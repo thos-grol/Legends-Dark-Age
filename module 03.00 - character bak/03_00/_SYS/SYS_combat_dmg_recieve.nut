@@ -35,7 +35,7 @@ o.onDamageReceived = function( _attacker, _skill, _hitInfo )
 	// hk - roll instinct damage reduction
 	::Z.S.roll_instinct( _hitInfo, p );
 	
-	//TODO: remove this system, then just skip lines on round or turn end
+	//FEATURE_1: remove this system, then just skip lines on round or turn end
 	if (::Z.T.Log.cd_obdr_msg)
 	{
 		::Tactical.EventLog.logIn(::Z.T.Log.cd_obdr_str);

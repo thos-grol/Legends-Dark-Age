@@ -10,8 +10,7 @@
  */
 "use strict";
 
-/* TODO:
-	+ Progressbar gegen Komponente austauschen
+/* 	+ Progressbar gegen Komponente austauschen
 	+ Image auch mit Offsets positionieren?
  */
 

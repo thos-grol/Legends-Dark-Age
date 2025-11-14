@@ -34,7 +34,7 @@
 		// }
 
 		// //add level ups
-        // //TODO: random level ups just use secondary and primary traits
+        // //FEATURE_1: random level ups just use secondary and primary traits
 		// init_levelups(::B[this.m.Type].LevelUps);
 	}
 
