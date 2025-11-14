@@ -12,7 +12,7 @@
 		local allowDiversion = this.m.IsRanged && this.m.MaxRangeBonus > 1;
 		local defenderProperties = _targetEntity.getSkills().buildPropertiesForDefense(user, this);
 
-		local RET = ::Z.S.get_ranged_details(_user);
+		local RET = ::Z.S.get_ranged_mult(_user);
 		local ranged_mult = RET.ranged_mult;
 		local melee_mult = RET.melee_mult;
 		local skill = properties.MeleeSkill * properties.MeleeSkillMult;

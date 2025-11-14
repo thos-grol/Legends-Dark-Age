@@ -1,3 +1,5 @@
+// !! For core core stuff, see scripts/config
+
 // Fixes some AI crashes
 ::Const.AI.ParallelizationMode = false;
 
