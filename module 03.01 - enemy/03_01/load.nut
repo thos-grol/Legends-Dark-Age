@@ -2,10 +2,11 @@
 // load module files
 // =================================================================================================
 
-local ROOT = "01_00";
+local ROOT = "03_01";
 local FOLDERS = [
 	"_CORE",
 	"_DEF",
+	"_DEF_BUILDS",
 	"_DEF_S",
 	"_SYS",
 	"src",

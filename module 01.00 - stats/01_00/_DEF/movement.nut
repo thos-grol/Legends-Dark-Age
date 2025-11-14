@@ -3,3 +3,26 @@
 // box. instead we only keep 1 stamina cost for changing z levels.
 
 ::Const.Movement.LevelDifferenceFatigueCost = 1;
+
+::Const.DefaultMovementFatigueCost <- [
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0
+];
+::Const.PathfinderMovementFatigueCost <- [
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0,
+	0
+];
