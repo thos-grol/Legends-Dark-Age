@@ -45,16 +45,16 @@ if (!("DEF" in this.getroottable())) ::DEF <- {};
 	::Z.Mod <- ::MSU.Class.Mod(::Z.ModID, ::Z.Version, ::Z.Name);
 	
 	# #0000 Hook Js Button Sounds - connect ui, register js hooks
-	::mods_registerJS("FIX_main_menu.js");
-	::mods_registerJS("FIX_sounds_button.js");
+	::mods_registerJS("00_main_menu.js");
+	::mods_registerJS("00_sounds_button.js");
+
+	::mods_registerJS("01_time_elements.js");
 
 	::mods_registerJS("SYS_Travel.js");
 	::mods_registerCSS("SYS_Travel.css");
 	
 	::mods_registerJS("SYS_log.js");
 	::mods_registerCSS("SYS_log.css");
-
-	::mods_registerJS("FIX_time_elements.js");
 
 	::mods_registerJS("FIX_dialog_readability.js");
 	::mods_registerCSS("FIX_dialog_readability.css");
