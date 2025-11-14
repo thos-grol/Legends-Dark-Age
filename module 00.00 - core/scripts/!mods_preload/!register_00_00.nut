@@ -40,6 +40,8 @@ mod.queue(">mod_legends", ">mod_msu", ">mod_swifter", function(){
 	// modern hooks executes these much earlier (after all vanilla files are read and Screens are 
 	// defined, but before any of them (except for Root Screen due to engine limitations) are instantiated
 
+	::Hooks.registerJS(::Z.DIR_JS + "menu_bg.js");
+	
 	::Hooks.registerJS(::Z.DIR_JS + "menu_sounds.js");
 	::Hooks.registerJS(::Z.DIR_JS + "menu_campaign_defaults.js");
 
