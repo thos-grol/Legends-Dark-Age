@@ -1,5 +1,4 @@
-//#0003 - Set up basic World UI - fast travel
-//this screen fades in and out as a transition
+// Defines a screen that fades in and out as a transition
 this.transition_screen <- ::inherit("scripts/mods/msu/ui_screen", {
 	m = {},
 
@@ -32,6 +31,6 @@ this.transition_screen <- ::inherit("scripts/mods/msu/ui_screen", {
 
 	function connect()
 	{
-		this.m.JSHandle = ::UI.connect("Mod_Transition_Screen", this);
+		this.m.JSHandle = ::UI.connect("hk_screen_transition", this);
 	}
 });

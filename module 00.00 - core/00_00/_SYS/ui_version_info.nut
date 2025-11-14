@@ -16,7 +16,7 @@
 		// hk
 		// - Add Dark Age Version to Be Displayed
 		this.m.JSHandle.asyncCall("setVersion", [
-			this.GameInfo.getVersionNumber() + " " + this.GameInfo.getVersionName() + "Dark Age " + ::Z.Version,
+			this.GameInfo.getVersionNumber() + " " + this.GameInfo.getVersionName() + "Dark Age " + ::Z.MOD_VERSION,
 			"Legends Mod " + ::Legends.Version + " " + ::Legends.BuildName,
 		]);
 		local dlc = [];
