@@ -1,2 +1,3 @@
 //TODO: actives: you need to fix skills with DamageMinimum adding way more damage than you want
+// - we probably want to hook all actives for editing
 //TODO: damage can only be done in integers
