@@ -305,9 +305,9 @@
 						{
 							this.worsenMood(this.Const.MoodChange.Injury, "Suffered an injury");
 
-							if (("State" in this.World) && this.World.State != null && this.World.Ambitions.hasActiveAmbition() && this.World.Ambitions.getActiveAmbition().getID() == "ambition.oath_of_sacrifice")
+							if (("State" in ::World) && ::World.State != null && ::World.Ambitions.hasActiveAmbition() && ::World.Ambitions.getActiveAmbition().getID() == "ambition.oath_of_sacrifice")
 							{
-								this.World.Statistics.getFlags().increment("OathtakersInjuriesSuffered");
+								::World.Statistics.getFlags().increment("OathtakersInjuriesSuffered");
 							}
 						}
 
