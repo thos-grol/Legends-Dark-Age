@@ -1,0 +1,109 @@
+/*
+ *  @Project:		Battle Brothers
+ *	@Company:		Overhype Studios
+ *
+ *	@Copyright:		(c) Overhype Studios | 2013 - 2020
+ * 
+ *  @Author:		Overhype Studios
+ *  @Date:			24.01.2017 / Reworked: 26.11.2017
+ *  @Description:	Character Screen CSS
+ */
+
+.character-screen
+{
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	
+	overflow: hidden;
+
+	background-image: url("coui://gfx/ui/skin/ui_character_new.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+}
+
+.character-screen > img
+{
+    position: absolute;
+    z-index: 1;
+}
+
+.character-screen .character-screen-statuetes
+{
+    width: 100%;
+	height: 90.6rem;
+
+	/*left: -22.0rem;
+	right: 21.5rem;
+	top: -11.9rem;
+	bottom: -0.5rem;*/
+
+	/* left: 0; */
+	right: 0;
+	top: 0;
+	bottom: 0;
+
+	position: absolute;
+    z-index: 2;
+	margin: 0;
+}
+
+
+.character-screen .character-screen-container
+{
+	/*left: -1.0rem;
+	right: 0;
+	top: 0;
+	bottom: -0.5rem;*/
+
+	/* left: 20.9rem;
+	top: 12.5rem;
+	right: 17.6rem; */
+
+	right: 0rem;
+
+	width: 100%;
+	height: 78.2rem;
+
+	position: absolute;
+
+   /* z-index: 2;*/
+	/*margin: auto;*/
+
+    /*background-image: url("coui://gfx/ui/skin/background_inventory.png");
+    background-repeat: no-repeat;*/
+}
+
+/* 
+	Enable Border Box Model 
+*/
+.character-screen .character-screen-container *
+{
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.character-screen .l-left-content-container
+{
+	/*background-color: #ABC;*/
+	
+	top: 0;
+	right: 0;
+	bottom: 0;
+	width: 34.0rem;
+	position: absolute;
+}
+
+.character-screen .character-screen-container .l-right-content-container
+{
+	/*background-color: #CBA;*/
+
+	top: 0;
+	right: 34.0rem;
+	width: 69.9rem;
+	bottom: 0;
+	position: absolute;
+}
