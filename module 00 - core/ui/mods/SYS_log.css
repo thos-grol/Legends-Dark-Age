@@ -1,0 +1,52 @@
+.tactical-screen .topbar-event-log-module
+{
+	top	 : 0;
+	left	: 0;
+	right   : 0;
+	bottom  : 0;
+	width   : 100%;
+	height  : 100%;
+	position: absolute;
+	margin  : auto;
+}
+
+.tactical-screen .topbar-event-log-module .l-expand-button
+{
+	top: 0.2rem;
+	right: 0.7rem;
+	bottom: 0;
+	width: 4.5rem;
+	height: 4.1rem;
+	position: absolute;
+	margin: auto 0;
+}
+
+.tactical-screen .topbar-event-log-module .l-event-logs-container
+{
+	top: 0.0rem;
+	left: 1.0rem;
+	bottom: 0.0rem;
+	height: 13.0rem;
+	position: absolute;
+	margin: auto;
+
+	font-weight: normal;
+	font-size: 1.4rem;
+	font-style : normal;
+	font-family: 'Roboto-Mono-Regular';
+}
+
+.tactical-screen .topbar-event-log-module .l-event-logs-container .entry2
+{
+	margin-left: 3.5rem;
+	margin-right: 0.2rem;
+	/*line-height: 1.3rem;*/
+}
+
+.tactical-screen .topbar-event-log-module .l-event-logs-container .entry3
+{
+	margin-left: 20.0rem;
+	margin-right: 0.2rem;
+	/*line-height: 1.3rem;*/
+	font-weight: bold;
+}
