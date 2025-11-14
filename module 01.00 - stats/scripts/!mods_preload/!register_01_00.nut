@@ -27,8 +27,7 @@ mod.queue(MOD_BEFORE, function(){
 	// modern hooks executes these much earlier (after all vanilla files are read and Screens are 
 	// defined, but before any of them (except for Root Screen due to engine limitations) are instantiated
 
-	// ::Hooks.registerJS(::Z.DIR_JS + "menu_event.js");
-	// ::mods_registerJS("mod_display_stats.js");
+	::Hooks.registerJS(::Z.DIR_JS + "menu_inventory_stats.js");
 
 	# load module
 	::include("01_00/load.nut");
