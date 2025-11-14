@@ -16,12 +16,8 @@ this.perk_load_training <- this.inherit("scripts/skills/skill", {
 		this.m.IsHidden = false;
 	}
 
-	function onAnySkillUsed( _skill, _targetEntity, _properties )
+	o.onUpdate <- function( _properties )
 	{
-		//FEATURE_8: add this.m.IsPhysical = true default to skill class. Then set false for valid
-		// skills
-		// then add check here to disable increase
-		_properties.DamageRegularMin += BUFF;
-		_properties.DamageRegularMax += BUFF;
+		_properties.FatigueRecoveryRate += BUFF;
 	}
 });

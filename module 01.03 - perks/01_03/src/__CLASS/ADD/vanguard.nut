@@ -52,15 +52,15 @@ pt.push({
     Const = "Safeguard"
 });
         
-::Legends.Perk.Steadfast <- null;
+::Legends.Perk.Steadfast2 <- null;
 pt.push({
-    ID = "perk.steadfast",
-    Script = "scripts/skills/perks/perk_steadfast",
-    Name = ::Const.Strings.PerkName.Steadfast,
-    Tooltip = ::Const.Strings.PerkDescription.Steadfast,
+    ID = "perk.steadfast2",
+    Script = "scripts/skills/perks/perk_steadfast2",
+    Name = ::Const.Strings.PerkName.Steadfast2,
+    Tooltip = ::Const.Strings.PerkDescription.Steadfast2,
     Icon = "ui/perks/steadfast.png",
     IconDisabled = "ui/perks/steadfast_sw.png",
-    Const = "Steadfast"
+    Const = "Steadfast2"
 });
         
 ::Legends.Perk.SurvivalInstinct <- null;

@@ -19,8 +19,9 @@ o.general_queryUIElementTooltipData = function (_entityId, _elementId, _elementO
 				{
 					id = 2,
 					type = "description",
-					text = "The dwelling-place of the soul. [The ninth of the nine parts of the soul; the only one that can be touched.]\n\nHealth increases the punishment a character can take before dying, and reduces the chance of recieving an injury. It also increases the potency of certain perks and skills."
+					text = "The dwelling-place of the soul. [The ninth of the nine parts of the soul; the only one that can be touched.]\n\nHealth represents the amount of damage this character can take before dying.\n\nInjuries are inflicted when..."
 				}
+				//TODO: write more on injury thresholds.
 			];
 
 		case "character-stats.Morale":
@@ -75,8 +76,9 @@ o.general_queryUIElementTooltipData = function (_entityId, _elementId, _elementO
 				{
 					id = 2,
 					type = "description",
-					text = "Head Armor protects, surprisingly, the head, which is harder to hit than the body, but more vulnerable to damage. The more head armor, the less damage will be applied to hitpoints on taking a hit to the head."
+					text = "Armor description here. With some exceptions, all damage must deplete armor first before damaging Health.\nHardness is a stat related to armor that is a flat reduction to incoming damage."
 				}
+				//TODO: armor description
 			];
 
 		case "character-stats.ArmorBody":
@@ -91,6 +93,7 @@ o.general_queryUIElementTooltipData = function (_entityId, _elementId, _elementO
 					type = "description",
 					text = " The more body armor, the less damage will be applied to hitpoints on taking a hit to the body."
 				}
+				//TODO: armor description
 			];
 
 		case "character-stats.MeleeSkill":
@@ -98,26 +101,28 @@ o.general_queryUIElementTooltipData = function (_entityId, _elementId, _elementO
 				{
 					id = 1,
 					type = "title",
-					text = "Attack"
+					text = "Skill"
 				},
 				{
 					id = 2,
 					type = "description",
-					text = "The ability to hit attacks. \n\nAttack has 100% effectiveness for the primary focus (usually melee) and 50% effectiveness for the secondary focus."
+					text = "The ability to hit attacks. \n\n Between hit and miss chances, there is now a graze band that takes up to 10 points from each side. Grazes deal 50% damage. ie. character with 40 Skill strikes a 0 defense character. The chances are 50% miss, 20% graze, and 30% hit. Grazes soften the disparity between hit and miss, and also decreases the chance of landing a solid hit. However when calculating at 90. 0% miss, 10% graze, 90% hit."
 				}
 			];
+
+			//TODO: write about graze band here
 
 		case "character-stats.RangeSkill":
 			return [
 				{
 					id = 1,
 					type = "title",
-					text = "Strength"
+					text = "X"
 				},
 				{
 					id = 2,
 					type = "description",
-					text = "The power of the body to crush any obstacle.\n\nStrength increases the potency of some perks and skills and increases Physical Damage by 1% for each point."
+					text = "X"
 				}
 			];
 
@@ -140,12 +145,12 @@ o.general_queryUIElementTooltipData = function (_entityId, _elementId, _elementO
 				{
 					id = 1,
 					type = "title",
-					text = "Instinct"
+					text = "X"
 				},
 				{
 					id = 2,
 					type = "description",
-					text = "The power of the body that drives one to survive.\n\nFor every point of Instinct, there is 0.5% chance to downgrade a critical hit (head hit) to a body hit or a body hit to a graze (10% damage). It also increases the potency of certain perks and skills."
+					text = "X"
 				}
 			];
 
@@ -215,7 +220,7 @@ o.general_queryUIElementTooltipData = function (_entityId, _elementId, _elementO
 				{
 					id = 2,
 					type = "description",
-					text = "The ability to move however and whenever one wants. Agility determines turn order, and is reduced by any form of Fatigue. It also increases the potency of certain perks and skills."
+					text = "Freedom; The ability to move however and whenever one wants.\n\nAgility determines turn order, and is reduced by any form of Fatigue."
 				}
 			];
 
@@ -229,7 +234,7 @@ o.general_queryUIElementTooltipData = function (_entityId, _elementId, _elementO
 				{
 					id = 2,
 					type = "description",
-					text = "Self-discipline; that part of us which makes the right choice.\n\nMettle provides resistance to mental attacks, the effects of negative events on morale, while increasing the chance characters gain morale from positive events."
+					text = "Will; self-discipline; that part of us which makes the right choice. [One of the nine parts of the human soul.]\n\nMettle provides:\n- resistance to mental attacks, \n-the effects of negative events on morale, \n-while increasing the chance characters gain morale from positive events."
 				}
 			];
 	}

@@ -16,12 +16,22 @@ this.perk_safeguard <- this.inherit("scripts/skills/skill", {
 		this.m.IsHidden = false;
 	}
 
-	function onAnySkillUsed( _skill, _targetEntity, _properties )
-	{
-		//FEATURE_8: add this.m.IsPhysical = true default to skill class. Then set false for valid
-		// skills
-		// then add check here to disable increase
-		_properties.DamageRegularMin += BUFF;
-		_properties.DamageRegularMax += BUFF;
-	}
+	//TODO: All shields provide this ability, but it is hidden and disabled unless if you have this perk.
+	//TODO: you need to hook the safeguard active and make it functional
+	//TODO: make shield wall turn ending, also do the ablative thing
+
+	// function onAdded()
+	// {
+	// 	if (!::Legends.Actives.has(this, ::Legends.Active.LegendSafeguard))
+	// 	{
+	// 		::Legends.Actives.grant(this, ::Legends.Active.LegendSafeguard);
+	// 	}
+	// }
+
+	// function onRemoved()
+	// {
+	// 	::Legends.Actives.remove(this, ::Legends.Active.LegendSafeguard);
+	// }
+
+	
 });
