@@ -90,13 +90,20 @@
 {
     ::Z.T.Log.Turn_Has_Acted <- true;
 
-    local entity = ::Const.UI.getColorizedEntityName(_targetEntity);
+    if (typeof _target != "string")
+    {
+        try {
+            _target = _target == this.Const.BodyPart.Head ? "Head" : "Body";
+        } 
+        catch(exception) {_target = "?";}
+    }
+
     local target = " [" + ::MSU.String.capitalizeFirst( _target ) + "] ";
     local hp_current = ::bloodred(_cur);
     local hp_previous = ::bloodred(_prev);
     local damage = " ([b]" + ::bloodred(_damage) + "[/b])";
 
-    ::Tactical.EventLog.logIn(entity + target + "» " + hp_previous + " › " + hp_current + damage);
+    ::Tactical.EventLog.logIn(::color_name(_targetEntity) + target + "» " + hp_previous + " › " + hp_current + damage);
 };
 
 ::Z.S.log_status <- function(_targetEntity, _string)

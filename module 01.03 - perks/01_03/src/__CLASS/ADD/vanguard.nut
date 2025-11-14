@@ -174,15 +174,15 @@ pt.push({
     Const = "ShieldBash"
 });
         
-::Legends.Perk.Berserk <- null;
+::Legends.Perk.Berserk2 <- null;
 pt.push({
-    ID = "perk.berserk",
-    Script = "scripts/skills/perks/perk_berserk",
-    Name = ::Const.Strings.PerkName.Berserk,
-    Tooltip = ::Const.Strings.PerkDescription.Berserk,
+    ID = "perk.berserk2",
+    Script = "scripts/skills/perks/perk_berserk2",
+    Name = ::Const.Strings.PerkName.Berserk2,
+    Tooltip = ::Const.Strings.PerkDescription.Berserk2,
     Icon = "ui/perks/berserk.png",
     IconDisabled = "ui/perks/berserk_sw.png",
-    Const = "Berserk"
+    Const = "Berserk2"
 });
         
 // =================================================================================================

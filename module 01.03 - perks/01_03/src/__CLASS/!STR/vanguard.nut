@@ -89,8 +89,8 @@
 + "\n\n" + ::blue("« Passive »")
 + "\n" + ::green("+1") + " Fat Recovery";
         
-::Const.Strings.PerkName.Berserk <- "Berserk";
-::Const.Strings.PerkDescription.Berserk <- "TODO"
+::Const.Strings.PerkName.Berserk2 <- "Berserk";
+::Const.Strings.PerkDescription.Berserk2 <- "TODO"
 + "\n\n" + ::blue("« Passive »")
 + "\n" + ::green("+1") + " Fat Recovery";
         

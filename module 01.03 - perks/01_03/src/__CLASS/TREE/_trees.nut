@@ -45,7 +45,7 @@
 		[
 			::Const.Perks.PerkDefs.ReboundForce,
 			::Const.Perks.PerkDefs.ShieldBash,
-			::Const.Perks.PerkDefs.Berserk,
+			::Const.Perks.PerkDefs.Berserk2,
 		],
 		[
 			::Const.Perks.PerkDefs.UnendingForce,

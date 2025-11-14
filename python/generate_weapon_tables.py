@@ -4,14 +4,18 @@ import re
 from _const import *
 from _helper import *
 
+from generate_weapon_tables_helper import *
+
 F_SRC = r'C:\Files\Projects\bbros\env_reference\scripts\items\weapons'
+F_SRC2 = r'C:\Files\Projects\bbros\env_reference\mod_legends\scripts\items\weapons'
 out = 'z_out/'
 # PTH_HOOK_BASE = build_hook_path(F_SRC)
 
 F_SRC = Path(F_SRC)
+F_SRC2 = Path(F_SRC2)
 out = Path(out)
 
-files = [p for p in F_SRC.rglob('*') if p.is_file()]
+files = [p for p in F_SRC.rglob('*') if p.is_file()] + [p for p in F_SRC2.rglob('*') if p.is_file()]
 
 FIELDS = {
     'ID',
@@ -33,6 +37,7 @@ ledger = {}
 for file in files:
     name = file.name
     encoding = get_file_encoding(file)
+    
     
     # load files
     info = {}
@@ -96,7 +101,8 @@ cat_order = [
 ]
 
         
-with open('test.nut', "w", encoding=encoding) as f_out:
+with open('module 02.00 - weapons/02_00/_DEF/_weapon_table.nut', "w", encoding=encoding) as f_out:
+    f_out.write(f'// This is an auto-generated table of weapon stats. Please see below files for overrides/corrections\n')
     f_out.write('::DEF.C.Weapons <- {\n')
     
     
@@ -108,17 +114,17 @@ with open('test.nut', "w", encoding=encoding) as f_out:
         
         tuples = []
         for x in cat:
-            a = x
             if x == '"shield.legend_parrying_dagger"': continue
             if x == '"shield.legend_named_parrying_dagger"': continue
             if not cat[x]['1H']: continue
-            tuples.append((int(cat[x]['RegularDamageMax']), cat[x]['ID']))
-        sorted_tuples = sorted(tuples)
+            tuples.append((int(cat[x]['RegularDamage']), int(cat[x]['RegularDamageMax']), cat[x]['ID']))
+        sorted_tuples = sorted(tuples, key=lambda item: (item[0], item[1]))
+        
         
         tuples2 = []
         for x in cat:
             if cat[x]['1H']: continue
-            tuples2.append((int(cat[x]['RegularDamageMax']), cat[x]['ID']))
+            tuples2.append((int(cat[x]['RegularDamage']), int(cat[x]['RegularDamageMax']), cat[x]['ID']))
         sorted_tuples2 = sorted(tuples2)
         
         
@@ -133,7 +139,7 @@ with open('test.nut', "w", encoding=encoding) as f_out:
             # };
             
             for t in l:
-                _, id = t
+                _, _, id = t
                 f_out.write(f'\t{id} : ' + '{\n')
                 for k, v in cat[id].items():
                     if k == 'ID': continue
@@ -142,18 +148,17 @@ with open('test.nut', "w", encoding=encoding) as f_out:
                     if k == 'ShieldDamage': continue
                     if k == '1H': continue
                     
-                    if k == 'DirectDamageMult': 
-                        f_out.write(f'\t\t"{k}" : {0},\n')
-                        continue
-                    
-                    if k == 'StaminaModifier':
-                        if i == 0: f_out.write(f'\t\t"{k}" : {-1},\n')
-                        else: f_out.write(f'\t\t"{k}" : {-2},\n')
-                        continue
-                    
+                    if k == 'DirectDamageMult':  continue                     
+                    if k == 'ArmorDamageMult':  continue                     
                     if k == 'RegularDamage' or k == 'RegularDamageMax':
-                        f_out.write(f'\t\t"{k}" : {int(v) // 10},\n')
+                        # val = max(int(v) - 10, 1)
+                        val = int(v) * 0.75
+                        # if float(cat[id]['ArmorDamageMult']) < 1.0:
+                        #     val = int(val * float(cat[id]['ArmorDamageMult']))
+                        val = round(val / 5.0) * 5
+                        f_out.write(f'\t\t"{k}" : {val},\n')
                         continue
+                        
                     f_out.write(f'\t\t"{k}" : {v},\n')
                 f_out.write('\t},\n')
                 

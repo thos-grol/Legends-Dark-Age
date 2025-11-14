@@ -1,7 +1,6 @@
 // this hooks the weapon class
-// - remove condition from the tooltip
+// - remove unused stats from the tooltip
 // - remove weapon deterioration
-// - disable shield damage
 ::m.rawHook("scripts/items/weapons/weapon", function(p) {
 
 	// - remove weapon deterioration
@@ -81,25 +80,31 @@
 			});
 		}
 
-		if (this.m.DirectDamageMult > 0)
-		{
-			result.push({
-				id = 64,
-				type = "text",
-				icon = "ui/icons/direct_damage.png",
-				text = "[color=" + ::Const.UI.Color.DamageValue + "]" + ::Math.floor((this.m.DirectDamageMult + this.m.DirectDamageAdd) * 100) + "%[/color] of damage ignores armor"
-			});
-		}
+		// hk
+		// - remove DirectDamageMult from the tooltip, we don't use it
+		// if (this.m.DirectDamageMult > 0)
+		// {
+		// 	result.push({
+		// 		id = 64,
+		// 		type = "text",
+		// 		icon = "ui/icons/direct_damage.png",
+		// 		text = "[color=" + ::Const.UI.Color.DamageValue + "]" + ::Math.floor((this.m.DirectDamageMult + this.m.DirectDamageAdd) * 100) + "%[/color] of damage ignores armor"
+		// 	});
+		// }
+		//hk end
 
-		if (this.m.ArmorDamageMult > 0)
-		{
-			result.push({
-				id = 5,
-				type = "text",
-				icon = "ui/icons/armor_damage.png",
-				text = "[color=" + ::Const.UI.Color.DamageValue + "]" + ::Math.floor(this.m.ArmorDamageMult * 100) + "%[/color] effective against armor"
-			});
-		}
+		// hk
+		// - remove ArmorDamageMult from the tooltip, we don't use it
+		// if (this.m.ArmorDamageMult > 0)
+		// {
+		// 	result.push({
+		// 		id = 5,
+		// 		type = "text",
+		// 		icon = "ui/icons/armor_damage.png",
+		// 		text = "[color=" + ::Const.UI.Color.DamageValue + "]" + ::Math.floor(this.m.ArmorDamageMult * 100) + "%[/color] effective against armor"
+		// 	});
+		// }
+		//hk end
 
 		// hk
 		// shields have been reworked, we don't do shield damage anymore

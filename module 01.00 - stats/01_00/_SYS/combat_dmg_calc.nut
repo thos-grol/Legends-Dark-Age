@@ -118,11 +118,12 @@
 
         local dmg_hp = _hitInfo.DamageMinimum + dmg; // hitpoint dmg = pierce dmg + remaining dmg
 
-        
 
         // finalize dmg
         _hitInfo.DamageInflictedArmor = dmg_armor_total;
         _hitInfo.DamageInflictedHitpoints = dmg_hp;
+        // local death_pre = this.m.Hitpoints;
+        // local death_curr = ::Math.max(0, this.m.Hitpoints - dmg_hp);
 
 		_hitInfo.DamageFatigue *= p.FatigueEffectMult;
 		this.m.Fatigue = this.Math.min(this.getFatigueMax(), this.Math.round(this.m.Fatigue + _hitInfo.DamageFatigue * p.FatigueReceivedPerHitMult * this.m.CurrentProperties.FatigueLossOnAnyAttackMult));
@@ -155,7 +156,7 @@
 			}
 			else
 			{
-				this.m.Hitpoints = this.Math.round(this.m.Hitpoints - dmg_hp);
+				this.m.Hitpoints = ::Math.max(this.Math.round(this.m.Hitpoints - dmg_hp), 0);
 			}
 		}
 
@@ -213,7 +214,7 @@
         {
             local before = this.m.BaseProperties.Armor[_hitInfo.BodyPart];
             this.m.BaseProperties.Armor[_hitInfo.BodyPart] = armor_innate;
-            ::Z.S.log_damage_armor(this, _hitInfo.BodyPart, armor_innate, before, dmg_armor_innnate, true)
+            ::Z.S.log_damage_armor(this, _hitInfo.BodyPart, armor_innate, before, dmg_armor_innnate, true);
         }
 
         if (dmg_armor_item > 0)
@@ -249,6 +250,7 @@
 		if (this.m.Hitpoints <= 0)
 		{
 			this.spawnBloodDecals(this.getTile());
+            // ::Z.S.log_damage_flesh(this, _hitInfo.BodyPart, death_curr, death_pre, dmg_hp); 
 			this.kill(_attacker, _skill, fatalityType);
 		}
 		else

@@ -1,24 +1,21 @@
-//This replaces randomized unit abstract
-::mods_hookExactClass("entity/tactical/legend_randomized_unit_abstract", function(o)
-{
-    o.onInit <- function()
+this.abstract_unit <- this.inherit("scripts/entity/tactical/human", {
+	function onInit()
 	{
 		this.human.onInit();
 		if (::Math.rand(0, 3) == 0) { this.setFemale(); }
 		else { this.setMale(); }
 		this.setAppearance();
 	}
-
-    o.create <- function()
+	
+	function create()
 	{
 		this.human.create();
 
 		local level = ::B[this.m.Type].Level;
 		this.getFlags().set("Level", level);
-		// this.m.XP = level * 25;
 	}
 
-    o.assignRandomEquipment <- function()
+	function assignRandomEquipment()
 	{
 		// equips armor
 		equip_outfit();
@@ -35,5 +32,16 @@
 
 		post_init();
 	}
+	
+	// Can override setfemale/male if we want southern units etc. Enemy defaults are setMale anyways
+	// Defaulting to 1 in 4 chance of female
+    function setFemale()
+    {
+        this.setGender(1);
+    }
 
+    function setMale()
+    {
+		this.setGender(0);
+    }
 });
