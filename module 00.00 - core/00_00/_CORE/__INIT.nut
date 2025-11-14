@@ -1,3 +1,6 @@
+// Fixes some AI crashes
+::Const.AI.ParallelizationMode = false;
+
 //This file hooks the menu state to load things late
 ::mods_hookExactClass("states/main_menu_state", function (o)
 {
