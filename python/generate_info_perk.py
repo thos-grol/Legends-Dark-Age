@@ -5,6 +5,8 @@ PATH_PERKS = 'module 01.03 - perks/scripts/skills/perks/'
 
 TREE_NAME = 'vanguard'
 
+tree_def = []
+
 OUTPUT = {
     'STR' : '',
     'ADD' : '',
@@ -45,6 +47,7 @@ for i, row in enumerate(lines):
     for x in row:
         x_id = x.lower().replace(' ', '_')
         x_up = x.replace(' ', '')
+        tree_def.append(x_up)
         
         perkdef_template = f"""
 ::Legends.Perk.{x_up} <- null;
@@ -111,3 +114,54 @@ with open(PATH_ADD + f'{TREE_NAME}.nut', "w", encoding='utf-8') as f_out2:
 for fname, output_file in OUTPUT['FILES'].items():
     with open(PATH_PERKS + f'{fname}.nut', "w", encoding='utf-8') as f_out3:
         f_out3.write(output_file)
+
+
+
+tree_info = f"""
+::Const.Perks.{TREE_NAME.capitalize()}ClassTree <- {{
+	ID = "{TREE_NAME.capitalize()}ClassTree",
+	Name = "{TREE_NAME.capitalize()}",
+	Descriptions = [
+		"TODO"
+	],
+	Tree = [
+		[
+			::Const.Perks.PerkDefs.{tree_def[0]},
+			::Const.Perks.PerkDefs.{tree_def[1]},
+			::Const.Perks.PerkDefs.{tree_def[2]},
+		],
+		[
+			::Const.Perks.PerkDefs.{tree_def[3]},
+			::Const.Perks.PerkDefs.{tree_def[4]},
+			::Const.Perks.PerkDefs.{tree_def[5]},
+		],
+		[
+			::Const.Perks.PerkDefs.{tree_def[6]},
+			::Const.Perks.PerkDefs.{tree_def[7]},
+			::Const.Perks.PerkDefs.{tree_def[8]},
+		],
+		[
+			::Const.Perks.PerkDefs.{tree_def[9]},
+			::Const.Perks.PerkDefs.{tree_def[10]},
+			::Const.Perks.PerkDefs.{tree_def[11]},
+		],
+		[
+			::Const.Perks.PerkDefs.{tree_def[12]},
+			::Const.Perks.PerkDefs.{tree_def[13]},
+			::Const.Perks.PerkDefs.{tree_def[14]},
+		],
+		[
+			::Const.Perks.PerkDefs.{tree_def[15]},
+			::Const.Perks.PerkDefs.{tree_def[16]},
+			::Const.Perks.PerkDefs.{tree_def[17]},
+		],
+		[
+			::Const.Perks.PerkDefs.{tree_def[18]},
+			::Const.Perks.PerkDefs.{tree_def[19]},
+			::Const.Perks.PerkDefs.{tree_def[20]},
+		]
+	]
+}};
+"""
+with open(f'tree_info.nut', "w+", encoding='utf-8') as f_out4:
+    f_out4.write(tree_info)
