@@ -16,7 +16,7 @@ this.perk_mettle <- this.inherit("scripts/skills/skill", {
 		this.m.IsHidden = false;
 	}
 
-	o.onUpdate <- function( _properties )
+	function onUpdate( _properties )
 	{
 		_properties.Bravery += 5;
 	}

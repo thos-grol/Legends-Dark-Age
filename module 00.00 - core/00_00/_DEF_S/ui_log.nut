@@ -67,19 +67,23 @@
     ::Tactical.EventLog.logEx(ret);
 }
 
-::Z.S.log_damage_armor <- function(_targetEntity, _target, _cur, _prev, _damage, _is_natural=false)
+::Z.S.log_damage_armor <- function(_targetEntity, _target, _cur, _prev, _damage, _is_innate=false)
 {
     ::Z.T.Log.Turn_Has_Acted <- true;
 
-    local entity = ::Const.UI.getColorizedEntityName(_targetEntity);
+    if (typeof _target != "string")
+    {
+        if (_is_innate) _target = _target == this.Const.BodyPart.Head ? "Head" : "Body";
+        else _target = "?";
+    }
+    
     local target = " [" + ::MSU.String.capitalizeFirst( _target );
-    if (_is_natural) target += " (NATURAL ARMOR)";
+    if (_is_innate) target += " (INNATE ARMOR)";
     target += "] ";
-    local ar_current = ::MSU.Text.color(::DEF.Color.BloodRed, _cur);
-    local ar_previous = ::MSU.Text.color(::DEF.Color.BloodRed, _prev);
-    local damage = " ([b]" + ::MSU.Text.color(::DEF.Color.BloodRed, _damage) + "[/b])";
 
-    ::Tactical.EventLog.logIn(entity + target + "» " + ar_previous + " › " + ar_current + damage);
+    local damage = " ([b]" + ::bloodred(_damage) + "[/b])";
+
+    ::Tactical.EventLog.logIn(::color_name(_targetEntity) + target + "» " + ::bloodred(_prev) + " › " + ::bloodred(_cur) + damage);
 };
 
 ::Z.S.log_damage_flesh <- function(_targetEntity, _target, _cur, _prev, _damage)
@@ -88,9 +92,9 @@
 
     local entity = ::Const.UI.getColorizedEntityName(_targetEntity);
     local target = " [" + ::MSU.String.capitalizeFirst( _target ) + "] ";
-    local hp_current = ::MSU.Text.color(::DEF.Color.BloodRed, _cur);
-    local hp_previous = ::MSU.Text.color(::DEF.Color.BloodRed, _prev);
-    local damage = " ([b]" + ::MSU.Text.color(::DEF.Color.BloodRed, _damage) + "[/b])";
+    local hp_current = ::bloodred(_cur);
+    local hp_previous = ::bloodred(_prev);
+    local damage = " ([b]" + ::bloodred(_damage) + "[/b])";
 
     ::Tactical.EventLog.logIn(entity + target + "» " + hp_previous + " › " + hp_current + damage);
 };
@@ -98,14 +102,14 @@
 ::Z.S.log_status <- function(_targetEntity, _string)
 {
     local entity = ::Const.UI.getColorizedEntityName(_targetEntity);
-    local status = ::MSU.Text.color(::DEF.Color.BloodRed, " is " + _string);
+    local status = ::bloodred(" is " + _string);
     ::Tactical.EventLog.logIn(entity + status);
 };
 
 ::Z.S.log_injury <- function(_targetEntity, _injury)
 {
     local entity = ::Const.UI.getColorizedEntityName(_targetEntity);
-    local injury = ::MSU.Text.color(::DEF.Color.BloodRed, _injury);
+    local injury = ::bloodred(_injury);
     ::Tactical.EventLog.logIn(entity + " suffers " +  injury);
 };
 
@@ -124,23 +128,6 @@
 // =========================================================================================
 // Main 2 - Minor fns
 // =========================================================================================
-
-::Z.S.log_instinct_trigger <- function()
-{
-    if (::Z.T.Instinct.RESULT == 0) 
-    {
-        // usually this means instinct calculation has completed
-        ::Z.T.Instinct.reset();
-        return;
-    }
-
-    ::Tactical.EventLog.logIn(
-        ::MSU.Text.color(::DEF.Color.BloodRed, "INSTINCT TRIGGERED - ") + (::Z.T.Instinct.RESULT == 1 ? "Downgraded to body hit" : "Downgraded to graze (10% dmg)")
-    );
-
-    // usually this means instinct calculation has completed
-    ::Z.T.Instinct.reset();
-};
 
 ::Z.S.log_skill_nine_lives <- function(_targetEntity)
 {
@@ -170,7 +157,7 @@
 ::Z.S.log_kill <- function(_targetEntity)
 {
     ::Tactical.EventLog.logIn(
-        ::Const.UI.getColorizedEntityName(_targetEntity) + ::MSU.Text.color(::DEF.Color.BloodRed, " KILLED")
+        ::Const.UI.getColorizedEntityName(_targetEntity) + ::bloodred(" KILLED")
     );
 };
 
