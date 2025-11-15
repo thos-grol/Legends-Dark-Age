@@ -10,12 +10,23 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 // Storage System Notes
-// - Fix not being able to remove last bro from party 1
 
 // - start by spawning all bros in storage
 
 
-// - add buttons to change squads
+// TODO: come up with squad state system
+//      - locked?
+//      - current mission details
+//      - current mission status
+//      - need to look into data source
+
+// TODO: button state 
+// red -> locked
+// normal -> highlighted (ready)
+// gray -> unused
+
+
+// TODO: create function for squad limit
 
 // - set limit in party to be added (default 12)
 // - if party limit > then can't add more bros to squad
@@ -32,3 +43,6 @@
 //          - on retaliation, squad is locked. cannot move or modify, mission is set
 //          - locked squads are still viewable with mission display
 //   - 
+
+// after prototype is finished, make this into a new screen, and replace show strategic character
+//

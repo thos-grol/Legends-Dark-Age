@@ -38,6 +38,8 @@
 	overflow: auto; 
 }
 
+
+
 .character-screen-container .brothers-list-module .l-list-container .scroll-container
 {
 	margin-bottom: 0.4rem;
@@ -156,12 +158,50 @@
     line-height: 2.6rem;
 }
 
-.character-screen-container .brothers-list-module .filter-panel .l-button.one
+.character-screen-container .brothers-list-module .squad-panel
 {
-    
+	top: -4.0rem;
+	left: 0rem;
+	bottom: 0;
+	height: 2.4rem;
+	position: absolute;
+	z-index: 10;
+	display: flex;
 }
 
-/* .character-screen-container .brothers-list-module .filter-panel .l-button.is-all-filter
+
+
+.character-screen-container .brothers-list-module .squad-panel .x-button
 {
-    left: 5.0rem;
-} */
+	width: 4.6rem;
+	height: 3.3rem;
+}
+
+.character-screen-container .brothers-list-module .squad-panel .x-button .label
+{
+	top: 0.5rem;
+}
+
+
+.character-screen-container .brothers-list-module .squad-panel .l-button
+{
+	width: 4.6rem;
+	height: 3.3rem;
+}
+
+.character-screen-container .brothers-list-module .squad-panel .l-button .label
+{
+	top: 0.5rem;
+}
+
+.character-screen-container .brothers-list-module .squad-panel .l-button .is-not-occupied
+{
+    color: #a7a7a7;
+}
+
+.character-screen-container .brothers-list-module .squad-panel .l-button .is-locked
+{
+    color: #a70355 !important;
+	background-image: url("coui://gfx/ui/skin/button_03_inactive.png");
+    background-size: 5.2rem 4.1rem;
+}

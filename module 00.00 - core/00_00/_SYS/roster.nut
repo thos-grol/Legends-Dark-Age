@@ -1,19 +1,22 @@
-// hk extend data added
+// hk purpose
+// - get bro roster
+
+// function strategic_onQueryBrothersList()
+// {
+// 	local roster = ::World.Assets.getFormation();
+// 	for( local i = 0; i != roster.len(); i = ++i )
+// 	{
+// 		if (roster[i] != null)
+// 		{
+// 			roster[i] = this.UIDataHelper.convertEntityToUIData(roster[i], null);
+// 		}
+// 	}
+// 	return roster;
+// }
+
 ::mods_hookExactClass("states/world/asset_manager", function(o)
 {
-    // function strategic_onQueryBrothersList()
-	// {
-	// 	local roster = this.World.Assets.getFormation();
-	// 	for( local i = 0; i != roster.len(); i = ++i )
-	// 	{
-	// 		if (roster[i] != null)
-	// 		{
-	// 			roster[i] = this.UIDataHelper.convertEntityToUIData(roster[i], null);
-	// 		}
-	// 	}
-	// 	return roster;
-	// }
-
+    // - get bro roster, we modify it for the increased roster size
     o.getFormation <- function()
 	{
 		// we expand the possible formation size to 470 max
@@ -21,90 +24,17 @@
         local ret = [];
 		ret.resize(27 * 10 + 200, null);
 
-		local roster = this.World.getPlayerRoster().getAll();
+		local roster = ::World.getPlayerRoster().getAll();
 		foreach( b in roster )
 		{
 			ret[b.getPlaceInFormation()] = b;
 		}
-
 		return ret;
 	}
 
-    // TODO: determine what changes are necessary here
     // this function here determines the count for in combat, and also changes roster positions
-    // it'll require careful modification to create our system
-    o.updateFormation <- function( considerMaxBros = false )
-	{
-		local NOT_IN_FORMATION = 27 * 10 + 200;
-		local formation = [];
-		formation.resize(27 * 10 + 200, false);
-		local roster = this.World.getPlayerRoster().getAll();
-		local hasUnplaced = false;
-		local inCombat = 0;
-
-		foreach( b in roster )
-		{
-			if (b.getPlaceInFormation() != NOT_IN_FORMATION && formation[b.getPlaceInFormation()] == false && (!considerMaxBros || inCombat < this.m.BrothersMaxInCombat))
-			{
-				formation[b.getPlaceInFormation()] = true;
-
-				if (b.getPlaceInFormation() <= 17)
-				{
-					inCombat = ++inCombat;
-				}
-			}
-			else
-			{
-				b.setPlaceInFormation(NOT_IN_FORMATION);
-				hasUnplaced = true;
-			}
-		}
-
-		if (hasUnplaced)
-		{
-			foreach( b in roster )
-			{
-				if (b.getPlaceInFormation() != NOT_IN_FORMATION)
-				{
-					continue;
-				}
-
-				local i = 0;
-
-				if (inCombat >= this.m.BrothersMaxInCombat)
-				{
-					i = 18;
-				}
-
-				while (i != formation.len())
-				{
-					if (formation[i] == false)
-					{
-						b.setPlaceInFormation(i);
-						formation[i] = true;
-
-						if (i <= 17)
-						{
-							inCombat = ++inCombat;
-						}
-
-						break;
-					}
-
-					i = ++i;
-				}
-			}
-		}
-
-		// if (inCombat == 0)
-		// {
-		// 	foreach( b in roster )
-		// 	{
-		// 		b.setPlaceInFormation(3);
-		// 		break;
-		// 	}
-		// }
-	}
+    // shouldn't be necessary if we validate input in squad ui
+    o.updateFormation <- function( considerMaxBros = false ) { }
 });
 
 // extend the roster size from u8 to u16
