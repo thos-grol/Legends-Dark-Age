@@ -55,11 +55,10 @@
 
 			local entities = ::World.getAllEntitiesAndOneLocationAtPos(::World.getCamera().screenToWorld(_mouse.getX(), _mouse.getY()), 1.0);
 
-			
-			local closest_settlement = ::Z.S.get_settlement_closest();
+			// local closest_settlement = ::Z.S.get_settlement_closest();
 			foreach( entity in entities )
 			{
-				if (entity == closest_settlement)
+				if (entity.is_enterable())
 				{
 					this.m.AutoEnterLocation = null;
 					this.m.LastEnteredTown = this.WeakTableRef(entity);
@@ -67,18 +66,18 @@
 					this.showTownScreen();
 					break
 				}
-				if (entity.getID() == this.m.Player.getID()) continue;
-				if (!closest_settlement.isConnectedToByRoads(entity)) continue;
-				local distance = ::Z.S.get_distance_by_road(closest_settlement.getTile(), entity.getTile());
-				local days = ::Z.S.get_distance_by_road_days(distance, ::Const.World.MovementSettings.Speed * 0.6, true);
+				// if (entity.getID() == this.m.Player.getID()) continue;
+				// if (!closest_settlement.isConnectedToByRoads(entity)) continue;
+				// local distance = ::Z.S.get_distance_by_road(closest_settlement.getTile(), entity.getTile());
+				// local days = ::Z.S.get_distance_by_road_days(distance, ::Const.World.MovementSettings.Speed * 0.6, true);
 
-				if (days > 1.1) continue;
+				// if (days > 1.1) continue;
 				
-				//prep variables for fast travel
-				::Z.T.Travel.Days <- ::Math.round(days);
-				::Z.T.Travel.ID <- entity.getName();
-				this.ask_travel();
-				break
+				// //prep variables for fast travel
+				// ::Z.T.Travel.Days <- ::Math.round(days);
+				// ::Z.T.Travel.ID <- entity.getName();
+				// this.ask_travel();
+				// break
 			}
 
 		}

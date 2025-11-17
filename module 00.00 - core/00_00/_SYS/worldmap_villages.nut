@@ -9,6 +9,7 @@
 
 		location_banner.Visible = false;
         this.setShowName(false);
+		this.getLabel("name").Visible = false;
 	}
 
     o.getTooltip <- function()
