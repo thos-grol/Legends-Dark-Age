@@ -48,8 +48,5 @@
             this.m.DirectDamageMult = info.DirectDamageMult;
         }
         catch(exception) {}
-
-        ::logInfo(this.m.ID);
-        ::logInfo(info.RegularDamage);
 	}
 });
