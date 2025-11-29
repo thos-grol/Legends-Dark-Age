@@ -87,7 +87,7 @@ CharacterScreenBrothersListModule.prototype.onBrothersListLoaded = function (_da
 	// we use j for the ui formation index
 	// i represents the storage formation index
 	var j = 0;  // 0-26
-	for (var i = x; i < y; i++)
+	for (var i = x; i <= y; i++)
 	{
 		var brother = _brothers[i];
 		if (brother !== null) 
@@ -100,7 +100,7 @@ CharacterScreenBrothersListModule.prototype.onBrothersListLoaded = function (_da
 	var storage_bounds = this.get_storage_bounds();
 	x = storage_bounds[0];
 	y = storage_bounds[1];
-	for (var i = x; i < y; i++)
+	for (var i = x; i <= y; i++)
 	{
 		var brother = _brothers[i];
 		if (brother !== null) 
@@ -454,6 +454,13 @@ CharacterScreenBrothersListModule.prototype.swapSlots = function (_a, _b)
 
 	if (_a < this.CHUNK_SIZE) trans_a = this.get_translated_index(_a);
 	if (_b < this.CHUNK_SIZE) trans_b = this.get_translated_index(_b);
+
+	var result = {};
+	result.a = _a;
+	result.b = _b;
+	result.trans_a = trans_a;
+	result.trans_b = trans_b;
+	console.log(result);
 
 	if(this.mSlots[_b].data('child') == null) // dragging into empty slot
 	{
