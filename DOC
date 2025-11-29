@@ -45,22 +45,8 @@
 
 // all faction capitals sit on default resource point, granting x resources every week
 
-
-//TODO: start the global map overhaul
-    //TODO: disable update stuff/tick
-    
-
-    // TODO: contract system - display them in circle
     // design force level after creating classes
 
-// however, villages, towns, and citadels can spawn missions on the world map
-// TODO: contract implemntation
-// - disable contract display in settlement
-// - create skulls on the world map that are clickable, linking to the contract
-// - clicking will open up squad select screen
-//      - squad select will have logic on which squads are embarkable.
-//      - create an end day button
-//      - create school which is 3rd area?
 
 // you 0 wages - can't die
 // slaves, no wages but very expensive - unlocked if you start with city state or you create contact
@@ -71,39 +57,3 @@
 // lv3  - basic wages
 // lv5  - decent wages
 // lv7  - veteran wages
-
-
-
-
-// TODO: come up with squad state system
-//      - locked?
-//      - current mission details
-//      - current mission status
-//      - need to look into data source
-
-// TODO: button state 
-// red -> locked
-// normal -> highlighted (ready)
-// gray -> unused
-
-
-// TODO: create function for squad limit
-
-// - set limit in party to be added (default 12)
-// - if party limit > then can't add more bros to squad
-
-// - logic? how to tell what squad to load in for mission
-// - save mission details to squad?
-// - lock squad from moving after mission is selected?
-
-// - squad status:
-//   - free (will have no mission, displays current mission)
-//      - mission screen opens to first free squad
-//   - locked - has mission info and seed
-//          - squad is not modifiable
-//          - on retaliation, squad is locked. cannot move or modify, mission is set
-//          - locked squads are still viewable with mission display
-//   - 
-
-// after prototype is finished, make this into a new screen, and replace show strategic character
-//
