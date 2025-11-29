@@ -54,7 +54,7 @@
 			this.getSprite("eye_rings").Visible = true;
 		}
 
-		if (!this.Tactical.State.isScenarioMode() && this.World.getTime().Days >= 40)
+		if (!this.Tactical.State.isScenarioMode() && ::World.getTime().Days >= 40)
 		{
 			b.MeleeDefense += 5;
 		}

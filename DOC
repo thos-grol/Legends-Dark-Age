@@ -23,3 +23,12 @@
 // - logic? how to tell what squad to load in for mission
 // - save mission details to squad?
 // - lock squad from moving after mission is selected?
+
+// - squad status:
+//   - free (will have no mission, displays current mission)
+//      - mission screen opens to first free squad
+//   - locked - has mission info and seed
+//          - squad is not modifiable
+//          - on retaliation, squad is locked. cannot move or modify, mission is set
+//          - locked squads are still viewable with mission display
+//   - 
