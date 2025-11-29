@@ -19,7 +19,7 @@ o.general_queryUIElementTooltipData = function (_entityId, _elementId, _elementO
 				{
 					id = 2,
 					type = "description",
-					text = "The dwelling-place of the soul. [The ninth of the nine parts of the soul; the only one that can be touched.]\n\nHealth represents the amount of damage this character can take before dying.\n\nInjuries are inflicted when..."
+					text = "The dwelling-place of the soul. [The ninth of the nine parts of the soul; the only one that can be touched.]\n\nHealth represents the amount of damage this character can take before dying.\n\nInjuries are inflicted when...\n\nDamage is rounded down after processing, except when it's > 0 and < 1. Then it becomes 1."
 				}
 				//TODO: write more on injury thresholds.
 			];
