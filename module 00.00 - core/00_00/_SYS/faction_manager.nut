@@ -1,0 +1,167 @@
+::mods_hookNewObject("factions/faction_manager", function(o)
+{
+    // o.assignSettlementsToNobleHouses = function ( _nobleHouses )
+	// {
+	// 	local settlements = this.World.EntityManager.getSettlements();
+	// 	local military = [];
+	// 	local civilian = [];
+
+	// 	for( local i = 0; i < settlements.len(); i = ++i )
+	// 	{
+	// 		if (this.isKindOf(settlements[i], "city_state"))
+	// 		{
+	// 		}
+	// 		else if (settlements[i].isMilitary())
+	// 		{
+	// 			military.push(settlements[i]);
+	// 		}
+	// 		else
+	// 		{
+	// 			civilian.push(settlements[i]);
+	// 		}
+	// 	}
+
+	// 	military.sort(this.onSizeCompare);
+
+	// 	foreach( i, n in _nobleHouses )
+	// 	{
+	// 		if (military.len() > 0)
+	// 		{
+	// 			n.addSettlement(military[0]);
+	// 			military.remove(0);
+	// 		}
+	// 		local other;
+	// 		do
+	// 		{
+	// 			other = this.Math.rand(0, _nobleHouses.len() - 1);
+	// 		}
+	// 		while (other == i);
+
+	// 		local description = n.getDescription();
+	// 		local vars = [
+	// 			[
+	// 				"noblehousename",
+	// 				n.getNameOnly()
+	// 			],
+	// 			[
+	// 				"regionname",
+	// 				""
+	// 			],
+	// 			[
+	// 				"factionfortressname",
+	// 				n.getSettlements()[0].getName()
+	// 			],
+	// 			[
+	// 				"othernoblehouse",
+	// 				_nobleHouses[other].getNameOnly()
+	// 			]
+	// 		];
+	// 		n.setDescription(this.buildTextFromTemplate(description, vars));
+	// 	}
+
+	// 	military.extend(civilian);
+
+	// 	foreach( s in military )
+	// 	{
+	// 		local best;
+	// 		local bestAvgDist = 9000.0;
+
+	// 		foreach( i, n in _nobleHouses )
+	// 		{
+	// 			local locales = n.getSettlements();
+	// 			local avgDist = 0.0;
+
+	// 			foreach( l in locales )
+	// 			{
+	// 				avgDist = avgDist + l.getTile().getDistanceTo(s.getTile());
+	// 			}
+
+	// 			avgDist = avgDist / locales.len();
+	// 			avgDist = avgDist + locales.len();
+
+	// 			if (avgDist < bestAvgDist)
+	// 			{
+	// 				bestAvgDist = avgDist;
+	// 				best = n;
+	// 			}
+	// 		}
+
+	// 		if (best != null)
+	// 		{
+	// 			best.addSettlement(s);
+	// 		}
+	// 	}
+
+	// 	local mapSize = this.World.getMapSize();
+	// 	local northernTile = this.World.getTileSquare(mapSize.X / 2, mapSize.Y - 1);
+	// 	local houses = [];
+
+	// 	foreach( n in _nobleHouses )
+	// 	{
+	// 		local closest;
+	// 		local dist = 9999;
+
+	// 		foreach( s in n.getSettlements() )
+	// 		{
+	// 			local d = s.getTile().getDistanceTo(northernTile);
+
+	// 			if (d < dist)
+	// 			{
+	// 				dist = d;
+	// 				closest = s;
+	// 			}
+	// 		}
+
+	// 		houses.push({
+	// 			Faction = n,
+	// 			Dist = dist
+	// 		});
+	// 	}
+
+	// 	houses.sort(function ( _a, _b )
+	// 	{
+	// 		if (_a.Dist > _b.Dist)
+	// 		{
+	// 			return -1;
+	// 		}
+	// 		else if (_a.Dist < _b.Dist)
+	// 		{
+	// 			return 1;
+	// 		}
+
+	// 		return 0;
+	// 	});
+
+	// 	for( local i = 0; i < 2; i = ++i )
+	// 	{
+	// 		houses[i].Faction.getFlags().set("IsHolyWarParticipant", true);
+	// 	}
+	// }
+
+    //function createFactions()
+
+    // function createSettlements()
+	// {
+	// 	local settlements = this.World.EntityManager.getSettlements();
+
+	// 	foreach( s in settlements )
+	// 	{
+	// 		if (s.isMilitary() || this.isKindOf(s, "city_state"))
+	// 		{
+	// 			continue;
+	// 		}
+
+	// 		local f = this.new("scripts/factions/settlement_faction");
+	// 		f.setID(this.m.Factions.len());
+	// 		f.setName(s.getName());
+	// 		f.setDescription(s.getDescription());
+	// 		f.setBanner(11);
+	// 		f.setDiscovered(true);
+	// 		this.m.Factions.push(f);
+	// 		f.addTrait(this.Const.FactionTrait.Settlement);
+	// 		f.addSettlement(s, false);
+	// 	}
+	// }
+
+	
+});

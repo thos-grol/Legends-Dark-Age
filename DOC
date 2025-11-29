@@ -13,7 +13,25 @@
 
 // - start by spawning all bros in storage
 
-//TODO: 
+//TODO: remove fog of war
+//TODO: start the global map overhaul
+    //TODO: villages are not clickable, remove name from map display
+        //TODO: disable update stuff/tick
+    //TODO: forts are not clickable
+        //TODO: disable update stuff/tick
+
+    // TODO: contract system - display them in circle
+
+// - let's just set all towns unclickable too ->
+// however, villages, towns, and citadels can spawn missions on the world map
+// TODO: contract implemntation
+// - create skulls on the world map that are clickable
+// - clicking will open up squad select screen
+//      - squad select will have logic on which squads are embarkable.
+//      - create an end day button
+//      - create school which is 3rd area?
+
+
 
 
 

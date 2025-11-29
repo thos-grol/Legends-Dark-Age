@@ -26,10 +26,9 @@
 		for(local i = 0; i != ::World.EntityManager.getSettlements().len(); i = i++)
 		{
 			randomVillage = ::World.EntityManager.getSettlements()[i];
-			if (randomVillage.isMilitary()) continue;
 			if (randomVillage.isIsolatedFromRoads()) continue;
-			if (randomVillage.getSize() >= 3) continue;
 			if (randomVillage.isSouthern()) continue;
+			if (randomVillage.m.Size <= 2) continue;
 			break;
 		}
 
