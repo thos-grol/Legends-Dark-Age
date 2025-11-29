@@ -1,5 +1,4 @@
 ::mods_hookExactClass("states/world_state", function(o) {
-
 	o.startNewCampaign <- function()
 	{
 		this.setAutoPause(true);
@@ -33,13 +32,13 @@
 			::logInfo("3");
 			this.m.CampaignSettings.StartingScenario.onInit();
 			::logInfo("4");
-			this.World.uncoverFogOfWar(this.getPlayer().getTile().Pos, 900.0);
-			::logInfo("5");
+			// this.World.uncoverFogOfWar(this.getPlayer().getTile().Pos, 900.0);
+			// ::logInfo("5");
 		}
 
-		::logInfo("6");
-		this.World.FactionManager.uncoverSettlements(this.m.CampaignSettings.ExplorationMode);
-		::logInfo("uncoverSettlements");
+		// ::logInfo("6");
+		// this.World.FactionManager.uncoverSettlements(this.m.CampaignSettings.ExplorationMode);
+		// ::logInfo("uncoverSettlements");
 		this.World.FactionManager.runSimulation();
 		::logInfo("runSimulation");
 		this.m.CampaignSettings = null;
@@ -72,5 +71,16 @@
         this.World.setFogOfWar(false);
     }
 
+});
+
+::mods_hookNewObject("factions/faction_manager", function(o)
+{
+    o.fix_settlement_display <- function()
+	{
+		foreach( s in this.World.EntityManager.getSettlements() )
+		{
+            s.make_less_apparent();
+		}
+	}
 });
 

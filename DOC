@@ -13,7 +13,6 @@
 
 // - start by spawning all bros in storage
 
-//TODO: remove fog of war
 //TODO: start the global map overhaul
     //TODO: villages are not clickable, remove name from map display
         //TODO: disable update stuff/tick

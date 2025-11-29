@@ -27,13 +27,8 @@
 		Types = this.Const.World.Settlements.Legends_villages_coast,
 		Sizes = [
 			{
-				Ratio = 5,
-				MinAmount = 1,
-				Size = 1
-			},
-			{
 				Ratio = 3,
-				MinAmount = 1,
+				MinAmount = 2,
 				Size = 2
 			}
 		]
@@ -43,15 +38,10 @@
 		Types = Const.World.Settlements.Legends_villages,
 		Sizes = [
 			{
-				Ratio = 5,
-				MinAmount = 1,
-				Size = 1
-			},
-			{
 				Ratio = 3,
-				MinAmount = 1,
+				MinAmount = 13,
 				Size = 2,
-			}
+			},
 		]
 	},
 	{
@@ -62,7 +52,7 @@
 		Sizes = [
 			{
 				Ratio = 10,
-				MinAmount = 2,
+				MinAmount = 1,
 				Size = 3
 			}
 		]
@@ -307,3 +297,4 @@
 	}
 
 });
+
