@@ -13,18 +13,22 @@
 		if (this.getContainer() == null) return;
 		if (this.getContainer().getActor() == null) return;
 
-		//FEATURE_1: armor perks & system - create new brawny perk. make it flat reduction
+		// hk
+		// - implement vanguard passive armor reduction
+		// - implement hardness stat
+		
+		local stamina_modifier = ::Math.ceil(this.getStaminaModifier());
+		//TODO: create new vanguard trait passive. make it flat reduction
+		//TODO: vanguard passive, copy over underdog logic
 		// if (this.getContainer().getActor().getSkills().hasPerk(::Legends.Perk.Brawny))
 		// {
-		// 	staminaMult = 0.70;
+		//  stamina_modifier = ::Math.min(0, stamina_modifier + 1); 
 		// }
+		_properties.Stamina += stamina_modifier;
 
 		_properties.Armor[::Const.BodyPart.Body] += this.getArmor();
 		_properties.ArmorMax[::Const.BodyPart.Body] += this.getArmorMax();
-		_properties.Stamina += ::Math.ceil(this.getStaminaModifier());
-
-		// hk
-		// - implement hardness stat
+		
 		_properties.Hardness += this.get_hardness();
 		//hk end
 
