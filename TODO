@@ -1,12 +1,17 @@
 Short term
 
-Finish contract system
-    TODO: serialize/deserialize, point link map objects to contracts
-        TODO: write get contract_entity.get_contract()
-        TODO: write get contract.get_contract_entity()
 
-        TODO: write serialization logic
-    
+Its time to port over squad screen before continuing
+    get a working skeleton from vanilla + pasted legends.
+        TODO: refactor class names to not collide
+        TODO: refactor css names to not collide
+        TODO: MSU create screen
+        TODO: replace hotkeys to load our screen in strategic mode
+
+Finish contract system
+    TODO: handle contract completion
+        contract -> kill contract entity -> contract completes
+
     TODO: click map object -> squad selection screen with contract details
     TODO: figure out how to pass data to ui, probably check settlement.nut for contract passing
     TODO: create squad screen contract ui display
@@ -19,6 +24,8 @@ Finish contract system
         squad has serialized data -> mission buffer
             mission buffer cleared week end
         week end progression button
+    
+    
 
         
 
