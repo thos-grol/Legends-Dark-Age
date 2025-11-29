@@ -58,7 +58,11 @@ for file in files:
                     categories.append(t_str)
                 continue
             categories.append(t)
-    except: continue
+    except: 
+        categories = ['Bad Sorting, Dev Didn\'t Categorize In Code Correctly']
+        info['Categories'] = 'One-Handed'
+        
+    info['1H'] = 'One-Handed' in info['Categories']
     
     key = ''
     for cat in categories:
@@ -68,36 +72,92 @@ for file in files:
     
     if key == '': continue
     if not key in ledger: ledger[key] = {}
-    ledger[key][info['ID']] = info
+    try:
+        ledger[key][info['ID']] = info
+    except: continue
     print()
     
+cat_order = [
+    'Dagger',
+    'Sword',
+    'Cleaver',
+    'Axe',
+    'Spear',
+    'Polearm',
+    'Mace',
+    'Hammer',
+    'Flail',
+    'Bow',
+    'Crossbow',
+    'ThrowingWeapon',
+    'MusicalInstrument',
+    'Firearm',
+    'Bad Sorting, Dev Didn\'t Categorize In Code Correctly'
+]
 
         
 with open('test.nut', "w", encoding=encoding) as f_out:
-    for key, cat in ledger.items():
-        tuples = [(int(cat[x]['RegularDamageMax']), cat[x]['ID']) for x in cat]
+    f_out.write('::DEF.C.Weapons <- {\n')
+    
+    
+    for key in cat_order:
+        cat = ledger[key]
+        f_out.write(f'//==================================================================================================\n')
+        f_out.write(f'//{key} \n')
+        f_out.write(f'//==================================================================================================\n\n')
         
+        tuples = []
+        for x in cat:
+            a = x
+            if x == '"shield.legend_parrying_dagger"': continue
+            if x == '"shield.legend_named_parrying_dagger"': continue
+            if not cat[x]['1H']: continue
+            tuples.append((int(cat[x]['RegularDamageMax']), cat[x]['ID']))
         sorted_tuples = sorted(tuples)
         
-        for t in sorted_tuples:
-            _, id = t
-            for k, v in cat[id].items():
-                if k == 'Categories': continue
-                if k == 'Value': continue
-                if k == 'ShieldDamage': continue
-                
-                if k == 'StaminaModifier':
-                    f_out.write(f'{k} : {int(v) // 5}\n')
-                    continue
-                
-                if k == 'RegularDamage' or k == 'RegularDamageMax':
-                    f_out.write(f'{k} : {int(v) // 10}\n')
-                    continue
-                f_out.write(f'{k} : {v}\n')
-            f_out.write(f'\n')
+        tuples2 = []
+        for x in cat:
+            if cat[x]['1H']: continue
+            tuples2.append((int(cat[x]['RegularDamageMax']), cat[x]['ID']))
+        sorted_tuples2 = sorted(tuples2)
+        
+        
+        for i, l in enumerate([sorted_tuples, sorted_tuples2]):
+            if i == 0: f_out.write(f'\t// 1H \n')
+            else: f_out.write(f'\t// 2H \n')
+            
+            # ::DEF.C.Weapons <- {
+            #     "arming sword" : {
+                    
+            #     }
+            # };
+            
+            for t in l:
+                _, id = t
+                f_out.write(f'\t{id} : ' + '{\n')
+                for k, v in cat[id].items():
+                    if k == 'ID': continue
+                    if k == 'Categories': continue
+                    if k == 'Value': continue
+                    if k == 'ShieldDamage': continue
+                    if k == '1H': continue
+                    
+                    if k == 'StaminaModifier':
+                        if i == 0: f_out.write(f'\t\t"{k}" : {-1},\n')
+                        else: f_out.write(f'\t\t"{k}" : {-2},\n')
+                        continue
+                    
+                    if k == 'RegularDamage' or k == 'RegularDamageMax':
+                        f_out.write(f'\t\t"{k}" : {int(v) // 10},\n')
+                        continue
+                    f_out.write(f'\t\t"{k}" : {v},\n')
+                f_out.write('\t},\n')
                 
         f_out.write(f'\n\n\n')
     
+    f_out.write('};')
+    
+    
     
 
-print()
+print(ledger.keys())
