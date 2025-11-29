@@ -1,16 +1,19 @@
+// =================================================================================================
+// load module files
+// =================================================================================================
 
-// load config folder
-// foreach (file in ::IO.enumerateFiles("01.00/!!!!config")) {
-// 	::include(file);
-// }
-// foreach (file in ::IO.enumerateFiles("01.00/!!config")) {
-// 	::include(file);
-// }
-// foreach (file in ::IO.enumerateFiles("01.00/!config")) {
-// 	::include(file);
-// }
+local ROOT = "01_00";
+local FOLDERS = [
+	"_CORE",
+	"_DEF",
+	"_DEF_S",
+	"_SYS",
+	"src",
+];
 
-foreach (file in ::IO.enumerateFiles("01_00/src"))
-{
-	::include(file);
+foreach (folder in FOLDERS) {
+	local folder_path = ROOT + "/" + folder;
+    foreach (file in ::IO.enumerateFiles(folder_path)) {
+		::include(file);
+	}
 }

@@ -1,75 +1,59 @@
+// Note: creating a new module, you can copy the folder structure of previous module,
+// but you need to modify the register/load files
+
+// =================================================================================================
+// CONST
+// =================================================================================================
+
 if (!("Z" in this.getroottable())) ::Z <- {};
 if (!("DEF" in this.getroottable())) ::DEF <- {};
 
-::Z.Version <- "3.0.0";
-::Z.ModID <- "da_00_00";
-::Z.Name <- "Dark Age: Core";
+::Z.MOD_VERSION <- "4.0.0";
+::Z.IDX <- 0;
 
-# #0000 Hook Js Button Sounds - sq fn defs
-::Button_Sounds <- {
-	ID = "mod_button_sounds"
-	Name = "Dark Age: Button Sounds"
-	Version = "1.0.0"
-	JSHandle = null
-	function connect()
-	{
-		this.JSHandle = this.UI.connect(this.ID, this);
-	}
-	function destroy()
-	{
-		this.JSHandle = ::UI.disconnect(this.JSHandle);
-	}
-	function isConnected()
-	{
-		return this.JSHandle != null;
-	}
-	function onButtonClicked()
-	{
-		::Sound.play("sounds/ui/click.wav", 1.5);
-	}
-	function onHover()
-	{
-		::Sound.play("sounds/ui/hover.wav", 0.5);
-	}
-	function registerMenuButtons()
-	{
-		::Button_Sounds.JSHandle.asyncCall("registerMenuButtons", null)
-	}
-}
+::Z.INFO <- {};
+::Z.PRE <- "mod_da_";
+
+::Z.INFO[::Z.IDX] <- {
+	"id" : "00_00",
+	"name" : "Dark Age: Core" 
+};
+
+::Z.DIR_JS <- "ui/mods/";
 
 
-::mods_registerMod(::Z.ModID, ::Z.Version, ::Z.Name);
-::mods_queue(::Z.ModID, "mod_legends(>=19.1.35), mod_msu(>=1.2.6), mod_swifter", function()
-{
 
-	::Z.Mod <- ::MSU.Class.Mod(::Z.ModID, ::Z.Version, ::Z.Name);
+// =================================================================================================
+// REGISTER
+// =================================================================================================
+local mod = ::Hooks.register(
+	::Z.PRE + ::Z.INFO[::Z.IDX]["id"], 
+	::Z.MOD_VERSION, 
+	::Z.INFO[::Z.IDX]["name"]
+);
+mod.require("mod_legends >= 19.1.35", "mod_msu >= 1.2.6", "mod_swifter");
+mod.queue(">mod_legends", ">mod_msu", ">mod_swifter", function(){
+	// old hooks load jss/css after main menu screen is initialized on the sq side 
+	// (basically when screen is visible to user). Thus, hooks for fns such as registerDatasourceListener
+	// would be executed immediately upon instantiation and never run
+
+	// modern hooks executes these much earlier (after all vanilla files are read and Screens are 
+	// defined, but before any of them (except for Root Screen due to engine limitations) are instantiated
+
+	::Hooks.registerJS(::Z.DIR_JS + "menu_sounds.js");
+	::Hooks.registerJS(::Z.DIR_JS + "menu_campaign_defaults.js");
+
+	::Hooks.registerJS(::Z.DIR_JS + "ui_time.js");
 	
-	# #0000 Hook Js Button Sounds - connect ui, register js hooks
-	::mods_registerJS("00_main_menu.js");
-	::mods_registerJS("00_sounds_button.js");
-
-	::mods_registerJS("01_time_elements.js");
-
-	::mods_registerJS("SYS_Travel.js");
-	::mods_registerCSS("SYS_Travel.css");
+	::Hooks.registerCSS(::Z.DIR_JS + "menu_fast_travel.css");
+	::Hooks.registerJS(::Z.DIR_JS + "menu_fast_travel.js");
 	
-	::mods_registerJS("SYS_log.js");
-	::mods_registerCSS("SYS_log.css");
+	::Hooks.registerCSS(::Z.DIR_JS + "tactical_log.css");
+	::Hooks.registerJS(::Z.DIR_JS + "tactical_log.js");
 
-	::mods_registerJS("FIX_dialog_readability.js");
-	::mods_registerCSS("FIX_dialog_readability.css");
+	::Hooks.registerCSS(::Z.DIR_JS + "menu_event.css");
+	::Hooks.registerJS(::Z.DIR_JS + "menu_event.js");
 
-	::MSU.UI.registerConnection(::Button_Sounds);
-	::MSU.UI.addOnConnectCallback(::Button_Sounds.registerMenuButtons);
-
-	# load core module
+	# load module
 	::include("00_00/load.nut");
-
-	::MSU.MH.queue(function() {
-		foreach (func in ::Z.QueueBucket.VeryLate)
-		{
-			func();
-		}
-		::Z.QueueBucket.VeryLate.clear();
-	}, ::Hooks.QueueBucket.VeryLate);
 });

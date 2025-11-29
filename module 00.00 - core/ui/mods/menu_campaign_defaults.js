@@ -1,4 +1,4 @@
-// Set Main Menu Defaults
+// Set campaign defaults
 NewCampaignMenuModule.prototype.collectSettings = function()
 {
 	var settings = {};

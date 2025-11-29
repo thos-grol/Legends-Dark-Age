@@ -1,5 +1,5 @@
-//#0003 - Set up basic World UI - fast travel
-//this is the sq class for the fast travel screen
+// Defines a screen to prompt fast travel
+
 this.fast_travel_screen <- ::inherit("scripts/mods/msu/ui_screen", {
 	m = {},
 	
@@ -34,6 +34,6 @@ this.fast_travel_screen <- ::inherit("scripts/mods/msu/ui_screen", {
 
 	function connect()
 	{
-		this.m.JSHandle = ::UI.connect("Mod_Fast_Travel_Screen", this);
+		this.m.JSHandle = ::UI.connect("hk_screen_fast_travel", this);
 	}
 });

@@ -1,27 +1,27 @@
-var Mod_Fast_Travel_Screen = function ()
+var hk_screen_fast_travel = function ()
 {
 	MSUUIScreen.call(this);
-	this.mID = "Mod_Fast_Travel_Screen";
+	this.mID = "hk_screen_fast_travel";
 };
 
-var Mod_Transition_Screen = function ()
+var hk_screen_transition = function ()
 {
 	MSUUIScreen.call(this);
-	this.mID = "Mod_Transition_Screen";
+	this.mID = "hk_screen_transition";
 };
 
 // =========================================================================================
-// Mod_Transition_Screen
+// hk_screen_transition
 // =========================================================================================
 var that = null;
-Mod_Transition_Screen.prototype = Object.create(MSUUIScreen.prototype);
-Object.defineProperty(Mod_Transition_Screen.prototype, 'constructor', {
-	value: Mod_Fast_Travel_Screen,
+hk_screen_transition.prototype = Object.create(MSUUIScreen.prototype);
+Object.defineProperty(hk_screen_transition.prototype, 'constructor', {
+	value: hk_screen_fast_travel,
 	enumerable: false,
 	writable: true
 });
 
-Mod_Transition_Screen.prototype.createDIV = function (_parentDiv)
+hk_screen_transition.prototype.createDIV = function (_parentDiv)
 {
 	MSUUIScreen.prototype.createDIV.call(this, _parentDiv);
 	this.mPopupDialog = null;
@@ -30,7 +30,7 @@ Mod_Transition_Screen.prototype.createDIV = function (_parentDiv)
 	_parentDiv.append(this.mContainer);
 };
 
-Mod_Transition_Screen.prototype.do_transition = function ()
+hk_screen_transition.prototype.do_transition = function ()
 {
 	this.show()
 	that = this;
@@ -39,12 +39,12 @@ Mod_Transition_Screen.prototype.do_transition = function ()
 	
 };
 
-Mod_Transition_Screen.prototype.transition_callback = function()
+hk_screen_transition.prototype.transition_callback = function()
 {
 	SQ.call(Screen_Transition.mSQHandle, 'transition_callback');
 };
 
-Mod_Transition_Screen.prototype.destroyDIV = function ()
+hk_screen_transition.prototype.destroyDIV = function ()
 {
 	if (this.mPopupDialog !== null)
 	{
@@ -55,34 +55,34 @@ Mod_Transition_Screen.prototype.destroyDIV = function ()
 };
 
 
-Mod_Transition_Screen.prototype.destroy = function ()
+hk_screen_transition.prototype.destroy = function ()
 {
 	MSUUIScreen.prototype.destroy.call(this);
 };
 
-Mod_Transition_Screen.prototype.hide = function()
+hk_screen_transition.prototype.hide = function()
 {
 	MSUUIScreen.prototype.hide.call(this);
 };
 
-Mod_Transition_Screen.prototype.show = function (_data)
+hk_screen_transition.prototype.show = function (_data)
 {
 	MSUUIScreen.prototype.show.call(this,_data);
 };
 
 
 // =========================================================================================
-// Mod_Fast_Travel_Screen
+// hk_screen_fast_travel
 // =========================================================================================
 
-Mod_Fast_Travel_Screen.prototype = Object.create(MSUUIScreen.prototype);
-Object.defineProperty(Mod_Fast_Travel_Screen.prototype, 'constructor', {
-	value: Mod_Fast_Travel_Screen,
+hk_screen_fast_travel.prototype = Object.create(MSUUIScreen.prototype);
+Object.defineProperty(hk_screen_fast_travel.prototype, 'constructor', {
+	value: hk_screen_fast_travel,
 	enumerable: false,
 	writable: true
 });
 
-Mod_Fast_Travel_Screen.prototype.createDIV = function (_parentDiv)
+hk_screen_fast_travel.prototype.createDIV = function (_parentDiv)
 {
 	MSUUIScreen.prototype.createDIV.call(this, _parentDiv);
 	this.mPopupDialog = null;
@@ -92,7 +92,7 @@ Mod_Fast_Travel_Screen.prototype.createDIV = function (_parentDiv)
 };
 
 
-Mod_Fast_Travel_Screen.prototype.ask_travel = function (_immediately)
+hk_screen_fast_travel.prototype.ask_travel = function (_immediately)
 {
 	this.show()
 	//$.fn.createPopupDialog = function(_title, _subTitle, _headerImagePath, _classes, _modalBackground)
@@ -121,12 +121,12 @@ Mod_Fast_Travel_Screen.prototype.ask_travel = function (_immediately)
 	this.mPopupDialog.addPopupDialogContent(result);
 };
 
-Mod_Fast_Travel_Screen.prototype.destroy = function ()
+hk_screen_fast_travel.prototype.destroy = function ()
 {
 	MSUUIScreen.prototype.destroy.call(this);
 };
 
-Mod_Fast_Travel_Screen.prototype.destroyDIV = function ()
+hk_screen_fast_travel.prototype.destroyDIV = function ()
 {
 	if (this.mPopupDialog !== null)
 	{
@@ -136,22 +136,22 @@ Mod_Fast_Travel_Screen.prototype.destroyDIV = function ()
 	MSUUIScreen.prototype.destroyDIV.call(this);
 };
 
-Mod_Fast_Travel_Screen.prototype.hide = function()
+hk_screen_fast_travel.prototype.hide = function()
 {
 	MSUUIScreen.prototype.hide.call(this);
 };
 
-Mod_Fast_Travel_Screen.prototype.show = function (_data)
+hk_screen_fast_travel.prototype.show = function (_data)
 {
 	MSUUIScreen.prototype.show.call(this,_data);
 };
 
 
-var Screen_Fast_Travel = new Mod_Fast_Travel_Screen();
-registerScreen("Mod_Fast_Travel_Screen", Screen_Fast_Travel);
+var Screen_Fast_Travel = new hk_screen_fast_travel();
+registerScreen("hk_screen_fast_travel", Screen_Fast_Travel);
 
-var Screen_Transition = new Mod_Transition_Screen();
-registerScreen("Mod_Transition_Screen", Screen_Transition);
+var Screen_Transition = new hk_screen_transition();
+registerScreen("hk_screen_transition", Screen_Transition);
 
 
 
