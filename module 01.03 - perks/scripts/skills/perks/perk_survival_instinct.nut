@@ -1,7 +1,8 @@
 
 this.perk_survival_instinct <- this.inherit("scripts/skills/skill", {
 	m = {
-		BUFF = 1
+		THRESHOLD_BUFF = 10,
+		BUFF = 5
 	},
 	function create()
 	{
@@ -16,12 +17,14 @@ this.perk_survival_instinct <- this.inherit("scripts/skills/skill", {
 		this.m.IsHidden = false;
 	}
 
-	function onAnySkillUsed( _skill, _targetEntity, _properties )
+	function onUpdate( _properties )
 	{
-		//FEATURE_8: add this.m.IsPhysical = true default to skill class. Then set false for valid
-		// skills
-		// then add check here to disable increase
-		_properties.DamageRegularMin += BUFF;
-		_properties.DamageRegularMax += BUFF;
+		_properties.MeleeDefense += this.m.BUFF;
+		
+		local actor = this.getContainer().getActor();
+		local currentPercent = actor.getHitpointsPct();
+
+		if (currentPercent <= 0.66) _properties.MeleeDefense += this.m.THRESHOLD_BUFF;
+		if (currentPercent <= 0.33) _properties.MeleeDefense += this.m.THRESHOLD_BUFF;
 	}
 });

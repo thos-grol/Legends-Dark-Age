@@ -27,8 +27,8 @@
 + "\n\n" + ::blue("« Passive »")
 + "\n" + ::green("+1") + " Fat Recovery";
         
-::Const.Strings.PerkName.Steadfast <- "Steadfast";
-::Const.Strings.PerkDescription.Steadfast <- "TODO"
+::Const.Strings.PerkName.Steadfast2 <- "Steadfast";
+::Const.Strings.PerkDescription.Steadfast2 <- "TODO"
 + "\n\n" + ::blue("« Passive »")
 + "\n" + ::green("+1") + " Fat Recovery";
         

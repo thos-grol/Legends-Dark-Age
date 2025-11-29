@@ -1,7 +1,8 @@
 
 this.perk_iron_mountain <- this.inherit("scripts/skills/skill", {
 	m = {
-		BUFF = 1
+		HARDNESS = 2,
+		ACTIVE = false
 	},
 	function create()
 	{
@@ -16,12 +17,20 @@ this.perk_iron_mountain <- this.inherit("scripts/skills/skill", {
 		this.m.IsHidden = false;
 	}
 
-	function onAnySkillUsed( _skill, _targetEntity, _properties )
+	function onDamageReceived( _attacker, _damageHitpoints, _damageArmor )
 	{
-		//FEATURE_8: add this.m.IsPhysical = true default to skill class. Then set false for valid
-		// skills
-		// then add check here to disable increase
-		_properties.DamageRegularMin += BUFF;
-		_properties.DamageRegularMax += BUFF;
+		this.m.ACTIVE = true;
+	}
+
+	function onTurnEnd()
+	{
+		this.m.ACTIVE = false;
+	}
+
+	function onUpdate( _properties )
+	{
+		//TODO: how damage works. Damage is rounded down after processing, BUT if damage > 0 and < 1. Then it becomes 1.
+		//TODO: add this property to damage calc
+		if (this.m.ACTIVE) _properties.Hardness += this.m.HARDNESS;
 	}
 });

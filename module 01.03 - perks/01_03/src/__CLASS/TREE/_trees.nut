@@ -29,7 +29,7 @@
 		],
 		[
 			::Const.Perks.PerkDefs.Safeguard,
-			::Const.Perks.PerkDefs.Steadfast,
+			::Const.Perks.PerkDefs.Steadfast2,
 			::Const.Perks.PerkDefs.SurvivalInstinct,
 		],
 		[
