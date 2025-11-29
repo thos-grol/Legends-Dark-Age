@@ -1,3 +1,11 @@
 //TODO: actives: you need to fix skills with DamageMinimum adding way more damage than you want
-// - we probably want to hook all actives for editing
+    // - we probably want to hook all actives for editing
+    // also 
+    // _properties.DamageRegularMin += 5;
+    // _properties.DamageRegularMax += 10;
 //TODO: damage can only be done in integers
+
+//TODO: write python code to generate perk addition entry from just something like 'brute_strength'
+
+//TODO: FatigueLossOnBeingMissed
+//      and on being hit too, should rebalance

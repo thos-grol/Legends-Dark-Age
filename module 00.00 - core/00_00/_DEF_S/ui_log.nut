@@ -145,7 +145,7 @@
 ::Z.S.log_skill_nine_lives <- function(_targetEntity)
 {
     local entity = "[" + ::Const.UI.getColorizedEntityName(_targetEntity) + "]";
-    local skill_text = "[" + ::MSU.Text.colorRed("Nine Lives") + "]"
+    local skill_text = "[" + ::red("Nine Lives") + "]"
     ::Tactical.EventLog.logIn(entity + " triggers " + skill_text);
 };
 
@@ -157,7 +157,7 @@
 
 ::Z.S.log_hair_armor <- function()
 {
-    ::Tactical.EventLog.logIn("[" + ::MSU.Text.colorRed("Hair Armor") + "] nullified direct damage.");
+    ::Tactical.EventLog.logIn("[" + ::red("Hair Armor") + "] nullified direct damage.");
 };
 
 

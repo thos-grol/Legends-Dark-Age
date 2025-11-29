@@ -1,5 +1,3 @@
-::DEF.C.Stats <- {};
-
 // Defines base stats for characters
 ::DEF.C.Stats.Base <- {
     Hitpoints =         5,        	// Health

@@ -61,21 +61,21 @@
 			id = 10,
 			type = "text",
 			icon = "ui/icons/fatigue.png",
-			text = ::MSU.Text.colorGreen(::Z.S.log_roundf(p.FatigueEffectMult) * 100) + "% Fatigue Cost (Skill)"
+			text = ::green(::Z.S.log_roundf(p.FatigueEffectMult) * 100) + "% Fatigue Cost (Skill)"
 		});
 
 		// tooltip.push({
 		// 	id = 10,
 		// 	type = "text",
 		// 	icon = "ui/icons/fatigue.png",
-		// 	text = "Fatality Chance Mult: " + ::MSU.Text.colorGreen(p.FatalityChanceMult)
+		// 	text = "Fatality Chance Mult: " + ::green(p.FatalityChanceMult)
 		// });
 
         tooltip.push({
 			id = 10,
 			type = "text",
 			icon = "ui/icons/fatigue.png",
-			text = "Armor class: " + details.Name + " (" + ::MSU.Text.colorGreen(details.Weight) + ") [" + details.Range + "]"
+			text = "Armor class: " + details.Name + " (" + ::green(details.Weight) + ") [" + details.Range + "]"
 		});
 
 		switch(details.Type)
@@ -248,7 +248,7 @@
 			id = 6,
 			type = "text",
 			icon = "ui/icons/health.png",
-			text = "Freedom of Movement: " + ::MSU.Text.colorGreen("+x%") + " Melee DR proportional to the Agility difference between this and attacker. (Max 80% for a 100 difference)."
+			text = "Freedom of Movement: " + ::green("+x%") + " Melee DR proportional to the Agility difference between this and attacker. (Max 80% for a 100 difference)."
 		});
 		return _tooltip;
 	}
@@ -265,7 +265,7 @@
             id = 6,
             type = "text",
             icon = "ui/icons/health.png",
-            text = "Balance: " + ::MSU.Text.colorGreen("+" + bonus + "%") + " DR. " + ::MSU.Text.colorRed("(Max 50%)\n") + ::MSU.Text.colorGreen("+5%") + " when dodging.\n" + ::MSU.Text.colorRed("– 10%") + " when hit. " 
+            text = "Balance: " + ::green("+" + bonus + "%") + " DR. " + ::red("(Max 50%)\n") + ::green("+5%") + " when dodging.\n" + ::red("– 10%") + " when hit. " 
         });
 
 		return _tooltip;
@@ -285,7 +285,7 @@
 				id = 6,
 				type = "text",
 				icon = "ui/icons/health.png",
-				text = ::MSU.Text.colorGreen("+" + headBonus + "%") + " Head DR (Health)"
+				text = ::green("+" + headBonus + "%") + " Head DR (Health)"
 			});
 		}
 		if (bodyBonus > 0)
@@ -294,7 +294,7 @@
 				id = 6,
 				type = "text",
 				icon = "ui/icons/health.png",
-				text = ::MSU.Text.colorGreen("+" + bodyBonus + "%") + " Body DR (Health)"
+				text = ::green("+" + bodyBonus + "%") + " Body DR (Health)"
 			});
 		}
 		return _tooltip;

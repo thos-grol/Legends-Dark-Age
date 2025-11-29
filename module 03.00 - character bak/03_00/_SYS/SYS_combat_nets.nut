@@ -80,8 +80,8 @@
 ::Const.Strings.PerkName.LegendNetCasting = "Net Arsenal"
 ::Const.Strings.PerkDescription.LegendNetCasting = "A well equipped mercenary is a prepared mercenary..."
 + "\n\n" + ::MSU.Text.color(::DEF.Color.Blue, "[u]Passive:[/u]")
-+ "\n"+::MSU.Text.colorGreen("+1") + " Net"
-+ "\n"+::MSU.Text.colorGreen("+20%") + " Net debuff effectiveness";
++ "\n"+::green("+1") + " Net"
++ "\n"+::green("+20%") + " Net debuff effectiveness";
 ::Const.Perks.PerkDefObjects[::Const.Perks.PerkDefs.LegendNetCasting].Name = ::Const.Strings.PerkName.LegendNetCasting;
 ::Const.Perks.PerkDefObjects[::Const.Perks.PerkDefs.LegendNetCasting].Tooltip = ::Const.Strings.PerkDescription.LegendNetCasting;
 

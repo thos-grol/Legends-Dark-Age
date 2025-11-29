@@ -209,7 +209,7 @@ o.attackEntity = function( _user, _targetEntity, _allowDiversion = true )
 	if (is_rolling && hit_result > HIT_RESULT.MISS && luck_roll <= luck_reroll_chance)
 	{
 		if (_user.getFlags().has("IgnoreLuck")) 
-			::Tactical.EventLog.log(::Const.UI.getColorizedEntityName(_user) + ::MSU.Text.colorRed(" NEGATES LUCK"));
+			::Tactical.EventLog.log(::Const.UI.getColorizedEntityName(_user) + ::red(" NEGATES LUCK"));
 		else
 		{
 			r = ::Math.rand(1, 100);

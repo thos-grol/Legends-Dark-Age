@@ -37,6 +37,8 @@
 ::blue <- function(msg) { return ::color(::Color.Blue, msg); }
 
 ::damagered <- function(msg) { return ::color(::Const.UI.Color.DamageValue, msg); }
+::purple <- function(msg) { return ::color(::Color.Purple, msg); }
+
 ::bloodred <- function(msg) { return ::color(::Color.BloodRed, msg); }
 ::lightblue <- function(msg) { return ::color(::Color.LightBlue, msg); }
 ::nicegreen <- function(msg) { return ::color(::Color.NiceGreen, msg); }

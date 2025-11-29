@@ -22,7 +22,11 @@
 		"TODO"
 	],
 	Tree = [
-		[],
+		[
+			::Const.Perks.PerkDefs.LoadTraining,
+			// ::Const.Perks.PerkDefs.Mettle,
+			::Const.Perks.PerkDefs.BruteStrength,
+		],
 		[],
 		[],
 		[],
@@ -72,4 +76,3 @@
 	}
 
 };
-
