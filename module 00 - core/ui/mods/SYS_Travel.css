@@ -1,0 +1,78 @@
+@font-face{
+	font-family: 'Roboto-Mono-Regular';
+	src: url('coui://gfx/fonts/Roboto-Mono/RobotoMono-VariableFont_wght.ttf') format('truetype');
+}
+
+@font-face{
+	font-family: 'Roboto-Mono-Italic';
+	src: url('coui://gfx/fonts/Roboto-Mono/RobotoMono-Italic-VariableFont_wght.ttf') format('truetype');
+}
+
+.transition-screen
+{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	background-color: rgba(0, 0, 0, 1.0);
+	overflow: hidden;
+	z-index: 101 !important;
+}
+
+.fast-travel-screen
+{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	background-color: rgba(0, 0, 0, 0.3);
+	overflow: hidden;
+	z-index: 101 !important;
+}
+
+.fast-travel-container
+{
+	width: 44.9rem;
+}
+
+.dialog-container .ui-control.popup-dialog.fast-travel-popup
+{
+	width: 44.9rem;
+	height: 12.0rem;
+}
+
+.dialog-container .ui-control.popup-dialog .fast-travel-container
+{
+	width: 100%;
+	padding: 0.6rem;
+	position: relative;
+	float: left;
+}
+
+.dialog-container .ui-control.popup-dialog .fast-travel-container .row
+{
+	width: 100%;
+	height: 5.9rem;
+	position: relative;
+	float: left;
+}
+
+.dialog-container .ui-control.popup-dialog .fast-travel-container .row .label
+{
+	width: 9.0rem;
+	height: 5.9rem;
+	margin-right: 1.0rem;
+	position: relative;
+	float: left;
+
+	line-height: 5.9rem;
+	text-align: right;
+}
+
+.dialog-container .ui-control.popup-dialog .fast-travel-container .row .l-input
+{
+	width: 30.0rem;
+	height: 4.0rem;
+	margin-top: 1.0rem;
+	margin-bottom: 1.0rem;
+	position: relative;
+	float: left;
+}
