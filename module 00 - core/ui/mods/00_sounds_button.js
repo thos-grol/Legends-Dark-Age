@@ -1,4 +1,4 @@
-// #0000 Hook Js Button Sounds - define js fn defs
+// js logic to hook main menu buttons to register sounds
 var Button_Sounds = 
 {
 	mSQHandle : null,
@@ -49,13 +49,12 @@ $.fn.createTextButton = Button_Sounds.wrapper($.fn.createTextButton);
 $.fn.createCustomButton = Button_Sounds.wrapper($.fn.createCustomButton);
 $.fn.createTabTextButton = Button_Sounds.wrapper($.fn.createTabTextButton);
 $.fn.createImageButton = Button_Sounds.wrapper($.fn.createImageButton);
+
 Button_Sounds.MainMenuScreen_show = Screens.MainMenuScreen.getModule("MainMenuModule").show;
 Screens.MainMenuScreen.getModule("MainMenuModule").show = function(_animation)
 {
 	Button_Sounds.registerMenuButtons();
 	return Button_Sounds.MainMenuScreen_show.call(this, _animation);
 }
-
-
 
 registerScreen("mod_button_sounds", Button_Sounds);	
