@@ -40,6 +40,35 @@ if (!("DEF" in this.getroottable())) ::DEF <- {};
 	// modern hooks executes these much earlier (after all vanilla files are read and Screens are 
 	// defined, but before any of them (except for Root Screen due to engine limitations) are instantiated
 
+	// load custom squad screen
+	::Hooks.registerCSS("ui/mods/screens/squad/modules/squad_screen_left_panel/squad_screen_paperdoll_module.css");
+	::Hooks.registerCSS("ui/mods/screens/squad/modules/squad_screen_left_panel/squad_screen_skills_module.css");
+	::Hooks.registerCSS("ui/mods/screens/squad/modules/squad_screen_left_panel/squad_screen_stats_module.css");
+	::Hooks.registerCSS("ui/mods/screens/squad/modules/squad_screen_brothers_list/squad_screen_brothers_list_module.css");
+	::Hooks.registerCSS("ui/mods/screens/squad/modules/squad_screen_right_panel/squad_screen_inventory_list_module.css");
+	::Hooks.registerCSS("ui/mods/screens/squad/modules/squad_screen_right_panel/squad_screen_perks_module.css");
+	::Hooks.registerCSS("ui/mods/screens/squad/modules/squad_screen_left_panel/squad_screen_left_panel_header_module.css");
+	::Hooks.registerCSS("ui/mods/screens/squad/modules/squad_screen_left_panel/squad_screen_left_panel_module.css");
+	::Hooks.registerCSS("ui/mods/screens/squad/modules/squad_screen_right_panel/squad_screen_right_panel_header_module.css");
+	::Hooks.registerCSS("ui/mods/screens/squad/modules/squad_screen_right_panel/squad_screen_right_panel_module.css");
+	::Hooks.registerCSS("ui/mods/screens/squad/squad_screen.css");
+
+	::Hooks.registerJS("ui/mods/screens/squad/modules/squad_screen_brothers_list/squad_screen_brothers_list_module.js");
+	::Hooks.registerJS("ui/mods/screens/squad/modules/squad_screen_right_panel/squad_screen_inventory_list_module.js");
+	::Hooks.registerJS("ui/mods/screens/squad/modules/squad_screen_right_panel/squad_screen_perks_module.js");
+	::Hooks.registerJS("ui/mods/screens/squad/modules/squad_screen_left_panel/squad_screen_skills_module.js");
+	::Hooks.registerJS("ui/mods/screens/squad/modules/squad_screen_left_panel/squad_screen_stats_module.js");
+	::Hooks.registerJS("ui/mods/screens/squad/modules/squad_screen_left_panel/squad_screen_paperdoll_module.js");
+	::Hooks.registerJS("ui/mods/screens/squad/modules/squad_screen_left_panel/squad_screen_left_panel_header_module.js");
+	::Hooks.registerJS("ui/mods/screens/squad/modules/squad_screen_left_panel/squad_screen_left_panel_module.js");
+	::Hooks.registerJS("ui/mods/screens/squad/modules/squad_screen_right_panel/squad_screen_right_panel_header_module.js");
+	::Hooks.registerJS("ui/mods/screens/squad/modules/squad_screen_right_panel/squad_screen_right_panel_module.js");
+	::Hooks.registerJS("ui/mods/screens/squad/squad_screen.js");
+
+	::Z.squad_screen <- this.new("scripts/screens/squad_screen");
+	::MSU.UI.registerConnection(::Z.squad_screen);
+
+	// load other js stuff
 	::Hooks.registerJS(::Z.DIR_JS + "menu_bg.js");
 	
 	::Hooks.registerJS(::Z.DIR_JS + "menu_sounds.js");

@@ -3,10 +3,12 @@ Short term
 
 Its time to port over squad screen before continuing
     get a working skeleton from vanilla + pasted legends.
-        TODO: refactor class names to not collide
-        TODO: refactor css names to not collide
-        TODO: MSU create screen
-        TODO: replace hotkeys to load our screen in strategic mode
+        (Done): refactor class names to not collide
+        (Done): refactor css names to not collide
+        (Done): MSU create screen
+        (Done): replace hotkeys to load our screen in strategic mode
+        TODO: port over legend modifications to character screen
+        TODO: port over our changes
 
 Finish contract system
     TODO: handle contract completion

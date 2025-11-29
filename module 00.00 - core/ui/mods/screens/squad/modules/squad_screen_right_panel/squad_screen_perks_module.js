@@ -6,7 +6,7 @@
 "use strict";
 
 
-var CharacterScreenPerksModule = function(_parent, _dataSource)
+var SquadScreenPerksModule = function(_parent, _dataSource)
 {
     this.mParent = _parent;
     this.mDataSource = _dataSource;
@@ -29,7 +29,7 @@ var CharacterScreenPerksModule = function(_parent, _dataSource)
 };
 
 
-CharacterScreenPerksModule.prototype.createDIV = function (_parentDiv)
+SquadScreenPerksModule.prototype.createDIV = function (_parentDiv)
 {
 	// create: containers (init hidden!)
 	this.mContainer = $('<div class="perks-module opacity-none"/>');
@@ -66,7 +66,7 @@ CharacterScreenPerksModule.prototype.createDIV = function (_parentDiv)
     this.mListScrollContainer.append(this.mLeftColumn);
 };
 
-CharacterScreenPerksModule.prototype.destroyDIV = function ()
+SquadScreenPerksModule.prototype.destroyDIV = function ()
 {
     this.mLeftColumn.empty();
     this.mLeftColumn.remove();
@@ -84,7 +84,7 @@ CharacterScreenPerksModule.prototype.destroyDIV = function ()
 };
 
 
-CharacterScreenPerksModule.prototype.createPerkTreeDIV = function (_perkTree, _parentDiv)
+SquadScreenPerksModule.prototype.createPerkTreeDIV = function (_perkTree, _parentDiv)
 {
 	var self = this;
 	var widetree = false;
@@ -146,7 +146,7 @@ CharacterScreenPerksModule.prototype.createPerkTreeDIV = function (_perkTree, _p
 };
 
 
-CharacterScreenPerksModule.prototype.resetPerkTree = function(_perkTree)
+SquadScreenPerksModule.prototype.resetPerkTree = function(_perkTree)
 {
 	if (_perkTree == null)
 		return;
@@ -174,7 +174,7 @@ CharacterScreenPerksModule.prototype.resetPerkTree = function(_perkTree)
 	}
 };
 
-CharacterScreenPerksModule.prototype.initPerkTree = function (_perkTree, _perksUnlocked)
+SquadScreenPerksModule.prototype.initPerkTree = function (_perkTree, _perksUnlocked)
 {
 	var perkPointsSpent = this.mDataSource.getBrotherPerkPointsSpent(this.mDataSource.getSelectedBrother());
 
@@ -220,7 +220,7 @@ CharacterScreenPerksModule.prototype.initPerkTree = function (_perkTree, _perksU
 	}
 };
 
-CharacterScreenPerksModule.prototype.setupPerkTreeTooltips = function(_perkTree, _brotherId)
+SquadScreenPerksModule.prototype.setupPerkTreeTooltips = function(_perkTree, _brotherId)
 {
 	for (var row = 0; row < _perkTree.length; ++row)
 	{
@@ -228,13 +228,12 @@ CharacterScreenPerksModule.prototype.setupPerkTreeTooltips = function(_perkTree,
 		{
 			var perk = _perkTree[row][i];
 			perk.Image.unbindTooltip();
-			if (perk.ID.indexOf("EMPTY") !== -1) continue;
 			perk.Image.bindTooltip({ contentType: 'ui-perk', entityId: _brotherId, perkId: perk.ID });
 		}
 	}
 };
 
-CharacterScreenPerksModule.prototype.setupPerkTree = function (_perkTree)
+SquadScreenPerksModule.prototype.setupPerkTree = function (_perkTree)
 {
 	if (this.mPerkTree !== null) {
 		this.removePerksEventHandlers()
@@ -246,11 +245,11 @@ CharacterScreenPerksModule.prototype.setupPerkTree = function (_perkTree)
     this.setupPerksEventHandlers(this.mPerkTree);
 };
 
-CharacterScreenPerksModule.prototype.updatePerkTreeLayout = function (_inventoryMode)
+SquadScreenPerksModule.prototype.updatePerkTreeLayout = function (_inventoryMode)
 {
 };
 
-CharacterScreenPerksModule.prototype.loadPerkTreesWithBrotherData = function (_brother)
+SquadScreenPerksModule.prototype.loadPerkTreesWithBrotherData = function (_brother)
 {
     this.setupPerkTree(_brother[CharacterScreenIdentifier.Perk.Tree]);
 
@@ -265,7 +264,7 @@ CharacterScreenPerksModule.prototype.loadPerkTreesWithBrotherData = function (_b
     }
 };
 
-CharacterScreenPerksModule.prototype.isPerkUnlockable = function (_perk)
+SquadScreenPerksModule.prototype.isPerkUnlockable = function (_perk)
 {
 	var _brother = this.mDataSource.getSelectedBrother();
 	var character = _brother[CharacterScreenIdentifier.Entity.Character.Key];
@@ -273,12 +272,13 @@ CharacterScreenPerksModule.prototype.isPerkUnlockable = function (_perk)
 	var perkPoints = this.mDataSource.getBrotherPerkPoints(_brother);
 	var perkPointsSpent = this.mDataSource.getBrotherPerkPointsSpent(_brother);
 	
-	if( _perk.ID.indexOf("EMPTY") !== -1) return false;
-	if(level >= 13 && _perk.ID === 'perk.student') return false;
+	if(level >= 13 && _perk.ID === 'perk.student') {
+		return false;
+	}
 	return perkPoints > 0 && perkPointsSpent >= _perk.Unlocks;
 };
 
-CharacterScreenPerksModule.prototype.attachEventHandler = function(_perk)
+SquadScreenPerksModule.prototype.attachEventHandler = function(_perk)
 {
 	var self = this;
 
@@ -315,7 +315,7 @@ CharacterScreenPerksModule.prototype.attachEventHandler = function(_perk)
 	});
 }
 
-CharacterScreenPerksModule.prototype.removePerksEventHandler = function (_perkTree)
+SquadScreenPerksModule.prototype.removePerksEventHandler = function (_perkTree)
 {
 	for (var row = 0; row < _perkTree.length; ++row)
 	{
@@ -329,7 +329,7 @@ CharacterScreenPerksModule.prototype.removePerksEventHandler = function (_perkTr
 	}
 };
 
-CharacterScreenPerksModule.prototype.setupPerksEventHandlers = function(_perkTree)
+SquadScreenPerksModule.prototype.setupPerksEventHandlers = function(_perkTree)
 {
 	//this.removePerksEventHandlers();
 
@@ -343,18 +343,18 @@ CharacterScreenPerksModule.prototype.setupPerksEventHandlers = function(_perkTre
 	}
 };
 
-CharacterScreenPerksModule.prototype.removePerksEventHandlers = function()
+SquadScreenPerksModule.prototype.removePerksEventHandlers = function()
 {
     this.removePerksEventHandler(this.mPerkTree);
 };
 
 
-CharacterScreenPerksModule.prototype.showPerkUnlockDialog = function(_perk)
+SquadScreenPerksModule.prototype.showPerkUnlockDialog = function(_perk)
 {
     this.mDataSource.notifyBackendPopupDialogIsVisible(true);
 
     var self = this;
-    var popupDialog = $('.character-screen').createPopupDialog('Unlock Perk', null, null, 'unlock-perk-popup');
+    var popupDialog = $('.squad-screen').createPopupDialog('Unlock Perk', null, null, 'unlock-perk-popup');
     
     popupDialog.addPopupDialogContent(this.createPerkUnlockDialogContent(_perk));
 
@@ -372,7 +372,7 @@ CharacterScreenPerksModule.prototype.showPerkUnlockDialog = function(_perk)
     });
 };
 
-CharacterScreenPerksModule.prototype.createPerkUnlockDialogContent = function (_perk)
+SquadScreenPerksModule.prototype.createPerkUnlockDialogContent = function (_perk)
 {
 	var result = $('<div class="unlock-perk-popup-dialog-content-container"/>');
 
@@ -405,7 +405,7 @@ CharacterScreenPerksModule.prototype.createPerkUnlockDialogContent = function (_
 };
 
 
-CharacterScreenPerksModule.prototype.registerDatasourceListener = function()
+SquadScreenPerksModule.prototype.registerDatasourceListener = function()
 {
     this.mDataSource.addListener(CharacterScreenDatasourceIdentifier.Inventory.ModeUpdated, jQuery.proxy(this.onInventoryModeUpdated, this));
 
@@ -416,20 +416,20 @@ CharacterScreenPerksModule.prototype.registerDatasourceListener = function()
 };
 
 
-CharacterScreenPerksModule.prototype.create = function(_parentDiv)
+SquadScreenPerksModule.prototype.create = function(_parentDiv)
 {
     this.createDIV(_parentDiv);
 };
 
-CharacterScreenPerksModule.prototype.destroy = function()
+SquadScreenPerksModule.prototype.destroy = function()
 {
     this.destroyDIV();
 };
 
 
-CharacterScreenPerksModule.prototype.register = function (_parentDiv)
+SquadScreenPerksModule.prototype.register = function (_parentDiv)
 {
-    console.log('CharacterScreenPerksModule::REGISTER');
+    console.log('SquadScreenPerksModule::REGISTER');
 
     if (this.mContainer !== null)
     {
@@ -443,9 +443,9 @@ CharacterScreenPerksModule.prototype.register = function (_parentDiv)
     }
 };
 
-CharacterScreenPerksModule.prototype.unregister = function ()
+SquadScreenPerksModule.prototype.unregister = function ()
 {
-    console.log('CharacterScreenPerksModule::UNREGISTER');
+    console.log('SquadScreenPerksModule::UNREGISTER');
 
     if (this.mContainer === null)
     {
@@ -456,7 +456,7 @@ CharacterScreenPerksModule.prototype.unregister = function ()
     this.destroy();
 };
 
-CharacterScreenPerksModule.prototype.isRegistered = function ()
+SquadScreenPerksModule.prototype.isRegistered = function ()
 {
 	if (this.mContainer !== null)
 	{
@@ -467,33 +467,33 @@ CharacterScreenPerksModule.prototype.isRegistered = function ()
 };
 
 
-CharacterScreenPerksModule.prototype.show = function ()
+SquadScreenPerksModule.prototype.show = function ()
 {
     // NOTE: (js) HACK which prevents relayouting..
 	this.mContainer.removeClass('opacity-none').addClass('opacity-full');
 	//this.mContainer.removeClass('display-none').addClass('display-block');
 };
 
-CharacterScreenPerksModule.prototype.hide = function ()
+SquadScreenPerksModule.prototype.hide = function ()
 {
     // NOTE: (js) HACK which prevents relayouting..
 	this.mContainer.removeClass('opacity-full is-top').addClass('opacity-none');
 	//this.mContainer.removeClass('display-block is-top').addClass('display-none');
 };
 
-CharacterScreenPerksModule.prototype.isVisible = function ()
+SquadScreenPerksModule.prototype.isVisible = function ()
 {
 	return this.mContainer.hasClass('opacity-full');
 	//return this.mContainer.hasClass('display-block');
 };
 
 
-CharacterScreenPerksModule.prototype.onInventoryModeUpdated = function (_dataSource, _mode)
+SquadScreenPerksModule.prototype.onInventoryModeUpdated = function (_dataSource, _mode)
 {
     this.updatePerkTreeLayout(_mode);
 };
 
-CharacterScreenPerksModule.prototype.onPerkTreeLoaded = function (_dataSource, _perkTree)
+SquadScreenPerksModule.prototype.onPerkTreeLoaded = function (_dataSource, _perkTree)
 {
     // if (_perkTree !== null)
     // {
@@ -502,7 +502,7 @@ CharacterScreenPerksModule.prototype.onPerkTreeLoaded = function (_dataSource, _
     // }
 };
 
-CharacterScreenPerksModule.prototype.onBrotherUpdated = function (_dataSource, _brother)
+SquadScreenPerksModule.prototype.onBrotherUpdated = function (_dataSource, _brother)
 {
 	if (_dataSource.isSelectedBrother(_brother))
 	{
@@ -510,7 +510,7 @@ CharacterScreenPerksModule.prototype.onBrotherUpdated = function (_dataSource, _
 	}
 };
 
-CharacterScreenPerksModule.prototype.onBrotherSelected = function (_dataSource, _brother)
+SquadScreenPerksModule.prototype.onBrotherSelected = function (_dataSource, _brother)
 {
 	if (_brother === null)
 	{

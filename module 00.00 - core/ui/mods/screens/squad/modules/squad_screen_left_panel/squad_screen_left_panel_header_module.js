@@ -10,11 +10,12 @@
  */
 "use strict";
 
-/* 	+ Progressbar gegen Komponente austauschen
+/* TODO:
+	+ Progressbar gegen Komponente austauschen
 	+ Image auch mit Offsets positionieren?
  */
 
-var CharacterScreenLeftPanelHeaderModule = function(_parent, _dataSource)
+var SquadScreenLeftPanelHeaderModule = function(_parent, _dataSource)
 {
 	this.mParent = _parent;
 	this.mDataSource = _dataSource;
@@ -163,7 +164,7 @@ var CharacterScreenLeftPanelHeaderModule = function(_parent, _dataSource)
 };
 
 
-CharacterScreenLeftPanelHeaderModule.prototype.createDIV = function (_parentDiv)
+SquadScreenLeftPanelHeaderModule.prototype.createDIV = function (_parentDiv)
 {
 	var self = this;
 
@@ -196,7 +197,7 @@ CharacterScreenLeftPanelHeaderModule.prototype.createDIV = function (_parentDiv)
 	{
 		self.mPayDismissalWage = false;
 		self.mDataSource.notifyBackendPopupDialogIsVisible(true);
-		self.mCurrentPopupDialog = $('.character-screen').createPopupDialog('Dismiss', null, null, 'dismiss-popup');
+		self.mCurrentPopupDialog = $('.squad-screen').createPopupDialog('Dismiss', null, null, 'dismiss-popup');
 
 		self.mCurrentPopupDialog.addPopupDialogOkButton(function (_dialog)
 		{
@@ -241,7 +242,7 @@ CharacterScreenLeftPanelHeaderModule.prototype.createDIV = function (_parentDiv)
 		}
 
 		self.mDataSource.notifyBackendPopupDialogIsVisible(true);
-		self.mCurrentPopupDialog = $('.character-screen').createPopupDialog('Change Name & Title', null, null, 'change-name-and-title-popup');
+		self.mCurrentPopupDialog = $('.squad-screen').createPopupDialog('Change Name & Title', null, null, 'change-name-and-title-popup');
 
 		self.mCurrentPopupDialog.addPopupDialogOkButton(function (_dialog)
 		{
@@ -276,7 +277,7 @@ CharacterScreenLeftPanelHeaderModule.prototype.createDIV = function (_parentDiv)
 		}
 
 		self.mDataSource.notifyBackendPopupDialogIsVisible(true);
-		self.mCurrentPopupDialog = $('.character-screen').createPopupDialog('Level Up', null, null, 'levelup-popup');
+		self.mCurrentPopupDialog = $('.squad-screen').createPopupDialog('Level Up', null, null, 'levelup-popup');
 		self.mCurrentPopupDialog.addPopupDialogSubHeader(self.createLevelUpDialogSubHeader());
 		self.mCurrentPopupDialog.addPopupDialogOkButton(function (_dialog)
 		{
@@ -315,7 +316,7 @@ CharacterScreenLeftPanelHeaderModule.prototype.createDIV = function (_parentDiv)
 		}
 
 		self.mDataSource.notifyBackendPopupDialogIsVisible(true);
-		self.mCurrentPopupDialog = $('.character-screen').createPopupDialog('Level Up', null, null, 'levelup-popup');
+		self.mCurrentPopupDialog = $('.squad-screen').createPopupDialog('Level Up', null, null, 'levelup-popup');
 		self.mCurrentPopupDialog.addPopupDialogSubHeader(self.createLevelUpDialogSubHeader());
 		self.mCurrentPopupDialog.addPopupDialogOkButton(function (_dialog)
 		{
@@ -334,7 +335,7 @@ CharacterScreenLeftPanelHeaderModule.prototype.createDIV = function (_parentDiv)
 	});
 };
 
-CharacterScreenLeftPanelHeaderModule.prototype.destroyDIV = function ()
+SquadScreenLeftPanelHeaderModule.prototype.destroyDIV = function ()
 {
 	if(this.mCurrentPopupDialog !== null)
 	{
@@ -364,7 +365,7 @@ CharacterScreenLeftPanelHeaderModule.prototype.destroyDIV = function ()
 };
 
 
-CharacterScreenLeftPanelHeaderModule.prototype.createChangeNameAndTitleDialogContent = function (_dialog)
+SquadScreenLeftPanelHeaderModule.prototype.createChangeNameAndTitleDialogContent = function (_dialog)
 {
 	var data = this.mDataSource.getSelectedBrother();
 	var selectedBrother = CharacterScreenIdentifier.Entity.Character.Key in data ? data[CharacterScreenIdentifier.Entity.Character.Key] : null;
@@ -422,7 +423,7 @@ CharacterScreenLeftPanelHeaderModule.prototype.createChangeNameAndTitleDialogCon
 	return result;
 };
 
-CharacterScreenLeftPanelHeaderModule.prototype.createDismissDialogContent = function (_dialog)
+SquadScreenLeftPanelHeaderModule.prototype.createDismissDialogContent = function (_dialog)
 {
 	var self = this;
 
@@ -480,7 +481,7 @@ CharacterScreenLeftPanelHeaderModule.prototype.createDismissDialogContent = func
 	return result;
 };
 
-CharacterScreenLeftPanelHeaderModule.prototype.updateNameAndTitle = function (_dialog)
+SquadScreenLeftPanelHeaderModule.prototype.updateNameAndTitle = function (_dialog)
 {
 	var contentContainer = _dialog.findPopupDialogContentContainer();
 	var inputFields = contentContainer.find('input');
@@ -489,7 +490,7 @@ CharacterScreenLeftPanelHeaderModule.prototype.updateNameAndTitle = function (_d
 };
 
 
-CharacterScreenLeftPanelHeaderModule.prototype.createLevelUpDialogSubHeader = function ()
+SquadScreenLeftPanelHeaderModule.prototype.createLevelUpDialogSubHeader = function ()
 {
 	var result = $('<div class="levelup-header"/>');
 	var centerLayout  = $('<div class="l-center-container"/>');
@@ -507,7 +508,7 @@ CharacterScreenLeftPanelHeaderModule.prototype.createLevelUpDialogSubHeader = fu
 	return result;
 };
 
-CharacterScreenLeftPanelHeaderModule.prototype.createLevelUpDialogContent = function ()
+SquadScreenLeftPanelHeaderModule.prototype.createLevelUpDialogContent = function ()
 {
 	var self = this;
 
@@ -556,7 +557,7 @@ CharacterScreenLeftPanelHeaderModule.prototype.createLevelUpDialogContent = func
 	return result;
 };
 
-CharacterScreenLeftPanelHeaderModule.prototype.createLevelUpDialogContentRow = function (_definitions, _parentDiv, _data, _stats)
+SquadScreenLeftPanelHeaderModule.prototype.createLevelUpDialogContentRow = function (_definitions, _parentDiv, _data, _stats)
 {
 	var self = this;
 
@@ -594,7 +595,7 @@ CharacterScreenLeftPanelHeaderModule.prototype.createLevelUpDialogContentRow = f
 	});
 };
 
-CharacterScreenLeftPanelHeaderModule.prototype.destroyLevelUpDialogContentRow = function (_definitions)
+SquadScreenLeftPanelHeaderModule.prototype.destroyLevelUpDialogContentRow = function (_definitions)
 {
 	$.each(_definitions, function(_key, _value)
 	{
@@ -608,7 +609,7 @@ CharacterScreenLeftPanelHeaderModule.prototype.destroyLevelUpDialogContentRow = 
 	});
 };
 
-CharacterScreenLeftPanelHeaderModule.prototype.setLevelUpDialogContentProgressbarValue = function (_progressbarDiv, _data, _valueKey, _valueMaxKey)
+SquadScreenLeftPanelHeaderModule.prototype.setLevelUpDialogContentProgressbarValue = function (_progressbarDiv, _data, _valueKey, _valueMaxKey)
 {
 	if (_valueKey in _data && _data[_valueKey] !== null && _valueMaxKey in _data && _data[_valueMaxKey] !== null)
 	{
@@ -617,7 +618,7 @@ CharacterScreenLeftPanelHeaderModule.prototype.setLevelUpDialogContentProgressba
 	}
 };
 
-CharacterScreenLeftPanelHeaderModule.prototype.queryLevelUpStatsIncreasedValue = function ()
+SquadScreenLeftPanelHeaderModule.prototype.queryLevelUpStatsIncreasedValue = function ()
 {
 	// create result values
 	var statsIncreased = 0;
@@ -632,7 +633,7 @@ CharacterScreenLeftPanelHeaderModule.prototype.queryLevelUpStatsIncreasedValue =
 	return statsIncreased;
 };
 
-CharacterScreenLeftPanelHeaderModule.prototype.increaseLevelUpStatValue = function (_button)
+SquadScreenLeftPanelHeaderModule.prototype.increaseLevelUpStatValue = function (_button)
 {
 	var data = this.mDataSource.getSelectedBrother();
 	var selectedBrother = CharacterScreenIdentifier.Entity.Character.Key in data ? data[CharacterScreenIdentifier.Entity.Character.Key] : null;
@@ -696,7 +697,7 @@ CharacterScreenLeftPanelHeaderModule.prototype.increaseLevelUpStatValue = functi
 	}
 };
 
-CharacterScreenLeftPanelHeaderModule.prototype.disableLevelUpButtons = function (_definitions)
+SquadScreenLeftPanelHeaderModule.prototype.disableLevelUpButtons = function (_definitions)
 {
 	$.each(_definitions, function(_key, _value)
 	{
@@ -707,14 +708,14 @@ CharacterScreenLeftPanelHeaderModule.prototype.disableLevelUpButtons = function 
 	});
 };
 
-CharacterScreenLeftPanelHeaderModule.prototype.setLevelUpDialogToFinish = function ()
+SquadScreenLeftPanelHeaderModule.prototype.setLevelUpDialogToFinish = function ()
 {
 	this.disableLevelUpButtons(this.mLevelUpLeftStatsRows);
 	this.disableLevelUpButtons(this.mLevelUpRightStatsRows);
 	this.mCurrentPopupDialog.findPopupDialogOkButton().enableButton(true);
 };
 
-CharacterScreenLeftPanelHeaderModule.prototype.commitLevelUpStats = function ()
+SquadScreenLeftPanelHeaderModule.prototype.commitLevelUpStats = function ()
 {
 	this.destroyLevelUpDialogContentRow(this.mLevelUpLeftStatsRows);
 	this.destroyLevelUpDialogContentRow(this.mLevelUpRightStatsRows);
@@ -724,7 +725,7 @@ CharacterScreenLeftPanelHeaderModule.prototype.commitLevelUpStats = function ()
 };
 
 
-CharacterScreenLeftPanelHeaderModule.prototype.bindTooltips = function ()
+SquadScreenLeftPanelHeaderModule.prototype.bindTooltips = function ()
 {
 	if(this.mDataSource.isTacticalMode() !== true)
 	{
@@ -738,7 +739,7 @@ CharacterScreenLeftPanelHeaderModule.prototype.bindTooltips = function ()
 	
 };
 
-CharacterScreenLeftPanelHeaderModule.prototype.unbindTooltips = function ()
+SquadScreenLeftPanelHeaderModule.prototype.unbindTooltips = function ()
 {
 	if(this.mDataSource.isTacticalMode() !== true)
 	{
@@ -752,29 +753,29 @@ CharacterScreenLeftPanelHeaderModule.prototype.unbindTooltips = function ()
 };
 
 
-CharacterScreenLeftPanelHeaderModule.prototype.registerDatasourceListener = function()
+SquadScreenLeftPanelHeaderModule.prototype.registerDatasourceListener = function()
 {
 	this.mDataSource.addListener(CharacterScreenDatasourceIdentifier.Brother.Updated, jQuery.proxy(this.onBrotherUpdated, this));
 	this.mDataSource.addListener(CharacterScreenDatasourceIdentifier.Brother.Selected, jQuery.proxy(this.onBrotherSelected, this));
 };
 
 
-CharacterScreenLeftPanelHeaderModule.prototype.create = function(_parentDiv)
+SquadScreenLeftPanelHeaderModule.prototype.create = function(_parentDiv)
 {
 	this.createDIV(_parentDiv);
 	this.bindTooltips();
 };
 
-CharacterScreenLeftPanelHeaderModule.prototype.destroy = function()
+SquadScreenLeftPanelHeaderModule.prototype.destroy = function()
 {
 	this.unbindTooltips();
 	this.destroyDIV();
 };
 
 
-CharacterScreenLeftPanelHeaderModule.prototype.register = function (_parentDiv)
+SquadScreenLeftPanelHeaderModule.prototype.register = function (_parentDiv)
 {
-	console.log('CharacterScreenLeftPanelHeaderModule::REGISTER');
+	console.log('SquadScreenLeftPanelHeaderModule::REGISTER');
 
 	if (this.mContainer !== null)
 	{
@@ -788,9 +789,9 @@ CharacterScreenLeftPanelHeaderModule.prototype.register = function (_parentDiv)
 	}
 };
 
-CharacterScreenLeftPanelHeaderModule.prototype.unregister = function ()
+SquadScreenLeftPanelHeaderModule.prototype.unregister = function ()
 {
-	console.log('CharacterScreenLeftPanelHeaderModule::UNREGISTER');
+	console.log('SquadScreenLeftPanelHeaderModule::UNREGISTER');
 
 	if (this.mContainer === null)
 	{
@@ -801,7 +802,7 @@ CharacterScreenLeftPanelHeaderModule.prototype.unregister = function ()
 	this.destroy();
 };
 
-CharacterScreenLeftPanelHeaderModule.prototype.isRegistered = function ()
+SquadScreenLeftPanelHeaderModule.prototype.isRegistered = function ()
 {
 	if (this.mContainer !== null)
 	{
@@ -812,7 +813,7 @@ CharacterScreenLeftPanelHeaderModule.prototype.isRegistered = function ()
 };
 
 
-CharacterScreenLeftPanelHeaderModule.prototype.setPortraitImage = function(_imagePath)
+SquadScreenLeftPanelHeaderModule.prototype.setPortraitImage = function(_imagePath)
 {
 	if (this.mPortraitImage.attr('src') == Path.PROCEDURAL + _imagePath)
 		return;
@@ -821,7 +822,7 @@ CharacterScreenLeftPanelHeaderModule.prototype.setPortraitImage = function(_imag
 	this.mPortraitImage.attr('src', Path.PROCEDURAL + _imagePath);
 };
 
-CharacterScreenLeftPanelHeaderModule.prototype.setNameAndTitle = function(_name, _title)
+SquadScreenLeftPanelHeaderModule.prototype.setNameAndTitle = function(_name, _title)
 {
 	var label = this.mNameContainer.find('.label:first');
 	if (label.length > 0)
@@ -852,7 +853,7 @@ CharacterScreenLeftPanelHeaderModule.prototype.setNameAndTitle = function(_name,
    // }
 };
 
-CharacterScreenLeftPanelHeaderModule.prototype.setLevel = function(_levelValue, _hasLevelUp)
+SquadScreenLeftPanelHeaderModule.prototype.setLevel = function(_levelValue, _hasLevelUp)
 {
 	var label = this.mLevelContainer.find('.label:first');
 	if (label.length > 0)
@@ -885,7 +886,7 @@ CharacterScreenLeftPanelHeaderModule.prototype.setLevel = function(_levelValue, 
 	}*/
 };
 
-CharacterScreenLeftPanelHeaderModule.prototype.setXP = function(_xpValue, _xpValueMax, _level, _hasLevelUp)
+SquadScreenLeftPanelHeaderModule.prototype.setXP = function(_xpValue, _xpValueMax, _level, _hasLevelUp)
 {
 	if(_level >= 11)
 	{
@@ -909,7 +910,7 @@ CharacterScreenLeftPanelHeaderModule.prototype.setXP = function(_xpValue, _xpVal
 };
 
 
-CharacterScreenLeftPanelHeaderModule.prototype.updateControls = function(_id, _data)
+SquadScreenLeftPanelHeaderModule.prototype.updateControls = function(_id, _data)
 {
 	/*this.mLevelContainer.css('backgroundColor', 'transparent');
 	this.mLevelContainer.stop();*/
@@ -981,7 +982,7 @@ CharacterScreenLeftPanelHeaderModule.prototype.updateControls = function(_id, _d
 };
 
 
-CharacterScreenLeftPanelHeaderModule.prototype.onBrotherUpdated = function (_dataSource, _brother)
+SquadScreenLeftPanelHeaderModule.prototype.onBrotherUpdated = function (_dataSource, _brother)
 {
 	/*this.mLevelContainer.css('backgroundColor', 'transparent');
 	this.mLevelContainer.stop();*/
@@ -992,7 +993,7 @@ CharacterScreenLeftPanelHeaderModule.prototype.onBrotherUpdated = function (_dat
 	}
 };
 
-CharacterScreenLeftPanelHeaderModule.prototype.onBrotherSelected = function (_dataSource, _brother)
+SquadScreenLeftPanelHeaderModule.prototype.onBrotherSelected = function (_dataSource, _brother)
 {
 	/*this.mLevelContainer.css('backgroundColor', 'transparent');
 	this.mLevelContainer.stop();*/

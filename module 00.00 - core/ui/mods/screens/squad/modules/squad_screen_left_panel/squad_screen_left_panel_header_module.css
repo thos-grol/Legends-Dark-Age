@@ -1,0 +1,440 @@
+/*
+ *  @Project:		Battle Brothers
+ *	@Company:		Overhype Studios
+ *
+ *	@Copyright:		(c) Overhype Studios | 2013 - 2020
+ * 
+ *  @Author:		Overhype Studios
+ *  @Date:			24.05.2017 / Reworked: 26.11.2017
+ *  @Description:	Left Panel Header Module CSS
+ */
+
+.squad-screen-container .left-panel-header-module
+{
+	width: 100%;
+	height: 9.0rem;
+	position: relative;
+	float: left;
+
+	/*border-bottom: 1px rgba(130, 130, 130, 1) solid;*/
+}
+
+.squad-screen-container .left-panel-header-module .portrait-container
+{
+	top: 0;
+	left: 0;
+	bottom: 0;
+	width: 9.0rem;
+	position: absolute;
+/*	background-color: blue;*/
+
+	/*border-right: 1px rgba(130, 130, 130, 1) solid;*/
+}
+
+.squad-screen-container .left-panel-header-module .portrait-container .l-portrait-image-container
+{
+	left: -2.5rem;
+	right: 0;
+	top: -2.5rem;
+	bottom: 0;
+	width: 15.0rem;
+	height: 15.0rem;
+/*	background-color: red;*/
+
+/*
+	width: 10.0rem;
+	height: 10.0rem;
+*/
+	pointer-events: none;
+	position: absolute;
+	margin: auto;
+	z-index: 2;
+}
+
+.squad-screen-container .left-panel-header-module .portrait-container img
+{
+	/*width: 100%;*/
+	
+	display: block;
+	margin: auto;
+	position: absolute;
+/*	background-color: grey;*/
+}
+
+.squad-screen-container .left-panel-header-module .portrait-container .l-button
+{
+	width: 4.5rem;
+	height: 4.1rem;
+	position: absolute;
+
+	line-height: 2.6rem;
+}
+
+.squad-screen-container .left-panel-header-module .portrait-container .l-button.is-dismiss
+{
+	left: 1.0rem;
+	top: 8.3rem;
+	z-index: 3;
+}
+
+.squad-screen-container .left-panel-header-module .portrait-container .l-button.is-reserve
+{
+	left: 5.6rem;
+	top: 8.3rem;
+	z-index: 3;
+}
+
+.squad-screen-container .left-panel-header-module .name-container
+{
+	top: 0;
+	left: 9.0rem;
+	right: 0;
+	height: 6.0rem;
+	position: absolute;
+
+	overflow: hidden;
+
+	/*border-bottom: 1px rgba(130, 130, 130, 1) solid;*/
+}
+
+.squad-screen-container .left-panel-header-module .name-container.is-clickable:hover
+{
+	/*background-color: rgb(129, 50, 24);
+	box-shadow: inset 0 0 4px rgba(0, 0, 0, 1);*/
+}
+
+
+.squad-screen-container .left-panel-header-module .name-container .label
+{
+	/* vertical center */
+	top: 50%;
+	width: 100%;
+	position: relative;
+
+	-webkit-transform: translateY(-50%);
+	-ms-transform: translateY(-50%);
+	transform: translateY(-50%);
+
+	white-space: nowrap;
+	text-align: center;
+	text-overflow: ellipsis;
+	line-height: 2.6rem;
+}
+
+.squad-screen-container .left-panel-header-module .name-container img
+{
+	top: 0;
+	bottom: 0;
+	right: 0.4rem;
+	width: 1.8rem;
+	height: 1.8rem;
+	position: absolute;
+	margin: auto;
+}
+
+.squad-screen-container .left-panel-header-module .level-container
+{
+	top: 6.0rem;
+	left: 9.0rem;
+	width: 5.0rem;
+	height: 3.0rem;
+	position: absolute;
+
+	overflow: hidden;
+
+	/*border-right: 1px rgba(130, 130, 130, 1) solid;*//
+}
+
+.squad-screen-container .left-panel-header-module .level-container.is-clickable:hover
+{
+	/*background-color: rgb(129, 50, 24);
+	box-shadow: inset 0 0 4px rgba(0, 0, 0, 1);*/
+}
+
+.squad-screen-container .left-panel-header-module .level-container > .label
+{
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	position: absolute;
+
+	line-height: 3.0rem;
+	text-align: center;
+}
+
+.squad-screen-container .left-panel-header-module .level-container > img
+{
+	top: 0;
+	right: -0.2rem;
+	bottom: 0;
+	width: 2.0rem;
+	height: 2.0rem;
+	position: absolute;
+	margin: auto;
+}
+
+.squad-screen-container .left-panel-header-module .xp-container
+{
+	top: 6.0rem;
+	left: 13.7rem;
+	right: 0;
+	height: 3.0rem;
+	position: absolute;
+}
+
+.squad-screen-container .left-panel-header-module .l-xp-center-container
+{
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 19.6rem;
+	height: 2.6rem;
+	position: absolute;
+	margin: auto;
+}
+
+
+/* Dismiss Dialog Container */
+.squad-screen .ui-control.popup-dialog.dismiss-popup
+{
+	width: 44.9rem;
+	height: 25.0rem;
+
+	background-image: url("coui://gfx/ui/skin/popup_background_449x250.png");
+	background-size: 44.9rem 25.0rem;
+	background-repeat: no-repeat;
+}
+
+.squad-screen .ui-control.popup-dialog .dismiss-character-container
+{
+	margin-top: -3.5rem;
+	margin-bottom: -0.5rem;
+	width: 100%;
+	/*height: 14.0rem;*/
+	padding: 2.6rem;
+	position: relative;
+	float: left;
+}
+
+.squad-screen .ui-control.popup-dialog .dismiss-character-container .title-label
+{
+	width: 100%;
+	height: 3.6rem;
+	position: relative;
+	float: left;
+	clear: left;
+
+	text-align: left;
+	line-height: 4.4rem;
+}
+
+.squad-screen .ui-control.popup-dialog .dismiss-character-container .label
+{
+	width: 100%;
+	position: relative;
+	float: left;
+
+	text-align: left;
+}
+
+.squad-screen .ui-control.popup-dialog .dismiss-character-container .retirement-package
+{
+	width: 100%;
+	position: relative;
+	float: left;
+
+	text-align: left;
+	margin-top: 1.5rem;
+	margin-bottom: -1.0rem;
+	margin-left: auto;
+	margin-right: auto;
+
+	display: block;
+
+	line-height: 3.0rem;
+}
+
+.squad-screen .ui-control.popup-dialog .dismiss-character-container .retirement-package .blub
+{
+	position: absolute;
+	left: 3.2rem;
+	top: -0.8rem;
+}
+
+
+/* Change Name & Title Dialog Container */
+.squad-screen .ui-control.popup-dialog.change-name-and-title-popup
+{
+	width: 44.9rem;
+	height: 25.0rem;
+
+	background-image: url("coui://gfx/ui/skin/popup_background_449x250.png");
+	background-size: 44.9rem 25.0rem;
+	background-repeat: no-repeat;
+}
+
+.squad-screen .ui-control.popup-dialog .change-name-and-title-container
+{
+	width: 100%;
+	padding: 0.6rem;
+	position: relative;
+	float: left;
+}
+
+.squad-screen .ui-control.popup-dialog .change-name-and-title-container .row
+{
+	width: 100%;
+	height: 5.9rem;
+	position: relative;
+	float: left;
+}
+
+.squad-screen .ui-control.popup-dialog .change-name-and-title-container .row .label
+{
+	width: 9.0rem;
+	height: 5.9rem;
+	margin-right: 1.0rem;
+	position: relative;
+	float: left;
+
+	line-height: 5.9rem;
+	text-align: right;
+}
+
+.squad-screen .ui-control.popup-dialog .change-name-and-title-container .row .l-input
+{
+	width: 30.0rem;
+	height: 4.0rem;
+	margin-top: 1.0rem;
+	margin-bottom: 1.0rem;
+	position: relative;
+	float: left;
+}
+
+
+/* LevelUp Dialog Content */
+.squad-screen .ui-control.popup-dialog.levelup-popup
+{
+	width: 60.0rem;
+	height: 30.0rem;
+
+	background-image: url("coui://gfx/ui/skin/popup_background_600x300.png");
+	background-size: 60.0rem 30.0rem;
+	background-repeat: no-repeat;
+}
+
+.squad-screen .ui-control.popup-dialog .levelup-header
+{
+	width: 100%;
+	height: 3.0rem;
+	position: relative;
+}
+
+.squad-screen .ui-control.popup-dialog .levelup-header .l-center-container
+{
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 8.0rem;
+	height: 3.0rem;
+	position: absolute;
+	margin: auto;
+}
+
+.squad-screen .ui-control.popup-dialog .levelup-header .l-center-container > img
+{
+	top: -0.1rem;
+	left: 0;
+	bottom: 0;
+	width: 3.0rem;
+	height: 3.0rem;
+	position: absolute;
+	margin: auto;
+}
+
+.squad-screen .ui-control.popup-dialog .levelup-header .l-center-container > .label
+{
+	top: 0;
+	left: 4.0rem;
+	bottom: 0;
+	width: 4.0rem;
+	height: 3.0rem;
+	position: absolute;
+	margin: auto;
+
+	line-height: 3.0rem;
+}
+
+.squad-screen .ui-control.popup-dialog .levelup-container
+{
+	width: 100%; /* 46.0rem */
+	padding: 0.6rem;
+	padding-left: 7.0rem;
+	padding-right: 7.0rem;
+	margin-bottom: 1.5rem;
+	position: relative;
+	float: left;
+}
+
+.squad-screen .ui-control.popup-dialog .levelup-container .column
+{
+	width: 22.4rem;
+	position: relative;
+	float: left;
+}
+
+.squad-screen .ui-control.popup-dialog .levelup-container .row
+{
+	width: 100%;
+	height: 3.0rem;
+	position: relative;
+	float: left;
+}
+
+.squad-screen .ui-control.popup-dialog .levelup-container .row > img
+{
+	top: 0;
+	left: 1.0rem;
+	bottom: 0;
+	width: 2.6rem;
+	height: 2.6rem;
+	position: absolute;
+	margin: auto;
+}
+
+.squad-screen .ui-control.popup-dialog .levelup-container .row .talent
+{
+	top: -1.3rem;
+	left: 3.7rem;
+
+	position: absolute;
+	z-index: 20;
+
+	width: 3.6rem;
+	height: 1.8rem;
+}
+
+.squad-screen .ui-control.popup-dialog .levelup-container .row > .l-progressbar-container
+{
+	top: 0;
+	left: 4.0rem;
+	bottom: 0;
+	width: 12.7rem;
+	height: 2.2rem;
+	position: absolute;
+	margin: auto;
+}
+
+.squad-screen .ui-control.popup-dialog .levelup-container .row > .l-increase-button-container
+{
+	top: 0.1rem;
+	left: 17.6rem;
+	bottom: 0;
+	width: 4.2rem;
+	height: 2.8rem;
+	position: absolute;
+	margin: auto;
+}

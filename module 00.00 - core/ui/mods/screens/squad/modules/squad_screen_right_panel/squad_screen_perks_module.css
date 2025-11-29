@@ -1,0 +1,186 @@
+/*
+ *  @Project:		Battle Brothers
+ *	@Company:		Overhype Studios
+ *
+ *	@Copyright:		(c) Overhype Studios | 2013 - 2020
+ *
+ *  @Author:		Overhype Studios
+ *  @Date:			04.08.2017 / Reworked: 26.11.2017
+ *  @Description:	Perks Module CSS
+ */
+
+
+.squad-screen-container .perks-module
+{
+    top: 3.5rem;
+	left: 1.0rem;
+	right: 1.5rem;
+	bottom: -0.8rem;
+	position: absolute;
+
+    overflow: hidden;
+
+
+    /*border-bottom: 1px rgba(130, 130, 130, 1) solid;*/
+}
+
+.squad-screen-container .perks-module .scroll-container
+{
+    margin-top: 0.4rem;
+    margin-bottom: 0.4rem;
+}
+
+.squad-screen-container .scroll-container .column
+{
+    position: absolute;
+
+    top: 2.0rem;
+	bottom: 1.0rem;
+	left: 1.0rem;
+	right: 0.0rem;
+
+	width: 100%;
+	height: 100%;
+
+	/*width: 22.8rem;*/
+    /*height: 48.0rem;*/
+}
+
+.squad-screen-container .scroll-container .column .row
+{
+    /*background-color: #5F98F8;*/
+
+	/*width: 5.0rem;
+    height: 100%;*/
+	width: 100%;
+    height: 5.0rem;
+    position: absolute;
+}
+
+.squad-screen-container .scroll-container .column .row .center
+{
+   position: absolute;
+
+   margin: auto;
+   display: block;
+
+   /*background-color: red;*/
+}
+
+.squad-screen-container .scroll-container .is-unlocked
+{
+	/*background-color: rgba(200, 120, 20, 0.1);*/
+	opacity: 1;
+}
+
+.squad-screen-container .scroll-container .is-locked
+{
+	opacity: 0.33;
+}
+
+
+.squad-screen-container .scroll-container .row .l-perk-container
+{
+    width: 5.0rem;
+    height: 5.0rem;
+    position: relative;
+    float: left;
+}
+
+.squad-screen-container .scroll-container .l-perk-container .selection-image-layer
+{
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 4.7rem;
+    height: 4.7rem;
+    position: absolute;
+    margin: auto;
+    padding-bottom: 0.1rem;
+    z-index: 1;
+}
+
+.squad-screen-container .scroll-container .l-perk-container .perk-image-layer
+{
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 4.5rem;
+    height: 4.5rem;
+    position: absolute;
+    margin: auto;
+    z-index: 2;
+}
+
+
+/* Unlock Popup Dialog */
+.squad-screen .ui-control.popup-dialog.unlock-perk-popup
+{
+    width: 60.0rem;
+    height: 30.0rem;
+
+    background-image: url("coui://gfx/ui/skin/popup_background_600x300.png");
+    background-size: 60.0rem 30.0rem;
+    background-repeat: no-repeat;
+}
+
+.squad-screen .ui-control.popup-dialog .unlock-perk-popup-dialog-content-container
+{
+    top: -2.0rem;
+	width: 100%;
+    height: 17.7rem;
+    padding-top: 0;
+	padding-left: 0.6rem;
+	padding-right: 0.6rem;
+    position: relative;
+    float: left;
+}
+
+.squad-screen .ui-control.popup-dialog .unlock-perk-popup-dialog-content-container .left-column
+{
+    width: 6.0rem;
+    height: 4.0rem;
+    position: relative;
+    float: left;
+}
+
+.squad-screen .ui-control.popup-dialog .unlock-perk-popup-dialog-content-container .left-column img
+{
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 4.0rem;
+    height: 4.0rem;
+    position: absolute;
+    margin: auto;
+}
+
+.squad-screen .ui-control.popup-dialog .unlock-perk-popup-dialog-content-container .right-column
+{
+    position: relative;
+    float: none;
+
+    padding-right: 1.0rem;
+
+    overflow: hidden;
+}
+
+.squad-screen .ui-control.popup-dialog .unlock-perk-popup-dialog-content-container .right-column .name
+{
+    width: 100%;
+    height: 3.6rem;
+    position: relative;
+    float: left;
+
+    line-height: 4.4rem;
+}
+
+.squad-screen .ui-control.popup-dialog .unlock-perk-popup-dialog-content-container .right-column .description
+{
+    width: 100%;
+    position: relative;
+    float: left;
+}

@@ -10,13 +10,11 @@
  */
 "use strict";
 
-// TODO: next step is creating 10 buttons for 10 squads
-// TODO: and then clicking the button will refresh the brolist with that squad
-// TODO: and then after create another bro list with indices displayed after that squad
-// TODO: and then check if I can drag and rop
-// TODO: then prob some qol buttons
+/* TODO
+ + Items Swappen / Draggen / Droppen an Datasource anbinden
+ */
 
-var CharacterScreenInventoryListModule = function(_parent, _dataSource)
+var SquadScreenInventoryListModule = function(_parent, _dataSource)
 {
 	this.mParent = _parent;
 	this.mDataSource = _dataSource;
@@ -46,20 +44,14 @@ var CharacterScreenInventoryListModule = function(_parent, _dataSource)
 
 	this.mCurrentPopupDialog = null;
 
-	this.mFilter = 0;
-	// 0 - No Filter
-	// 1 - Filter Weapons
-	// 2 - Filter Armor
-	// 3 - Filter Misc
-	// 4 - Filter Usable
-
 	this.registerDatasourceListener();
 };
 
 
-CharacterScreenInventoryListModule.prototype.createDIV = function (_parentDiv)
+SquadScreenInventoryListModule.prototype.createDIV = function (_parentDiv)
 {
 	var self = this; 
+
 
 	// create: containers
 	this.mContainer = $('<div class="inventory-list-module opacity-none"/>');
@@ -106,131 +98,68 @@ CharacterScreenInventoryListModule.prototype.createDIV = function (_parentDiv)
 
 	var layout = $('<div class="l-button is-all-filter"/>');
 	this.mFilterPanel.append(layout);
-	
-	// this.mFilter = 0;
-	// 0 - No Filter
-	// 1 - Filter Weapons
-	// 2 - Filter Armor
-	// 3 - Filter Misc
-	// 4 - Filter Usable
 	this.mFilterAllButton = layout.createImageButton(Path.GFX + Asset.BUTTON_ALL_FILTER, function ()
 	{
-		// self.mFilterAllButton.addClass('is-active');
-		// self.mFilterWeaponsButton.removeClass('is-active');
-		// self.mFilterArmorButton.removeClass('is-active');
-		// self.mFilterMiscButton.removeClass('is-active');
-		// self.mFilterUsableButton.removeClass('is-active');
-		// self.mDataSource.notifyBackendFilterAllButtonClicked();
+		self.mFilterAllButton.addClass('is-active');
+		self.mFilterWeaponsButton.removeClass('is-active');
+		self.mFilterArmorButton.removeClass('is-active');
+		self.mFilterMiscButton.removeClass('is-active');
+		self.mFilterUsableButton.removeClass('is-active');
+		self.mDataSource.notifyBackendFilterAllButtonClicked();
 	}, '', 3);
 	this.mFilterAllButton.addClass('is-active');
 
 	var layout = $('<div class="l-button is-weapons-filter"/>');
-	self.mFilterPanel.append(layout);
-	self.mFilterWeaponsButton = layout.createImageButton(Path.GFX + Asset.BUTTON_WEAPONS_FILTER, function ()
+	this.mFilterPanel.append(layout);
+	this.mFilterWeaponsButton = layout.createImageButton(Path.GFX + Asset.BUTTON_WEAPONS_FILTER, function ()
 	{
-		if (self.mFilter === 1)
-		{
-			self.mFilterAllButton.removeClass('is-active');
-			self.mFilterWeaponsButton.removeClass('is-active');
-			self.mFilterArmorButton.removeClass('is-active');
-			self.mFilterMiscButton.removeClass('is-active');
-			self.mFilterUsableButton.removeClass('is-active');
-			self.mDataSource.notifyBackendFilterAllButtonClicked();
-			self.mFilter = 0;
-		}
-		else
-		{
-			self.mFilterAllButton.removeClass('is-active');
-			self.mFilterWeaponsButton.addClass('is-active');
-			self.mFilterArmorButton.removeClass('is-active');
-			self.mFilterMiscButton.removeClass('is-active');
-			self.mFilterUsableButton.removeClass('is-active');
-			self.mDataSource.notifyBackendFilterWeaponsButtonClicked();
-			self.mFilter = 1;
-		}
+		self.mFilterAllButton.removeClass('is-active');
+		self.mFilterWeaponsButton.addClass('is-active');
+		self.mFilterArmorButton.removeClass('is-active');
+		self.mFilterMiscButton.removeClass('is-active');
+		self.mFilterUsableButton.removeClass('is-active');
+		self.mDataSource.notifyBackendFilterWeaponsButtonClicked();
 	}, '', 3);
 
 	var layout = $('<div class="l-button is-armor-filter"/>');
 	this.mFilterPanel.append(layout);
 	this.mFilterArmorButton = layout.createImageButton(Path.GFX + Asset.BUTTON_ARMOR_FILTER, function ()
 	{
-		if (self.mFilter === 2)
-		{
-			self.mFilterAllButton.removeClass('is-active');
-			self.mFilterWeaponsButton.removeClass('is-active');
-			self.mFilterArmorButton.removeClass('is-active');
-			self.mFilterMiscButton.removeClass('is-active');
-			self.mFilterUsableButton.removeClass('is-active');
-			self.mDataSource.notifyBackendFilterAllButtonClicked();
-			self.mFilter = 0;
-		}
-		else
-		{
-			self.mFilterAllButton.removeClass('is-active');
-			self.mFilterWeaponsButton.removeClass('is-active');
-			self.mFilterArmorButton.addClass('is-active');
-			self.mFilterMiscButton.removeClass('is-active');
-			self.mFilterUsableButton.removeClass('is-active');
-			self.mDataSource.notifyBackendFilterArmorButtonClicked();
-			self.mFilter = 2;
-		}
+		self.mFilterAllButton.removeClass('is-active');
+		self.mFilterWeaponsButton.removeClass('is-active');
+		self.mFilterArmorButton.addClass('is-active');
+		self.mFilterMiscButton.removeClass('is-active');
+		self.mFilterUsableButton.removeClass('is-active');
+		self.mDataSource.notifyBackendFilterArmorButtonClicked();
 	}, '', 3);
 
 	var layout = $('<div class="l-button is-misc-filter"/>');
 	this.mFilterPanel.append(layout);
 	this.mFilterMiscButton = layout.createImageButton(Path.GFX + Asset.BUTTON_MISC_FILTER, function ()
 	{
-		if (self.mFilter === 3)
-		{
-			self.mFilterAllButton.removeClass('is-active');
-			self.mFilterWeaponsButton.removeClass('is-active');
-			self.mFilterArmorButton.removeClass('is-active');
-			self.mFilterMiscButton.removeClass('is-active');
-			self.mFilterUsableButton.removeClass('is-active');
-			self.mDataSource.notifyBackendFilterAllButtonClicked();
-			self.mFilter = 0;
-		}
-		else
-		{
-			self.mFilterAllButton.removeClass('is-active');
-			self.mFilterWeaponsButton.removeClass('is-active');
-			self.mFilterArmorButton.removeClass('is-active');
-			self.mFilterMiscButton.addClass('is-active');
-			self.mFilterUsableButton.removeClass('is-active');
-			self.mDataSource.notifyBackendFilterMiscButtonClicked();
-			self.mFilter = 3;
-		}
+		self.mFilterAllButton.removeClass('is-active');
+		self.mFilterWeaponsButton.removeClass('is-active');
+		self.mFilterArmorButton.removeClass('is-active');
+		self.mFilterMiscButton.addClass('is-active');
+		self.mFilterUsableButton.removeClass('is-active');
+		self.mDataSource.notifyBackendFilterMiscButtonClicked();
 	}, '', 3);
 
 	var layout = $('<div class="l-button is-usable-filter"/>');
 	this.mFilterPanel.append(layout);
 	this.mFilterUsableButton = layout.createImageButton(Path.GFX + Asset.BUTTON_USABLE_FILTER, function ()
 	{
-		if (self.mFilter === 4)
-		{
-			self.mFilterAllButton.removeClass('is-active');
-			self.mFilterWeaponsButton.removeClass('is-active');
-			self.mFilterArmorButton.removeClass('is-active');
-			self.mFilterMiscButton.removeClass('is-active');
-			self.mFilterUsableButton.removeClass('is-active');
-			self.mDataSource.notifyBackendFilterAllButtonClicked();
-			self.mFilter = 0;
-		}
-		else
-		{
-			self.mFilterAllButton.removeClass('is-active');
-			self.mFilterWeaponsButton.removeClass('is-active');
-			self.mFilterArmorButton.removeClass('is-active');
-			self.mFilterMiscButton.removeClass('is-active');
-			self.mFilterUsableButton.addClass('is-active');
-			self.mDataSource.notifyBackendFilterUsableButtonClicked();
-			self.mFilter = 4;
-		}
+		self.mFilterAllButton.removeClass('is-active');
+		self.mFilterWeaponsButton.removeClass('is-active');
+		self.mFilterArmorButton.removeClass('is-active');
+		self.mFilterMiscButton.removeClass('is-active');
+		self.mFilterUsableButton.addClass('is-active');
+		self.mDataSource.notifyBackendFilterUsableButtonClicked();
 	}, '', 3);
 
 };
 
-CharacterScreenInventoryListModule.prototype.destroyDIV = function ()
+SquadScreenInventoryListModule.prototype.destroyDIV = function ()
 {
 	this.mInventorySlots = null;
 
@@ -254,7 +183,7 @@ CharacterScreenInventoryListModule.prototype.destroyDIV = function ()
 };
 
 
-CharacterScreenInventoryListModule.prototype.querySlotByIndex = function(_itemArray, _index)
+SquadScreenInventoryListModule.prototype.querySlotByIndex = function(_itemArray, _index)
 {
 	if (_itemArray === null || _itemArray.length === 0 || _index < 0 || _index >= _itemArray.length)
 	{
@@ -264,7 +193,7 @@ CharacterScreenInventoryListModule.prototype.querySlotByIndex = function(_itemAr
 	return _itemArray[_index];
 };
 
-CharacterScreenInventoryListModule.prototype.createItemSlot = function (_owner, _index, _parentDiv, _screenDiv)
+SquadScreenInventoryListModule.prototype.createItemSlot = function (_owner, _index, _parentDiv, _screenDiv)
 {
 	var self = this;
 	
@@ -286,9 +215,7 @@ CharacterScreenInventoryListModule.prototype.createItemSlot = function (_owner, 
 			return false;
 		}
 
-		// self.mSlotCountPanel.offset().top = -7, so -32
-		// _dd.offsetY = 34
-		if (_dd.offsetY < -32) 
+		if (_dd.offsetY > self.mSlotCountPanel.offset().top - 25)
 			return false;
 
 		//var sourceData = _source.data('item');
@@ -645,16 +572,16 @@ CharacterScreenInventoryListModule.prototype.createItemSlot = function (_owner, 
 	return result;
 };
 
-CharacterScreenInventoryListModule.prototype.createItemSlots = function (_owner, _size, _itemArray, _itemContainer)
+SquadScreenInventoryListModule.prototype.createItemSlots = function (_owner, _size, _itemArray, _itemContainer)
 {
-	var screen = $('.character-screen');
+	var screen = $('.squad-screen');
 	for (var i = 0; i < _size; ++i)
 	{
 		_itemArray.push(this.createItemSlot(_owner, i, _itemContainer, screen));
 	}
 };
 
-CharacterScreenInventoryListModule.prototype.assignItems = function (_entityId, _owner, _items, _itemArray, _itemContainer)
+SquadScreenInventoryListModule.prototype.assignItems = function (_entityId, _owner, _items, _itemArray, _itemContainer)
 {
 	this.destroyItemSlots(_itemArray, _itemContainer);
 
@@ -677,7 +604,7 @@ CharacterScreenInventoryListModule.prototype.assignItems = function (_entityId, 
 	}
 };
 
-CharacterScreenInventoryListModule.prototype.assignItemToSlot = function(_entityId, _owner, _slot, _item)
+SquadScreenInventoryListModule.prototype.assignItemToSlot = function(_entityId, _owner, _slot, _item)
 {
 	var remove = false;
 
@@ -722,7 +649,7 @@ CharacterScreenInventoryListModule.prototype.assignItemToSlot = function(_entity
 	}
 };
 
-CharacterScreenInventoryListModule.prototype.updateSlotItem = function (_entityId, _owner, _itemArray, _item, _index, _flag)
+SquadScreenInventoryListModule.prototype.updateSlotItem = function (_entityId, _owner, _itemArray, _item, _index, _flag)
 {
 	var slot = this.querySlotByIndex(_itemArray, _index);
 	if (slot === null)
@@ -761,7 +688,7 @@ CharacterScreenInventoryListModule.prototype.updateSlotItem = function (_entityI
 	*/
 };
 
-CharacterScreenInventoryListModule.prototype.removeItemFromSlot = function(_slot)
+SquadScreenInventoryListModule.prototype.removeItemFromSlot = function(_slot)
 {
 	// remove item image
 	_slot.assignListItemImage();
@@ -778,7 +705,7 @@ CharacterScreenInventoryListModule.prototype.removeItemFromSlot = function(_slot
 	_slot.data('item', itemData);
 };
 
-CharacterScreenInventoryListModule.prototype.clearItemSlots = function (_itemArray)
+SquadScreenInventoryListModule.prototype.clearItemSlots = function (_itemArray)
 {
 	if (_itemArray === null || _itemArray.length === 0)
 	{
@@ -792,7 +719,7 @@ CharacterScreenInventoryListModule.prototype.clearItemSlots = function (_itemArr
 	}
 };
 
-CharacterScreenInventoryListModule.prototype.destroyItemSlots = function (_itemArray, _itemContainer)
+SquadScreenInventoryListModule.prototype.destroyItemSlots = function (_itemArray, _itemContainer)
 {
 	this.clearItemSlots(_itemArray);
 
@@ -806,7 +733,7 @@ CharacterScreenInventoryListModule.prototype.destroyItemSlots = function (_itemA
 
 
 
-CharacterScreenInventoryListModule.prototype.registerDatasourceListener = function()
+SquadScreenInventoryListModule.prototype.registerDatasourceListener = function()
 {
 	this.mDataSource.addListener(ErrorCode.Key, jQuery.proxy(this.onDataSourceError, this));
 
@@ -819,19 +746,19 @@ CharacterScreenInventoryListModule.prototype.registerDatasourceListener = functi
 };
 
 
-CharacterScreenInventoryListModule.prototype.create = function(_parentDiv)
+SquadScreenInventoryListModule.prototype.create = function(_parentDiv)
 {
 	this.createDIV(_parentDiv);
 	this.bindTooltips();
 };
 
-CharacterScreenInventoryListModule.prototype.destroy = function()
+SquadScreenInventoryListModule.prototype.destroy = function()
 {
 	this.unbindTooltips();
 	this.destroyDIV();
 };
 
-CharacterScreenInventoryListModule.prototype.bindTooltips = function ()
+SquadScreenInventoryListModule.prototype.bindTooltips = function ()
 {
 	this.mSortInventoryButton.bindTooltip({ contentType: 'ui-element', elementId: TooltipIdentifier.CharacterScreen.RightPanelHeaderModule.SortButton });
 	this.mFilterAllButton.bindTooltip({ contentType: 'ui-element', elementId: TooltipIdentifier.CharacterScreen.RightPanelHeaderModule.FilterAllButton });
@@ -842,7 +769,7 @@ CharacterScreenInventoryListModule.prototype.bindTooltips = function ()
 	this.mFilterMoodButton.bindTooltip({ contentType: 'ui-element', elementId: TooltipIdentifier.CharacterScreen.RightPanelHeaderModule.FilterMoodButton });
 };
 
-CharacterScreenInventoryListModule.prototype.unbindTooltips = function ()
+SquadScreenInventoryListModule.prototype.unbindTooltips = function ()
 {
 	this.mSortInventoryButton.unbindTooltip();
 	this.mFilterAllButton.unbindTooltip();
@@ -853,9 +780,9 @@ CharacterScreenInventoryListModule.prototype.unbindTooltips = function ()
 	this.mFilterMoodButton.unbindTooltip();
 };
 
-CharacterScreenInventoryListModule.prototype.register = function (_parentDiv)
+SquadScreenInventoryListModule.prototype.register = function (_parentDiv)
 {
-	console.log('CharacterScreenInventoryListModule::REGISTER');
+	console.log('SquadScreenInventoryListModule::REGISTER');
 
 	if (this.mContainer !== null)
 	{
@@ -869,9 +796,9 @@ CharacterScreenInventoryListModule.prototype.register = function (_parentDiv)
 	}
 };
 
-CharacterScreenInventoryListModule.prototype.unregister = function ()
+SquadScreenInventoryListModule.prototype.unregister = function ()
 {
-	console.log('CharacterScreenInventoryListModule::UNREGISTER');
+	console.log('SquadScreenInventoryListModule::UNREGISTER');
 
 	if (this.mContainer === null)
 	{
@@ -882,7 +809,7 @@ CharacterScreenInventoryListModule.prototype.unregister = function ()
 	this.destroy();
 };
 
-CharacterScreenInventoryListModule.prototype.isRegistered = function ()
+SquadScreenInventoryListModule.prototype.isRegistered = function ()
 {
 	if (this.mContainer !== null)
 	{
@@ -893,27 +820,27 @@ CharacterScreenInventoryListModule.prototype.isRegistered = function ()
 };
 
 
-CharacterScreenInventoryListModule.prototype.show = function ()
+SquadScreenInventoryListModule.prototype.show = function ()
 {
 	// NOTE: (js) HACK which prevents relayouting..
 	this.mContainer.removeClass('opacity-none no-pointer-events').addClass('opacity-full');
 	//this.mContainer.removeClass('display-none').addClass('display-full');
 };
 
-CharacterScreenInventoryListModule.prototype.hide = function ()
+SquadScreenInventoryListModule.prototype.hide = function ()
 {
 	// NOTE: (js) HACK which prevents relayouting..
 	this.mContainer.removeClass('opacity-full is-top').addClass('opacity-none no-pointer-events');
 	//this.mContainer.removeClass('display-block is-top').addClass('display-none');
 };
 
-CharacterScreenInventoryListModule.prototype.isVisible = function ()
+SquadScreenInventoryListModule.prototype.isVisible = function ()
 {
 	//return this.mContainer.hasClass('display-block');
 	return this.mContainer.hasClass('opacity-full');
 };
 
-CharacterScreenInventoryListModule.prototype.toggleFilterPanel = function (val)
+SquadScreenInventoryListModule.prototype.toggleFilterPanel = function (val)
 {
 	if (val) {
 		this.mFilterPanel.show();
@@ -924,7 +851,7 @@ CharacterScreenInventoryListModule.prototype.toggleFilterPanel = function (val)
 };
 
 
-CharacterScreenInventoryListModule.prototype.setSlotCountTooltip = function ()
+SquadScreenInventoryListModule.prototype.setSlotCountTooltip = function ()
 {
 	if (this.mDataSource.isInStashMode() === true)
 	{
@@ -936,7 +863,7 @@ CharacterScreenInventoryListModule.prototype.setSlotCountTooltip = function ()
 	}
 };
 
-CharacterScreenInventoryListModule.prototype.updateSlotsLabel = function ()
+SquadScreenInventoryListModule.prototype.updateSlotsLabel = function ()
 {
 	var statistics = null;
 	if (this.mDataSource.isInStashMode() === true)
@@ -961,7 +888,7 @@ CharacterScreenInventoryListModule.prototype.updateSlotsLabel = function ()
 };
 
 
-CharacterScreenInventoryListModule.prototype.onInventoryModeUpdated = function (_dataSource, _mode)
+SquadScreenInventoryListModule.prototype.onInventoryModeUpdated = function (_dataSource, _mode)
 {
 	if (_mode === null || typeof(_mode) !== 'string')
 	{
@@ -985,7 +912,7 @@ CharacterScreenInventoryListModule.prototype.onInventoryModeUpdated = function (
 	this.setSlotCountTooltip();
 };
 
-CharacterScreenInventoryListModule.prototype.onBrotherUpdated = function (_dataSource, _brother)
+SquadScreenInventoryListModule.prototype.onBrotherUpdated = function (_dataSource, _brother)
 {
 	if (_dataSource.isSelectedBrother(_brother))
 	{
@@ -993,7 +920,7 @@ CharacterScreenInventoryListModule.prototype.onBrotherUpdated = function (_dataS
 	}
 };
 
-CharacterScreenInventoryListModule.prototype.onBrotherSelected = function (_dataSource, _data)
+SquadScreenInventoryListModule.prototype.onBrotherSelected = function (_dataSource, _data)
 {
 	if (_data === null || !(CharacterScreenIdentifier.Entity.Id in _data))
 	{
@@ -1019,7 +946,7 @@ CharacterScreenInventoryListModule.prototype.onBrotherSelected = function (_data
 	this.assignItems(_data[CharacterScreenIdentifier.Entity.Id], CharacterScreenIdentifier.ItemOwner.Ground, _data[CharacterScreenIdentifier.Entity.Ground], arrayRef.val, containerRef.val);
 };
 
-CharacterScreenInventoryListModule.prototype.onStashLoaded = function (_dataSource, _data, _reset)
+SquadScreenInventoryListModule.prototype.onStashLoaded = function (_dataSource, _data, _reset)
 {
 	if (_data === undefined || _data === null || !jQuery.isArray(_data))
 	{
@@ -1046,7 +973,7 @@ CharacterScreenInventoryListModule.prototype.onStashLoaded = function (_dataSour
 	this.assignItems(null, _dataSource.isInStashMode() ? CharacterScreenIdentifier.ItemOwner.Stash : CharacterScreenIdentifier.ItemOwner.Ground, _data, arrayRef.val, containerRef.val);
 };
 
-CharacterScreenInventoryListModule.prototype.onStashItemUpdated = function (_dataSource, _data)
+SquadScreenInventoryListModule.prototype.onStashItemUpdated = function (_dataSource, _data)
 {
 	if (_data === null || typeof(_data) !== 'object' || !('item' in _data) || !('index' in _data) || !('flag' in _data))
 	{
@@ -1062,7 +989,7 @@ CharacterScreenInventoryListModule.prototype.onStashItemUpdated = function (_dat
 	this.updateSlotItem(null, _dataSource.isInStashMode() ? CharacterScreenIdentifier.ItemOwner.Stash : CharacterScreenIdentifier.ItemOwner.Ground, this.mInventorySlots, _data.item, _data.index, _data.flag);
 };
 
-CharacterScreenInventoryListModule.prototype.onDataSourceError  = function (_dataSource, _data)
+SquadScreenInventoryListModule.prototype.onDataSourceError  = function (_dataSource, _data)
 {
 	if (_data  === undefined || _data === null || typeof(_data) !== 'number')
 	{
@@ -1077,7 +1004,7 @@ CharacterScreenInventoryListModule.prototype.onDataSourceError  = function (_dat
 		} break;
 	}
 
-	console.info('CharacterScreenInventoryListModule::onDataSourceError(' + _data + ')');
+	console.info('SquadScreenInventoryListModule::onDataSourceError(' + _data + ')');
 };
 
 

@@ -1,0 +1,368 @@
+/*
+ *  @Project:		Battle Brothers
+ *	@Company:		Overhype Studios
+ *
+ *	@Copyright:		(c) Overhype Studios | 2013 - 2020
+ *
+ *  @Author:		Overhype Studios
+ *  @Date:			24.01.2017 / Reworked: 26.11.2017
+ *  @Description:	Paperdoll Module JS
+ */
+
+
+.squad-screen-container .paperdoll-module {
+	width: 100%;
+	/* height: 43.5%; */
+	/* AUTO HEIGHT */
+	position: relative;
+	float: left;
+
+	margin-top: 1.2rem;
+	/*border-bottom: 1px rgba(130, 130, 130, 1) solid;*/
+}
+
+
+.squad-screen-container .paperdoll-module .equipment-column {
+	width: 33%;
+	height: 25.0rem;
+	position: relative;
+	float: left;
+}
+
+.squad-screen-container .paperdoll-module .equipment-column.is-middle {
+	width: 34%;
+}
+
+.squad-screen-container .paperdoll-module .equipment-column>.l-equipment-column {
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 7.0rem;
+	position: absolute;
+	margin: auto;
+}
+
+.squad-screen-container .paperdoll-module .l-equipment-column.is-left {
+	left: 0.5rem;
+}
+
+.squad-screen-container .paperdoll-module .l-equipment-column.is-right {
+	right: 0.7rem;
+}
+
+.squad-screen-container .paperdoll-module .l-equipment-column>.l-equipment-container-top-small-offset {
+	margin-top: 1.0rem;
+}
+
+.squad-screen-container .paperdoll-module .l-equipment-column>.l-equipment-container-top-big-offset {
+	margin-top: 2.0rem;
+}
+
+.squad-screen-container .paperdoll-module .l-equipment-column>.l-equipment-container-between-offset {
+	margin-top: 1.0rem;
+}
+
+.squad-screen-container .paperdoll-module .l-slot-container {
+	width: 7.0rem;
+	height: 7.0rem;
+	position: relative;
+
+	/*background-image: url("coui://gfx/ui/skin/paperdoll_slot_small.png");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 7.4rem 7.4rem;*/
+}
+
+.squad-screen-container .paperdoll-module .l-slot-container.is-big {
+	height: 14.0rem;
+
+	/*background-image: url("coui://gfx/ui/skin/paperdoll_slot_big.png");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: 7.4rem 14.0rem;*/
+}
+
+/* fixes the body armor position */
+.squad-screen-container .paperdoll-module .is-middle .l-slot-container.is-big  {
+	top: 0.45rem;
+	left: 0.15rem;
+}
+
+.squad-screen-container .paperdoll-module .l-slot-container.is-top-small-offset {
+	margin-top: 1.0rem;
+}
+
+.squad-screen-container .paperdoll-module .l-slot-container.helm-is-top-small-offset {
+	padding-top: 2.0rem;
+}
+
+
+.squad-screen-container .paperdoll-module .l-slot-container.is-top-big-offset {
+	margin-top: 1.8rem;
+}
+
+.squad-screen-container .paperdoll-module .l-slot-container.is-in-between-offset {
+	margin-top: 1.0rem;
+}
+
+.squad-screen-container .paperdoll-module .l-slot-container.body-is-in-between-offset {
+	margin-top: 3.0rem;
+}
+
+/*
+.squad-screen-container .paperdoll-module .equipment-slot-container-small .equipment-slot-background-layer,
+.squad-screen-container .paperdoll-module .equipment-slot-container-big .equipment-slot-background-layer
+{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	z-index: 1;
+}
+
+.squad-screen-container .paperdoll-module .equipment-slot-container-small .l-equipment-slot-background-image,
+.squad-screen-container .paperdoll-module .equipment-slot-container-big .l-equipment-slot-background-image
+{
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	position: absolute;
+	margin: auto;
+}
+
+.squad-screen-container .paperdoll-module .l-equipment-slot-background-image.is-small
+{
+	width: 5.8rem;
+	height: 5.8rem;
+}
+
+.squad-screen-container .paperdoll-module .l-equipment-slot-background-image.is-big
+{
+	width: 5.8rem;
+	height: 11.6rem;
+}
+
+.squad-screen-container .paperdoll-module .equipment-slot-background-layer img
+{
+	width: 5.8rem;
+
+	opacity: 0.8;
+}
+
+
+.squad-screen-container .paperdoll-module .equipment-slot-container-small .equipment-slot-image-layer,
+.squad-screen-container .paperdoll-module .equipment-slot-container-big .equipment-slot-image-layer
+{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	z-index: 2;
+}
+
+.squad-screen-container .paperdoll-module .equipment-slot-container-small .l-equipment-slot-image,
+.squad-screen-container .paperdoll-module .equipment-slot-container-big .l-equipment-slot-image
+{
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	position: absolute;
+	margin: auto;
+}
+
+.squad-screen-container .paperdoll-module .l-equipment-slot-image.is-small
+{
+	width: 5.8rem;
+	height: 5.8rem;
+}
+
+.squad-screen-container .paperdoll-module .l-equipment-slot-image.is-big
+{
+	width: 5.8rem;
+	height: 11.6rem;
+}
+
+.squad-screen-container .paperdoll-module .l-equipment-slot-image.is-blocked
+{
+	opacity: 0.6;
+}
+
+.squad-screen-container .paperdoll-module .equipment-slot-image-layer img
+{
+	width: 5.8rem;
+}
+
+
+.squad-screen-container .paperdoll-module .equipment-slot-container-small .equipment-slot-locked-image-layer,
+.squad-screen-container .paperdoll-module .equipment-slot-container-big .equipment-slot-locked-image-layer
+{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	z-index: 3;
+
+	pointer-events: none;
+}
+
+.squad-screen-container .paperdoll-module .equipment-slot-container-small .l-equipment-slot-locked-image,
+.squad-screen-container .paperdoll-module .equipment-slot-container-big .l-equipment-slot-locked-image
+{
+	right: 0.4rem;
+	bottom: 0.4rem;
+	width: 2.0rem;
+	height: 2.52rem;
+	position: absolute;
+
+	pointer-events: none;
+}
+
+.squad-screen-container .paperdoll-module .equipment-slot-locked-image-layer img
+{
+	width: 2.0rem;
+	height: 2.52rem;
+}
+
+.squad-screen-container .paperdoll-module .equipment-slot-container-small .equipment-slot-amount-layer,
+.squad-screen-container .paperdoll-module .equipment-slot-container-big .equipment-slot-amount-layer
+{
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	z-index: 4;
+
+	pointer-events: none;
+}
+
+.squad-screen-container .paperdoll-module .equipment-slot-container-small .l-equipment-slot-amount-label,
+.squad-screen-container .paperdoll-module .equipment-slot-container-big .l-equipment-slot-amount-label
+{
+	right: 0.4rem;
+	bottom: 0.0rem;
+	height: 1.2rem;
+	position: absolute;
+
+	text-align: right;
+	line-height: 1.2rem;
+
+	pointer-events: none;
+}
+*/
+
+
+
+
+.squad-screen-container .paperdoll-module .backpack-row {
+	width: 100%;
+	height: 7.4rem;
+	position: relative;
+	float: left;
+	margin-top: 0.5rem;
+	margin-bottom: 0.5rem;
+}
+
+.squad-screen-container .paperdoll-module .backpack-row .l-backpack-row {
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	height: 7.4rem;
+	position: absolute;
+	/*margin: auto;*/
+}
+
+.squad-screen-container .paperdoll-module .l-backpack-row.has-slot-1 {
+	width: 7.4rem;
+}
+
+.squad-screen-container .paperdoll-module .l-backpack-row.has-slot-2 {
+	width: 14.8rem;
+	left: 9.8rem;
+}
+
+.squad-screen-container .paperdoll-module .l-backpack-row.has-slot-3 {
+	width: 22.6rem;
+}
+
+.squad-screen-container .paperdoll-module .l-backpack-row.has-slot-4 {
+	width: 30.4rem;
+	left: 2.4rem;
+}
+
+.squad-screen-container .paperdoll-module .l-slot-container.is-backpack {
+	float: left;
+	margin-left: 0.4rem;
+
+	background-image: url("coui://gfx/ui/skin/inventory_bag_slot.png");
+	background-size: 7.4rem 7.4rem;
+	background-position: center;
+	background-repeat: no-repeat;
+
+	overflow: hidden;
+}
+
+.squad-screen-container .paperdoll-module .l-slot-container.is-backpack:first-child {
+	margin-left: 0;
+}
+
+.squad-screen-container .paperdoll-module .l-button {
+	width: 2.2rem;
+	height: 2.2rem;
+	position: absolute;
+	line-height: 2.2rem;
+	left: -0.5rem;
+}
+
+.squad-screen-container .paperdoll-module .l-button.h-remove4 {
+	top: -0.6rem;
+}
+
+.squad-screen-container .paperdoll-module .l-button.h-remove3 {
+	top: 1.6rem;
+}
+
+.squad-screen-container .paperdoll-module .l-button.h-remove2 {
+	top: 3.8rem;
+}
+
+.squad-screen-container .paperdoll-module .l-button.h-remove1 {
+	top: 6.0rem;
+}
+
+.squad-screen-container .paperdoll-module .l-button.h-remove0 {
+	top: 8.2rem;
+}
+
+.squad-screen-container .paperdoll-module .l-button.remove5 {
+	top: 11.4rem;
+}
+
+.squad-screen-container .paperdoll-module .l-button.remove4 {
+	top: 13.6rem;
+}
+
+.squad-screen-container .paperdoll-module .l-button.remove3 {
+	top: 15.8rem;
+}
+
+.squad-screen-container .paperdoll-module .l-button.remove2 {
+	top: 18.0rem;
+}
+
+.squad-screen-container .paperdoll-module .l-button.remove1 {
+	top: 20.2rem;
+}
+
+.squad-screen-container .paperdoll-module .l-button.remove0 {
+	top: 22.4rem;
+}
+
+.squad-screen-container .paperdoll-module .l-button.accessory-toggle {
+	top: 6.4rem;
+	left: 0.3rem;
+}
+
+.armor_button_invisible {
+	background-image: url("coui://gfx/ui/skin/armor_button_invisible.png") !important;
+	background-size: 2.2rem 2.2rem;
+}
