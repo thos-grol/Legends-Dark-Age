@@ -10,11 +10,7 @@
  */
 "use strict";
 
-// create div -> createBrotherSlots
-// CharacterScreenDatasourceIdentifier.Brother.Updated : registerDatasourceListener-> onBrotherUpdated -> updateBrotherSlot (put images)
-
-// onBrothersListLoaded 
-//	-> this.addBrotherSlotDIV(this.mSlots[i], brother, i, allowReordering);
+//TODO: refactor this file to use logical and ui coordinate translation
 
 // =================================================================================================
 // DEF
@@ -64,56 +60,75 @@ var CharacterScreenBrothersListModule = function(_parent, _dataSource)
 // Logic
 // =================================================================================================
 
-CharacterScreenBrothersListModule.prototype.display_chunk = function (chunk_index)
+CharacterScreenBrothersListModule.prototype.select_squad = function (_index)
 {
-	this.CHUNK_INDEX = chunk_index;
+	this.CHUNK_INDEX = _index - 1;
 	this.onBrothersListLoaded(this.mDataSource, this.BROTHERS_TEMP);
 }
 
 CharacterScreenBrothersListModule.prototype.onBrothersListLoaded = function (_dataSource, _brothers)
 {
+	var self = this;
 	this.clearBrothersList();
 
 	if (_brothers === null || !jQuery.isArray(_brothers) || _brothers.length === 0) return;
 	this.BROTHERS_TEMP = _brothers;
-	
+
+	$("div.squad-panel div.ui-control").each(function(index, element) {
+		// 'this' refers to the current DOM element in the loop
+		// 'element' also refers to the current DOM element
+		// 'index' is the zero-based index of the element in the selection
+
+		var lcb = self.get_lcb(index);
+		var occupied = false;
+		for (var i = lcb[0]; i <= lcb[1]; i++)
+		{
+			if (_brothers[i] != null) occupied = true;
+			break;
+		}
+	  
+		var $currentElement = $(element); //wrap 'element' with jQuery to use jQuery methods on it
+		if (!occupied) $currentElement.addClass('is-not-occupied'); 
+
+		// Example: Get the value of an input field
+		// var inputValue = $currentElement.val(); 
+	});
+
 	var allowReordering = this.mDataSource.getInventoryMode() == CharacterScreenDatasourceIdentifier.InventoryMode.Stash;
 
-	var bounds = this.get_chunk_bounds(this.CHUNK_INDEX);
-	var x = bounds[0];
-	var y = bounds[1];
+
+	var logical_chunk_bounds = this.get_logical_chunk_bounds();
+	console.log("chunk: " + this.CHUNK_INDEX);
+	console.log("logical bounds: " + logical_chunk_bounds);
 
 	// NOTE: _brothers is list of actual formation locations
 	// we use j for the ui formation index
 	// i represents the storage formation index
-	var j = 0;  // 0-26
-	for (var i = x; i <= y; i++)
+	var ui_chunk_index = 0;  // 0-26
+	for (var i = logical_chunk_bounds[0]; i <= logical_chunk_bounds[1]; i++)
 	{
 		var brother = _brothers[i];
 		if (brother !== null) 
 		{
-			this.addBrotherSlotDIV(this.mSlots[j], brother, j, allowReordering);
+			console.log("Adding formation bro | logical_chunk_index: " + i + ", ui_chunk_index: " + ui_chunk_index);
+			console.log(brother);
+			var parent_div = this.mSlots[ui_chunk_index];
+			this.addBrotherSlotDIV(parent_div, brother, ui_chunk_index, allowReordering);
 		}
-		j++;
+		ui_chunk_index++;
 	}
 
-	var storage_bounds = this.get_storage_bounds();
-	x = storage_bounds[0];
-	y = storage_bounds[1];
-	for (var i = x; i <= y; i++)
+	var logical_storage_bounds = this.get_logical_storage_bounds();
+	for (var i = logical_storage_bounds[0]; i <= logical_storage_bounds[1]; i++)
 	{
 		var brother = _brothers[i];
 		if (brother !== null) 
 		{
-			// var translated_index = this.get_translated_index();
-			// var test = {
-			// 	'mslot' : this.mSlots[j],
-			// 	'brother' : brother,
-			// 	'i' : j,
-			// 	'allowReordering' : allowReordering,
-			// };
-			// console.log(test);
-			this.addBrotherSlotDIV(this.mSlots[i], brother, i, allowReordering);
+			var ui_index = this.get_storage_ui_index(i);
+			console.log("Adding storage bro | logical_index: " + i + ", ui_index: " + ui_index);
+			console.log(brother);
+
+			this.addBrotherSlotDIV(this.mSlots[ui_index], brother, ui_index, allowReordering);
 		}
 	}
 
@@ -156,22 +171,47 @@ CharacterScreenBrothersListModule.prototype.onBrothersListLoaded = function (_da
 		this.mNumActive = 0;
 	};
 
-	CharacterScreenBrothersListModule.prototype.get_translated_index = function(index)
+	CharacterScreenBrothersListModule.prototype.get_logical_index = function(index)
 	{
-		return this.CHUNK_INDEX * this.CHUNK_SIZE + index;
+		// 0-27 is the squad window, use squad index to translate
+		// ui formation: [0, 27)
+		// logical formation: [0, CHUNKSIZE * 10)
+		// ui storage: [27, 27+200)
+		// logical storage: [CHUNKSIZE * 10, CHUNKSIZE * 10 + 200)
+
+		if (index < this.CHUNK_SIZE) // if it's a_ui squad
+		{
+			return this.CHUNK_INDEX * this.CHUNK_SIZE + index;
+		}
+		else // if it's storage
+		{
+			return this.CHUNK_SIZE * this.CHUNKS + index;
+		}
 	};
 
-	CharacterScreenBrothersListModule.prototype.get_chunk_bounds = function(chunk_index)
+	CharacterScreenBrothersListModule.prototype.get_storage_ui_index = function(index)
+	{
+		// ui storage: [27, 27+200)
+		// logical storage: [CHUNKSIZE * 10, CHUNKSIZE * 10 + 200)
+		return index - this.CHUNK_SIZE * this.CHUNKS;
+	};
+
+	CharacterScreenBrothersListModule.prototype.get_logical_chunk_bounds = function()
+	{
+		return [this.CHUNK_INDEX * this.CHUNK_SIZE, (this.CHUNK_INDEX + 1)  * this.CHUNK_SIZE - 1];
+	};
+
+	CharacterScreenBrothersListModule.prototype.get_lcb = function(chunk_index)
 	{
 		return [chunk_index * this.CHUNK_SIZE, (chunk_index + 1)  * this.CHUNK_SIZE - 1];
 	};
 
-	CharacterScreenBrothersListModule.prototype.get_storage_bounds = function()
+	CharacterScreenBrothersListModule.prototype.get_logical_storage_bounds = function()
 	{
-		return [this.CHUNK_SIZE, this.CHUNK_SIZE + this.STORAGE_SIZE - 1];
+		return [this.CHUNK_SIZE * 10, this.CHUNK_SIZE * 10 + this.STORAGE_SIZE - 1];
 	};
 
-CharacterScreenBrothersListModule.prototype.addBrotherSlotDIV = function (_parentDiv, _data, _index, _allowReordering)
+CharacterScreenBrothersListModule.prototype.addBrotherSlotDIV = function (_parentDiv, _data, ui_index, _allowReordering)
 {
 	var self = this;
 	var screen = $('.character-screen');
@@ -180,57 +220,42 @@ CharacterScreenBrothersListModule.prototype.addBrotherSlotDIV = function (_paren
 	var result = _parentDiv.createListBrother(_data[CharacterScreenIdentifier.Entity.Id]);
 	result.attr('id', 'slot-index_' + _data[CharacterScreenIdentifier.Entity.Id]);
 	result.data('ID', _data[CharacterScreenIdentifier.Entity.Id]);
-	result.data('idx', _index);
+	result.data('idx', ui_index);
 	result.data('inReserves', _data['inReserves']);
 
-	console.log(result);
+	// console.log(result);
 
-	this.mSlots[_index].data('child', result);
+	this.mSlots[ui_index].data('child', result);
 
-	if (_index <= 27) ++this.mNumActive;
+	if (ui_index < this.CHUNK_SIZE) ++this.mNumActive;
 	if (_allowReordering) // drag handler
 	{
 		result.drag("start", function (ev, dd)
 		{
-			// dont allow drag if this is an empty slot
-			/*var data = $(this).data('item');
-			if (data.isEmpty === true)
-			{
-				return false;
-			}*/
-
 			// build proxy
 			var proxy = $('<div class="ui-control brother is-proxy"/>');
 			proxy.appendTo(document.body);
-			proxy.data('idx', _index);
-
+			proxy.data('idx', ui_index);
 			var imageLayer = result.find('.image-layer:first');
 			if (imageLayer.length > 0)
 			{
 				imageLayer = imageLayer.clone();
 				proxy.append(imageLayer);
 			}
-
 			$(dd.drag).addClass('is-dragged');
-
 			return proxy;
 		}, { distance: 3 });
-
 		result.drag(function (ev, dd)
 		{
 			$(dd.proxy).css({ top: dd.offsetY, left: dd.offsetX });
 		}, { relative: false, distance: 3 });
-
 		result.drag("end", function (ev, dd)
 		{
 			var drag = $(dd.drag);
 			var drop = $(dd.drop);
 			var proxy = $(dd.proxy);
-
 			var allowDragEnd = true;
-
-			// not dropped into anything?
-			if (drop.length === 0 || allowDragEnd === false)
+			if (drop.length === 0 || allowDragEnd === false) // not dropped into anything?
 			{
 				proxy.velocity("finish", true).velocity({ top: dd.originalY, left: dd.originalX },
 				{
@@ -258,7 +283,8 @@ CharacterScreenBrothersListModule.prototype.addBrotherSlotDIV = function (_paren
 	//result.assignListBrotherName(character[CharacterScreenIdentifier.Entity.Character.Name]);
 	//result.assignListBrotherDailyMoneyCost(character[CharacterScreenIdentifier.Entity.Character.DailyMoneyCost]);
 
-	if(CharacterScreenIdentifier.Entity.Character.LeveledUp in character && character[CharacterScreenIdentifier.Entity.Character.LeveledUp] === true)
+	if(CharacterScreenIdentifier.Entity.Character.LeveledUp in character 
+		&& character[CharacterScreenIdentifier.Entity.Character.LeveledUp] === true)
 	{
 		result.assignListBrotherLeveledUp();
 	}
@@ -302,7 +328,7 @@ CharacterScreenBrothersListModule.prototype.createBrotherSlots = function (_pare
 {
 	var self = this;
 
-	this.mSlots = [];
+	this.mSlots = []; //creates ui slots
 	for (var i = 0; i < this.CHUNK_SIZE + this.STORAGE_SIZE; i++) {
 		this.mSlots.push(null);
 	}
@@ -445,43 +471,38 @@ CharacterScreenBrothersListModule.prototype.onBrotherUpdated = function (_dataSo
 	};
 
 
-
-//TODO: factor in roster update?
-CharacterScreenBrothersListModule.prototype.swapSlots = function (_a, _b)
+CharacterScreenBrothersListModule.prototype.swapSlots = function (a_ui, b_ui)
 {
-	var trans_a = _a;
-	var trans_b = _b;
-
-	if (_a < this.CHUNK_SIZE) trans_a = this.get_translated_index(_a);
-	if (_b < this.CHUNK_SIZE) trans_b = this.get_translated_index(_b);
+	// a_ui and b_ui are logical ui indices. get logical indices
+	var a_log = this.get_logical_index(a_ui);
+	var b_log = this.get_logical_index(b_ui);
 
 	var result = {};
-	result.a = _a;
-	result.b = _b;
-	result.trans_a = trans_a;
-	result.trans_b = trans_b;
+	result.a_ui = a_ui;
+	result.b_ui = b_ui;
+	result.a_log = a_log;
+	result.b_log = b_log;
 	console.log(result);
 
-	if(this.mSlots[_b].data('child') == null) // dragging into empty slot
+	if(this.mSlots[b_ui].data('child') == null) // dragging into empty slot
 	{
-		var A = this.mSlots[_a].data('child');
-		A.data('idx', _b);
-		A.appendTo(this.mSlots[_b]);
+		var A_DATA = this.mSlots[a_ui].data('child');
+		A_DATA.data('idx', b_ui);
+		A_DATA.appendTo(this.mSlots[b_ui]);
+		this.mSlots[b_ui].data('child', A_DATA);
+		this.mSlots[a_ui].data('child', null);
 
-		this.mSlots[_b].data('child', A);
-		this.mSlots[_a].data('child', null);
-
-		if (_a < this.CHUNK_SIZE && _b > this.CHUNK_SIZE) --this.mNumActive;
-		else if (_a > this.CHUNK_SIZE && _b < this.CHUNK_SIZE) ++this.mNumActive;
+		if (a_ui < this.CHUNK_SIZE && b_ui >= this.CHUNK_SIZE) --this.mNumActive;
+		else if (a_ui >= this.CHUNK_SIZE && b_ui < this.CHUNK_SIZE) ++this.mNumActive;
 
 		this.updateBlockedSlots();
-		this.mDataSource.swapBrothers(_a, _b);
+		this.mDataSource.swapBrothers(a_log, b_log);
 
-		// CharacterScreenDatasource.prototype.swapBrothers = function (_a, _b)
+		// CharacterScreenDatasource.prototype.swapBrothers = function (a_ui, b_ui)
 		// {
-		// 	var tmp = this.mBrothersList[_a];
-		// 	this.mBrothersList[_a] = this.mBrothersList[_b];
-		// 	this.mBrothersList[_b] = tmp;
+		// 	var tmp = this.mBrothersList[a_ui];
+		// 	this.mBrothersList[a_ui] = this.mBrothersList[b_ui];
+		// 	this.mBrothersList[b_ui] = tmp;
 		// }
 
 		// CharacterScreenDatasource.prototype.notifyBackendUpdateRosterPosition = function (_id, _pos)
@@ -511,41 +532,41 @@ CharacterScreenBrothersListModule.prototype.swapSlots = function (_a, _b)
 		// 	return this.mSelectedBrotherIndex;
 		// };
 
-		this.mDataSource.notifyBackendUpdateRosterPosition(A.data('ID'), trans_b);
+		this.mDataSource.notifyBackendUpdateRosterPosition(A_DATA.data('ID'), b_log);
 
-		if(this.mDataSource.getSelectedBrotherIndex() == trans_a)
+		if(this.mDataSource.getSelectedBrotherIndex() == a_log)
 		{
-			this.mDataSource.setSelectedBrotherIndex(trans_b, true);
+			this.mDataSource.setSelectedBrotherIndex(b_log, true);
 		}
 
 	}
 	else // swapping two full slots
 	{
-		var A = this.mSlots[_a].data('child');
-		var B = this.mSlots[_b].data('child');
+		var A_DATA = this.mSlots[a_ui].data('child');
+		var B_DATA = this.mSlots[b_ui].data('child');
 
-		A.data('idx', _b);
-		B.data('idx', _a);
+		A_DATA.data('idx', b_ui);
+		B_DATA.data('idx', a_ui);
 
-		B.detach();
+		B_DATA.detach();
 
-		A.appendTo(this.mSlots[_b]);
-		this.mSlots[_b].data('child', A);
+		A_DATA.appendTo(this.mSlots[b_ui]);
+		this.mSlots[b_ui].data('child', A_DATA);
 
-		B.appendTo(this.mSlots[_a]);
-		this.mSlots[_a].data('child', B);
+		B_DATA.appendTo(this.mSlots[a_ui]);
+		this.mSlots[a_ui].data('child', B_DATA);
 
-		this.mDataSource.swapBrothers(_a, _b);
-		this.mDataSource.notifyBackendUpdateRosterPosition(A.data('ID'), trans_b);
-		this.mDataSource.notifyBackendUpdateRosterPosition(B.data('ID'), trans_a);
+		this.mDataSource.swapBrothers(a_log, b_log);
+		this.mDataSource.notifyBackendUpdateRosterPosition(A_DATA.data('ID'), b_log);
+		this.mDataSource.notifyBackendUpdateRosterPosition(B_DATA.data('ID'), a_log);
 
-		if (this.mDataSource.getSelectedBrotherIndex() == trans_a)
+		if (this.mDataSource.getSelectedBrotherIndex() == a_log)
 		{
-			this.mDataSource.setSelectedBrotherIndex(trans_b, true);
+			this.mDataSource.setSelectedBrotherIndex(b_log, true);
 		}
-		else if (this.mDataSource.getSelectedBrotherIndex() == trans_b)
+		else if (this.mDataSource.getSelectedBrotherIndex() == b_log)
 		{
-			this.mDataSource.setSelectedBrotherIndex(trans_a, true);
+			this.mDataSource.setSelectedBrotherIndex(a_log, true);
 		}
 	}
 
@@ -787,28 +808,7 @@ CharacterScreenBrothersListModule.prototype.createDIV = function (_parentDiv)
 	this.createBrotherSlots(this.mListScrollContainer, this.mListScrollContainer2_scroll);
 
 	// =============================================================================================
-	this.mFilterPanel = $('<div class="filter-panel"/>');
-	this.mContainer.append(this.mFilterPanel);
 
-	// var layout = $('<div class="l-button.one"/>');
-	// this.mFilterPanel.append(layout);
-	// this.mFilterMoodButton = layout.createImageButton(Path.GFX + Asset.BUTTON_MOOD_FILTER, function ()
-	// {
-	// 	if(self.mParent.mParent.mBrothersModule.toggleMoodVisibility())
-	// 		self.mFilterMoodButton.changeButtonImage(Path.GFX + Asset.BUTTON_MOOD_FILTER);
-	// 	else
-	// 		self.mFilterMoodButton.changeButtonImage(Path.GFX + Asset.BUTTON_MOOD_FILTER_OFF);
-	// }, '', 3);
-
-	var layout = $('<div class="l-button.one"/>');
-	this.mFilterPanel.append(layout);
-	this.mSortInventoryButton = layout.createImageButton(Path.GFX + Asset.BUTTON_SORT, function ()
-	{
-		
-	}, '', 3);
-
-	// var layout = $('<div class="l-button is-all-filter"/>');
-	// this.mFilterPanel.append(layout);
 	// =============================================================================================
 
 	// start battle
@@ -818,6 +818,104 @@ CharacterScreenBrothersListModule.prototype.createDIV = function (_parentDiv)
 	{
 		self.mDataSource.notifyBackendStartBattleButtonClicked();
 	}, '', 1);
+
+	////////////////////////////////////////////////////////////////////////////////////////////////
+
+	this.mSquadPanel = $('<div class="squad-panel"/>');
+	this.mContainer.append(this.mSquadPanel);
+
+	for (var i = 0; i < this.CHUNKS; i++) 
+	{
+		var button_template = $('<div class="l-button"/>');
+		(function(index) { 
+			button_template.createTextButton(""+(index+1), function ()
+			{
+				self.select_squad(index + 1);
+			}, '', 3);
+		})(i);
+		this.mSquadPanel.append(button_template);
+	}
+
+	// var squad_layout_1 = $('<div class="l-button is-squad-1"/>');
+	// this.mSquadPanel.append(squad_layout_1);
+	// this.BUTTON_SQUAD_1 = squad_layout_1.createTextButton("2", function ()
+	// {
+	// 	self.select_squad(1);
+	// }, '', 3);
+
+	// var squad_layout_2 = $('<div class="l-button is-squad-2"/>');
+	// this.mSquadPanel.append(squad_layout_2);
+	// this.BUTTON_SQUAD_2 = squad_layout_2.createTextButton("2", function ()
+	// {
+	// 	self.select_squad(2);
+	// }, '', 3);
+	
+	// var squad_layout_3 = $('<div class="l-button is-squad-3"/>');
+	// this.mSquadPanel.append(squad_layout_3);
+	// this.BUTTON_SQUAD_3 = squad_layout_3.createTextButton("3", function ()
+	// {
+	// 	self.select_squad(3);
+	// }, '', 3);
+	
+	// var squad_layout_4 = $('<div class="l-button is-squad-4"/>');
+	// this.mSquadPanel.append(squad_layout_4);
+	// this.BUTTON_SQUAD_4 = squad_layout_4.createTextButton("4", function ()
+	// {
+	// 	self.select_squad(4);
+	// }, '', 3);
+	
+	// var squad_layout_5 = $('<div class="l-button is-squad-5"/>');
+	// this.mSquadPanel.append(squad_layout_5);
+	// this.BUTTON_SQUAD_5 = squad_layout_5.createTextButton("5", function ()
+	// {
+	// 	self.select_squad(5);
+	// }, '', 3);
+	
+	// var squad_layout_6 = $('<div class="l-button is-squad-6"/>');
+	// this.mSquadPanel.append(squad_layout_6);
+	// this.BUTTON_SQUAD_6 = squad_layout_6.createTextButton("6", function ()
+	// {
+	// 	self.select_squad(6);
+	// }, '', 3);
+	
+	// var squad_layout_7 = $('<div class="l-button is-squad-7"/>');
+	// this.mSquadPanel.append(squad_layout_7);
+	// this.BUTTON_SQUAD_7 = squad_layout_7.createTextButton("7", function ()
+	// {
+	// 	self.select_squad(7);
+	// }, '', 3);
+	
+	// var squad_layout_8 = $('<div class="l-button is-squad-8"/>');
+	// this.mSquadPanel.append(squad_layout_8);
+	// this.BUTTON_SQUAD_8 = squad_layout_8.createTextButton("8", function ()
+	// {
+	// 	self.select_squad(8);
+	// }, '', 3);
+	
+	// var squad_layout_9 = $('<div class="l-button is-squad-9"/>');
+	// this.mSquadPanel.append(squad_layout_9);
+	// this.BUTTON_SQUAD_9 = squad_layout_9.createTextButton("9", function ()
+	// {
+	// 	self.select_squad(9);
+	// }, '', 3);
+	
+	// var squad_layout_10 = $('<div class="l-button is-squad-10"/>');
+	// this.mSquadPanel.append(squad_layout_10);
+	// this.BUTTON_SQUAD_10 = squad_layout_10.createTextButton("10", function ()
+	// {
+	// 	self.select_squad(10);
+	// }, '', 3);
+
+	var squad_layout_11 = $('<div class="x-button"/>');
+	this.mSquadPanel.append(squad_layout_11);
+	this.BUTTON_SQUAD_11 = squad_layout_11.createTextButton("X", function ()
+	{
+		//TODO: clear squad
+		//TODO: sort storage by level
+		//TODO: sort storage by weapon
+	}, '', 3);
+	
+	
 };
 
 CharacterScreenBrothersListModule.prototype.destroyDIV = function ()
