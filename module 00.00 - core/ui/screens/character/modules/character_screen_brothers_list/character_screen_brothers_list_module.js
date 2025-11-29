@@ -74,6 +74,8 @@ CharacterScreenBrothersListModule.prototype.onBrothersListLoaded = function (_da
 	if (_brothers === null || !jQuery.isArray(_brothers) || _brothers.length === 0) return;
 	this.BROTHERS_TEMP = _brothers;
 
+	// modify styles of squad buttons to reflect occupancy or squad/mission status
+	// TODO: after mission, squad will be locked, but yellow - meaning non-hostile lock
 	$("div.squad-panel div.ui-control").each(function(index, element) {
 		// 'this' refers to the current DOM element in the loop
 		// 'element' also refers to the current DOM element
@@ -83,8 +85,11 @@ CharacterScreenBrothersListModule.prototype.onBrothersListLoaded = function (_da
 		var occupied = false;
 		for (var i = lcb[0]; i <= lcb[1]; i++)
 		{
-			if (_brothers[i] != null) occupied = true;
-			break;
+			if (_brothers[i] !== null) 
+			{
+				occupied = true;
+				break;
+			}
 		}
 	  
 		var $currentElement = $(element); //wrap 'element' with jQuery to use jQuery methods on it
@@ -124,7 +129,7 @@ CharacterScreenBrothersListModule.prototype.onBrothersListLoaded = function (_da
 		var brother = _brothers[i];
 		if (brother !== null) 
 		{
-			var ui_index = this.get_storage_ui_index(i);
+			var ui_index = this.storage_logical_to_ui(i);
 			console.log("Adding storage bro | logical_index: " + i + ", ui_index: " + ui_index);
 			console.log(brother);
 
@@ -171,6 +176,51 @@ CharacterScreenBrothersListModule.prototype.onBrothersListLoaded = function (_da
 		this.mNumActive = 0;
 	};
 
+	CharacterScreenBrothersListModule.prototype.get_logical_chunk_bounds = function()
+	{
+		return [this.CHUNK_INDEX * this.CHUNK_SIZE, (this.CHUNK_INDEX + 1)  * this.CHUNK_SIZE - 1];
+	};
+
+	CharacterScreenBrothersListModule.prototype.get_lcb = function(chunk_index)
+	{
+		return [chunk_index * this.CHUNK_SIZE, (chunk_index + 1)  * this.CHUNK_SIZE - 1];
+	};
+
+	CharacterScreenBrothersListModule.prototype.get_logical_storage_bounds = function()
+	{
+		return [this.CHUNK_SIZE * 10, this.CHUNK_SIZE * 10 + this.STORAGE_SIZE - 1];
+	};
+
+	CharacterScreenBrothersListModule.prototype.get_next_logical_storage_index = function(index)
+	{
+		var lsb = this.get_logical_storage_bounds();
+		var start = index;
+		if (start === 0) start = lsb[0];
+		for (var i = start; i <= lsb[1]; i++)
+		{
+			var brother = this.BROTHERS_TEMP[i];
+			if (brother === null) return i;
+		}
+		return null;
+	}
+
+	CharacterScreenBrothersListModule.prototype.storage_logical_to_ui = function(index)
+	{
+		// ui storage: [27, 27+200)
+		// logical storage: [CHUNKSIZE * 10, CHUNKSIZE * 10 + 200)
+		//ie. 270 -> 0 + 27 = 27
+		return (index - this.CHUNK_SIZE * this.CHUNKS) + this.CHUNK_SIZE;
+	};
+
+	CharacterScreenBrothersListModule.prototype.storage_ui_to_logical = function(index)
+	{
+		// ui storage: [27, 27+200)
+		// logical storage: [CHUNKSIZE * 10, CHUNKSIZE * 10 + 200)
+		// ie. 27 -> 27 - 27 = 0
+		// 0 + 270 = 270
+		return (index - this.CHUNK_SIZE) + this.CHUNKS * this.CHUNK_SIZE;
+	};
+
 	CharacterScreenBrothersListModule.prototype.get_logical_index = function(index)
 	{
 		// 0-27 is the squad window, use squad index to translate
@@ -185,30 +235,30 @@ CharacterScreenBrothersListModule.prototype.onBrothersListLoaded = function (_da
 		}
 		else // if it's storage
 		{
-			return this.CHUNK_SIZE * this.CHUNKS + index;
+			return this.storage_ui_to_logical(index);
 		}
 	};
 
-	CharacterScreenBrothersListModule.prototype.get_storage_ui_index = function(index)
+	CharacterScreenBrothersListModule.prototype.clear_squad = function()
 	{
-		// ui storage: [27, 27+200)
-		// logical storage: [CHUNKSIZE * 10, CHUNKSIZE * 10 + 200)
-		return index - this.CHUNK_SIZE * this.CHUNKS;
-	};
+		var lcb = this.get_logical_chunk_bounds();
+		var ui_chunk_index = 0;  // 0-26
+		var lsi = 0;
+		for (var i = lcb[0]; i <= lcb[1]; i++)
+		{
+			var brother = this.BROTHERS_TEMP[i];
+			if (brother !== null)
+			{
+				lsi = this.get_next_logical_storage_index(lsi);
+				var ui_storage_index = this.storage_logical_to_ui(lsi);
+				if (lsi === null) return;
+				this.swapSlots(ui_chunk_index, ui_storage_index);
+			}
+			ui_chunk_index++;
+		}
+		// get bro
+		// get next open slot in storage, do a swap
 
-	CharacterScreenBrothersListModule.prototype.get_logical_chunk_bounds = function()
-	{
-		return [this.CHUNK_INDEX * this.CHUNK_SIZE, (this.CHUNK_INDEX + 1)  * this.CHUNK_SIZE - 1];
-	};
-
-	CharacterScreenBrothersListModule.prototype.get_lcb = function(chunk_index)
-	{
-		return [chunk_index * this.CHUNK_SIZE, (chunk_index + 1)  * this.CHUNK_SIZE - 1];
-	};
-
-	CharacterScreenBrothersListModule.prototype.get_logical_storage_bounds = function()
-	{
-		return [this.CHUNK_SIZE * 10, this.CHUNK_SIZE * 10 + this.STORAGE_SIZE - 1];
 	};
 
 CharacterScreenBrothersListModule.prototype.addBrotherSlotDIV = function (_parentDiv, _data, ui_index, _allowReordering)
@@ -474,6 +524,8 @@ CharacterScreenBrothersListModule.prototype.onBrotherUpdated = function (_dataSo
 CharacterScreenBrothersListModule.prototype.swapSlots = function (a_ui, b_ui)
 {
 	// a_ui and b_ui are logical ui indices. get logical indices
+	var self = this;
+	
 	var a_log = this.get_logical_index(a_ui);
 	var b_log = this.get_logical_index(b_ui);
 
@@ -568,6 +620,40 @@ CharacterScreenBrothersListModule.prototype.swapSlots = function (a_ui, b_ui)
 		{
 			this.mDataSource.setSelectedBrotherIndex(a_log, true);
 		}
+	}
+
+	if (a_ui < this.CHUNK_SIZE || b_ui < this.CHUNK_SIZE)
+	{
+		$("div.squad-panel div.ui-control").each(function(index, element) {
+			// 'this' refers to the current DOM element in the loop
+			// 'element' also refers to the current DOM element
+			// 'index' is the zero-based index of the element in the selection
+			if (index != self.CHUNK_INDEX) return;
+	
+			var lcb = self.get_lcb(index);
+			var occupied = false;
+			for (var i = lcb[0]; i <= lcb[1]; i++)
+			{
+				if (self.BROTHERS_TEMP[i] !== null) 
+				{
+					occupied = true;
+					break;
+				}
+			}
+		  
+			var $currentElement = $(element); //wrap 'element' with jQuery to use jQuery methods on it
+			if (!occupied) 
+			{
+				$currentElement.addClass('is-not-occupied'); 
+			}
+			else
+			{
+				$currentElement.removeClass('is-not-occupied'); 
+			}
+	
+			// Example: Get the value of an input field
+			// var inputValue = $currentElement.val(); 
+		});
 	}
 
 	this.updateRosterLabel();
@@ -836,83 +922,14 @@ CharacterScreenBrothersListModule.prototype.createDIV = function (_parentDiv)
 		this.mSquadPanel.append(button_template);
 	}
 
-	// var squad_layout_1 = $('<div class="l-button is-squad-1"/>');
-	// this.mSquadPanel.append(squad_layout_1);
-	// this.BUTTON_SQUAD_1 = squad_layout_1.createTextButton("2", function ()
-	// {
-	// 	self.select_squad(1);
-	// }, '', 3);
-
-	// var squad_layout_2 = $('<div class="l-button is-squad-2"/>');
-	// this.mSquadPanel.append(squad_layout_2);
-	// this.BUTTON_SQUAD_2 = squad_layout_2.createTextButton("2", function ()
-	// {
-	// 	self.select_squad(2);
-	// }, '', 3);
-	
-	// var squad_layout_3 = $('<div class="l-button is-squad-3"/>');
-	// this.mSquadPanel.append(squad_layout_3);
-	// this.BUTTON_SQUAD_3 = squad_layout_3.createTextButton("3", function ()
-	// {
-	// 	self.select_squad(3);
-	// }, '', 3);
-	
-	// var squad_layout_4 = $('<div class="l-button is-squad-4"/>');
-	// this.mSquadPanel.append(squad_layout_4);
-	// this.BUTTON_SQUAD_4 = squad_layout_4.createTextButton("4", function ()
-	// {
-	// 	self.select_squad(4);
-	// }, '', 3);
-	
-	// var squad_layout_5 = $('<div class="l-button is-squad-5"/>');
-	// this.mSquadPanel.append(squad_layout_5);
-	// this.BUTTON_SQUAD_5 = squad_layout_5.createTextButton("5", function ()
-	// {
-	// 	self.select_squad(5);
-	// }, '', 3);
-	
-	// var squad_layout_6 = $('<div class="l-button is-squad-6"/>');
-	// this.mSquadPanel.append(squad_layout_6);
-	// this.BUTTON_SQUAD_6 = squad_layout_6.createTextButton("6", function ()
-	// {
-	// 	self.select_squad(6);
-	// }, '', 3);
-	
-	// var squad_layout_7 = $('<div class="l-button is-squad-7"/>');
-	// this.mSquadPanel.append(squad_layout_7);
-	// this.BUTTON_SQUAD_7 = squad_layout_7.createTextButton("7", function ()
-	// {
-	// 	self.select_squad(7);
-	// }, '', 3);
-	
-	// var squad_layout_8 = $('<div class="l-button is-squad-8"/>');
-	// this.mSquadPanel.append(squad_layout_8);
-	// this.BUTTON_SQUAD_8 = squad_layout_8.createTextButton("8", function ()
-	// {
-	// 	self.select_squad(8);
-	// }, '', 3);
-	
-	// var squad_layout_9 = $('<div class="l-button is-squad-9"/>');
-	// this.mSquadPanel.append(squad_layout_9);
-	// this.BUTTON_SQUAD_9 = squad_layout_9.createTextButton("9", function ()
-	// {
-	// 	self.select_squad(9);
-	// }, '', 3);
-	
-	// var squad_layout_10 = $('<div class="l-button is-squad-10"/>');
-	// this.mSquadPanel.append(squad_layout_10);
-	// this.BUTTON_SQUAD_10 = squad_layout_10.createTextButton("10", function ()
-	// {
-	// 	self.select_squad(10);
-	// }, '', 3);
-
 	var squad_layout_11 = $('<div class="x-button"/>');
 	this.mSquadPanel.append(squad_layout_11);
 	this.BUTTON_SQUAD_11 = squad_layout_11.createTextButton("X", function ()
 	{
-		//TODO: clear squad
+		self.clear_squad();
 		//TODO: sort storage by level
 		//TODO: sort storage by weapon
+		//TODO: can't start missions if you don't finish all retaliations first
 	}, '', 3);
 	
 	
