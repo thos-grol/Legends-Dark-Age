@@ -64,13 +64,10 @@
         local armor_item = armor - armor_innate;
 
         // Armor dmg
-        // TODO: get int amounts for innate and item armor first
         // note p.ArmorMult[_hitInfo.BodyPart] is not used for either innate or item armor now. Just
         // add flat armor if you want more and we don't want to multiply armor anyways. Also search of
         // vanilla code shows that armor mult isn't used anyways. I don't see any rounding either
         // meaning that armor dmg was non-integer wtf
-
-        //TODO: dmg innate armor -> item armor -> hitpoint dmg
 
         // calc innate armor dmg
         if (dmg > 0)

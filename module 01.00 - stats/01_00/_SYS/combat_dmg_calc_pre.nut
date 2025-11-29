@@ -43,16 +43,12 @@
 		// hk
         // armor acts as ablative
         // hardness reduces damage
-        // TODO:
-        // bludgeons can inflict injuries even without hitpoint damage if the damage is high enough after hardness reduction
-        // 2H shatter can smash 1 hardness
-        // 1H shatter has a 50% chance to smash 1 hardness
 
 		local hitInfo = clone ::Const.Tactical.HitInfo;
 		hitInfo.DamageRegular = dmg * mult_dmg; //regular damage
         hitInfo.DamageMinimum = _info.Properties.DamageMinimum * mult_dmg; // piercing damage
 
-        hitInfo.DamageFatigue = ::Const.Combat.FatigueReceivedPerHit * _info.Properties.FatigueDealtPerHitMult + _info.Properties.FatigueDealtAsPercentOfMaxFatigue * _info.TargetEntity.getFatigueMax(); //TODO: relogic
+        hitInfo.DamageFatigue = ::Const.Combat.FatigueReceivedPerHit * _info.Properties.FatigueDealtPerHitMult + _info.Properties.FatigueDealtAsPercentOfMaxFatigue * _info.TargetEntity.getFatigueMax();
 
 		hitInfo.DamageArmor = 0;
 		hitInfo.DamageDirect = 0;

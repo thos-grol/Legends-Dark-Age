@@ -18,8 +18,8 @@
 		// - implement hardness stat
 		
 		local stamina_modifier = ::Math.ceil(this.getStaminaModifier());
-		//TODO: create new vanguard trait passive. make it flat reduction
-		//TODO: vanguard passive, copy over underdog logic
+		//FEATURE_1: create new vanguard trait passive. make it flat reduction
+		//FEATURE_1: vanguard passive, copy over underdog logic
 		// if (this.getContainer().getActor().getSkills().hasPerk(::Legends.Perk.Brawny))
 		// {
 		//  stamina_modifier = ::Math.min(0, stamina_modifier + 1); 

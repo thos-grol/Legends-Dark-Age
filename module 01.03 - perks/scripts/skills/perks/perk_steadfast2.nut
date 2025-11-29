@@ -19,8 +19,8 @@ this.perk_steadfast2 <- this.inherit("scripts/skills/skill", {
 	function onUpdate( _properties )
 	{
 		_properties.FatigueReceivedPerHitMult = this.m.FatigueReceivedPerHitMult;
-		//TODO: create new property to remove FatigueLossOnBeingMissed
-		//TODO: overhaul fatigue system on hit/miss
+		//FEATURE_1: create new property to remove FatigueLossOnBeingMissed
+		//FEATURE_1: overhaul fatigue system on hit/miss
 		// this.m.Fatigue = ::Math.min(this.getFatigueMax(), ::Math.round(this.m.Fatigue + ::Const.Combat.FatigueLossOnBeingMissed * this.m.CurrentProperties.FatigueEffectMult * this.m.CurrentProperties.FatigueLossOnAnyAttackMult));
 	}
 });

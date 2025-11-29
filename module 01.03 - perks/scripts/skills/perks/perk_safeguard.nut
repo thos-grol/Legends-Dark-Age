@@ -16,9 +16,9 @@ this.perk_safeguard <- this.inherit("scripts/skills/skill", {
 		this.m.IsHidden = false;
 	}
 
-	//TODO: All shields provide this ability, but it is hidden and disabled unless if you have this perk.
-	//TODO: you need to hook the safeguard active and make it functional
-	//TODO: make shield wall turn ending, also do the ablative thing
+	//FEATURE_1: All shields provide this ability, but it is hidden and disabled unless if you have this perk.
+	//FEATURE_1: you need to hook the safeguard active and make it functional
+	//FEATURE_1: make shield wall turn ending, also do the ablative thing
 
 	// function onAdded()
 	// {

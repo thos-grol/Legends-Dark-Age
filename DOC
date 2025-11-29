@@ -1,10 +1,10 @@
-//TODO: actives: you need to fix skills with DamageMinimum adding way more damage than you want
-    //TODO: generate hooks for all active skills, account for legend hooks
+//FEATURE_1: actives: you need to fix skills with DamageMinimum adding way more damage than you want
+    //FEATURE_1: generate hooks for all active skills, account for legend hooks
     // - we probably want to hook all actives for editing
     // _properties.DamageRegularMin += 5;
     // _properties.DamageRegularMax += 10;
 
-//TODO: we should have our own entity system instead of using legend's randomized abstract. This is
+//FEATURE_1: we should have our own entity system instead of using legend's randomized abstract. This is
 // in case of breaking changes
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////

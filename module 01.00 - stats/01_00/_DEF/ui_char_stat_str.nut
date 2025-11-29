@@ -21,7 +21,7 @@ o.general_queryUIElementTooltipData = function (_entityId, _elementId, _elementO
 					type = "description",
 					text = "The dwelling-place of the soul. [The ninth of the nine parts of the soul; the only one that can be touched.]\n\nHealth represents the amount of damage this character can take before dying.\n\nInjuries are inflicted when...\n\nDamage is rounded down after processing, except when it's > 0 and < 1. Then it becomes 1."
 				}
-				//TODO: write more on injury thresholds.
+				//FEATURE_3: write more on injury thresholds.
 			];
 
 		case "character-stats.Morale":
@@ -78,7 +78,7 @@ o.general_queryUIElementTooltipData = function (_entityId, _elementId, _elementO
 					type = "description",
 					text = "Armor description here. With some exceptions, all damage must deplete armor first before damaging Health.\nHardness is a stat related to armor that is a flat reduction to incoming damage."
 				}
-				//TODO: armor description
+				//FEATURE_3: armor description
 			];
 
 		case "character-stats.ArmorBody":
@@ -93,7 +93,7 @@ o.general_queryUIElementTooltipData = function (_entityId, _elementId, _elementO
 					type = "description",
 					text = " The more body armor, the less damage will be applied to hitpoints on taking a hit to the body."
 				}
-				//TODO: armor description
+				//FEATURE_3: armor description
 			];
 
 		case "character-stats.MeleeSkill":
@@ -110,7 +110,7 @@ o.general_queryUIElementTooltipData = function (_entityId, _elementId, _elementO
 				}
 			];
 
-			//TODO: write about graze band here
+			//FEATURE_3: write about graze band here
 
 		case "character-stats.RangeSkill":
 			return [

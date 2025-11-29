@@ -29,8 +29,6 @@ this.perk_iron_mountain <- this.inherit("scripts/skills/skill", {
 
 	function onUpdate( _properties )
 	{
-		//TODO: how damage works. Damage is rounded down after processing, BUT if damage > 0 and < 1. Then it becomes 1.
-		//TODO: add this property to damage calc
 		if (this.m.ACTIVE) _properties.Hardness += this.m.HARDNESS;
 	}
 });
