@@ -1,8 +1,18 @@
+// hk - purpose
+// - we smooshed together ratk and matk, so we need to implement custom logic to handle only 1 skill stat
+// - we smooshed together rdef and mdef, so we need to implement custom logic to handle only 1 skill stat
+// - implement long war's graze band
+// - note we're using old hooks here because legends usees the old hooks and using the new hook has no result
 ::mods_hookBaseClass("skills/skill", function (o) {
-// while(!("attackEntity" in o)) o = o[o.SuperName];
 while(!("m" in o && "ID" in o.m)) o=o[o.SuperName];
+
 o.attackEntity = function( _user, _targetEntity, _allowDiversion = true )
 {
+	// hk
+	// - removed a whole lot of useless stuff here about attacking scenery, that was hampering
+	// readability. Why not implement logic in static functions to be called?
+	// hk end
+	
 	if (_targetEntity != null && !_targetEntity.isAlive())
 	{
 		return false;
@@ -45,15 +55,13 @@ o.attackEntity = function( _user, _targetEntity, _allowDiversion = true )
 	local levelDifference = _targetEntity.getTile().Level - _user.getTile().Level;
 	local distanceToTarget = _user.getTile().getDistanceTo(_targetEntity.getTile());
 	local toHit = 0;
-    local RET;
-
-
-	RET = ::Z.S.get_ranged_details(_user);
-    local ranged_mult = RET.ranged_mult;
-    local melee_mult = RET.melee_mult;
-
+	
+	// hk
+    // - we smooshed together ratk and matk, so we need to implement custom logic to handle only 1 skill stat
+	local ranged_mult = ::Z.S.get_ranged_mult(_user);
 	local skill = properties.MeleeSkill * properties.MeleeSkillMult;
-	skill *= (this.m.IsRanged ? ranged_mult : melee_mult);
+	if (this.m.IsRanged) skill *= ::Z.S.get_ranged_mult(_user);
+	// hk end
 
 	toHit = toHit + skill;
 	toHit = toHit - defense;
@@ -63,10 +71,19 @@ o.attackEntity = function( _user, _targetEntity, _allowDiversion = true )
 		toHit = toHit + (distanceToTarget - this.m.MinRange) * properties.HitChanceAdditionalWithEachTile * properties.HitChanceWithEachTileMult;
 	}
 
-	if (levelDifference < 0) toHit = toHit + ::Const.Combat.LevelDifferenceToHitBonus;
-	else toHit = toHit + ::Const.Combat.LevelDifferenceToHitMalus * levelDifference;
+	if (levelDifference < 0)
+	{
+		toHit = toHit + ::Const.Combat.LevelDifferenceToHitBonus;
+	}
+	else
+	{
+		toHit = toHit + ::Const.Combat.LevelDifferenceToHitMalus * levelDifference;
+	}
 
-	if (!this.m.IsShieldRelevant) // if is ignoring shield bonus
+	// hk
+	// - we smooshed together rdef and mdef, so we need to implement custom logic to handle only 1 skill stat
+	// this handles shield calculations
+	if (!this.m.IsShieldRelevant) // aka if is ignoring shield bonus
 	{
 		local shield = _targetEntity.getItems().getItemAtSlot(::Const.ItemSlot.Offhand);
 		if (shield != null && shield.isItemType(::Const.Items.ItemType.Shield)) 
@@ -85,10 +102,9 @@ o.attackEntity = function( _user, _targetEntity, _allowDiversion = true )
 	if (shield != null && shield.isItemType(::Const.Items.ItemType.Shield))
 	{
 		shieldBonus = shield.getMeleeDefense();
-		if (this.m.IsRanged) shieldBonus *= 0.75;
-		
 		if (_targetEntity.getSkills().hasEffect(::Legends.Effect.Shieldwall)) shieldBonus = shieldBonus * 2;
 	}
+	// hk end
 
 	toHit = toHit * properties.TotalAttackToHitMult;
 	toHit = toHit + ::Math.max(0, 100 - toHit) * (1.0 - defenderProperties.TotalDefenseToHitMult);
@@ -96,13 +112,14 @@ o.attackEntity = function( _user, _targetEntity, _allowDiversion = true )
 	if (this.m.IsRanged && !_allowDiversion && this.m.IsShowingProjectile)
 	{
 		toHit = toHit - 15;
-		properties.DamageTotalMult *= 0.75;
+		// properties.DamageTotalMult *= 0.75; // why is this here?
 	}
 
-	if (defense > -100 && skill > -100)
-	{
-		toHit = ::Math.max(5, ::Math.min(95, toHit));
-	}
+	// hk
+	// - implement long war's graze band
+	// changed to clamp to 0-100 range
+	toHit = ::Math.max(0, ::Math.min(100, toHit)); 
+	// hk end
 
 	_targetEntity.onAttacked(_user);
 
@@ -125,103 +142,105 @@ o.attackEntity = function( _user, _targetEntity, _allowDiversion = true )
 		}
 	}
 
-	if (!_targetEntity.isAbleToDie() && _targetEntity.getHitpoints() == 1)
+	// hk
+	// - implement long war's graze band
+	local hit_result = HIT_RESULT.MISS;
+
+	local is_rolling = true;
+	local is_using_hitchance = this.isUsingHitchance();
+
+	local r = ::Math.rand(1, 100);
+	local graze_band;
+
+
+	if (!_targetEntity.isAbleToDie() && _targetEntity.getHitpoints() == 1) // is_death_immune
 	{
+		is_rolling = false;
 		toHit = 0;
 	}
 
-	if (!this.isUsingHitchance())
+	if (!this.isUsingHitchance()) // guaranteed hit
 	{
+		is_rolling = false;
+		hit_result = HIT_RESULT.HIT;
 		toHit = 100;
 	}
+	
+	if (is_rolling)
+	{
+		graze_band = ::Z.S.calc_graze_band(toHit);
+		hit_result = ::Z.S.get_hit_result(graze_band, r);
+	}
 
-	// compute roll range and roll
-    local has_focus_target = _targetEntity.getSkills().hasSkill("perk.legend_perfect_focus");
-    local has_focus_user = _user.getSkills().hasSkill("perk.legend_perfect_focus");
-	local roll = ::Math.rand(has_focus_target ? 6 : 1, has_focus_user ? 95 : 100);
-
-	local isHit = roll <= toHit;
-    if (defenderProperties.IsEvadingAllAttacks)
-    {
-        isHit = false;
-    }
+    if (defenderProperties.IsEvadingAllAttacks) 
+		hit_result = HIT_RESULT.MISS;
+    
 
 	if (!_user.isHiddenToPlayer() && !_targetEntity.isHiddenToPlayer())
     {
-        if (defenderProperties.IsEvadingAllAttacks)
+        this.Tactical.EventLog.log_newline();
+
+		if (defenderProperties.IsEvadingAllAttacks)
         {
             ::Tactical.EventLog.log(::Const.UI.getColorizedEntityName(_user) + " uses " + this.getName() + " and " + ::Const.UI.getColorizedEntityName(_targetEntity) + " evades the attack");
         }
         else
         {
-            local rolled = roll;
-            this.Tactical.EventLog.log_newline();
+            ::Z.S.log_skill({
+				User = _user,
+				Target = _targetEntity,
+				Name = getName(),
 
-            if (astray)
-            {
-                if (this.isUsingHitchance())
-                {
-                    if (isHit)
-                    {
-                        ::Z.S.log_skill(_user, _targetEntity, getName(), rolled, toHit, "ASTRAY][HIT", false);
-                    }
-                    else
-                    {
-                        ::Z.S.log_skill(_user, _targetEntity, getName(), rolled, toHit, "ASTRAY][MISS", false);
-                    }
-                }
-                else
-                {
-                    ::Z.S.log_skill(_user, _targetEntity, getName(), rolled, toHit, "ASTRAY][HIT", false, false);
-                }
-            }
-            else if (this.isUsingHitchance())
-            {
-                if (isHit)
-                {
-                    ::Z.S.log_skill(_user, _targetEntity, getName(), rolled, toHit, "");
-                }
-                else
-                {
-                    ::Z.S.log_skill(_user, _targetEntity, getName(), rolled, toHit, "", false);
-                }
-            }
-            else
-            {
-                ::Z.S.log_skill(_user, _targetEntity, getName(), rolled, toHit, "", true, false);
-            }
+				Roll = r,
+				Chance = 0,
+				GrazeBand = graze_band,
+				HitResult = hit_result,
+				ResultType = RESULT_TYPE.GRAZE_BAND,
+
+				IsUsingHitchance = is_using_hitchance,
+				Astray = astray
+			});
+		}
 	}
 
-	//luck reroll
-	local roll_2 = ::Math.rand(1, 100);
-	if (isHit && roll_2 <= _targetEntity.getCurrentProperties().RerollDefenseChance)
+	// luck reroll code and log notifications
+	local luck_roll = ::Math.rand(1, 100);
+	local luck_reroll_chance = _targetEntity.getCurrentProperties().RerollDefenseChance;
+	if (is_rolling && hit_result > HIT_RESULT.MISS && luck_roll <= luck_reroll_chance)
 	{
-		if (!_user.getFlags().has("IgnoreLuck"))
-		{
-			roll = ::Math.rand(1, 100);
-			isHit = roll <= toHit;
-
-			if (!isHit)
-			{
-				::Z.S.log_skill(_user, null, getName(), roll, toHit, "LUCK REROLL (" + roll_2 + " vs " + _targetEntity.getCurrentProperties().RerollDefenseChance + ")][DODGE");
-			}
-			else
-			{
-				::Z.S.log_skill(_user, null, getName(), roll, toHit, "LUCK REROLL (" + roll_2 + " vs " + _targetEntity.getCurrentProperties().RerollDefenseChance + ")][FAIL", false);
-			}
-		}
+		if (_user.getFlags().has("IgnoreLuck")) 
+			::Tactical.EventLog.log(::Const.UI.getColorizedEntityName(_user) + ::MSU.Text.colorRed(" NEGATES LUCK"));
 		else
 		{
-			::Tactical.EventLog.log(
-				::Const.UI.getColorizedEntityName(_user) + ::MSU.Text.colorRed(" IS IGNORING LUCK")
-			);
+			r = ::Math.rand(1, 100);
+			local temp_result = ::Z.S.get_hit_result(graze_band, r);
+
+			if (temp_result < hit_result) # if the luck roll downgraded the hit
+			{
+				hit_result = temp_result;
+				::Z.S.log_skill({
+					User = _user,
+					Target = null,
+					Name = "LUCK REROLL",
+	
+					Roll = r,
+					Chance = 0,
+					GrazeBand = graze_band,
+					HitResult = hit_result,
+					ResultType = RESULT_TYPE.GRAZE_BAND,
+	
+					IsUsingHitchance = true,
+				});
+			}
 		}
-
 	}
-
-	if (isHit)
+	
+	if (hit_result != HIT_RESULT.MISS)
 	{
 		this.getContainer().setBusy(true);
+
+		if (hit_result == HIT_RESULT.GRAZE) properties.DamageTotalMult *= 0.5;
+
 		local info = {
 			Skill = this,
 			Container = this.getContainer(),
@@ -230,6 +249,8 @@ o.attackEntity = function( _user, _targetEntity, _allowDiversion = true )
 			Properties = properties,
 			DistanceToTarget = distanceToTarget
 		};
+
+		// hk end
 
 		if (this.m.IsShowingProjectile && this.m.ProjectileType != 0 && _user.getTile().getDistanceTo(_targetEntity.getTile()) >= ::Const.Combat.SpawnProjectileMinDist && (!_user.isHiddenToPlayer() || !_targetEntity.isHiddenToPlayer()))
 		{
@@ -265,7 +286,7 @@ o.attackEntity = function( _user, _targetEntity, _allowDiversion = true )
 	else
 	{
 		local distanceToTarget = _user.getTile().getDistanceTo(_targetEntity.getTile());
-		_targetEntity.onMissed(_user, this, this.m.IsShieldRelevant && shield != null && roll <= toHit + shieldBonus * 2);
+		_targetEntity.onMissed(_user, this, this.m.IsShieldRelevant && shield != null && r <= toHit + shieldBonus * 2);
 		this.m.Container.onTargetMissed(this, _targetEntity);
 		local prohibitDiversion = false;
 
@@ -294,11 +315,11 @@ o.attackEntity = function( _user, _targetEntity, _allowDiversion = true )
 			}
 		}
 
-		if (_allowDiversion && this.m.IsRanged && !(this.m.IsShieldRelevant && shield != null && roll <= toHit + shieldBonus * 2) && !prohibitDiversion && distanceToTarget > 2)
+		if (_allowDiversion && this.m.IsRanged && !(this.m.IsShieldRelevant && shield != null && r <= toHit + shieldBonus * 2) && !prohibitDiversion && distanceToTarget > 2)
 		{
 			this.divertAttack(_user, _targetEntity);
 		}
-		else if (this.m.IsShieldRelevant && shield != null && roll <= toHit + shieldBonus * 2)
+		else if (this.m.IsShieldRelevant && shield != null && r <= toHit + shieldBonus * 2)
 		{
 			local info = {
 				Skill = this,
@@ -359,4 +380,5 @@ o.attackEntity = function( _user, _targetEntity, _allowDiversion = true )
 		return false;
 	}
 }
-}});
+
+});

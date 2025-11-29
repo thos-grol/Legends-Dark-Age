@@ -24,7 +24,7 @@
 
 		foreach( it in items )
 		{
-			if (it.isItemType(::Const.Items.ItemType.RangedWeapon) && (!_trueRangedOnly || ::Math.min(it.getRangeMax(), this.m.CurrentProperties.getVision()) >= 6 && ::Z.S.get_ranged_details(this).is_ranged_unit ))
+			if (it.isItemType(::Const.Items.ItemType.RangedWeapon) && (!_trueRangedOnly || ::Math.min(it.getRangeMax(), this.m.CurrentProperties.getVision()) >= 6 && ::Z.S.get_ranged_mult(this).is_ranged_unit ))
 			{
 				if (it.getAmmoMax() == 0 && it.getAmmoID() == "")
 				{
@@ -122,7 +122,7 @@
 					result.HasRangedWeapon = true;
 					local range = ::Math.min(it.getRangeEffective() + it.getAdditionalRange(this), this.m.CurrentProperties.getVision());
 
-					if (range >= 6 && ::Z.S.get_ranged_details(this).is_ranged_unit) result.IsTrueRangedWeapon = true;
+					if (range >= 6 && ::Z.S.get_ranged_mult(this).is_ranged_unit) result.IsTrueRangedWeapon = true;
 
 					result.Range = ::Math.max(result.Range, range);
 					result.RangeWithLevel = ::Math.max(result.RangeWithLevel, range + ::Math.min(it.getRangeMaxBonus(), this.getTile().Level));
@@ -152,7 +152,7 @@
 
 		local hasRangedWeapon = _entity.hasRangedWeapon();
 		if (hasRangedWeapon && _entity.getCurrentProperties().getVision() > 4
-			&& ::Z.S.get_ranged_details(_entity).is_ranged_unit
+			&& ::Z.S.get_ranged_mult(_entity).is_ranged_unit
 		)
 		{
 			return true;

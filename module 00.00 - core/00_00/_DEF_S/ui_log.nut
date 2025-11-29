@@ -33,18 +33,39 @@
 // Main
 // =========================================================================================
 
-::Z.S.log_skill <- function(_user, _targetEntity, _skill_name, rolled, toHit, _result_string, _is_good=true, is_showing_chance=true)
+::Z.S.log_skill <- function(info)
 {
-    local start = "";
-    if (::Z.T.last_name != _user.getName())
+    // local _info = {
+    //     User = _user,
+    //     Target = _targetEntity,
+    //     Name = getName(),
+
+    //     Roll = r,
+    //     Chance = 0,
+    //     GrazeBand = graze_band,
+    //     HitResult = hit_result,
+    //     ResultType = ...,
+
+    //     IsUsingHitchance = is_using_hitchance,
+    //     Astray = astray,
+    // };
+
+    // if there is a new entity acting, we want to add line breaks
+    local ret = "";
+    if (::Z.T.last_name != info.User.getName())
     {
-        ::Z.T.last_name = _user.getName();
-        start = "\n";
+        ::Z.T.last_name = info.User.getName();
+        ret = "\n";
     }
-    local skill_result = ::Z.S.log_skill_result(_user, _targetEntity, _skill_name, _is_good);
-    local chance = (is_showing_chance ? ::Z.S.log_chance(rolled, toHit) : "");
-    ::Tactical.EventLog.logEx(start + skill_result + chance);
-};
+    ret += ::Z.S.log_target_info(info.User, info.Target, info.Name, info.HitResult); // user [skill] target
+    if ("Astray" in info && info.Astray)
+    {
+        ret += "[ASTRAY]"
+    }
+    ret += info.IsUsingHitchance ? ::Z.S.log_result(info) : ""; // shows hit miss roll or graze band roll
+
+    ::Tactical.EventLog.logEx(ret);
+}
 
 ::Z.S.log_damage_armor <- function(_targetEntity, _target, _cur, _prev, _damage, _is_natural=false)
 {
@@ -158,19 +179,46 @@
 // Helper 
 // =========================================================================================
 
-::Z.S.log_skill_result <- function(_user, _targetEntity, _skill_name, _is_good)
+::Z.S.log_target_info <- function(_user, _target, _skill_name, _result)
 {
+    // user [skill] target
     ::Z.T.Log.Turn_Has_Acted <- true;
-    return ::Const.UI.getColorizedEntityName(_user) + " "
-    + ( ::MSU.Text.color((_is_good ? ::DEF.Color.NiceGreen : ::DEF.Color.BloodRed), "[" + _skill_name + "]") )
-    + (_targetEntity != null ? " " + ::Const.UI.getColorizedEntityName(_targetEntity): "");
+
+    local ret = ::color_name(_user) + " " + ::color(::Color.hit_result[_result], "[" + _skill_name + "]");
+    if (_target != null) ret += " " + ::color_name(_target);
+
+    return ret;
 }
 
-::Z.S.log_chance <- function(rolled, toHit)
+::Z.S.log_result <- function(info)
 {
-    local success = rolled <= toHit;
-    local rolled_str = ::MSU.Text.color((success ? ::DEF.Color.NiceGreen : ::DEF.Color.BloodRed), "" + rolled);
-    return " » (" + rolled_str + " < " + ::Math.min(95, ::Math.max(5, toHit))+ ")";
+    // local _info = {
+    //     User = _user,
+    //     TargetEntity = _targetEntity,
+    //     Name = getName(),
+
+    //     Roll = r,
+    //     Chance = 0,
+    //     GrazeBand = graze_band,
+    //     HitResult = hit_result,
+    //     ResultType = ...,
+
+    //     IsUsingHitchance = is_using_hitchance,
+    //     Astray = astray,
+    // };
+    switch (info.ResultType) {
+        case RESULT_TYPE.HIT_MISS:
+            local result = ::color(::Color.hit_result[info.HitResult], "" + info.Roll);
+            return " » (" + result + " < " + ::Math.min(100, ::Math.max(0, info.Chance))+ ")";
+        case RESULT_TYPE.GRAZE_BAND:
+            // { 0 | 45 | 100 } (60)
+            local gb = info.GrazeBand;
+            return " {" + ::nicered(""+gb[0]) + "|" 
+                + ::niceyellow(""+::Math.min(100, gb[1])) + "|" 
+                + ::nicegreen(""+::Math.min(100, gb[2])) + "} » (" 
+                + ::color(::Color.hit_result[info.HitResult], "" + info.Roll) + ")";
+    }
+
 }
 
 ::Z.S.log_display_result <- function(_result_string, _is_good)

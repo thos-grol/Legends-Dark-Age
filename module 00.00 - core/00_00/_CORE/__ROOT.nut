@@ -1,3 +1,5 @@
+// !! For core core stuff, see scripts/config
+
 ::Z.S <- {}; // S for static
 ::Z.T <- {}; // T for temp
 
