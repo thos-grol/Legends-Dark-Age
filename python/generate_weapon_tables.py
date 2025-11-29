@@ -142,6 +142,10 @@ with open('test.nut', "w", encoding=encoding) as f_out:
                     if k == 'ShieldDamage': continue
                     if k == '1H': continue
                     
+                    if k == 'DirectDamageMult': 
+                        f_out.write(f'\t\t"{k}" : {0},\n')
+                        continue
+                    
                     if k == 'StaminaModifier':
                         if i == 0: f_out.write(f'\t\t"{k}" : {-1},\n')
                         else: f_out.write(f'\t\t"{k}" : {-2},\n')
