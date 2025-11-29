@@ -1,6 +1,6 @@
-::Const.Perks.SturdyTree <- {
-	ID = "SturdyTree",
-	Name = "Sturdy",
+::Const.Perks.HealthTree <- {
+	ID = "HealthTree",
+	Name = "Health",
 	Descriptions = [ "is sturdy" ]
 	Attributes = {
 		Hitpoints = [0,0],
@@ -14,19 +14,25 @@
 	},
 	Tree = [
 		[
-			::Const.Perks.PerkDefs.Colossus
+			::Legends.Perk.EMPTY_STURDY,
 		],
-		[],
 		[
-			::Const.Perks.PerkDefs.HoldOut
+			::Legends.Perk.EMPTY_STURDY,
 		],
-		[],
 		[
-			::Const.Perks.PerkDefs.NineLives
+			::Legends.Perk.EMPTY_STURDY,
 		],
-		[],
 		[
-			::Const.Perks.PerkDefs.Indomitable
+			::Legends.Perk.EMPTY_STURDY,
+		],
+		[
+			::Legends.Perk.EMPTY_STURDY,
+		],
+		[
+			::Legends.Perk.EMPTY_STURDY,
+		],
+		[
+			::Legends.Perk.EMPTY_STURDY,
 		]
 	]
 };

@@ -15,16 +15,17 @@
 	]
 };
 
+
 ::Const.Perks.VanguardClassTree <- {
 	ID = "VanguardClassTree",
-	Name = "Vanguard",
+	Name = "Vanguard Class",
 	Descriptions = [
-		"TODO"
+		"Vanguards are meant to stand tall amidst a sea of foes"
 	],
 	Tree = [
 		[
-			::Const.Perks.PerkDefs.LoadTraining,
-			::Const.Perks.PerkDefs.Mettle,
+			::Const.Perks.PerkDefs.BlockMastery,
+			::Const.Perks.PerkDefs.Conservation,
 			::Const.Perks.PerkDefs.BruteStrength,
 		],
 		[
@@ -34,31 +35,32 @@
 		],
 		[
 			::Const.Perks.PerkDefs.IronMountain,
-			::Const.Perks.PerkDefs.HoldtheLine,
+			::Const.Perks.PerkDefs.Vanguard,
 			::Const.Perks.PerkDefs.Rage,
 		],
 		[
-			::Const.Perks.PerkDefs.BlockMastery,
-			::Const.Perks.PerkDefs.SteadyDefense,
-			::Const.Perks.PerkDefs.DyingWish,
+			::Const.Perks.PerkDefs.StunStrike,
+			::Const.Perks.PerkDefs.Executioner2,
+			::Const.Perks.PerkDefs.TrueStrike,
 		],
 		[
 			::Const.Perks.PerkDefs.ReboundForce,
-			::Const.Perks.PerkDefs.ShieldBash,
-			::Const.Perks.PerkDefs.Berserk2,
+			::Const.Perks.PerkDefs.HoldtheLine,
+			::Const.Perks.PerkDefs.Berserk,
 		],
 		[
-			::Const.Perks.PerkDefs.UnendingForce,
-			::Const.Perks.PerkDefs.Indomitable,
-			::Const.Perks.PerkDefs.UnendingRage,
+			::Const.Perks.PerkDefs.NineLives,
+			::Const.Perks.PerkDefs.HeavyCounter,
+			::Const.Perks.PerkDefs.Unhindered,
 		],
 		[
-			::Const.Perks.PerkDefs.Immortal,
-			::Const.Perks.PerkDefs.Momentum,
+			::Const.Perks.PerkDefs.ImpactCondensation,
+			::Const.Perks.PerkDefs.LionsRoar,
 			::Const.Perks.PerkDefs.DeathDealer,
 		]
 	]
 };
+
 
 ::Const.Perks.ClassTrees <- {
 	Tree = [

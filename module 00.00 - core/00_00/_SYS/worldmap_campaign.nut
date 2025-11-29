@@ -5,11 +5,11 @@
 		this.Time.setVirtualTime(0);
 		this.m.IsRunningUpdatesWhilePaused = true;
 		this.setPause(true);
-		this.Math.seedRandomString(this.m.CampaignSettings.Seed);
+		::Math.seedRandomString(this.m.CampaignSettings.Seed);
 		local worldmap = this.MapGen.get("world.worldmap_generator");
 		local minX = worldmap.getMinX();
 		local minY = worldmap.getMinY();
-		this.World.resizeScene(minX, minY);
+		::World.resizeScene(minX, minY);
 		worldmap.fill({
 			X = 0,
 			Y = 0,
@@ -18,10 +18,13 @@
 		}, null);
 		::logInfo("worldmap.fill");
 		this.m.Assets.init();
-		this.World.FactionManager.createFactions();
-		this.World.EntityManager.buildRoadAmbushSpots();
-		this.Math.seedRandomString(this.m.CampaignSettings.Seed);
-		::logInfo("this.Math.seedRandomString(this.m.CampaignSettings.Seed);");
+
+		// this is where we setup the war table
+		::World.FactionManager.createFactions();
+
+		::World.EntityManager.buildRoadAmbushSpots();
+		::Math.seedRandomString(this.m.CampaignSettings.Seed);
+		::logInfo("::Math.seedRandomString(this.m.CampaignSettings.Seed);");
 
 		if (this.m.CampaignSettings != null)
 		{
@@ -32,43 +35,42 @@
 			::logInfo("3");
 			this.m.CampaignSettings.StartingScenario.onInit();
 			::logInfo("4");
-			// this.World.uncoverFogOfWar(this.getPlayer().getTile().Pos, 900.0);
+			// ::World.uncoverFogOfWar(this.getPlayer().getTile().Pos, 900.0);
 			// ::logInfo("5");
 		}
 
-		// ::logInfo("6");
-		// this.World.FactionManager.uncoverSettlements(this.m.CampaignSettings.ExplorationMode);
-		// ::logInfo("uncoverSettlements");
-		this.World.FactionManager.runSimulation();
-		::logInfo("runSimulation");
+		// ::World.FactionManager.uncoverSettlements(this.m.CampaignSettings.ExplorationMode);
+		::World.FactionManager.update_true();
+		::World.FactionManager.runSimulation();
+
 		this.m.CampaignSettings = null;
 		this.setupWeather();
-		this.Math.seedRandom(this.Time.getRealTime());
+		::Math.seedRandom(this.Time.getRealTime());
 		
 		if (this.Const.DLC.Unhold)
 		{
-			this.World.Flags.set("IsUnholdCampaign", true);
+			::World.Flags.set("IsUnholdCampaign", true);
 		}
 		
 		if (this.Const.DLC.Wildmen)
 		{
-			this.World.Flags.set("IsWildmenCampaign", true);
+			::World.Flags.set("IsWildmenCampaign", true);
 		}
 		
 		if (this.Const.DLC.Desert)
 		{
-			this.World.Flags.set("IsDesertCampaign", true);
+			::World.Flags.set("IsDesertCampaign", true);
 		}
 		
-		this.World.FactionManager.fix_settlement_display();
-        this.World.setFogOfWar(false);
+		::World.FactionManager.fix_settlement_display();
+        ::World.setFogOfWar(false);
 	}
 
     local onDeserialize = o.onDeserialize;
     o.onDeserialize = function ( _in )
     {
         onDeserialize(_in);
-        this.World.setFogOfWar(false);
+        ::World.setFogOfWar(false);
     }
 
 });
@@ -77,7 +79,7 @@
 {
     o.fix_settlement_display <- function()
 	{
-		foreach( s in this.World.EntityManager.getSettlements() )
+		foreach( s in ::World.EntityManager.getSettlements() )
 		{
             s.make_less_apparent();
 		}

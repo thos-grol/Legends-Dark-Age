@@ -1,9 +1,16 @@
 ::m.rawHook("scripts/entity/world/world_entity", function(p) {
     p.m.Capital <- false;
+    
     p.m.Enterable <- false;
     p.is_enterable <- function()
     {
         return this.m.Enterable;
+    }
+
+    p.m.Is_Contract <- false;
+    p.is_contract <- function()
+    {
+        return this.m.Is_Contract;
     }
 
     p.is_capital <- function()

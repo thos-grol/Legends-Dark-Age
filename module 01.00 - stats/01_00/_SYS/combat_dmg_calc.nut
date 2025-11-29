@@ -123,7 +123,7 @@
         // local death_curr = ::Math.max(0, this.m.Hitpoints - dmg_hp);
 
 		_hitInfo.DamageFatigue *= p.FatigueEffectMult;
-		this.m.Fatigue = this.Math.min(this.getFatigueMax(), this.Math.round(this.m.Fatigue + _hitInfo.DamageFatigue * p.FatigueReceivedPerHitMult * this.m.CurrentProperties.FatigueLossOnAnyAttackMult));
+		this.m.Fatigue = ::Math.min(this.getFatigueMax(), ::Math.round(this.m.Fatigue + _hitInfo.DamageFatigue * p.FatigueReceivedPerHitMult * this.m.CurrentProperties.FatigueLossOnAnyAttackMult));
 
         // call event fn		
 		this.m.Skills.onDamageReceived(_attacker, _hitInfo.DamageInflictedHitpoints, _hitInfo.DamageInflictedArmor);
@@ -135,7 +135,7 @@
 
 			if (armorHitSound.len() > 0)
 			{
-				this.Sound.play(armorHitSound[this.Math.rand(0, armorHitSound.len() - 1)], this.Const.Sound.Volume.ActorArmorHit, this.getPos());
+				this.Sound.play(armorHitSound[::Math.rand(0, armorHitSound.len() - 1)], this.Const.Sound.Volume.ActorArmorHit, this.getPos());
 			}
 
 			if (dmg_hp < this.Const.Combat.PlayPainSoundMinDamage)
@@ -153,7 +153,7 @@
 			}
 			else
 			{
-				this.m.Hitpoints = ::Math.max(this.Math.round(this.m.Hitpoints - dmg_hp), 0);
+				this.m.Hitpoints = ::Math.max(::Math.round(this.m.Hitpoints - dmg_hp), 0);
 			}
 		}
 
@@ -175,7 +175,7 @@
 				if (nineLivesSkill != null && (!nineLivesSkill.isSpent() || nineLivesSkill.getLastFrameUsed() == this.Time.getFrame()))
 				{
 					this.getSkills().removeByType(this.Const.SkillType.DamageOverTime);
-					this.m.Hitpoints = this.Math.rand(11, 15);
+					this.m.Hitpoints = ::Math.rand(11, 15);
 					nineLivesSkill.setSpent(true);
 					this.Tactical.EventLog.logEx(this.Const.UI.getColorizedEntityName(this) + " has nine lives!");
 				}
@@ -190,15 +190,15 @@
 
 			if (_skill != null)
 			{
-				if (_skill.getChanceDecapitate() >= 100 || _hitInfo.BodyPart == this.Const.BodyPart.Head && this.Math.rand(1, 100) <= _skill.getChanceDecapitate() * _hitInfo.FatalityChanceMult)
+				if (_skill.getChanceDecapitate() >= 100 || _hitInfo.BodyPart == this.Const.BodyPart.Head && ::Math.rand(1, 100) <= _skill.getChanceDecapitate() * _hitInfo.FatalityChanceMult)
 				{
 					fatalityType = this.Const.FatalityType.Decapitated;
 				}
-				else if (_skill.getChanceSmash() >= 100 || _hitInfo.BodyPart == this.Const.BodyPart.Head && this.Math.rand(1, 100) <= _skill.getChanceSmash() * _hitInfo.FatalityChanceMult)
+				else if (_skill.getChanceSmash() >= 100 || _hitInfo.BodyPart == this.Const.BodyPart.Head && ::Math.rand(1, 100) <= _skill.getChanceSmash() * _hitInfo.FatalityChanceMult)
 				{
 					fatalityType = this.Const.FatalityType.Smashed;
 				}
-				else if (_skill.getChanceDisembowel() >= 100 || _hitInfo.BodyPart == this.Const.BodyPart.Body && this.Math.rand(1, 100) <= _skill.getChanceDisembowel() * _hitInfo.FatalityChanceMult)
+				else if (_skill.getChanceDisembowel() >= 100 || _hitInfo.BodyPart == this.Const.BodyPart.Body && ::Math.rand(1, 100) <= _skill.getChanceDisembowel() * _hitInfo.FatalityChanceMult)
 				{
 					fatalityType = this.Const.FatalityType.Disemboweled;
 				}
@@ -255,7 +255,7 @@
 			// do fx
             if (dmg >= this.Const.Combat.SpawnBloodEffectMinDamage)
 			{
-				local mult = this.Math.maxf(0.75, this.Math.minf(2.0, dmg / this.getHitpointsMax() * 3.0));
+				local mult = ::Math.maxf(0.75, ::Math.minf(2.0, dmg / this.getHitpointsMax() * 3.0));
 				this.spawnBloodEffect(this.getTile(), mult);
 			}
 
@@ -265,11 +265,11 @@
 
 				if (mult >= 0.75)
 				{
-					this.Sound.play(this.Const.Sound.ArenaBigHit[this.Math.rand(0, this.Const.Sound.ArenaBigHit.len() - 1)], this.Const.Sound.Volume.Tactical * this.Const.Sound.Volume.Arena);
+					this.Sound.play(this.Const.Sound.ArenaBigHit[::Math.rand(0, this.Const.Sound.ArenaBigHit.len() - 1)], this.Const.Sound.Volume.Tactical * this.Const.Sound.Volume.Arena);
 				}
-				else if (mult >= 0.25 || this.Math.rand(1, 100) <= 20)
+				else if (mult >= 0.25 || ::Math.rand(1, 100) <= 20)
 				{
-					this.Sound.play(this.Const.Sound.ArenaHit[this.Math.rand(0, this.Const.Sound.ArenaHit.len() - 1)], this.Const.Sound.Volume.Tactical * this.Const.Sound.Volume.Arena);
+					this.Sound.play(this.Const.Sound.ArenaHit[::Math.rand(0, this.Const.Sound.ArenaHit.len() - 1)], this.Const.Sound.Volume.Tactical * this.Const.Sound.Volume.Arena);
 				}
 			}
 
@@ -294,7 +294,7 @@
 
 				while (potentialInjuries.len() != 0)
 				{
-					local r = this.Math.rand(0, potentialInjuries.len() - 1);
+					local r = ::Math.rand(0, potentialInjuries.len() - 1);
 					local injury = this.new("scripts/skills/" + potentialInjuries[r]);
 
 					if (injury.isValid(this))
@@ -313,7 +313,7 @@
 
 						if (this.isPlayerControlled() || !this.isHiddenToPlayer())
 						{
-							this.Tactical.EventLog.logEx(this.Const.UI.getColorizedEntityName(this) + "\'s " + this.Const.Strings.BodyPartName[_hitInfo.BodyPart] + " is hit for [b]" + this.Math.floor(dmg) + "[/b] dmg and suffers " + injury.getNameOnly() + "!");
+							this.Tactical.EventLog.logEx(this.Const.UI.getColorizedEntityName(this) + "\'s " + this.Const.Strings.BodyPartName[_hitInfo.BodyPart] + " is hit for [b]" + ::Math.floor(dmg) + "[/b] dmg and suffers " + injury.getNameOnly() + "!");
 						}
 
 						appliedInjury = true;
@@ -329,13 +329,13 @@
 				{
 					if (dmg > 0 && !this.isHiddenToPlayer())
 					{
-						this.Tactical.EventLog.logEx(this.Const.UI.getColorizedEntityName(this) + "\'s " + this.Const.Strings.BodyPartName[_hitInfo.BodyPart] + " is hit for [b]" + this.Math.floor(dmg) + "[/b] dmg");
+						this.Tactical.EventLog.logEx(this.Const.UI.getColorizedEntityName(this) + "\'s " + this.Const.Strings.BodyPartName[_hitInfo.BodyPart] + " is hit for [b]" + ::Math.floor(dmg) + "[/b] dmg");
 					}
 				}
 			}
 			else if (dmg > 0 && !this.isHiddenToPlayer())
 			{
-				this.Tactical.EventLog.logEx(this.Const.UI.getColorizedEntityName(this) + "\'s " + this.Const.Strings.BodyPartName[_hitInfo.BodyPart] + " is hit for [b]" + this.Math.floor(dmg) + "[/b] dmg");
+				this.Tactical.EventLog.logEx(this.Const.UI.getColorizedEntityName(this) + "\'s " + this.Const.Strings.BodyPartName[_hitInfo.BodyPart] + " is hit for [b]" + ::Math.floor(dmg) + "[/b] dmg");
 			}
 
 			if (this.m.MoraleState != this.Const.MoraleState.Ignore && dmg >= this.Const.Morale.OnHitMinDamage && this.getCurrentProperties().IsAffectedByLosingHitpoints)
@@ -366,7 +366,7 @@
 			if ((this.m.IsFlashingOnHit || this.getCurrentProperties().IsStunned || this.getCurrentProperties().IsRooted) && !this.isHiddenToPlayer() && _attacker != null && _attacker.isAlive())
 			{
 				local layers = this.m.ShakeLayers[_hitInfo.BodyPart];
-				local recoverMult = this.Math.minf(1.5, this.Math.maxf(1.0, dmg * 2.0 / this.getHitpointsMax()));
+				local recoverMult = ::Math.minf(1.5, ::Math.maxf(1.0, dmg * 2.0 / this.getHitpointsMax()));
 				this.Tactical.getShaker().cancel(this);
 				this.Tactical.getShaker().shake(this, _attacker.getTile(), this.m.IsShakingOnHit ? 2 : 3, this.Const.Combat.ShakeEffectHitpointsHitColor, this.Const.Combat.ShakeEffectHitpointsHitHighlight, this.Const.Combat.ShakeEffectHitpointsHitFactor, this.Const.Combat.ShakeEffectHitpointsSaturation, layers, recoverMult);
 			}

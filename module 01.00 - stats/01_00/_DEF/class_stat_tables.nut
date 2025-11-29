@@ -1,6 +1,8 @@
 
 ::DEF.C.Stats.Class.Vanguard <- {};
 ::DEF.C.Stats.Class.Rogue <- {};
+::DEF.C.Stats.Class.Scrapper <- {};
+::DEF.C.Stats.Class.Ranger <- {};
 
 // Vanguards focuses on health and endurance and ignore agility
 //                              Levels     1   2   3   4   5   6   7   8

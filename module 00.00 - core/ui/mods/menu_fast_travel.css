@@ -76,3 +76,31 @@
 	position: relative;
 	float: left;
 }
+
+/* FIXME: Needs own file */
+.character-screen-container .scroll-container .l-perk-container .perk-image-layer
+{
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 4.95rem;
+    height: 4.95rem;
+    position: absolute;
+    margin: auto;
+    z-index: 2;
+}
+
+.character-screen-container .scroll-container .l-perk-container .selection-image-layer
+{
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 4.95rem;
+    height: 4.95rem;
+    position: absolute;
+    margin: auto;
+    padding-bottom: 0.1rem;
+    z-index: 1;
+}

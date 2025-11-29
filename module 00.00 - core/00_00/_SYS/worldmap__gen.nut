@@ -65,10 +65,10 @@
     
 	o.buildSettlements = function ( _rect )
 	{
-		local _properties = this.World.State.m.CampaignSettings;
+		local _properties = ::World.State.m.CampaignSettings;
 		this.LoadingScreen.updateProgress("Building Settlements ...");
 		this.logInfo("Building settlements...");
-		local isLeft = this.Math.rand(0, 1);
+		local isLeft = ::Math.rand(0, 1);
 		local settlementTiles = [];
 
 		//TODO: when rolling factions, assign correct citadels to factions
@@ -125,7 +125,7 @@
 
 			while (num > 0)
 			{
-				local r = this.Math.rand(1, 10);
+				local r = ::Math.rand(1, 10);
 				local total = 0;
 				foreach (s in list.Sizes)
 				{
@@ -159,20 +159,20 @@
 			{
 				if (isLeft)
 				{
-					x = this.Math.rand(5, _rect.W * 0.6);
+					x = ::Math.rand(5, _rect.W * 0.6);
 				}
 				else
 				{
-					x = this.Math.rand(_rect.W * 0.4, _rect.W - 6);
+					x = ::Math.rand(_rect.W * 0.4, _rect.W - 6);
 				}
 			}
 			else
 			{
-				x = this.Math.rand(5, _rect.W - 6);
+				x = ::Math.rand(5, _rect.W - 6);
 			}
 
-			y = this.Math.rand(5, _rect.H * 0.95);
-			local tile = this.World.getTileSquare(x, y);
+			y = ::Math.rand(5, _rect.H * 0.95);
+			local tile = ::World.getTileSquare(x, y);
 
 			if (is_north)
 			{
@@ -233,7 +233,7 @@
 				continue;
 			}
 
-			local type = candidates[this.Math.rand(0, candidates.len() - 1)];
+			local type = candidates[::Math.rand(0, candidates.len() - 1)];
 
 			if ((terrain.Region[this.Const.World.TerrainType.Ocean] >= 3 || terrain.Region[this.Const.World.TerrainType.Shore] >= 3) && !("IsCoastal" in type) && !("IsFlexible" in type))
 			{
@@ -243,13 +243,13 @@
 			if (!("IsCoastal" in type))
 			{
 				local skip = settlementTiles.len() != 0;
-				local navSettings = this.World.getNavigator().createSettings();
+				local navSettings = ::World.getNavigator().createSettings();
 
 				for( local i = settlementTiles.len() - 1; i >= 0; i = --i )
 				{
 					local settlement = settlementTiles[i];
 					navSettings.ActionPointCosts = this.Const.World.TerrainTypeNavCost;
-					local path = this.World.getNavigator().findPath(tile, settlement, navSettings, 0);
+					local path = ::World.getNavigator().findPath(tile, settlement, navSettings, 0);
 
 					if (!path.isEmpty())
 					{
@@ -270,9 +270,9 @@
 				for( local i = settlementTiles.len() - 1; i >= 0; i = --i )
 				{
 					local settlement = settlementTiles[i];
-					local navSettings = this.World.getNavigator().createSettings();
+					local navSettings = ::World.getNavigator().createSettings();
 					navSettings.ActionPointCosts = this.Const.World.TerrainTypeNavCost_Flat;
-					local path = this.World.getNavigator().findPath(tile, settlement, navSettings, 0);
+					local path = ::World.getNavigator().findPath(tile, settlement, navSettings, 0);
 
 					if (!path.isEmpty())
 					{
@@ -288,7 +288,7 @@
 			}
 
 			tile.clear();
-			local entity = this.World.spawnLocation(type.Script, tile.Coords);
+			local entity = ::World.spawnLocation(type.Script, tile.Coords);
 			entity.setSize(settlementSize);
 			settlementTiles.push(tile);
 			return settlementTiles;

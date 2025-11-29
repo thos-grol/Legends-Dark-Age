@@ -1,4 +1,4 @@
-
+// story missions where the world heads towards a future associated with a certain god ()
 
 
 // TODO: preset factions
@@ -107,7 +107,6 @@
 	],
 	Description = "The templar order protects the church of the light. Their specialties are templar knights and priests who purge all that is evil, blasphemous, and unholy.",
 	Motto = "Light in Darkness"
-	
 };
 ::DEF.C.Factions.Nobles["House Rabenholt"] <- {
 	Name = "House Rabenholt",

@@ -1,0 +1,21 @@
+Short term
+
+Finish contract system
+    TODO: serialize/deserialize, point link map objects to contracts
+    
+    TODO: click map object -> squad selection screen with contract details
+    TODO: figure out how to pass data to ui, probably check settlement.nut for contract passing
+    TODO: create squad screen contract ui display
+        TODO: state: null
+        TODO: state: free
+        TODO: state: locked
+
+        TODO: serialize squad states (do we serialize inside roster?)
+
+        squad has serialized data -> mission buffer
+            mission buffer cleared week end
+        week end progression button
+
+        
+
+TODO: do vanguard perk tree incrementally, and test perks

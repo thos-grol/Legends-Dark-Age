@@ -1,8 +1,6 @@
 
 this.perk_safeguard <- this.inherit("scripts/skills/skill", {
-	m = {
-		BUFF = 1
-	},
+	m = {},
 	function create()
 	{
 		this.m.ID = "perk.safeguard";
@@ -15,23 +13,4 @@ this.perk_safeguard <- this.inherit("scripts/skills/skill", {
 		this.m.IsStacking = false;
 		this.m.IsHidden = false;
 	}
-
-	//FEATURE_1: All shields provide this ability, but it is hidden and disabled unless if you have this perk.
-	//FEATURE_1: you need to hook the safeguard active and make it functional
-	//FEATURE_1: make shield wall turn ending, also do the ablative thing
-
-	// function onAdded()
-	// {
-	// 	if (!::Legends.Actives.has(this, ::Legends.Active.LegendSafeguard))
-	// 	{
-	// 		::Legends.Actives.grant(this, ::Legends.Active.LegendSafeguard);
-	// 	}
-	// }
-
-	// function onRemoved()
-	// {
-	// 	::Legends.Actives.remove(this, ::Legends.Active.LegendSafeguard);
-	// }
-
-	
 });

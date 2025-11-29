@@ -3,27 +3,27 @@ local pt = [];
 // =================================================================================================
 // 1
 // =================================================================================================
-    
-::Legends.Perk.LoadTraining <- null;
+
+::Legends.Perk.BlockMastery <- null;
 pt.push({
-    ID = "perk.load_training",
-    Script = "scripts/skills/perks/perk_load_training",
-    Name = ::Const.Strings.PerkName.LoadTraining,
-    Tooltip = ::Const.Strings.PerkDescription.LoadTraining,
-    Icon = "ui/perks/load_training.png",
-    IconDisabled = "ui/perks/load_training_sw.png",
-    Const = "LoadTraining"
+    ID = "perk.block_mastery",
+    Script = "scripts/skills/perks/perk_block_mastery",
+    Name = ::Const.Strings.PerkName.BlockMastery,
+    Tooltip = ::Const.Strings.PerkDescription.BlockMastery,
+    Icon = "ui/perks/perk_05.png",
+	IconDisabled = "ui/perks/perk_05_sw.png",
+    Const = "BlockMastery"
 });
         
-::Legends.Perk.Mettle <- null;
+::Legends.Perk.Conservation <- null;
 pt.push({
-    ID = "perk.mettle",
-    Script = "scripts/skills/perks/perk_mettle",
-    Name = ::Const.Strings.PerkName.Mettle,
-    Tooltip = ::Const.Strings.PerkDescription.Mettle,
-    Icon = "ui/perks/mettle.png",
-    IconDisabled = "ui/perks/mettle_sw.png",
-    Const = "Mettle"
+    ID = "perk.conservation",
+    Script = "scripts/skills/perks/perk_conservation",
+    Name = ::Const.Strings.PerkName.Conservation,
+    Tooltip = ::Const.Strings.PerkDescription.Conservation,
+    Icon = "ui/perks/recuperation_circle.png",
+	IconDisabled = "ui/perks/recuperation_circle_bw.png",
+    Const = "Conservation"
 });
         
 ::Legends.Perk.BruteStrength <- null;
@@ -47,8 +47,8 @@ pt.push({
     Script = "scripts/skills/perks/perk_safeguard",
     Name = ::Const.Strings.PerkName.Safeguard,
     Tooltip = ::Const.Strings.PerkDescription.Safeguard,
-    Icon = "ui/perks/safeguard.png",
-    IconDisabled = "ui/perks/safeguard_sw.png",
+    Icon = "ui/perks/perk_22.png",
+	IconDisabled = "ui/perks/perk_22_sw.png",
     Const = "Safeguard"
 });
         
@@ -58,8 +58,8 @@ pt.push({
     Script = "scripts/skills/perks/perk_steadfast2",
     Name = ::Const.Strings.PerkName.Steadfast2,
     Tooltip = ::Const.Strings.PerkDescription.Steadfast2,
-    Icon = "ui/perks/steadfast.png",
-    IconDisabled = "ui/perks/steadfast_sw.png",
+    Icon = "ui/perks/steadfast_circle.png",
+	IconDisabled = "ui/perks/steadfast_circle_bw.png",
     Const = "Steadfast2"
 });
         
@@ -70,7 +70,7 @@ pt.push({
     Name = ::Const.Strings.PerkName.SurvivalInstinct,
     Tooltip = ::Const.Strings.PerkDescription.SurvivalInstinct,
     Icon = "ui/perks/survival_instinct.png",
-    IconDisabled = "ui/perks/survival_instinct_sw.png",
+    IconDisabled = "ui/perks/survival_instinct_bw.png",
     Const = "SurvivalInstinct"
 });
         
@@ -89,15 +89,15 @@ pt.push({
     Const = "IronMountain"
 });
         
-::Legends.Perk.HoldtheLine <- null;
+::Legends.Perk.Vanguard <- null;
 pt.push({
-    ID = "perk.hold_the_line",
-    Script = "scripts/skills/perks/perk_hold_the_line",
-    Name = ::Const.Strings.PerkName.HoldtheLine,
-    Tooltip = ::Const.Strings.PerkDescription.HoldtheLine,
-    Icon = "ui/perks/hold_the_line.png",
-    IconDisabled = "ui/perks/hold_the_line_sw.png",
-    Const = "HoldtheLine"
+    ID = "perk.vanguard",
+    Script = "scripts/skills/perks/perk_vanguard",
+    Name = ::Const.Strings.PerkName.Vanguard,
+    Tooltip = ::Const.Strings.PerkDescription.Vanguard,
+    Icon = "ui/perks/vanguard.png",
+    IconDisabled = "ui/perks/vanguard_sw.png",
+    Const = "Vanguard"
 });
         
 ::Legends.Perk.Rage <- null;
@@ -115,37 +115,37 @@ pt.push({
 // 4
 // =================================================================================================
     
-::Legends.Perk.BlockMastery <- null;
+::Legends.Perk.StunStrike <- null;
 pt.push({
-    ID = "perk.block_mastery",
-    Script = "scripts/skills/perks/perk_block_mastery",
-    Name = ::Const.Strings.PerkName.BlockMastery,
-    Tooltip = ::Const.Strings.PerkDescription.BlockMastery,
-    Icon = "ui/perks/block_mastery.png",
-    IconDisabled = "ui/perks/block_mastery_sw.png",
-    Const = "BlockMastery"
+    ID = "perk.stun_strike",
+    Script = "scripts/skills/perks/perk_stun_strike",
+    Name = ::Const.Strings.PerkName.StunStrike,
+    Tooltip = ::Const.Strings.PerkDescription.StunStrike,
+    Icon = "ui/perks/stun_strike.png",
+    IconDisabled = "ui/perks/stun_strike_sw.png",
+    Const = "StunStrike"
 });
         
-::Legends.Perk.SteadyDefense <- null;
+::Legends.Perk.Executioner2 <- null;
 pt.push({
-    ID = "perk.steady_defense",
-    Script = "scripts/skills/perks/perk_steady_defense",
-    Name = ::Const.Strings.PerkName.SteadyDefense,
-    Tooltip = ::Const.Strings.PerkDescription.SteadyDefense,
-    Icon = "ui/perks/steady_defense.png",
-    IconDisabled = "ui/perks/steady_defense_sw.png",
-    Const = "SteadyDefense"
+    ID = "perk.executioner2",
+    Script = "scripts/skills/perks/perk_executioner2",
+    Name = ::Const.Strings.PerkName.Executioner2,
+    Tooltip = ::Const.Strings.PerkDescription.Executioner2,
+    Icon = "ui/perks/executioner2.png",
+    IconDisabled = "ui/perks/executioner2_sw.png",
+    Const = "Executioner2"
 });
         
-::Legends.Perk.DyingWish <- null;
+::Legends.Perk.TrueStrike <- null;
 pt.push({
-    ID = "perk.dying_wish",
-    Script = "scripts/skills/perks/perk_dying_wish",
-    Name = ::Const.Strings.PerkName.DyingWish,
-    Tooltip = ::Const.Strings.PerkDescription.DyingWish,
-    Icon = "ui/perks/dying_wish.png",
-    IconDisabled = "ui/perks/dying_wish_sw.png",
-    Const = "DyingWish"
+    ID = "perk.true_strike",
+    Script = "scripts/skills/perks/perk_true_strike",
+    Name = ::Const.Strings.PerkName.TrueStrike,
+    Tooltip = ::Const.Strings.PerkDescription.TrueStrike,
+    Icon = "ui/perks/true_strike.png",
+    IconDisabled = "ui/perks/true_strike_sw.png",
+    Const = "TrueStrike"
 });
         
 // =================================================================================================
@@ -163,89 +163,67 @@ pt.push({
     Const = "ReboundForce"
 });
         
-::Legends.Perk.ShieldBash <- null;
+::Legends.Perk.HoldtheLine <- null;
 pt.push({
-    ID = "perk.shield_bash",
-    Script = "scripts/skills/perks/perk_shield_bash",
-    Name = ::Const.Strings.PerkName.ShieldBash,
-    Tooltip = ::Const.Strings.PerkDescription.ShieldBash,
-    Icon = "ui/perks/shield_bash.png",
-    IconDisabled = "ui/perks/shield_bash_sw.png",
-    Const = "ShieldBash"
-});
-        
-::Legends.Perk.Berserk2 <- null;
-pt.push({
-    ID = "perk.berserk2",
-    Script = "scripts/skills/perks/perk_berserk2",
-    Name = ::Const.Strings.PerkName.Berserk2,
-    Tooltip = ::Const.Strings.PerkDescription.Berserk2,
-    Icon = "ui/perks/berserk.png",
-    IconDisabled = "ui/perks/berserk_sw.png",
-    Const = "Berserk2"
+    ID = "perk.hold_the_line",
+    Script = "scripts/skills/perks/perk_hold_the_line",
+    Name = ::Const.Strings.PerkName.HoldtheLine,
+    Tooltip = ::Const.Strings.PerkDescription.HoldtheLine,
+    Icon = "ui/perks/hold_the_line.png",
+    IconDisabled = "ui/perks/hold_the_line_sw.png",
+    Const = "HoldtheLine"
 });
         
 // =================================================================================================
 // 6
 // =================================================================================================
     
-::Legends.Perk.UnendingForce <- null;
+::Legends.Perk.HeavyCounter <- null;
 pt.push({
-    ID = "perk.unending_force",
-    Script = "scripts/skills/perks/perk_unending_force",
-    Name = ::Const.Strings.PerkName.UnendingForce,
-    Tooltip = ::Const.Strings.PerkDescription.UnendingForce,
-    Icon = "ui/perks/unending_force.png",
-    IconDisabled = "ui/perks/unending_force_sw.png",
-    Const = "UnendingForce"
+    ID = "perk.heavy_counter",
+    Script = "scripts/skills/perks/perk_heavy_counter",
+    Name = ::Const.Strings.PerkName.HeavyCounter,
+    Tooltip = ::Const.Strings.PerkDescription.HeavyCounter,
+    Icon = "ui/perks/heavy_counter.png",
+    IconDisabled = "ui/perks/heavy_counter_sw.png",
+    Const = "HeavyCounter"
 });
         
-::Legends.Perk.Indomitable <- null;
+::Legends.Perk.Unhindered <- null;
 pt.push({
-    ID = "perk.indomitable",
-    Script = "scripts/skills/perks/perk_indomitable",
-    Name = ::Const.Strings.PerkName.Indomitable,
-    Tooltip = ::Const.Strings.PerkDescription.Indomitable,
-    Icon = "ui/perks/indomitable.png",
-    IconDisabled = "ui/perks/indomitable_sw.png",
-    Const = "Indomitable"
-});
-        
-::Legends.Perk.UnendingRage <- null;
-pt.push({
-    ID = "perk.unending_rage",
-    Script = "scripts/skills/perks/perk_unending_rage",
-    Name = ::Const.Strings.PerkName.UnendingRage,
-    Tooltip = ::Const.Strings.PerkDescription.UnendingRage,
-    Icon = "ui/perks/unending_rage.png",
-    IconDisabled = "ui/perks/unending_rage_sw.png",
-    Const = "UnendingRage"
+    ID = "perk.unhindered",
+    Script = "scripts/skills/perks/perk_unhindered",
+    Name = ::Const.Strings.PerkName.Unhindered,
+    Tooltip = ::Const.Strings.PerkDescription.Unhindered,
+    Icon = "ui/perks/unhindered.png",
+    IconDisabled = "ui/perks/unhindered_sw.png",
+    Const = "Unhindered"
 });
         
 // =================================================================================================
 // 7
 // =================================================================================================
     
-::Legends.Perk.Immortal <- null;
+::Legends.Perk.ImpactCondensation <- null;
 pt.push({
-    ID = "perk.immortal",
-    Script = "scripts/skills/perks/perk_immortal",
-    Name = ::Const.Strings.PerkName.Immortal,
-    Tooltip = ::Const.Strings.PerkDescription.Immortal,
-    Icon = "ui/perks/immortal.png",
-    IconDisabled = "ui/perks/immortal_sw.png",
-    Const = "Immortal"
+    ID = "perk.impact_condensation",
+    Script = "scripts/skills/perks/perk_impact_condensation",
+    Name = ::Const.Strings.PerkName.ImpactCondensation,
+    Tooltip = ::Const.Strings.PerkDescription.ImpactCondensation,
+    Icon = "ui/perks/impact_condensation.png",
+    IconDisabled = "ui/perks/impact_condensation_sw.png",
+    Const = "ImpactCondensation"
 });
         
-::Legends.Perk.Momentum <- null;
+::Legends.Perk.LionsRoar <- null;
 pt.push({
-    ID = "perk.momentum",
-    Script = "scripts/skills/perks/perk_momentum",
-    Name = ::Const.Strings.PerkName.Momentum,
-    Tooltip = ::Const.Strings.PerkDescription.Momentum,
-    Icon = "ui/perks/momentum.png",
-    IconDisabled = "ui/perks/momentum_sw.png",
-    Const = "Momentum"
+    ID = "perk.lions_roar",
+    Script = "scripts/skills/perks/perk_lions_roar",
+    Name = ::Const.Strings.PerkName.LionsRoar,
+    Tooltip = ::Const.Strings.PerkDescription.LionsRoar,
+    Icon = "ui/perks/lions_roar.png",
+    IconDisabled = "ui/perks/lions_roar_sw.png",
+    Const = "LionsRoar"
 });
         
 ::Legends.Perk.DeathDealer <- null;

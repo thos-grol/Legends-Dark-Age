@@ -1,6 +1,16 @@
 ::mods_hookNewObject("factions/faction_manager", function(o)
 {
- 	o.createNobleHouses = function()
+ 	o.get_faction <- function(name)
+	{
+		foreach (faction in this.m.Factions)
+		{
+			if (faction == null) continue;
+			if (faction.m.Name == name) return faction;
+		}
+		return null;
+	}
+
+	o.createNobleHouses = function()
 	{
 		local banners = [];
 		local names = [];
@@ -15,7 +25,7 @@
 			local banner;
 			do
 			{
-				banner = this.Math.rand(2, 10);
+				banner = ::Math.rand(2, 10);
 			}
 			while (banners.find(banner) != null);
 			banners.push(banner);

@@ -71,3 +71,6 @@ sounds/enemies/unhold_regenerate_01.wav
 sounds/enemies/unhold_regenerate_02.wav
 sounds/ui/click.wav
 sounds/ui/hover.wav
+gfx/da_enemy.png
+gfx/da_fx.png
+gfx/da_world.png

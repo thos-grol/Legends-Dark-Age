@@ -8,3 +8,10 @@ enum RESULT_TYPE {
     GRAZE_BAND,
     HIT_MISS,
 };
+
+enum SKILL_TYPE {
+    PHYSICAL,
+    SPIRITUAL,
+    FIRE,
+    ICE,
+};

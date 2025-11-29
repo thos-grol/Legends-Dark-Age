@@ -1,8 +1,6 @@
 
 this.perk_block_mastery <- this.inherit("scripts/skills/skill", {
-	m = {
-		BUFF = 1
-	},
+	m = {},
 	function create()
 	{
 		this.m.ID = "perk.block_mastery";
@@ -16,12 +14,8 @@ this.perk_block_mastery <- this.inherit("scripts/skills/skill", {
 		this.m.IsHidden = false;
 	}
 
-	function onAnySkillUsed( _skill, _targetEntity, _properties )
+	function onUpdate( _properties )
 	{
-		//FEATURE_8: add this.m.IsPhysical = true default to skill class. Then set false for valid
-		// skills
-		// then add check here to disable increase
-		_properties.DamageRegularMin += BUFF;
-		_properties.DamageRegularMax += BUFF;
+		_properties.BlockMastery = true;
 	}
 });

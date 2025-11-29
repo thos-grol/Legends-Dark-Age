@@ -3,27 +3,6 @@
 	o.create = function()
 	{
 		create();
-		this.m.DailyCost = ::DEF.C.Economy.Wages.Backgrounds[this.m.ID].DailyCost;
-		this.m.HiringCost = ::DEF.C.Economy.Wages.Backgrounds[this.m.ID].HiringCost;
-		this.m.PerkTreeDynamicMins.Traits = 3;
-
-		this.m.PerkTreeDynamic = {
-			Weapon = [
-				::Const.Perks.PolearmTree,
-				::Const.Perks.ShieldTree
-			],
-			Defense = [
-				::Const.Perks.MediumArmorTree,
-				::Const.Perks.LightArmorTree
-			],
-			Traits = [],
-			Enemy = [],
-			Class = [
-				::Const.Perks.FistsClassTree,
-				::Const.Perks.TrainedTree,
-			],
-			Magic = []
-		};
 	}
 
 	o.onAddEquipment = function()
@@ -72,19 +51,18 @@
 		]));
 	}
 
-	o.onChangeAttributes <- function()
-	{
-		local c = {
-			Hitpoints = [0,0],
-			Bravery = [0,0],
-			Stamina = [0,0],
-			MeleeSkill = [0,0],
-			RangedSkill = [0,0],
-			MeleeDefense = [0,0],
-			RangedDefense = [0,0],
-			Initiative = [0,0]
-		};
-		return c;
-	}
-
+	// o.onChangeAttributes <- function()
+	// {
+	// 	local c = {
+	// 		Hitpoints = [0,0],
+	// 		Bravery = [0,0],
+	// 		Stamina = [0,0],
+	// 		MeleeSkill = [0,0],
+	// 		RangedSkill = [0,0],
+	// 		MeleeDefense = [0,0],
+	// 		RangedDefense = [0,0],
+	// 		Initiative = [0,0]
+	// 	};
+	// 	return c;
+	// }
 });

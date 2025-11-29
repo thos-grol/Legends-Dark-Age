@@ -4,3 +4,5 @@
 
 ::Const.CharacterProperties.IsAffectedByApproachingEnemies <- true;
 ::Const.CharacterProperties.Hardness <- 0;
+
+::Const.CharacterProperties.BlockMastery <- false;

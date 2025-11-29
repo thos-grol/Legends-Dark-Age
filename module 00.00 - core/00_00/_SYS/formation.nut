@@ -5,7 +5,7 @@
 		//TODO: use seed from contract
         if (::World.State.getCombatSeed() != 0)
 		{
-			this.Math.seedRandom(::World.State.getCombatSeed());
+			::Math.seedRandom(::World.State.getCombatSeed());
 		}
 		this.Time.setRound(0); //TODO: hook log here to set round?
 
@@ -421,7 +421,7 @@
 			player.onCombatStart();
 		}
 
-		this.Math.seedRandom(this.Time.getRealTime());
+		::Math.seedRandom(this.Time.getRealTime());
 	}
 
     o.placePlayersInFormation = function ( _players, _offsetX = 0, _offsetY = 0 )

@@ -1,14 +1,14 @@
 
 this.perk_steadfast2 <- this.inherit("scripts/skills/skill", {
 	m = {
-		FatigueReceivedPerHitMult = 0.0
+		BUFF = 1
 	},
 	function create()
 	{
 		this.m.ID = "perk.steadfast2";
 		this.m.Name = ::Const.Strings.PerkName.Steadfast2;
 		this.m.Description = ::Const.Strings.PerkDescription.Steadfast2;
-		this.m.Icon = "ui/perks/steadfast.png";
+		this.m.Icon = "ui/perks/steadfast2.png";
 		this.m.Type = ::Const.SkillType.Perk;
 		this.m.Order = ::Const.SkillOrder.Perk;
 		this.m.IsActive = false;
@@ -16,11 +16,12 @@ this.perk_steadfast2 <- this.inherit("scripts/skills/skill", {
 		this.m.IsHidden = false;
 	}
 
-	function onUpdate( _properties )
+	function onAnySkillUsed( _skill, _targetEntity, _properties )
 	{
-		_properties.FatigueReceivedPerHitMult = this.m.FatigueReceivedPerHitMult;
-		//FEATURE_1: create new property to remove FatigueLossOnBeingMissed
-		//FEATURE_1: overhaul fatigue system on hit/miss
-		// this.m.Fatigue = ::Math.min(this.getFatigueMax(), ::Math.round(this.m.Fatigue + ::Const.Combat.FatigueLossOnBeingMissed * this.m.CurrentProperties.FatigueEffectMult * this.m.CurrentProperties.FatigueLossOnAnyAttackMult));
+		//FEATURE_8: add this.m.IsPhysical = true default to skill class. Then set false for valid
+		// skills
+		// then add check here to disable increase
+		_properties.DamageRegularMin += BUFF;
+		_properties.DamageRegularMax += BUFF;
 	}
 });

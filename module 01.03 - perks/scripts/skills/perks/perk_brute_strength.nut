@@ -1,7 +1,7 @@
 
 this.perk_brute_strength <- this.inherit("scripts/skills/skill", {
 	m = {
-		BUFF = 1
+		BUFF = 5
 	},
 	function create()
 	{
@@ -18,10 +18,15 @@ this.perk_brute_strength <- this.inherit("scripts/skills/skill", {
 
 	function onAnySkillUsed( _skill, _targetEntity, _properties )
 	{
-		//FEATURE_8: add this.m.IsPhysical = true default to skill class. Then set false for valid
-		// skills
-		// then add check here to disable increase
-		_properties.DamageRegularMin += BUFF;
-		_properties.DamageRegularMax += BUFF;
+		if (this.m.SkillType != SKILL_TYPE.PHYSICAL) return;
+
+		local actor = this.m.Container.getActor();
+		local mult = 1;
+		if (actor.getFlags().has("Level 3")) mult += 1;
+		if (actor.getFlags().has("Level 5")) mult += 1;
+		if (actor.getFlags().has("Level 7")) mult += 1;
+
+		_properties.DamageRegularMin += this.m.BUFF * mult;
+		_properties.DamageRegularMax += this.m.BUFF * mult;
 	}
 });

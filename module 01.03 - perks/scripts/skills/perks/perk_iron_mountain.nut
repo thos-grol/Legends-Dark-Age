@@ -1,8 +1,7 @@
 
 this.perk_iron_mountain <- this.inherit("scripts/skills/skill", {
 	m = {
-		HARDNESS = 2,
-		ACTIVE = false
+		BUFF = 1
 	},
 	function create()
 	{
@@ -17,18 +16,12 @@ this.perk_iron_mountain <- this.inherit("scripts/skills/skill", {
 		this.m.IsHidden = false;
 	}
 
-	function onDamageReceived( _attacker, _damageHitpoints, _damageArmor )
+	function onAnySkillUsed( _skill, _targetEntity, _properties )
 	{
-		this.m.ACTIVE = true;
-	}
-
-	function onTurnEnd()
-	{
-		this.m.ACTIVE = false;
-	}
-
-	function onUpdate( _properties )
-	{
-		if (this.m.ACTIVE) _properties.Hardness += this.m.HARDNESS;
+		//FEATURE_8: add this.m.IsPhysical = true default to skill class. Then set false for valid
+		// skills
+		// then add check here to disable increase
+		_properties.DamageRegularMin += BUFF;
+		_properties.DamageRegularMax += BUFF;
 	}
 });

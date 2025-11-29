@@ -12,7 +12,7 @@
 		this.m.Beards = this.Const.Beards.Raider;
 		this.m.AIAgent = this.new("scripts/ai/tactical/agents/bandit_ranged_agent");
 		this.m.AIAgent.setActor(this);
-		if (this.Math.rand(1, 100) <= 10)
+		if (::Math.rand(1, 100) <= 10)
 		{
 			this.setGender(1);
 		}
@@ -31,7 +31,7 @@
 		this.setAppearance();
 		this.getSprite("socket").setBrush("bust_base_bandits");
 
-		if (this.Math.rand(1, 100) <= 20)
+		if (::Math.rand(1, 100) <= 20)
 		{
 			local pox = this.getSprite("tattoo_head");
 			pox.Visible = true;
@@ -41,7 +41,7 @@
 		{
 			local dirt = this.getSprite("dirt");
 			dirt.Visible = true;
-			dirt.Alpha = this.Math.rand(150, 255);
+			dirt.Alpha = ::Math.rand(150, 255);
 		}
 
 		this.setArmorSaturation(0.85);

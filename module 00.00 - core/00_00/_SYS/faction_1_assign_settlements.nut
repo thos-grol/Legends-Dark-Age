@@ -44,7 +44,7 @@
 		// 1. Assign capitals (and rename)
 		// 2. Each faction takes turns picking one settlement closest to them on the list
 		
-		local settlements = this.World.EntityManager.getSettlements();
+		local settlements = ::World.EntityManager.getSettlements();
 		local capitals = [];
 		local villages = [];
 		for( local i = 0; i < settlements.len(); i = ++i )
@@ -143,8 +143,8 @@
 		// 	}
 		// }
 
-		local mapSize = this.World.getMapSize();
-		local northernTile = this.World.getTileSquare(mapSize.X / 2, mapSize.Y - 1);
+		local mapSize = ::World.getMapSize();
+		local northernTile = ::World.getTileSquare(mapSize.X / 2, mapSize.Y - 1);
 		local houses = [];
 
 		foreach( n in _nobleHouses )
@@ -191,7 +191,7 @@
 
 	// o.assignSettlementsToNobleHouses = function ( _nobleHouses )
 	// {
-	// 	local settlements = this.World.EntityManager.getSettlements();
+	// 	local settlements = ::World.EntityManager.getSettlements();
 	// 	local capitals = [];
 	// 	local villages = [];
 
@@ -222,7 +222,7 @@
 	// 		local other;
 	// 		do
 	// 		{
-	// 			other = this.Math.rand(0, _nobleHouses.len() - 1);
+	// 			other = ::Math.rand(0, _nobleHouses.len() - 1);
 	// 		}
 	// 		while (other == i);
 
@@ -281,8 +281,8 @@
 	// 		}
 	// 	}
 
-	// 	local mapSize = this.World.getMapSize();
-	// 	local northernTile = this.World.getTileSquare(mapSize.X / 2, mapSize.Y - 1);
+	// 	local mapSize = ::World.getMapSize();
+	// 	local northernTile = ::World.getTileSquare(mapSize.X / 2, mapSize.Y - 1);
 	// 	local houses = [];
 
 	// 	foreach( n in _nobleHouses )
@@ -331,7 +331,7 @@
 
     // function createSettlements()
 	// {
-	// 	local settlements = this.World.EntityManager.getSettlements();
+	// 	local settlements = ::World.EntityManager.getSettlements();
 
 	// 	foreach( s in settlements )
 	// 	{

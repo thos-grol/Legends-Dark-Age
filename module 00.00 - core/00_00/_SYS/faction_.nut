@@ -69,7 +69,7 @@
 		// 	return;
 		// }
 
-		// local pick = this.Math.rand(1, score);
+		// local pick = ::Math.rand(1, score);
 
 		// for( local i = 0; i < this.m.Deck.len(); i = ++i )
 		// {
@@ -240,7 +240,7 @@
 
 		for( local i = 0; i != numSettlements; i = ++i )
 		{
-			local s = this.World.getEntityByID(_in.readI32());
+			local s = ::World.getEntityByID(_in.readI32());
 			local owner = _in.readBool();
 			this.addSettlement(s, owner);
 		}
@@ -249,7 +249,7 @@
 
 		for( local i = 0; i != numUnits; i = ++i )
 		{
-			local unit = this.World.getEntityByID(_in.readI32());
+			local unit = ::World.getEntityByID(_in.readI32());
 			this.addUnit(unit);
 		}
 

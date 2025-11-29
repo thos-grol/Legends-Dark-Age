@@ -7,7 +7,7 @@
 	p.onUse = function(_skill) {}
 	p.lowerCondition = function(_value = 0) {}
 	
-	// - disable shield damage
+	// - disable damage
 	p.getShieldDamage = function () { return 0; }
 
 	// - remove condition from the tooltip

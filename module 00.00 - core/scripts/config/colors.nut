@@ -19,6 +19,11 @@
 
 ::Color.Gray <- "#808080";
 
+::Color.SeaGreen <- "#400080";
+
+::Color.OneTimeEffect <- "#000ec1";
+::Color.Status <- "#731f39";
+
 ::Color.hit_result <- {};
 
 ::Color.hit_result[HIT_RESULT.MISS] <- ::Color.NiceRed;
@@ -45,5 +50,9 @@
 ::niceyellow <- function(msg) { return ::color(::Color.NiceYellow, msg); }
 ::nicered <- function(msg) { return ::color(::Color.NiceRed, msg); }
 ::gray <- function(msg) { return ::color(::Color.Gray, msg); }
+
+::seagreen <- function(msg) { return ::color(::Color.SeaGreen, msg); }
+::stack <- function(msg) { return ::color(::Color.OneTimeEffect, msg); }
+::status <- function(msg) { return ::color(::Color.Status, msg); }
 
 ::color_name <- function(msg) { return ::Const.UI.getColorizedEntityName(msg); }
