@@ -19,12 +19,6 @@
 	Loadout = [
 		[
 			"scripts/items/weapons/short_bow",
-		],
-		[
-			"scripts/items/weapons/legend_sling",
-		],
-		[
-			"scripts/items/weapons/legend_sling",
 		]
 	]
 };

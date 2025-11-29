@@ -1,7 +1,6 @@
 //Bandit Rabble
 //Lvl 3
 ::Const.Tactical.Actor.BanditRabble <- clone ::B.Templates.Human;
-::Const.Tactical.Actor.BanditRabble.Bravery = 4;
 
 ::B[::Const.EntityType.BanditRabble] <- {
     Level = 1,
