@@ -16,7 +16,7 @@ this.perk_load_training <- this.inherit("scripts/skills/skill", {
 		this.m.IsHidden = false;
 	}
 
-	o.onUpdate <- function( _properties )
+	function onUpdate( _properties )
 	{
 		_properties.FatigueRecoveryRate += BUFF;
 	}
