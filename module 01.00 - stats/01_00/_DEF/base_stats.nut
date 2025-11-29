@@ -10,6 +10,6 @@
     RangedSkill =       0,         	// Strength
     RangedDefense =     0,         	// Instinct
 	
-    MeleeSkill =        50,         // Attack
+    MeleeSkill =        40,         // Attack
     MeleeDefense =      0,         	// Defense
 };
