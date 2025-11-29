@@ -12,17 +12,16 @@
 	{
 		if (this.getContainer() == null) return;
 		if (this.getContainer().getActor() == null) return;
-		local staminaMult = 1.0;
 
-		//TODO: modify how brawny works. make it flat reduction
-		if (this.getContainer().getActor().getSkills().hasPerk(::Legends.Perk.Brawny))
-		{
-			staminaMult = 0.70;
-		}
+		//FEATURE_1: armor perks & system - create new brawny perk. make it flat reduction
+		// if (this.getContainer().getActor().getSkills().hasPerk(::Legends.Perk.Brawny))
+		// {
+		// 	staminaMult = 0.70;
+		// }
 
 		_properties.Armor[::Const.BodyPart.Body] += this.getArmor();
 		_properties.ArmorMax[::Const.BodyPart.Body] += this.getArmorMax();
-		_properties.Stamina += ::Math.ceil(this.getStaminaModifier() * staminaMult);
+		_properties.Stamina += ::Math.ceil(this.getStaminaModifier());
 
 		// hk
 		// - implement hardness stat

@@ -21,7 +21,7 @@
 	else
 	{
 		this.m.MenuStack.pop();
-		#FEATURE_1: o.onLeave <- function ()
+		#FEATURE_6: o.onLeave <- function ()
 		# override legend's onleave function, disable camping shit
 		# add your own stuff
 	}

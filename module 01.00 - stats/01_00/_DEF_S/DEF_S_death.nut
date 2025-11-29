@@ -31,7 +31,7 @@
         if (skill.isGarbage()) continue;
         if (skill.isType(::Const.SkillType.DamageOverTime | ::Const.SkillType.StatusEffect)) continue;
         
-        // FEATURE_2: Enemy overhaul - mark actives as racial so zombies can grab them
+        // FEATURE_7: Enemy overhaul - mark actives as racial so zombies can grab them
         if (skill.isType(::Const.SkillType.Trait | ::Const.SkillType.Racial | ::Const.SkillType.Perk))
         {
             corpse.Skills.push(skill);

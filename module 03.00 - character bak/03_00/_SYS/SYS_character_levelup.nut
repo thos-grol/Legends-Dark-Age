@@ -1,4 +1,4 @@
-//FEATURE_2: audit level up code
+//FEATURE_7: audit level up code
 // ::mods_hookExactClass("entity/tactical/player", function (o){
 // // 	// =========================================================================================
 // // 	// Level Up

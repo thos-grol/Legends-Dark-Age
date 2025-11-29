@@ -14,8 +14,8 @@
 	for(local i = 0; i < ::Z.T.Travel.Days; i++ )
 	{
 		::Z.T.Event.Stack.append("event.travel.resolve");
-		//FEATURE_1: add combat event
-		//FEATURE_1: final roll encounters, events. create "roll table using msu"
+		//FEATURE_6: add combat event
+		//FEATURE_6: final roll encounters, events. create "roll table using msu"
 	}
 }
 
