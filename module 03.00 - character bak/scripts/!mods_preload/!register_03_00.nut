@@ -7,7 +7,7 @@
 local MOD_BEFORE = ">" + ::Z.PRE + ::Z.INFO[::Z.IDX]["id"];
 ::Z.IDX++;
 ::Z.INFO[::Z.IDX] <- {
-	"id" : "01_00",
+	"id" : "03_00",
 	"name" : "Dark Age: Stats" 
 };
 // =================================================================================================
@@ -31,5 +31,5 @@ mod.queue(MOD_BEFORE, function(){
 	// ::mods_registerJS("mod_display_stats.js");
 
 	# load module
-	::include("01_00/load.nut");
+	::include("03_00/load.nut");
 });
