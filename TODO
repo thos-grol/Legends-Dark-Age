@@ -6,10 +6,12 @@ Its time to port over squad screen before continuing
         (Done): refactor css names to not collide
         (Done): MSU create screen
         (Done): replace hotkeys to load our screen in strategic mode
-        TODO: port over legend modifications to character screen
-        TODO: port over our changes
+        (Done): port over legend modifications to character screen
+        (Done): port over our changes
 
 Finish contract system
+    TODO: fix stash starting out with only 10 slots
+    TODO: fix fighters in the fighting line
     TODO: handle contract completion
         contract -> kill contract entity -> contract completes
 

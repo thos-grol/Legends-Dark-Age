@@ -16,6 +16,7 @@
 	local onDestroyUI = o.onDestroyUI;
 	o.onDestroyUI = function()
 	{
+		onDestroyUI();
 		this.m.SquadScreen.destroy();
 		this.m.SquadScreen = null;
 	}
@@ -31,7 +32,6 @@
 
 	o.showCharacterScreen <- function()
 	{
-		::logInfo("Showing squad screen - we're not hallucinating");
 		if (!this.m.SquadScreen.isVisible() && !this.m.SquadScreen.isAnimating())
 		{
 			this.m.CustomZoom = this.World.getCamera().Zoom;
