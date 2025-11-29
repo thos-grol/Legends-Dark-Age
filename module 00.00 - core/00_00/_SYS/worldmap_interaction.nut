@@ -74,6 +74,7 @@
 				if (entity.is_contract())
 				{
 					::logInfo("Contract triggered");
+					entity.trigger_contract();
 					break
 				}
 				// if (entity.getID() == this.m.Player.getID()) continue;

@@ -1,10 +1,10 @@
 ::B.Templates.Human <- {
-	Hitpoints = 50,			// HEA
+	Hitpoints = 80,			// HEA
 	Bravery = 50,			// MET
-	Stamina = 50, 			// END
-	Initiative = 50,		// AGI
+	Stamina = 80, 			// END
+	Initiative = 80,		// AGI
 
-	MeleeSkill = 40, 		// ATK 50% miss, 20% graze, 30% hit
+	MeleeSkill = 30, 		// ATK 50% miss, 20% graze, 30% hit
 	MeleeDefense = 0, 		// DEF
 	RangedSkill = 0, 		// X
 	RangedDefense = 0, 		// X

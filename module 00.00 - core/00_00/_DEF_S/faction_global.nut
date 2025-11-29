@@ -45,38 +45,23 @@
     local tries = 0;
     local myTile = location.getTile();
 
-    if (contract.m.X == null)
+    while (tries++ < 1000)
     {
-        while (tries++ < 1000)
-        {
-            local x = ::Math.rand(myTile.SquareCoords.X - 2 - _additionalDistance, myTile.SquareCoords.X + 2 + _additionalDistance);
-            local y = ::Math.rand(myTile.SquareCoords.Y - 2 - _additionalDistance, myTile.SquareCoords.Y + 2 + _additionalDistance);
+        local x = ::Math.rand(myTile.SquareCoords.X - 2 - _additionalDistance, myTile.SquareCoords.X + 2 + _additionalDistance);
+        local y = ::Math.rand(myTile.SquareCoords.Y - 2 - _additionalDistance, myTile.SquareCoords.Y + 2 + _additionalDistance);
 
-            if (!::World.isValidTileSquare(x, y)) continue;
-            
-            local tile = ::World.getTileSquare(x, y);
-            if (tile.IsOccupied) continue;
-            
-            if (tile.getDistanceTo(myTile) == 1 && _additionalDistance >= 0 || tile.getDistanceTo(myTile) < _additionalDistance) continue;
+        if (!::World.isValidTileSquare(x, y)) continue;
+        
+        local tile = ::World.getTileSquare(x, y);
+        if (tile.IsOccupied) continue;
+        
+        if (tile.getDistanceTo(myTile) == 1 && _additionalDistance >= 0 || tile.getDistanceTo(myTile) < _additionalDistance) continue;
 
-            // contract entity setup
-            local contract_entity = ::World.spawnLocation("scripts/entity/world/locations/legendary/contract_entity", tile.Coords);
-            // contract_entity.set_settlement(location);
-            contract_entity.set_details(contract.get_details());
-            // contract.set_coordinates(x, y);
-            // contract.set_entity(contract_entity);
-
-        //    ::World.spawnLocation("scripts/entity/world/locations/legendary/ancient_statue_location", tile.Coords);
-            break;
-        }
-    }
-    else
-    {
-        local tile = ::World.getTileSquare(contract.m.X, contract.m.Y);
+        // contract entity setup
         local contract_entity = ::World.spawnLocation("scripts/entity/world/locations/legendary/contract_entity", tile.Coords);
-        // contract_entity.set_settlement(location);
         contract_entity.set_details(contract.get_details());
-        contract.set_entity(contract_entity);
+        contract.set_coordinates(x, y);
+        break;
     }
 
     

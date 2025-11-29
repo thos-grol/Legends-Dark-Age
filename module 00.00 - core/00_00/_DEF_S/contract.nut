@@ -9,6 +9,9 @@
 ::Z.T.Contract.Victory <- null;
 ::Z.T.Contract.Defeat <- null;
 
+// we hook the loading screen, so when it's hidden we can resume the contract ui
+// and use the outcome strings to determine flow
+// refer to ::Z.T.Contract.build_stack_combat and ::Z.S.show_contract_screen_post_combat
 ::Z.T.Contract.set_outcomes_combat <- function (_success, _failure) 
 {
 	::Z.T.Contract.Victory <- _success;

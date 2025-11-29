@@ -2,6 +2,10 @@ Short term
 
 Finish contract system
     TODO: serialize/deserialize, point link map objects to contracts
+        TODO: write get contract_entity.get_contract()
+        TODO: write get contract.get_contract_entity()
+
+        TODO: write serialization logic
     
     TODO: click map object -> squad selection screen with contract details
     TODO: figure out how to pass data to ui, probably check settlement.nut for contract passing

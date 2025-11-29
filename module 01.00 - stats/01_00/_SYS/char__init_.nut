@@ -1,5 +1,15 @@
 ::mods_hookExactClass("entity/tactical/player", function (o){
 
+	local onInit = o.onInit;
+	o.onInit = function ()
+	{
+		onInit();
+		local c = this.getSkills();
+
+		local skill = c.getSkillByID("special.character_system");
+		if (skill == null) c.add(this.new("scripts/skills/special/character_system"));
+	}
+
 	// sets up character's stats, traits, and perks
 	o.setStartValuesEx <- function ( _backgrounds, _addTraits = true, _gender = -1, _addEquipment = true )
 	{

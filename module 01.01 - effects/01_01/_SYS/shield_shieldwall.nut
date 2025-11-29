@@ -32,6 +32,10 @@
         _properties.Armor[::Const.BodyPart.Head] += bonus;
         _properties.ArmorMax[::Const.BodyPart.Body] += bonus;
         _properties.ArmorMax[::Const.BodyPart.Head] += bonus;
+
+		// TODO: prob be best handled as extra armor added by skill,
+		// then in damage calc subtract this first?
+		// 		"calc item armor dmg" section subtract outgoing damage from there from skill armor
 	}
 
     o.onTurnStart <- function()

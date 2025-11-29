@@ -7,7 +7,8 @@ function create()
 	this.contract.create();
 	this.m.Type = "contract.return_item";
 	this.m.Name = "Return Item";
-	this.m.TimeOut = this.Time.getVirtualTimeF() + ::World.getTime().SecondsPerDay * 7.0;	
+	this.m.Description = "Brigands have stolen a local artifact and the city is in an outrage. Follow their tracks, leave no survivors, and return the city\'s relic.";
+	this.m.TimeOut = 1;
 }
 
 function start()

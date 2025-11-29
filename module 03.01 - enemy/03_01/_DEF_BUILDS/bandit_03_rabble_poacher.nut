@@ -3,7 +3,7 @@
     Level = 1,
     Pattern = [
         ["T", 1],
-        ["D", 2],
+        // ["D", 2],
     ],
 	LevelUps = [
 		["Health", 2, 0, 1],
