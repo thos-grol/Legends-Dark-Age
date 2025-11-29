@@ -247,7 +247,8 @@ o.attackEntity = function( _user, _targetEntity, _allowDiversion = true )
 			User = _user,
 			TargetEntity = _targetEntity,
 			Properties = properties,
-			DistanceToTarget = distanceToTarget
+			DistanceToTarget = distanceToTarget,
+			HitResult = hit_result
 		};
 
 		// hk end
