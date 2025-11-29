@@ -1,0 +1,50 @@
+# Do Update
+#     If Cycle != 0:
+#         resolve all resource points on map
+
+#         resolve all contracts on map
+#               roll outcomes, then remove map contract, then remove contract
+#               unlock all squads
+#         pass
+#     Update Shops
+
+
+#     Update Plans for Capitals
+
+#     Update Plans for Resource points
+
+#     Update Plans for Villages
+#           # Village rolls contracts -> contract success will give faction benefits/debuff enemies
+#               ie. bandits will gain strength if contract succeeds
+#               contract failure by player will for success with disadvantage (they hired more mercs)
+#           - Dungeon Investigate Fringes - explore and guard researchers 
+#                   - faction gets converted crystals and research score boost
+#           - Dungeon Investigate Middle - explore and guard researchers 
+#                   - faction gets converted crystals and research score boost
+#           - Caravan : Civilians send caravan to trade/destroying caravan will decrease faction strength
+#                       Successful caravan will increase faction strength/improve marketplace selection
+#           - Clear enemy gang
+#               - bandits
+#                   - enemy gang can be in the middle of rendevous, has a special item
+#                   - small chance of retaliation from faction benefitting from rendevous
+#               - barbarians
+#               - cultists
+#               - nomads
+#           - Bandit Camp (after 3 gang contracts or caravan has been raided)
+#           - Hero/General (after bandit camp raided/does not expire)
+#           - Warlord/Core (after all generals eliminated)
+
+#           - Orc ambushes
+#           - Goblin ambushes
+#           - Clear graveyard
+#           - Monsters
+#           - Witches
+
+#     Update Plans for Enemies
+#     Update Plans for Camps
+#     Create Contracts on Map
+
+#     Click contracts -> squad screen -> embark -> start contract (lock squad, queue contract & save) -> finish contract
+#           contract q means that on load finished, the contract stage will trigger
+#           after contract complete, roll retaliation chance
+#           after contract finished, squad remains locked and can't move in out/interact items, can't embark on mission

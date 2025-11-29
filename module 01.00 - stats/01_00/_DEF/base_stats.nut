@@ -8,6 +8,6 @@
     RangedSkill =       0,         	// Strength
     RangedDefense =     0,         	// Instinct
 	
-    MeleeSkill =        40,         // Attack // ATK 60% miss, 20% graze, 20% hit
+    MeleeSkill =        30,         // Attack // ATK 60% miss, 20% graze, 20% hit
     MeleeDefense =      0,         	// Defense
 };

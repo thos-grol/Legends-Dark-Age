@@ -1,4 +1,4 @@
-::DEF.C.Factions <- {}
+
 
 
 // TODO: preset factions

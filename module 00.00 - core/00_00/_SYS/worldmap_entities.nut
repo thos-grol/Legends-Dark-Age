@@ -1,6 +1,3 @@
-
-
-
 ::m.rawHook("scripts/entity/world/world_entity", function(p) {
     p.m.Capital <- false;
     p.m.Enterable <- false;

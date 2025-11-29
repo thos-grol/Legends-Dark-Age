@@ -4,6 +4,8 @@
 ::Z.T <- {}; // T for temp
 
 ::DEF.C <- {}
+::DEF.C.Factions <- {}
+::DEF.C.Factions.Decks <- {};
 
 ::Z.Log <- {};
 ::Z.Lib <- {};
