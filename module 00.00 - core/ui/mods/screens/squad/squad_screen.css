@@ -18,6 +18,10 @@
 	position: absolute;
 	
 	overflow: hidden;
+
+	background-image: url("coui://gfx/ui/skin/ui_character_new.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
 }
 
 .squad-screen > img
@@ -28,7 +32,7 @@
 
 .squad-screen .squad-screen-statuetes
 {
-    width: 142.1rem;
+    width: 100%;
 	height: 90.6rem;
 
 	/*left: -22.0rem;
@@ -36,18 +40,14 @@
 	top: -11.9rem;
 	bottom: -0.5rem;*/
 
-	left: 0;
+	/* left: 0; */
 	right: 0;
 	top: 0;
 	bottom: 0;
 
 	position: absolute;
     z-index: 2;
-	margin: auto;
-
-    background-image: url("coui://gfx/ui/skin/background_inventory.png");
-    background-size: 142.1rem 90.6rem;
-    background-repeat: no-repeat;
+	margin: 0;
 }
 
 
@@ -58,11 +58,13 @@
 	top: 0;
 	bottom: -0.5rem;*/
 
-	left: 20.9rem;
+	/* left: 20.9rem;
 	top: 12.5rem;
-	right: 17.6rem;
+	right: 17.6rem; */
 
-	width: 103.9rem;
+	right: 0rem;
+
+	width: 100%;
 	height: 78.2rem;
 
 	position: absolute;
@@ -89,7 +91,7 @@
 	/*background-color: #ABC;*/
 	
 	top: 0;
-	left: 0;
+	right: 0;
 	bottom: 0;
 	width: 34.0rem;
 	position: absolute;
@@ -100,8 +102,8 @@
 	/*background-color: #CBA;*/
 
 	top: 0;
-	left: 34.0rem;
-	right: 0;
+	right: 34.0rem;
+	width: 69.9rem;
 	bottom: 0;
 	position: absolute;
 }

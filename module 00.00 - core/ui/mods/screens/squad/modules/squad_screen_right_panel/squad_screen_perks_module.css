@@ -93,8 +93,8 @@
     left: 0;
     right: 0;
     bottom: 0;
-    width: 4.7rem;
-    height: 4.7rem;
+    width: 4.95rem;
+    height: 4.95rem;
     position: absolute;
     margin: auto;
     padding-bottom: 0.1rem;
@@ -107,13 +107,12 @@
     left: 0;
     right: 0;
     bottom: 0;
-    width: 4.5rem;
-    height: 4.5rem;
+    width: 4.95rem;
+    height: 4.95rem;
     position: absolute;
     margin: auto;
     z-index: 2;
 }
-
 
 /* Unlock Popup Dialog */
 .squad-screen .ui-control.popup-dialog.unlock-perk-popup
@@ -184,3 +183,4 @@
     position: relative;
     float: left;
 }
+

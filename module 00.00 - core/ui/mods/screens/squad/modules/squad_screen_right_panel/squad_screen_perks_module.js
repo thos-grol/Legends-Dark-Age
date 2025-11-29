@@ -228,6 +228,7 @@ SquadScreenPerksModule.prototype.setupPerkTreeTooltips = function(_perkTree, _br
 		{
 			var perk = _perkTree[row][i];
 			perk.Image.unbindTooltip();
+			if (perk.ID.indexOf("EMPTY") !== -1) continue;
 			perk.Image.bindTooltip({ contentType: 'ui-perk', entityId: _brotherId, perkId: perk.ID });
 		}
 	}
@@ -272,9 +273,8 @@ SquadScreenPerksModule.prototype.isPerkUnlockable = function (_perk)
 	var perkPoints = this.mDataSource.getBrotherPerkPoints(_brother);
 	var perkPointsSpent = this.mDataSource.getBrotherPerkPointsSpent(_brother);
 	
-	if(level >= 13 && _perk.ID === 'perk.student') {
-		return false;
-	}
+	if( _perk.ID.indexOf("EMPTY") !== -1) return false;
+	if(level >= 13 && _perk.ID === 'perk.student') return false;
 	return perkPoints > 0 && perkPointsSpent >= _perk.Unlocks;
 };
 

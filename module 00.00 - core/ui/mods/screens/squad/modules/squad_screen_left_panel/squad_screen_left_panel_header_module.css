@@ -73,14 +73,14 @@
 .squad-screen-container .left-panel-header-module .portrait-container .l-button.is-dismiss
 {
 	left: 1.0rem;
-	top: 8.3rem;
+	top: 32rem;
 	z-index: 3;
 }
 
 .squad-screen-container .left-panel-header-module .portrait-container .l-button.is-reserve
 {
-	left: 5.6rem;
-	top: 8.3rem;
+	left: 5.0rem;
+	top: 32rem;
 	z-index: 3;
 }
 
@@ -89,7 +89,7 @@
 	top: 0;
 	left: 9.0rem;
 	right: 0;
-	height: 6.0rem;
+	height: 7.0rem;
 	position: absolute;
 
 	overflow: hidden;
@@ -107,7 +107,7 @@
 .squad-screen-container .left-panel-header-module .name-container .label
 {
 	/* vertical center */
-	top: 50%;
+    top: 70%;
 	width: 100%;
 	position: relative;
 
@@ -134,7 +134,7 @@
 
 .squad-screen-container .left-panel-header-module .level-container
 {
-	top: 6.0rem;
+	top: 7.1rem;
 	left: 9.0rem;
 	width: 5.0rem;
 	height: 3.0rem;
@@ -176,7 +176,7 @@
 
 .squad-screen-container .left-panel-header-module .xp-container
 {
-	top: 6.0rem;
+	top: 7.1rem;
 	left: 13.7rem;
 	right: 0;
 	height: 3.0rem;

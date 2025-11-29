@@ -10,7 +10,7 @@
 		this.m.SquadScreen = ::Z.squad_screen;
 		this.m.SquadScreen.setOnCloseButtonClickedListener(this.character_screen_onClosePressed.bindenv(this));
 		this.m.SquadScreen.setStashMode();
-		::MSU.Mod.Keybinds.addSQKeybind("open_squad_screen", "k", ::MSU.Key.State.World, this.showCharacterScreen);
+		// ::MSU.Mod.Keybinds.addSQKeybind("open_squad_screen", "k", ::MSU.Key.State.World, this.showCharacterScreen);
 	}
 
 	local onDestroyUI = o.onDestroyUI;

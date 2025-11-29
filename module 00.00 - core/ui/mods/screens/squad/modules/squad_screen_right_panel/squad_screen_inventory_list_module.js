@@ -10,9 +10,6 @@
  */
 "use strict";
 
-/* TODO
- + Items Swappen / Draggen / Droppen an Datasource anbinden
- */
 
 var SquadScreenInventoryListModule = function(_parent, _dataSource)
 {
@@ -43,6 +40,13 @@ var SquadScreenInventoryListModule = function(_parent, _dataSource)
 	this.mFilterUsableButton = null;
 
 	this.mCurrentPopupDialog = null;
+
+	this.mFilter = 0;
+	// 0 - No Filter
+	// 1 - Filter Weapons
+	// 2 - Filter Armor
+	// 3 - Filter Misc
+	// 4 - Filter Usable
 
 	this.registerDatasourceListener();
 };
@@ -98,20 +102,39 @@ SquadScreenInventoryListModule.prototype.createDIV = function (_parentDiv)
 
 	var layout = $('<div class="l-button is-all-filter"/>');
 	this.mFilterPanel.append(layout);
+	
+	// this.mFilter = 0;
+	// 0 - No Filter
+	// 1 - Filter Weapons
+	// 2 - Filter Armor
+	// 3 - Filter Misc
+	// 4 - Filter Usable
 	this.mFilterAllButton = layout.createImageButton(Path.GFX + Asset.BUTTON_ALL_FILTER, function ()
 	{
-		self.mFilterAllButton.addClass('is-active');
+		// self.mFilterAllButton.addClass('is-active');
+		// self.mFilterWeaponsButton.removeClass('is-active');
+		// self.mFilterArmorButton.removeClass('is-active');
+		// self.mFilterMiscButton.removeClass('is-active');
+		// self.mFilterUsableButton.removeClass('is-active');
+		// self.mDataSource.notifyBackendFilterAllButtonClicked();
+	}, '', 3);
+	this.mFilterAllButton.addClass('is-active');
+
+	var layout = $('<div class="l-button is-weapons-filter"/>');
+	self.mFilterPanel.append(layout);
+	self.mFilterWeaponsButton = layout.createImageButton(Path.GFX + Asset.BUTTON_WEAPONS_FILTER, function ()
+	{
+		if (self.mFilter === 1)
+		{
+			self.mFilterAllButton.removeClass('is-active');
 		self.mFilterWeaponsButton.removeClass('is-active');
 		self.mFilterArmorButton.removeClass('is-active');
 		self.mFilterMiscButton.removeClass('is-active');
 		self.mFilterUsableButton.removeClass('is-active');
 		self.mDataSource.notifyBackendFilterAllButtonClicked();
-	}, '', 3);
-	this.mFilterAllButton.addClass('is-active');
-
-	var layout = $('<div class="l-button is-weapons-filter"/>');
-	this.mFilterPanel.append(layout);
-	this.mFilterWeaponsButton = layout.createImageButton(Path.GFX + Asset.BUTTON_WEAPONS_FILTER, function ()
+			self.mFilter = 0;
+		}
+		else
 	{
 		self.mFilterAllButton.removeClass('is-active');
 		self.mFilterWeaponsButton.addClass('is-active');
@@ -119,11 +142,25 @@ SquadScreenInventoryListModule.prototype.createDIV = function (_parentDiv)
 		self.mFilterMiscButton.removeClass('is-active');
 		self.mFilterUsableButton.removeClass('is-active');
 		self.mDataSource.notifyBackendFilterWeaponsButtonClicked();
+			self.mFilter = 1;
+		}
 	}, '', 3);
 
 	var layout = $('<div class="l-button is-armor-filter"/>');
 	this.mFilterPanel.append(layout);
 	this.mFilterArmorButton = layout.createImageButton(Path.GFX + Asset.BUTTON_ARMOR_FILTER, function ()
+	{
+		if (self.mFilter === 2)
+		{
+			self.mFilterAllButton.removeClass('is-active');
+			self.mFilterWeaponsButton.removeClass('is-active');
+			self.mFilterArmorButton.removeClass('is-active');
+			self.mFilterMiscButton.removeClass('is-active');
+			self.mFilterUsableButton.removeClass('is-active');
+			self.mDataSource.notifyBackendFilterAllButtonClicked();
+			self.mFilter = 0;
+		}
+		else
 	{
 		self.mFilterAllButton.removeClass('is-active');
 		self.mFilterWeaponsButton.removeClass('is-active');
@@ -131,11 +168,25 @@ SquadScreenInventoryListModule.prototype.createDIV = function (_parentDiv)
 		self.mFilterMiscButton.removeClass('is-active');
 		self.mFilterUsableButton.removeClass('is-active');
 		self.mDataSource.notifyBackendFilterArmorButtonClicked();
+			self.mFilter = 2;
+		}
 	}, '', 3);
 
 	var layout = $('<div class="l-button is-misc-filter"/>');
 	this.mFilterPanel.append(layout);
 	this.mFilterMiscButton = layout.createImageButton(Path.GFX + Asset.BUTTON_MISC_FILTER, function ()
+	{
+		if (self.mFilter === 3)
+		{
+			self.mFilterAllButton.removeClass('is-active');
+			self.mFilterWeaponsButton.removeClass('is-active');
+			self.mFilterArmorButton.removeClass('is-active');
+			self.mFilterMiscButton.removeClass('is-active');
+			self.mFilterUsableButton.removeClass('is-active');
+			self.mDataSource.notifyBackendFilterAllButtonClicked();
+			self.mFilter = 0;
+		}
+		else
 	{
 		self.mFilterAllButton.removeClass('is-active');
 		self.mFilterWeaponsButton.removeClass('is-active');
@@ -143,11 +194,25 @@ SquadScreenInventoryListModule.prototype.createDIV = function (_parentDiv)
 		self.mFilterMiscButton.addClass('is-active');
 		self.mFilterUsableButton.removeClass('is-active');
 		self.mDataSource.notifyBackendFilterMiscButtonClicked();
+			self.mFilter = 3;
+		}
 	}, '', 3);
 
 	var layout = $('<div class="l-button is-usable-filter"/>');
 	this.mFilterPanel.append(layout);
 	this.mFilterUsableButton = layout.createImageButton(Path.GFX + Asset.BUTTON_USABLE_FILTER, function ()
+	{
+		if (self.mFilter === 4)
+		{
+			self.mFilterAllButton.removeClass('is-active');
+			self.mFilterWeaponsButton.removeClass('is-active');
+			self.mFilterArmorButton.removeClass('is-active');
+			self.mFilterMiscButton.removeClass('is-active');
+			self.mFilterUsableButton.removeClass('is-active');
+			self.mDataSource.notifyBackendFilterAllButtonClicked();
+			self.mFilter = 0;
+		}
+		else
 	{
 		self.mFilterAllButton.removeClass('is-active');
 		self.mFilterWeaponsButton.removeClass('is-active');
@@ -155,6 +220,8 @@ SquadScreenInventoryListModule.prototype.createDIV = function (_parentDiv)
 		self.mFilterMiscButton.removeClass('is-active');
 		self.mFilterUsableButton.addClass('is-active');
 		self.mDataSource.notifyBackendFilterUsableButtonClicked();
+			self.mFilter = 4;
+		}
 	}, '', 3);
 
 };
@@ -215,7 +282,9 @@ SquadScreenInventoryListModule.prototype.createItemSlot = function (_owner, _ind
 			return false;
 		}
 
-		if (_dd.offsetY > self.mSlotCountPanel.offset().top - 25)
+		// self.mSlotCountPanel.offset().top = -7, so -32
+		// _dd.offsetY = 34
+		if (_dd.offsetY < -32) 
 			return false;
 
 		//var sourceData = _source.data('item');

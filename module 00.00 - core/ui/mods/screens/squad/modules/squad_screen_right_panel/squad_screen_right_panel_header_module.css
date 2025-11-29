@@ -37,9 +37,11 @@
 
 .squad-screen-container .right-panel-header-module .buttons-container.is-middle
 {
-	left: 16.0rem;
+	/* left: 16.0rem;
 	right: 0;
-	width: 200.0rem;
+	width: 200.0rem; */
+	left: 1.0rem;
+	width: 0.0rem;
 }
 
 .squad-screen-container .right-panel-header-module .buttons-container.is-right
@@ -85,17 +87,18 @@
 
 .squad-screen-container .right-panel-header-module .buttons-container .l-button.is-inventory
 {
-    left: 0;
+    left: 17.0rem;
 }
 
 .squad-screen-container .right-panel-header-module .buttons-container .l-button.is-perks
 {
-    left: 17.0rem;
+    left: 0;
 }
 
 .squad-screen-container .right-panel-header-module .buttons-container .l-button.is-close
 {
-    right: 0;
+	position: relative;
+	right: -33.5rem;
     top: 0.2rem;
     width: 4.5rem;
 	height: 4.1rem;

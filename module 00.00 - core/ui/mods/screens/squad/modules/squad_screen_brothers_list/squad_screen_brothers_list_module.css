@@ -27,8 +27,25 @@
 	bottom: 0;
 	position: absolute;
 }
+.squad-screen-container .brothers-list-module .l-list-container2
+{
+	position: relative;
+	top: 25.5rem;
+	width: 190rem;
+	left: -86rem;
+
+	height: 30rem;
+	overflow: auto; 
+}
+
+
 
 .squad-screen-container .brothers-list-module .l-list-container .scroll-container
+{
+	margin-bottom: 0.4rem;
+}
+
+.squad-screen-container .brothers-list-module .l-list-container2 .l-list-container2-scroll
 {
 	margin-bottom: 0.4rem;
 }
@@ -115,4 +132,76 @@
 	height: 4.3rem;
 	position: absolute;
 	line-height: 3.0rem;
+}
+
+
+
+
+
+
+
+
+.squad-screen-container .brothers-list-module .filter-panel
+{
+    position: absolute;
+    left: 2.0rem;
+    top: 0.8rem;
+    z-index: 10;
+}
+
+.squad-screen-container .brothers-list-module .filter-panel .l-button
+{
+	width: 5.2rem;
+	height: 4.1rem;
+	position: absolute;
+
+    line-height: 2.6rem;
+}
+
+.squad-screen-container .brothers-list-module .squad-panel
+{
+	top: -4.0rem;
+	left: 0rem;
+	bottom: 0;
+	height: 2.4rem;
+	position: absolute;
+	z-index: 10;
+	display: flex;
+}
+
+
+
+.squad-screen-container .brothers-list-module .squad-panel .x-button
+{
+	width: 4.6rem;
+	height: 3.3rem;
+}
+
+.squad-screen-container .brothers-list-module .squad-panel .x-button .label
+{
+	top: 0.5rem;
+}
+
+
+.squad-screen-container .brothers-list-module .squad-panel .l-button
+{
+	width: 4.6rem;
+	height: 3.3rem;
+}
+
+.squad-screen-container .brothers-list-module .squad-panel .l-button .label
+{
+	top: 0.5rem;
+}
+
+.squad-screen-container .brothers-list-module .squad-panel .l-button .is-not-occupied
+{
+    color: #a7a7a7;
+}
+
+.squad-screen-container .brothers-list-module .squad-panel .l-button .is-locked
+{
+    color: #a70355 !important;
+	background-image: url("coui://gfx/ui/skin/button_03_inactive.png");
+    background-size: 5.2rem 4.1rem;
 }
