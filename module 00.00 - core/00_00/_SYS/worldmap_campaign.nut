@@ -28,13 +28,9 @@
 
 		if (this.m.CampaignSettings != null)
 		{
-			::logInfo("1");
 			this.m.Assets.setCampaignSettings(this.m.CampaignSettings);
-			::logInfo("2");
 			this.m.CampaignSettings.StartingScenario.onSpawnPlayer();
-			::logInfo("3");
 			this.m.CampaignSettings.StartingScenario.onInit();
-			::logInfo("4");
 			// ::World.uncoverFogOfWar(this.getPlayer().getTile().Pos, 900.0);
 			// ::logInfo("5");
 		}

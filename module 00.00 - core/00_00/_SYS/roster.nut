@@ -35,6 +35,15 @@
     // this function here determines the count for in combat, and also changes roster positions
     // shouldn't be necessary if we validate input in squad ui
     o.updateFormation <- function( considerMaxBros = false ) { }
+
+	o.calculateStartingStashSize <- function( _settings )
+	{
+		local size = 50;
+		this.getStash().setResizable(false); // turn off the infinite stash size
+		this.getStash().sort();
+		this.getStash().resize(size);
+		::Legends.Stash.setStartingSize(size);
+	}
 });
 
 // extend the roster size from u8 to u16

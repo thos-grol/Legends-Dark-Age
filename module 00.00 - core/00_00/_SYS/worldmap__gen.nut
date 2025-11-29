@@ -72,7 +72,6 @@
 		local settlementTiles = [];
 
 		//TODO: when rolling factions, assign correct citadels to factions
-
 		// then close to a faction's village, place 3 bandit warlord camps for each faction
 
 		// TODO: let's design organic factions and force level system

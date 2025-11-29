@@ -10,17 +10,19 @@ Its time to port over squad screen before continuing
         (Done): port over our changes
 
 Finish contract system
-    TODO: fix stash starting out with only 10 slots
-    TODO: fix fighters in the fighting line
+    (Done): fix stash starting out with only 10 slots
     TODO: handle contract completion
         contract -> kill contract entity -> contract completes
 
     TODO: click map object -> squad selection screen with contract details
-    TODO: figure out how to pass data to ui, probably check settlement.nut for contract passing
+        TODO: figure out how to pass data to ui, probably check settlement.nut for contract passing
     TODO: create squad screen contract ui display
         TODO: state: null
         TODO: state: free
         TODO: state: locked
+            TODO: fix fighters in the fighting line #
+                TODO: contract sets max fighters
+            TODO: fix and check fighters in company line #
 
         TODO: serialize squad states (do we serialize inside roster?)
 
