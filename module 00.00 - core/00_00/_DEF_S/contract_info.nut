@@ -10,8 +10,7 @@
     ID = 0,
     Name = null,
     Description = null,
-    Pay_Advance = 0,
-    Pay_Complete = 0,
+    Pay = 0,
     Bro_Limit = 0,
 };
 
@@ -21,8 +20,7 @@
     ::Z.T.CONTRACT_INFO_BUFFER.ID = 0;
     ::Z.T.CONTRACT_INFO_BUFFER.Name = null;
     ::Z.T.CONTRACT_INFO_BUFFER.Description = null;
-    ::Z.T.CONTRACT_INFO_BUFFER.Pay_Advance = 0;
-    ::Z.T.CONTRACT_INFO_BUFFER.Pay_Complete = 0;
+    ::Z.T.CONTRACT_INFO_BUFFER.Pay = 0;
     ::Z.T.CONTRACT_INFO_BUFFER.Bro_Limit = 0;
 }
 
@@ -41,8 +39,7 @@
     ::Z.T.CONTRACT_INFO_BUFFER.ID = contract.m.ID;
     ::Z.T.CONTRACT_INFO_BUFFER.Name = contract.m.Name;
     ::Z.T.CONTRACT_INFO_BUFFER.Description = contract.m.Description;
-    ::Z.T.CONTRACT_INFO_BUFFER.Pay_Advance = contract.m.Payment.Advance;
-    ::Z.T.CONTRACT_INFO_BUFFER.Pay_Complete = contract.m.Payment.Completion;
+    ::Z.T.CONTRACT_INFO_BUFFER.Pay = contract.m.Payment.Pool;
     ::Z.T.CONTRACT_INFO_BUFFER.Bro_Limit = contract.m.Bro_Limit;
 }
 
@@ -56,8 +53,7 @@
         ::Z.T.CONTRACT_INFO_BUFFER.ID,
         ::Z.T.CONTRACT_INFO_BUFFER.Name,
         ::Z.T.CONTRACT_INFO_BUFFER.Description,
-        ::Z.T.CONTRACT_INFO_BUFFER.Pay_Advance,
-        ::Z.T.CONTRACT_INFO_BUFFER.Pay_Complete,
+        ::Z.T.CONTRACT_INFO_BUFFER.Pay,
         ::Z.T.CONTRACT_INFO_BUFFER.Bro_Limit,
     ]
 }

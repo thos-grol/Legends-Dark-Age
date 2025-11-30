@@ -63,6 +63,7 @@ this.squad_screen <- ::inherit("scripts/mods/msu/ui_screen", {
 
 	function connect()
 	{
+		if (this.m.JSHandle != null) return;
 		this.m.JSHandle = this.UI.connect(this.m.ID, this);
 		this.m.JSDataSourceHandle = this.m.JSHandle.connectToModule("DataSource", this);
 	}
@@ -70,8 +71,8 @@ this.squad_screen <- ::inherit("scripts/mods/msu/ui_screen", {
 	function destroy()
 	{
 		this.clearEventListener();
-		this.m.JSDataSourceHandle = this.UI.disconnect(this.m.JSDataSourceHandle);
-		this.m.JSHandle = this.UI.disconnect(this.m.JSHandle);
+		// this.m.JSDataSourceHandle = this.UI.disconnect(this.m.JSDataSourceHandle);
+		// this.m.JSHandle = this.UI.disconnect(this.m.JSHandle);
 	}
 
 	function show()
@@ -453,16 +454,16 @@ this.squad_screen <- ::inherit("scripts/mods/msu/ui_screen", {
 
 	function embark( _data )
 	{
-		// CharacterScreenDatasource.prototype.notifyBackendQueryPerkInformation = function (_perkId, _callback)
-		// {
-		// 	SQ.call(this.mSQHandle, 'onQueryPerkInformation', [_perkId], _callback);
-		// };
-
-		// showCharacterScreen -> squadscreen.show()
-		// entity.trigger_contract();
+		// SQ.call(self.mSQHandle, 'embark', [ self.contract_id, "squad_index" ]);
+		local id = _data[0];
+		local squad_index = _data[1];
 
 		// lock squad
-		// set contract data and stuff from ui?
+		::World.State.set_squad_state(squad_index, SQUAD_STATE.LOCKED);
+		
+		local contract = ::World.Contracts.get_contract_by_id(id);
+		::World.State.m.MenuStack.pop();
+		::World.Contracts.showContract(contract);
 	}
 
 	function on_update_squad_info( _data )
@@ -487,6 +488,7 @@ this.squad_screen <- ::inherit("scripts/mods/msu/ui_screen", {
 			if (::Z.S.CONTRACT_INFO_BUFFER_isactive())
 			{
 				result.contract_info <- ::Z.S.CONTRACT_INFO_BUFFER_push();
+				::Z.S.CONTRACT_INFO_BUFFER_flush();
 			}
 		}
 

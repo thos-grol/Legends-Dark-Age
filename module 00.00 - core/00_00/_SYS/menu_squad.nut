@@ -61,7 +61,6 @@
 	o.onDestroyUI = function()
 	{
 		onDestroyUI();
-		this.m.SquadScreen.destroy();
 		this.m.SquadScreen = null;
 	}
 

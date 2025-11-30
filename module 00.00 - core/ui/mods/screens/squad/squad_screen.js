@@ -32,6 +32,17 @@ var SquadScreen = function(_isTacticalMode)
 
 	this.mPopupDialog = null;
 
+
+	// contract info display
+	this.contract_id = 0;
+	this.max_squad_size = 6;
+	this.mContractInfoContainer = null;
+	this.mInfo_Title = null;
+	this.mInfo_Content = null;
+	this.mInfo_max_size = null;
+	this.mInfo_pay = null;
+	this.mInfo_Embark_Button = null;
+
 	this.createModules();
 	this.registerDatasourceListener();
 };
@@ -92,6 +103,7 @@ SquadScreen.prototype.onModuleOnDisconnectionCalled = function (_module)
 
 SquadScreen.prototype.createDIV = function (_parentDiv)
 {
+	var self = this;
 	// create: containers (init hidden!)
 	this.mContainer = $('<div class="squad-screen ui-control dialog-modal-background display-none opacity-none"/>');
 	_parentDiv.append(this.mContainer);
@@ -136,6 +148,34 @@ SquadScreen.prototype.createDIV = function (_parentDiv)
 	this.mCharacterScreen.append(this.mLeftContentContainer);
 	this.mRightContentContainer = $('<div class="l-right-content-container"/>');
 	this.mCharacterScreen.append(this.mRightContentContainer);
+
+	this.mContractInfoContainer = $('<div class="contract-info-container"/>');
+	this.mCharacterScreen.append(this.mContractInfoContainer);
+
+	this.mInfo_Title = $('<div class="label title-font-big font-bold font-color-brother-name"/>')
+		.text('Title');
+	this.mContractInfoContainer.append(this.mInfo_Title);
+
+	this.mInfo_Content = $('<div class="content label text-font-normal font-color-white" style=" max-width: 70rem;"/>')
+		.text('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin at pharetra diam. Aenean at leo est. Donec accumsan posuere consequat. Cras dapibus nunc eu tincidunt commodo. Suspendisse eu eros vulputate, euismod dui id, tempus nibh. Pellentesque elementum ultricies mi at elementum. Cras ut nibh quis erat dapibus dapibus id varius arcu. Donec ac elit in lorem eleifend pellentesque a sed tellus. Nulla facilisi. Ut dapibus dolor nec neque pulvinar rutrum. Nullam vitae nisl lorem. Fusce eget volutpat tortor. Suspendisse arcu ligula, sollicitudin at cursus eget, viverra et ante. Mauris feugiat massa nibh, tempus semper nisi mollis eu.')
+    this.mContractInfoContainer.append(this.mInfo_Content);
+
+	this.mInfo_max_size = $('<div class="content label text-font-normal font-color-brother-name" style=" max-width: 70rem;"/>')
+		.text('Max Size: 6')
+    this.mContractInfoContainer.append(this.mInfo_max_size);
+
+	this.mInfo_pay = $('<div class="content label text-font-normal font-color-brother-name" style=" max-width: 70rem;"/>')
+		.text('Pay: 600')
+    this.mContractInfoContainer.append(this.mInfo_pay);
+
+	this.mInfo_Embark_Button = this.mContractInfoContainer.createTextButton("Embark", function()
+	{
+		if (self.mSQHandle !== null)
+		{
+			SQ.call(self.mSQHandle, 'embark', [ self.contract_id, self.mBrothersModule.CHUNK_INDEX ]);
+		}
+	}, "embark-button", 1);
+	this.mContractInfoContainer.hide();
 };
 
 SquadScreen.prototype.destroyDIV = function ()
@@ -144,6 +184,25 @@ SquadScreen.prototype.destroyDIV = function ()
 	this.mRightContentContainer = null;
 	this.mLeftContentContainer.empty();
 	this.mLeftContentContainer = null;
+
+	this.contract_id = 0;
+	this.max_squad_size = 6;
+	this.mContractInfoContainer.empty();
+	this.mContractInfoContainer = null;
+	this.mInfo_Title.empty();
+	this.mInfo_Title = null;
+	this.mInfo_Content.empty();
+	this.mInfo_Content = null;
+	this.mInfo_max_size.empty();
+	this.mInfo_max_size = null;
+	this.mInfo_pay.empty();
+	this.mInfo_pay = null;
+	this.mInfo_Embark_Button.empty();
+	this.mInfo_Embark_Button = null;
+	
+	this.mContractInfoContainer.empty();
+	this.mContractInfoContainer = null;
+
 
 	this.mCharacterScreen.empty();
 	this.mCharacterScreen = null;
@@ -279,16 +338,37 @@ SquadScreen.prototype.show = function (_data)
 		this.mDataSource.loadStashList();
 	}
 
+	this.contract_id = 0;
+	this.max_squad_size = 6;
+	this.mContractInfoContainer.hide();
+
 	if ('squad_state' in _data)
 	{
 		this.data_squad_state = _data.squad_state;
 		console.log(this.data_squad_state);
+		//TODO: set squad states
 	}
 
     if ('contract_info' in _data)
 	{
-		this.data_contract_info = _data.contract_info;
-		console.log(this.data_contract_info);
+		console.log(_data.contract_info);
+
+		// return [
+		// 	::Z.T.CONTRACT_INFO_BUFFER.ID, 0
+		// 	::Z.T.CONTRACT_INFO_BUFFER.Name, 1
+		// 	::Z.T.CONTRACT_INFO_BUFFER.Description, 2
+		// 	::Z.T.CONTRACT_INFO_BUFFER.Pay, 3
+		// 	::Z.T.CONTRACT_INFO_BUFFER.Bro_Limit, 4
+		// ]
+
+		this.contract_id = _data.contract_info[0];
+		this.mInfo_Title.text(_data.contract_info[1]);
+		this.mInfo_Content.text(_data.contract_info[2]);
+		this.mInfo_pay.text("Pay: " + _data.contract_info[3]);
+		this.max_squad_size = _data.contract_info[4];
+		this.mInfo_max_size.text("Max Party Size: " + _data.contract_info[4]);
+		// this.mInfo_Embark_Button = null;
+		this.mContractInfoContainer.show();
 	}
 
 	var parentWidth = this.mContainer.width();

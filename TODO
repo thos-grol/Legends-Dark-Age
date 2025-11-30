@@ -14,17 +14,17 @@ Finish contract system
     (Done): handle contract completion
         contract -> kill contract entity -> contract completes
 
-    TODO: click map object -> squad selection screen with contract details
-        TODO: figure out how to pass data to ui, probably check settlement.nut for contract passing
-    TODO: create squad screen contract ui display
-        TODO: state: null
+    (Done): click map object -> squad selection screen with contract details
+        (Done): figure out how to pass data to ui, probably check settlement.nut for contract passing
+    (Done): create squad screen contract ui display
+        (Done): state: null
         TODO: state: free
         TODO: state: locked
-            TODO: fix fighters in the fighting line #
-                TODO: contract sets max fighters
-            TODO: fix and check fighters in company line #
+            (Done): fix fighters in the fighting line #
+                (Done): contract sets max fighters
+            (Done): fix and check fighters in company line #
 
-        TODO: serialize squad states (do we serialize inside roster?)
+        (Done): serialize squad states (do we serialize inside roster?)
 
         squad has serialized data -> mission buffer
             mission buffer cleared week end

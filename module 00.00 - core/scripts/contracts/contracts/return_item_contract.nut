@@ -12,6 +12,8 @@ function create()
 
 	//payment
 	this.m.Payment.Pool = 400 * this.getPaymentMult() * ::Math.pow(this.getDifficultyMult(), ::Const.World.Assets.ContractRewardPOW) * this.getReputationToPaymentMult();
+	this.m.Payment.Pool = ::Math.round(this.m.Payment.Pool);
+	
 	if (::Math.rand(1, 100) <= 33)
 	{
 		this.m.Payment.Completion = 0.75;

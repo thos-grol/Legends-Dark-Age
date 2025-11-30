@@ -107,3 +107,19 @@
 	bottom: 0;
 	position: absolute;
 }
+
+.squad-screen .squad-screen-container .contract-info-container
+{
+	display: flex;
+	flex-direction: column;
+	padding: 4.5rem;
+	max-width: 87rem;
+}
+
+.squad-screen .squad-screen-container .embark-button
+{
+	left: calc(50% - 17.5rem / 2);
+	height: 4.3rem;
+	width: 17.5rem;
+	position: relative;
+}
