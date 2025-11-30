@@ -11,7 +11,7 @@ Its time to port over squad screen before continuing
 
 Finish contract system
     (Done): fix stash starting out with only 10 slots
-    TODO: handle contract completion
+    (Done): handle contract completion
         contract -> kill contract entity -> contract completes
 
     TODO: click map object -> squad selection screen with contract details

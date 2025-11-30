@@ -6,7 +6,7 @@ this.squad_screen <- ::inherit("scripts/mods/msu/ui_screen", {
 		InventoryMode = null,
 		Visible = null,
 		PopupDialogVisible = null,
-		Animating = null,
+	Animating = null,
 		PerkTreesLoaded = null,
 		InventoryFilter = this.Const.Items.ItemFilter.All,
 		OnCloseButtonClickedListener = null,
@@ -76,14 +76,45 @@ this.squad_screen <- ::inherit("scripts/mods/msu/ui_screen", {
 
 	function show()
 	{
-		this.setRosterLimit(("State" in this.World) && this.World.State != null ? this.World.Assets.getBrothersMaxInCombat() : 12);
-
+		//TODO: iron this out roster limit
+		// this.setRosterLimit(("State" in this.World) && this.World.State != null ? this.World.Assets.getBrothersMaxInCombat() : 12);
+		this.setRosterLimit(120);
+		// this.setRosterLimit();
 		if (this.m.JSHandle != null)
 		{
 			this.Tooltip.hide();
 			this.m.JSHandle.asyncCall("show", this.queryData());
 		}
 	}
+
+		function setRosterLimit( _limit )
+		{
+			if (this.m.JSDataSourceHandle != null)
+			{
+				// this.m.JSDataSourceHandle.asyncCall("setRosterLimit", _limit);
+				this.m.JSDataSourceHandle.asyncCall("setRosterLimit", this.queryRosterSizeData(false));
+			}
+		}
+
+		function queryRosterSizeData (_shake = false)
+		{
+			local brosInCombat = "State" in ::World ? ::World.State.getBrothersInFrontline() : 18;
+			local result = {
+				brothersInCombat = brosInCombat,
+				brothersMaxInCombat = 27,
+				brothers = this.World.getPlayerRoster().getSize(),
+				brothersMax = 27,
+				shake = _shake,
+			};
+
+			if (("Assets" in this.World) && this.World.Assets != null)
+			{
+				result.brothersMaxInCombat = this.World.Assets.getBrothersMaxInCombat();
+				result.brothersMax = this.World.Assets.getBrothersMax();
+			}
+
+			return result;
+		}
 
 	function hide()
 	{
@@ -420,6 +451,25 @@ this.squad_screen <- ::inherit("scripts/mods/msu/ui_screen", {
 		this.Sound.play(this.Const.Sound.DiceThrow[this.Math.rand(0, this.Const.Sound.DiceThrow.len() - 1)], this.Const.Sound.Volume.Inventory);
 	}
 
+	function embark( _data )
+	{
+		// CharacterScreenDatasource.prototype.notifyBackendQueryPerkInformation = function (_perkId, _callback)
+		// {
+		// 	SQ.call(this.mSQHandle, 'onQueryPerkInformation', [_perkId], _callback);
+		// };
+
+		// showCharacterScreen -> squadscreen.show()
+		// entity.trigger_contract();
+
+		// lock squad
+		// set contract data and stuff from ui?
+	}
+
+	function on_update_squad_info( _data )
+	{
+		// this.Tactical.getEntityByID(_data[0]).setPlaceInFormation(_data[1]);
+	}
+
 	function queryData()
 	{
 		local result = {
@@ -431,6 +481,13 @@ this.squad_screen <- ::inherit("scripts/mods/msu/ui_screen", {
 			result.stash <- this.onQueryStashList();
 			result.stashSpaceUsed <- this.Stash.getNumberOfFilledSlots();
 			result.stashSpaceMax <- this.Stash.getCapacity();
+
+			// push squad states and contract info if existing
+			result.squad_state <- ::World.State.get_squad_states();
+			if (::Z.S.CONTRACT_INFO_BUFFER_isactive())
+			{
+				result.contract_info <- ::Z.S.CONTRACT_INFO_BUFFER_push();
+			}
 		}
 
 		if (this.m.PerkTreesLoaded == false)
@@ -439,6 +496,7 @@ this.squad_screen <- ::inherit("scripts/mods/msu/ui_screen", {
 			result.perkTrees <- this.onQueryPerkTrees();
 		}
 
+		
 		return result;
 	}
 

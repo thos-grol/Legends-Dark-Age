@@ -797,21 +797,22 @@ SquadScreenBrothersListModule.prototype.toggleMoodVisibility = function ()
 
 SquadScreenBrothersListModule.prototype.updateRosterLabel = function (_data)
 {
-	if (_data === undefined)
-	{
-		this.mRosterCountLabel.html('' + this.mNumActive + '/' + this.mDataSource.getMaxBrothers());
-		this.mFrontlineCountLabel.html('' + this.mDataSource.getFrontlineData()[0] + '/' + this.mDataSource.getFrontlineData()[1])
-	}
-	else
-	{
-		this.mRosterCountLabel.html('' + _data.brothers + '/' + _data.brothersMax);
-		this.mFrontlineCountLabel.html('' + _data.brothersInCombat + '/' + _data.brothersMaxInCombat);
-		if (_data.shake)
-		{
-			this.mFrontlineCountLabel.shakeLeftRight();
-		}
-	}
+	this.mRosterCountLabel.html('' + this.get_brother_count() + '/' + 120);
+	this.mFrontlineCountLabel.html('' + this.mNumActive + '/' + 27);
 };
+
+	SquadScreenBrothersListModule.prototype.get_brother_count = function ()
+	{
+		if (this.BROTHERS_TEMP === null) return 0;
+
+		var count = 0;
+		for(var i=0; i < this.BROTHERS_TEMP.length; i++)
+		{
+			var brother = this.BROTHERS_TEMP[i];
+			if (brother !== null) count++;
+		}
+		return count;
+	}
 
 // =================================================================================================
 // Boilerplate

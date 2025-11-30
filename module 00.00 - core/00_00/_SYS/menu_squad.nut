@@ -1,7 +1,51 @@
 ::mods_hookExactClass("states/world_state", function(o)
 {
-	o.m.SquadScreen <- null;
+	// squad logic
+	o.m.squad_state <- [ // 
+		SQUAD_STATE.FREE, // 1
+		SQUAD_STATE.FREE, // 2
+		SQUAD_STATE.FREE, // 3
+		SQUAD_STATE.FREE, // 4
+		SQUAD_STATE.FREE, // 5
+		SQUAD_STATE.FREE, // 6
+		SQUAD_STATE.FREE, // 7
+		SQUAD_STATE.FREE, // 8
+		SQUAD_STATE.FREE, // 9
+		SQUAD_STATE.FREE, // 10
+	];
 
+	o.get_squad_states <- function() 
+	{ 
+		return this.m.squad_state; 
+	}
+	o.set_squad_state <- function( squad_index, state ) 
+	{ 
+		this.m.squad_state[squad_index] = state; 
+	}
+
+	local onSerialize = o.onSerialize;
+	o.onSerialize = function ( _out )
+	{
+		onSerialize(_out);
+		for(local i = 0; i < this.m.squad_state.len(); i++ )
+		{
+			_out.writeU8(this.m.squad_state[i]);
+		}
+	}
+
+	local onDeserialize = o.onDeserialize;
+	o.onDeserialize = function ( _in )
+	{
+		onDeserialize(_in);
+		for(local i = 0; i < this.m.squad_state.len(); i++ )
+		{
+			this.m.squad_state[i] = _in.readU8();
+		}
+	}
+	
+	// setup logic
+
+	o.m.SquadScreen <- null;
 	local onInitUI = o.onInitUI;
 	o.onInitUI = function()
 	{

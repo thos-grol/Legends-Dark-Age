@@ -10,6 +10,7 @@
 			// faction has enemies stored as details?
 			//	enemies simulated faction can conflict with faction
 
+	p.m.Bro_Limit <- 6;
 	p.m.IsStory <- false;
 	p.m.Difficulty <- 0; // 0-3
 	p.get_details <- function()

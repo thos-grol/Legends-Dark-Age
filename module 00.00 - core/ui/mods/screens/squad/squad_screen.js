@@ -279,6 +279,18 @@ SquadScreen.prototype.show = function (_data)
 		this.mDataSource.loadStashList();
 	}
 
+	if ('squad_state' in _data)
+	{
+		this.data_squad_state = _data.squad_state;
+		console.log(this.data_squad_state);
+	}
+
+    if ('contract_info' in _data)
+	{
+		this.data_contract_info = _data.contract_info;
+		console.log(this.data_contract_info);
+	}
+
 	var parentWidth = this.mContainer.width();
 	var parentHeight = this.mContainer.height();
 	var width = this.mCharacterScreenStatuetes.width();
@@ -439,5 +451,7 @@ SquadScreen.prototype.openPopupDialog = function(_text)
 
 	this.mPopupDialog.addPopupDialogContent(result);
 };
+
+
 
 registerScreen("SquadScreen", new SquadScreen());

@@ -9,10 +9,7 @@ function create()
 	this.m.Name = "Return Item";
 	this.m.Description = "Brigands have stolen a local artifact and the city is in an outrage. Follow their tracks, leave no survivors, and return the city\'s relic.";
 	this.m.TimeOut = 1;
-}
 
-function start()
-{
 	//payment
 	this.m.Payment.Pool = 400 * this.getPaymentMult() * ::Math.pow(this.getDifficultyMult(), ::Const.World.Assets.ContractRewardPOW) * this.getReputationToPaymentMult();
 	if (::Math.rand(1, 100) <= 33)
@@ -24,7 +21,10 @@ function start()
 	{
 		this.m.Payment.Completion = 1.0;
 	}
+}
 
+function start()
+{
 	//roll loot
 	local items = [
 		"Rare Coin Collection",

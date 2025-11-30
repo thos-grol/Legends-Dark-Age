@@ -1,3 +1,8 @@
+enum SQUAD_STATE {
+    FREE,
+    LOCKED,
+};
+
 enum HIT_RESULT {
     MISS,
     GRAZE,
@@ -15,3 +20,4 @@ enum SKILL_TYPE {
     FIRE,
     ICE,
 };
+

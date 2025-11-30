@@ -7,10 +7,10 @@
         return this.m.Enterable;
     }
 
-    p.m.Is_Contract <- false;
-    p.is_contract <- function()
+    p.m.Is_Contract_Entity <- false;
+    p.is_contract_entity <- function()
     {
-        return this.m.Is_Contract;
+        return this.m.Is_Contract_Entity;
     }
 
     p.is_capital <- function()

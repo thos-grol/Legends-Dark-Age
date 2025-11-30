@@ -34,7 +34,7 @@ this.contract_entity <- this.inherit("scripts/entity/world/location", {
 
 		this.m.IsShowingName = true;
 		this.m.IsShowingLabel = true;
-        this.m.Is_Contract = true;
+        this.m.Is_Contract_Entity = true;
 	}
 
 	function set_details(tag)

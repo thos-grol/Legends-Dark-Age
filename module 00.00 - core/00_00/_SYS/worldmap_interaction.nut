@@ -69,10 +69,11 @@
 					break
 				}
 
-				if (entity.is_contract())
+				if (entity.is_contract_entity())
 				{
-					::logInfo("Contract triggered");
-					entity.trigger_contract();
+					// contract is clicked so we want to open up the squad screen with data
+					::Z.S.store_contract_info(entity.get_contract());
+					::World.State.showCharacterScreen();
 					break
 				}
 				// if (entity.getID() == this.m.Player.getID()) continue;
