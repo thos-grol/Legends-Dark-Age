@@ -48,7 +48,6 @@
 		{
 			local dest = ::World.getCamera().screenToWorld(_mouse.getX(), _mouse.getY());
 			local entities = ::World.getAllEntitiesAndOneLocationAtPos(dest, 1.0);
-			::logInfo("num entities = " + entities.len());
 			if (entities.len() <= 0) return false;
 			
 			local destTile = ::World.worldToTile(dest);
@@ -56,7 +55,6 @@
 			this.m.AutoEnterLocation = null;
 			this.m.AutoAttack = null;
 			this.m.LastAutoAttackPath = 0.0;
-
 
 			// local closest_settlement = ::Z.S.get_settlement_closest();
 			foreach( entity in entities )

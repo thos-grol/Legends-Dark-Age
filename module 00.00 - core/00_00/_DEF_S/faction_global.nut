@@ -57,10 +57,12 @@
         
         if (tile.getDistanceTo(myTile) == 1 && _additionalDistance >= 0 || tile.getDistanceTo(myTile) < _additionalDistance) continue;
 
+
+        ::logInfo("Spawning contract at " + x + ", " + y);
         // contract entity setup
         local contract_entity = ::World.spawnLocation("scripts/entity/world/locations/legendary/contract_entity", tile.Coords);
         contract_entity.set_details(contract.get_details());
-        contract.set_coordinates(x, y);
+        contract.bind_entity(contract_entity);
         break;
     }
 

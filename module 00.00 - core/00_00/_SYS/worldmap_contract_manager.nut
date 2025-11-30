@@ -83,6 +83,14 @@
 			this.updateAchievement("BrokenPromises", 1, 1);
 		}
 
+		local contract_entity = this.m.Active.get_contract_entity();
+		if (contract_entity != null)
+		{
+			contract_entity.fadeOutAndDie();
+			contract_entity = null;
+		}
+		
+
 		this.World.FactionManager.getFaction(this.m.Active.getFaction()).removeContract(this.m.Active);
 		this.World.Assets.getOrigin().onContractFinished(this.m.Active.getType(), _isCancelled);
 		this.m.Active.clear();

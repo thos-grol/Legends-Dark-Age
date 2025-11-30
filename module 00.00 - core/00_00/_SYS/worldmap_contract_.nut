@@ -23,25 +23,15 @@
 		};
 	}
 
-	p.m.X <- null;
-	p.m.Y <- null;
-	p.set_coordinates <- function(x, y)
+	p.m.contract_entity <- null;
+	p.bind_entity <- function(e)
 	{
-		this.m.X = x;
-		this.m.Y = y;
+		this.m.contract_entity = e;
 	}
 
 	p.get_contract_entity <- function()
 	{
-		if (this.m.X == null) return null;
-
-		local dest = ::World.getCamera().screenToWorld(this.m.X, this.m.Y);
-		local entities = ::World.getAllEntitiesAndOneLocationAtPos(dest, 1.0);
-		foreach( e in entities )
-		{
-			if (e.is_contract()) return e;
-		}
-		return null;
+		return this.m.contract_entity;
 	}
 });
 
