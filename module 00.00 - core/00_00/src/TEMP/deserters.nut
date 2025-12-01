@@ -52,11 +52,11 @@
 		local roster = ::World.getPlayerRoster();
 		local bro;
 		local items;
-		local loc = 0;
+		local loc = ::Z.S.Formation.get_logical_storage_bounds()[0];
 
 		bro = roster.create("scripts/entity/tactical/player");
 		bro.setName("Retired Soldier");
-		bro.setPlaceInFormation(3 + loc++);
+		bro.setPlaceInFormation(loc++);
 		// bro.setStartValuesEx(["retired_soldier_background"]);
 		bro.setStartValuesEx(["deserter_background"]);
 		bro.m.HireTime = this.Time.getVirtualTimeF();
@@ -78,85 +78,121 @@
 		// =========================================================================================
 		// B - Lumberjack
 		// =========================================================================================
-	// 	bro = roster.create("scripts/entity/tactical/player");
-	// 	bro.setName("Lumberjack");
-	// 	bro.setPlaceInFormation(3 + loc++);
-	// 	bro.setStartValuesEx(["lumberjack_background"]);
-	// 	bro.m.HireTime = this.Time.getVirtualTimeF();
+		bro = roster.create("scripts/entity/tactical/player");
+		bro.setName("Lumberjack");
+		bro.setPlaceInFormation(loc++);
+		bro.setStartValuesEx(["lumberjack_background"]);
+		bro.m.HireTime = this.Time.getVirtualTimeF();
 
-	// 	bro.getBackground().m.RawDescription = "{A lumberjack, %fullname% was always was a quiet man that prefered the serenity of the woods to the company of people. Yet over the years, it dawned on him that he wanted to see more from the world than the same woods every day. After thinking long and hard, he made up his mind to become a mercenary.}";
-	// 	bro.getBackground().buildDescription(true);
+		bro.getBackground().m.RawDescription = "{A lumberjack, %fullname% was always was a quiet man that prefered the serenity of the woods to the company of people. Yet over the years, it dawned on him that he wanted to see more from the world than the same woods every day. After thinking long and hard, he made up his mind to become a mercenary.}";
+		bro.getBackground().buildDescription(true);
 
-	// 	bro.m.Level = 5;
-	// 	bro.m.PerkPoints = bro.m.Level - 1;
-	// 	bro.m.LevelUps = bro.m.Level - 1;
-	// 	bro.m.XP = ::Const.LevelXP[bro.m.Level - 1];
-	// 	// bro.fillAttributeLevelUpValues(::Const.XP.MaxLevelWithPerkpoints - 1);
+		bro.m.Level = 5;
+		bro.m.PerkPoints = bro.m.Level - 1;
+		bro.m.LevelUps = bro.m.Level - 1;
+		bro.m.XP = ::Const.LevelXP[bro.m.Level - 1];
+		// bro.fillAttributeLevelUpValues(::Const.XP.MaxLevelWithPerkpoints - 1);
 
-	// 	items = bro.getItems();
-	// 	items.unequip(items.getItemAtSlot(::Const.ItemSlot.Mainhand));
-	// 	items.unequip(items.getItemAtSlot(::Const.ItemSlot.Ammo));
-	// 	items.equip(this.new("scripts/items/weapons/woodcutters_axe"));
+		items = bro.getItems();
+		items.unequip(items.getItemAtSlot(::Const.ItemSlot.Mainhand));
+		items.unequip(items.getItemAtSlot(::Const.ItemSlot.Ammo));
+		items.equip(this.new("scripts/items/weapons/woodcutters_axe"));
 
-	// 	// =========================================================================================
-	// 	// C - Brawler
-	// 	// =========================================================================================
-	// 	bro = roster.create("scripts/entity/tactical/player");
-	// 	bro.setName("Brawler");
-	// 	bro.setPlaceInFormation(3 + loc++);
-	// 	bro.setStartValuesEx(["brawler_background"]);
-	// 	bro.m.HireTime = this.Time.getVirtualTimeF();
+		// =========================================================================================
+		// C - Brawler
+		// =========================================================================================
+		bro = roster.create("scripts/entity/tactical/player");
+		bro.setName("Brawler");
+		bro.setPlaceInFormation(loc++);
+		bro.setStartValuesEx(["brawler_background"]);
+		bro.m.HireTime = this.Time.getVirtualTimeF();
 
-	// 	bro.getBackground().m.RawDescription = "{%name% only ever had one real talent: using his fists to bloody the noses of other men and not going down no matter what. Although he became an undefeated prizefighter, he was hardly earning enough to get by. This is when he decided to take up mercenary work.}";
-	// 	bro.getBackground().buildDescription(true);
+		bro.getBackground().m.RawDescription = "{%name% only ever had one real talent: using his fists to bloody the noses of other men and not going down no matter what. Although he became an undefeated prizefighter, he was hardly earning enough to get by. This is when he decided to take up mercenary work.}";
+		bro.getBackground().buildDescription(true);
 
-	// 	bro.m.Level = 5;
-	// 	bro.m.PerkPoints = bro.m.Level - 1;
-	// 	bro.m.LevelUps = bro.m.Level - 1;
-	// 	bro.m.XP = ::Const.LevelXP[bro.m.Level - 1];
-	// 	// bro.fillAttributeLevelUpValues(::Const.XP.MaxLevelWithPerkpoints - 1);
+		bro.m.Level = 5;
+		bro.m.PerkPoints = bro.m.Level - 1;
+		bro.m.LevelUps = bro.m.Level - 1;
+		bro.m.XP = ::Const.LevelXP[bro.m.Level - 1];
+		// bro.fillAttributeLevelUpValues(::Const.XP.MaxLevelWithPerkpoints - 1);
 
-	// 	// =========================================================================================
-	// 	// D - Hunter
-	// 	// =========================================================================================
-	// 	bro = roster.create("scripts/entity/tactical/player");
-	// 	bro.setName("Hunter");
-	// 	bro.setPlaceInFormation(3 + loc++);
-	// 	bro.setStartValuesEx(["hunter_background"]);
-	// 	bro.m.HireTime = this.Time.getVirtualTimeF();
+		// =========================================================================================
+		// D - Hunter
+		// =========================================================================================
+		bro = roster.create("scripts/entity/tactical/player");
+		bro.setName("Hunter");
+		bro.setPlaceInFormation(loc++);
+		bro.setStartValuesEx(["hunter_background"]);
+		bro.m.HireTime = this.Time.getVirtualTimeF();
 
-	// 	bro.getBackground().m.RawDescription = "{%name% hid the thought well, but for the longest time he wondered what it would be like to hunt the ultimate game: man. That is what lead him to become a mercenary.\n\nDespite his flaws, %name% is a valuable companion.}";
-	// 	bro.getBackground().buildDescription(true);
+		bro.getBackground().m.RawDescription = "{%name% hid the thought well, but for the longest time he wondered what it would be like to hunt the ultimate game: man. That is what lead him to become a mercenary.\n\nDespite his flaws, %name% is a valuable companion.}";
+		bro.getBackground().buildDescription(true);
 
-	// 	bro.m.Level = 5;
-	// 	bro.m.PerkPoints = bro.m.Level - 1;
-	// 	bro.m.LevelUps = bro.m.Level - 1;
-	// 	bro.m.XP = ::Const.LevelXP[bro.m.Level - 1];
-	// 	// bro.fillAttributeLevelUpValues(::Const.XP.MaxLevelWithPerkpoints - 1);
+		bro.m.Level = 5;
+		bro.m.PerkPoints = bro.m.Level - 1;
+		bro.m.LevelUps = bro.m.Level - 1;
+		bro.m.XP = ::Const.LevelXP[bro.m.Level - 1];
+		// bro.fillAttributeLevelUpValues(::Const.XP.MaxLevelWithPerkpoints - 1);
 
-	// 	// =========================================================================================
-	// 	// E - You
-	// 	// =========================================================================================
-	// 	bro = roster.create("scripts/entity/tactical/player");
-	// 	bro.setName("You");
-	// 	bro.setPlaceInFormation(3 + loc++);
-	// 	bro.setStartValuesEx(["apprentice_background"]);
-	// 	bro.m.HireTime = this.Time.getVirtualTimeF();
-	// 	::Legends.Traits.grant(bro, ::Legends.Trait.Player);
+		// =========================================================================================
+		// E - You
+		// =========================================================================================
+		bro = roster.create("scripts/entity/tactical/player");
+		bro.setName("You");
+		bro.setPlaceInFormation(loc++);
+		bro.setStartValuesEx(["apprentice_background"]);
+		bro.m.HireTime = this.Time.getVirtualTimeF();
+		::Legends.Traits.grant(bro, ::Legends.Trait.Player);
 
-	// 	bro.getBackground().m.RawDescription = "{%name% were rescued by this mercenary party. And to pay this debt of life and to hope for a better future, you joined them, trading service for training.}";
-	// 	bro.getBackground().buildDescription(true);
+		bro.getBackground().m.RawDescription = "{%name% were rescued by this mercenary party. And to pay this debt of life and to hope for a better future, you joined them, trading service for training.}";
+		bro.getBackground().buildDescription(true);
 
-	// 	bro.m.Level = 2;
-	// 	bro.m.PerkPoints = bro.m.Level - 1;
-	// 	bro.m.LevelUps = bro.m.Level - 1;
-	// 	bro.m.XP = ::Const.LevelXP[bro.m.Level - 1];
-	// 	// bro.fillAttributeLevelUpValues(::Const.XP.MaxLevelWithPerkpoints - 1);
+		bro.m.Level = 2;
+		bro.m.PerkPoints = bro.m.Level - 1;
+		bro.m.LevelUps = bro.m.Level - 1;
+		bro.m.XP = ::Const.LevelXP[bro.m.Level - 1];
+		// bro.fillAttributeLevelUpValues(::Const.XP.MaxLevelWithPerkpoints - 1);
 
-	// 	items = bro.getItems();
-	// 	items.unequip(items.getItemAtSlot(::Const.ItemSlot.Mainhand));
-	// 	items.unequip(items.getItemAtSlot(::Const.ItemSlot.Ammo));
-	// 	items.equip(this.new("scripts/items/weapons/militia_spear"));
+		items = bro.getItems();
+		items.unequip(items.getItemAtSlot(::Const.ItemSlot.Mainhand));
+		items.unequip(items.getItemAtSlot(::Const.ItemSlot.Ammo));
+		items.equip(this.new("scripts/items/weapons/militia_spear"));
+
+		// =========================================================================================
+		// D - Hunter
+		// =========================================================================================
+		bro = roster.create("scripts/entity/tactical/player");
+		bro.setName("Hunter");
+		bro.setPlaceInFormation(loc++);
+		bro.setStartValuesEx(["hunter_background"]);
+		bro.m.HireTime = this.Time.getVirtualTimeF();
+
+		bro.getBackground().m.RawDescription = "{%name% hid the thought well, but for the longest time he wondered what it would be like to hunt the ultimate game: man. That is what lead him to become a mercenary.\n\nDespite his flaws, %name% is a valuable companion.}";
+		bro.getBackground().buildDescription(true);
+
+		bro.m.Level = 5;
+		bro.m.PerkPoints = bro.m.Level - 1;
+		bro.m.LevelUps = bro.m.Level - 1;
+		bro.m.XP = ::Const.LevelXP[bro.m.Level - 1];
+		// bro.fillAttributeLevelUpValues(::Const.XP.MaxLevelWithPerkpoints - 1);
+
+		// =========================================================================================
+		// D - Hunter
+		// =========================================================================================
+		bro = roster.create("scripts/entity/tactical/player");
+		bro.setName("Hunter");
+		bro.setPlaceInFormation(loc++);
+		bro.setStartValuesEx(["hunter_background"]);
+		bro.m.HireTime = this.Time.getVirtualTimeF();
+
+		bro.getBackground().m.RawDescription = "{%name% hid the thought well, but for the longest time he wondered what it would be like to hunt the ultimate game: man. That is what lead him to become a mercenary.\n\nDespite his flaws, %name% is a valuable companion.}";
+		bro.getBackground().buildDescription(true);
+
+		bro.m.Level = 5;
+		bro.m.PerkPoints = bro.m.Level - 1;
+		bro.m.LevelUps = bro.m.Level - 1;
+		bro.m.XP = ::Const.LevelXP[bro.m.Level - 1];
+		// bro.fillAttributeLevelUpValues(::Const.XP.MaxLevelWithPerkpoints - 1);
 		
 		
 	// 	// =========================================================================================

@@ -34,6 +34,7 @@ var SquadScreen = function(_isTacticalMode)
 
 
 	// contract info display
+	this.data_squad_state = null;
 	this.contract_id = 0;
 	this.max_squad_size = 6;
 	this.mContractInfoContainer = null;
@@ -175,8 +176,19 @@ SquadScreen.prototype.createDIV = function (_parentDiv)
 			SQ.call(self.mSQHandle, 'embark', [ self.contract_id, self.mBrothersModule.CHUNK_INDEX ]);
 		}
 	}, "embark-button", 1);
+	this.mInfo_Embark_Button.enableButton(false);
 	this.mContractInfoContainer.hide();
 };
+
+SquadScreen.prototype.update_embark_button_state = function ()
+{
+	var num_bros = this.mBrothersModule.mNumActive;
+	var enabled = num_bros <= this.max_squad_size 
+		&& num_bros > 0
+		&& this.data_squad_state[this.mBrothersModule.CHUNK_INDEX] !== 1;
+	
+	this.mInfo_Embark_Button.enableButton(enabled);
+}
 
 SquadScreen.prototype.destroyDIV = function ()
 {
@@ -346,7 +358,9 @@ SquadScreen.prototype.show = function (_data)
 	{
 		this.data_squad_state = _data.squad_state;
 		console.log(this.data_squad_state);
-		//TODO: set squad states
+
+		//jquery set squad state
+		this.mBrothersModule.update_squads(this.data_squad_state);
 	}
 
     if ('contract_info' in _data)
@@ -368,6 +382,8 @@ SquadScreen.prototype.show = function (_data)
 		this.max_squad_size = _data.contract_info[4];
 		this.mInfo_max_size.text("Max Party Size: " + _data.contract_info[4]);
 		// this.mInfo_Embark_Button = null;
+
+		this.update_embark_button_state();
 		this.mContractInfoContainer.show();
 	}
 

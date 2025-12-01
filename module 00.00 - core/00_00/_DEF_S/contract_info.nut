@@ -41,6 +41,7 @@
     ::Z.T.CONTRACT_INFO_BUFFER.Description = contract.m.Description;
     ::Z.T.CONTRACT_INFO_BUFFER.Pay = contract.m.Payment.Pool;
     ::Z.T.CONTRACT_INFO_BUFFER.Bro_Limit = contract.m.Bro_Limit;
+    return true;
 }
 
 // =========================================================================================

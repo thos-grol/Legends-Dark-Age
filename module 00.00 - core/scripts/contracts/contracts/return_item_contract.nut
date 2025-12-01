@@ -150,6 +150,9 @@ function createScreens()
 				Text = "{This doesn\'t sound like our kind of work. | I don\'t think so.}",
 				function getResult()
 				{
+					local contract_entity = this.get_contract_entity();
+					if (contract_entity != null) contract_entity.fadeOutAndDie();
+
 					::World.Contracts.removeContract(this.Contract);
 					return 0;
 				}

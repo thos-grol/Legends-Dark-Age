@@ -458,7 +458,10 @@ this.squad_screen <- ::inherit("scripts/mods/msu/ui_screen", {
 		local id = _data[0];
 		local squad_index = _data[1];
 
+		
 		// lock squad
+		::logInfo("starting battle with squad index: " + squad_index);
+		::Z.S.Formation.Init(squad_index);
 		::World.State.set_squad_state(squad_index, SQUAD_STATE.LOCKED);
 		
 		local contract = ::World.Contracts.get_contract_by_id(id);

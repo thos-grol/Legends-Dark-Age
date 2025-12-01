@@ -49,20 +49,20 @@
         this.m.Flags.set("Seed", this.Time.getRealTime()); 
     }
 
-	local onSerialize = o.onSerialize;
-	o.onSerialize = function (_out) {
-		onSerialize(_out);
-		_out.writeI32(this.m.X);
-		_out.writeI32(this.m.Y);
-	}
+	// local onSerialize = o.onSerialize;
+	// o.onSerialize = function (_out) {
+	// 	onSerialize(_out);
+	// 	_out.writeI32(this.m.X);
+	// 	_out.writeI32(this.m.Y);
+	// }
 
-	local onDeserialize = o.onDeserialize;
-	o.onDeserialize = function(_in)
-	{
-		onDeserialize(_in);
-		this.m.X = _in.readI32();
-		this.m.Y = _in.readI32();
-	}
+	// local onDeserialize = o.onDeserialize;
+	// o.onDeserialize = function(_in)
+	// {
+	// 	onDeserialize(_in);
+	// 	this.m.X = _in.readI32();
+	// 	this.m.Y = _in.readI32();
+	// }
 });
 
 ::mods_hookDescendants("contracts/contract", function (o)

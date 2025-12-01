@@ -72,7 +72,8 @@
 				if (entity.is_contract_entity())
 				{
 					// contract is clicked so we want to open up the squad screen with data
-					::Z.S.store_contract_info(entity.get_contract());
+					local contract = entity.get_contract();
+					::Z.S.store_contract_info(contract);
 					::World.State.showCharacterScreen();
 					break
 				}

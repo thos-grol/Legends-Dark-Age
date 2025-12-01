@@ -47,6 +47,8 @@ var SquadScreenBrothersListModule = function(_parent, _dataSource)
 
 	this.IsMoodVisible					= true;
 
+	// this.EMBARK_BUTTON 					= null;
+
 	this.registerDatasourceListener();
 };
 
@@ -58,6 +60,29 @@ SquadScreenBrothersListModule.prototype.select_squad = function (_index)
 {
 	this.CHUNK_INDEX = _index - 1;
 	this.onBrothersListLoaded(this.mDataSource, this.BROTHERS_TEMP);
+
+	var buttons = $(".squad-panel .l-button .ui-control");
+	buttons.each(function(index, element) {
+		var $e = $(this);
+		$e.removeClass("select");
+		if (index === _index - 1) 
+		{
+			$e.addClass("select");
+		}
+	  });
+}
+
+SquadScreenBrothersListModule.prototype.update_squads = function (squad_state)
+{
+	var buttons = $(".squad-panel .l-button .ui-control");
+	buttons.each(function(index, element) {
+		var $e = $(this);
+		$e.removeClass("is-locked");
+		if (squad_state[index] === 1) 
+		{
+			$e.addClass("is-locked");
+		}
+	  });
 }
 
 SquadScreenBrothersListModule.prototype.onBrothersListLoaded = function (_dataSource, _brothers)
@@ -393,8 +418,10 @@ SquadScreenBrothersListModule.prototype.createBrotherSlots = function (_parentDi
 		drag.removeClass('is-dragged');
 		if (drag.data('idx') == drop.data('idx')) return false;
 
-		// TODO: use mission limits
-		// number in formation is limited
+		
+		if (self.mParent.data_squad_state !== null && self.mParent.data_squad_state[self.CHUNK_INDEX] === 1) return false;
+
+		
 		if (self.mNumActive >= self.mNumActiveMax 
 			&& drag.data('idx') > 27 && drop.data('idx') <= 27 
 			&& self.mSlots[drop.data('idx')].data('child') == null)
@@ -799,6 +826,8 @@ SquadScreenBrothersListModule.prototype.updateRosterLabel = function (_data)
 {
 	this.mRosterCountLabel.html('' + this.get_brother_count() + '/' + 120);
 	this.mFrontlineCountLabel.html('' + this.mNumActive + '/' + 27);
+
+	this.mParent.update_embark_button_state();
 };
 
 	SquadScreenBrothersListModule.prototype.get_brother_count = function ()
@@ -922,12 +951,7 @@ SquadScreenBrothersListModule.prototype.createDIV = function (_parentDiv)
 	this.BUTTON_SQUAD_11 = squad_layout_11.createTextButton("X", function ()
 	{
 		self.clear_squad();
-		//TODO: sort storage by level
-		//TODO: sort storage by weapon
-		//TODO: can't start missions if you don't finish all retaliations first
 	}, '', 3);
-	
-	
 };
 
 SquadScreenBrothersListModule.prototype.destroyDIV = function ()

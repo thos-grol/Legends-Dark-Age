@@ -201,7 +201,12 @@
 
 .squad-screen-container .brothers-list-module .squad-panel .l-button .is-locked
 {
-    color: #a70355 !important;
+    color: #a70355;
 	background-image: url("coui://gfx/ui/skin/button_03_inactive.png");
     background-size: 5.2rem 4.1rem;
+}
+
+.squad-screen-container .brothers-list-module .squad-panel .l-button .select
+{
+    color: #03a763 !important;
 }

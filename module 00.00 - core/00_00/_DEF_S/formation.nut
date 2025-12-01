@@ -2,6 +2,9 @@
 ::Z.S.Formation <- {}
 ::Z.T.Formation <- {};
 
+// TODO: tactical_entity_manager.spawn = function ( _properties )
+// seems to be where we determine what spawns, need to overhaul it to use squad index
+
 // =========================================================================================
 // Associated tmp variables and managers
 // =========================================================================================
@@ -15,11 +18,6 @@
 	::Z.T.Travel.ID <- null;
 	::Z.T.Travel.Days <- 0;
     ::Z.T.Formation.CHUNK_INDEX <- 0;
-}
-
-::Z.T.Formation.Init <- function(_chunk)
-{
-	::Z.T.Formation.CHUNK_INDEX <- _chunk;
 }
 
 // =========================================================================================
@@ -46,9 +44,10 @@
     foreach( b in roster )
     {
         local i = b.getPlaceInFormation();
-        if (i >= bounds[0] || i <= bounds[1])
+        if (i >= bounds[0] && i < bounds[1])
         {
             sub_roster.append(b);
+            ::logInfo("Adding to combat: " + b.getName())
         }
     }
     return sub_roster;
@@ -76,7 +75,15 @@
 ::Z.S.Formation.get_storage_bounds <- function()
 {
     return [
-        ::Z.T.Formation.CHUNK_SIZE, 
-        ::Z.T.Formation.CHUNK_SIZE + ::Z.T.Formation.STORAGE_SIZE - 1
+        ::Z.T.Formation.CHUNK_SIZE * 10, 
+        ::Z.T.Formation.CHUNK_SIZE * 10 + ::Z.T.Formation.STORAGE_SIZE - 1
+    ];
+}
+
+::Z.S.Formation.get_logical_storage_bounds <- function()
+{
+    return [
+        ::Z.T.Formation.CHUNK_SIZE * 10, 
+        ::Z.T.Formation.CHUNK_SIZE * 10 + ::Z.T.Formation.STORAGE_SIZE - 1
     ];
 }
