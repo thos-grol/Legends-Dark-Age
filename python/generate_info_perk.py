@@ -91,9 +91,7 @@ this.perk_{x_id} <- this.inherit("scripts/skills/skill", {{
 
 	function onAnySkillUsed( _skill, _targetEntity, _properties )
 	{{
-		//FEATURE_8: add this.m.IsPhysical = true default to skill class. Then set false for valid
-		// skills
-		// then add check here to disable increase
+		
 		_properties.DamageRegularMin += BUFF;
 		_properties.DamageRegularMax += BUFF;
 	}}
