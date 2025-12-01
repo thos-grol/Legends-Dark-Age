@@ -1,15 +1,4 @@
 ::m.rawHook("scripts/contracts/contract", function(p) {
-	// this.m.Home <- stores the settlement associated with the contract, contract.setHome(_h)
-
-	// TODO: completion, destroy world entity, remove this contract from world manager
-	// add resolution to faction
-
-			// village tooltip: add owner.
-			// contracts spawned if village is above z level use barbarians instead
-
-			// faction has enemies stored as details?
-			//	enemies simulated faction can conflict with faction
-
 	p.m.Bro_Limit <- 6;
 	p.m.IsStory <- false;
 	p.m.Difficulty <- 0; // 0-3

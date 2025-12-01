@@ -2,7 +2,6 @@
 ::m.hookTree("scripts/skills/backgrounds/character_background", function(q) {
     q.onChangeAttributes = @(__original) function() 
     {
-        //TODO: if background is in overrride list, then change stats
         local c = {
 			Hitpoints = [
 				0,

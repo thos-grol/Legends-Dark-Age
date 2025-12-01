@@ -44,7 +44,3 @@
 	}
 
 });
-
-//TODO: added to lowborn backgrounds at 80% chance
-//TODO: anatomist background can cure nightblindness - event
-

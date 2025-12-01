@@ -71,16 +71,10 @@
 		local isLeft = ::Math.rand(0, 1);
 		local settlementTiles = [];
 
-		//TODO: when rolling factions, assign correct citadels to factions
-		// then close to a faction's village, place 3 bandit warlord camps for each faction
-
-		// TODO: let's design organic factions and force level system
-
-		// TODO: place vampire castle
-		// TODO: place shifting woods
-		// TODO: place ghost village 
-
-		//TODO: lower the snow line
+		// FEATURE_4: then close to a faction's village, place 3 bandit warlord camps for each faction
+		// FEATURE_4: place vampire castle
+		// FEATURE_4: place shifting woods
+		// FEATURE_4: place ghost village 
 
 		foreach( list in this.Const.World.Settlements.LegendsWorldMaster )
 		{

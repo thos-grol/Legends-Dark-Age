@@ -77,8 +77,6 @@ this.squad_screen <- ::inherit("scripts/mods/msu/ui_screen", {
 
 	function show()
 	{
-		//TODO: iron this out roster limit
-		// this.setRosterLimit(("State" in this.World) && this.World.State != null ? this.World.Assets.getBrothersMaxInCombat() : 12);
 		this.setRosterLimit(120);
 		// this.setRosterLimit();
 		if (this.m.JSHandle != null)

@@ -93,8 +93,6 @@ SquadScreenBrothersListModule.prototype.onBrothersListLoaded = function (_dataSo
 	if (_brothers === null || !jQuery.isArray(_brothers) || _brothers.length === 0) return;
 	this.BROTHERS_TEMP = _brothers;
 
-	// modify styles of squad buttons to reflect occupancy or squad/mission status
-	// TODO: after mission, squad will be locked, but yellow - meaning non-hostile lock
 	$("div.squad-panel div.ui-control").each(function(index, element) {
 		// 'this' refers to the current DOM element in the loop
 		// 'element' also refers to the current DOM element

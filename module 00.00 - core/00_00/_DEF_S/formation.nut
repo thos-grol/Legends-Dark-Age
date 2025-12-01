@@ -2,9 +2,6 @@
 ::Z.S.Formation <- {}
 ::Z.T.Formation <- {};
 
-// TODO: tactical_entity_manager.spawn = function ( _properties )
-// seems to be where we determine what spawns, need to overhaul it to use squad index
-
 // =========================================================================================
 // Associated tmp variables and managers
 // =========================================================================================
