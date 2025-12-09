@@ -1,11 +1,16 @@
 Short term
 
+// TODO: shield rework, shields are dropped onto the floor if their durability is used up, don't actually break them
+// heal shield to full, make shields unable to be picked up
+
+// How to make shieldwall better? Add some block value that mitigates damage hit duh
+// add shield poise, when hit multiple times, a character becomes unsteady and loses block ability
+// that way people can't turtle behind shields as we remove durability
+
+
 // TODO: village tooltip: add owner, see captial relations banner?
 // contracts spawned if village is above z level use barbarians instead
     
-    
-
-        
 // story missions where the world heads towards a future associated with a certain god ()
 // faction has enemies stored as details?
 // enemies simulated faction can conflict with faction

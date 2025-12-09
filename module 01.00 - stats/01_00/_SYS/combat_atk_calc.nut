@@ -239,7 +239,7 @@ o.attackEntity = function( _user, _targetEntity, _allowDiversion = true )
 	{
 		this.getContainer().setBusy(true);
 
-		if (hit_result == HIT_RESULT.GRAZE) properties.DamageTotalMult *= 0.5;
+		if (hit_result == HIT_RESULT.GRAZE) properties.DamageTotalMult *= 0.33;
 
 		local info = {
 			Skill = this,
