@@ -1,0 +1,1 @@
+::Const.World.Assets.NewCampaignEquipment.clear();

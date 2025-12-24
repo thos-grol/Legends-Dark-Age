@@ -20,11 +20,11 @@ this.perk_brute_strength <- this.inherit("scripts/skills/skill", {
 	{
 		if (this.m.SkillType != SKILL_TYPE.PHYSICAL) return;
 
-		local actor = this.m.Container.getActor();
+		local actor = this.getContainer().getActor();
+		local level = actor.getFlags().getAsInt("Level Updated To");
 		local mult = 1;
-		if (actor.getFlags().has("Level 3")) mult += 1;
-		if (actor.getFlags().has("Level 5")) mult += 1;
-		if (actor.getFlags().has("Level 7")) mult += 1;
+		if (level >= 3) mult++;
+		if (level >= 5) mult += 2;
 
 		_properties.DamageRegularMin += this.m.BUFF * mult;
 		_properties.DamageRegularMax += this.m.BUFF * mult;

@@ -17,9 +17,9 @@
 ::Color.Pink <- "#dfabcd";
 ::Color.BloodRed <- "#900C3F";
 
-::Color.Gray <- "#808080";
+::Color.Gray <- "#5b5b5b";
 
-::Color.SeaGreen <- "#400080";
+::Color.SeaGreen <- "#2e8b57";
 
 ::Color.OneTimeEffect <- "#000ec1";
 ::Color.Status <- "#731f39";
@@ -52,7 +52,7 @@
 ::gray <- function(msg) { return ::color(::Color.Gray, msg); }
 
 ::seagreen <- function(msg) { return ::color(::Color.SeaGreen, msg); }
-::stack <- function(msg) { return ::color(::Color.OneTimeEffect, msg); }
+::stack <- function(msg) { return ::color(::Color.SeaGreen, msg); }
 ::status <- function(msg) { return ::color(::Color.Status, msg); }
 
 ::color_name <- function(msg) { return ::Const.UI.getColorizedEntityName(msg); }

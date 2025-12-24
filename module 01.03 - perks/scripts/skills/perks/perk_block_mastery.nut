@@ -1,4 +1,3 @@
-
 this.perk_block_mastery <- this.inherit("scripts/skills/skill", {
 	m = {},
 	function create()

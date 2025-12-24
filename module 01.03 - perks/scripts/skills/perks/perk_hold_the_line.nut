@@ -1,8 +1,6 @@
 
 this.perk_hold_the_line <- this.inherit("scripts/skills/skill", {
-	m = {
-		BUFF = 1
-	},
+	m = {},
 	function create()
 	{
 		this.m.ID = "perk.hold_the_line";
@@ -16,10 +14,16 @@ this.perk_hold_the_line <- this.inherit("scripts/skills/skill", {
 		this.m.IsHidden = false;
 	}
 
-	function onAnySkillUsed( _skill, _targetEntity, _properties )
+	function onUpdate( _properties )
 	{
-		
-		_properties.DamageRegularMin += BUFF;
-		_properties.DamageRegularMax += BUFF;
+		_properties.IsImmuneToKnockBackAndGrab = true;
+
+		// if it's not this character's turn they get advantage on attacks
+		// good for ripostes and attacks of oppurtunity
+		local actor = this.getContainer().getActor();
+		if (!actor.isPlacedOnMap()) return;
+		if (this.Tactical.TurnSequenceBar.getActiveEntity() == null) return;
+		if (this.Tactical.TurnSequenceBar.getActiveEntity().getID() == actor.getID()) return;
+		_properties.Advantage_Attack = true;
 	}
 });

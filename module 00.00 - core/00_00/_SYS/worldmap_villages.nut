@@ -14,7 +14,7 @@
 
     o.getTooltip <- function()
 	{
-		return [
+		local ret = [
 			{
 				id = 1,
 				type = "title",
@@ -26,5 +26,18 @@
 				text = this.getDescription()
 			}
 		];
+
+		foreach( i in this.m.Factions )
+		{
+			local f = this.World.FactionManager.getFaction(i);
+			ret.push({
+				id = 5,
+				type = "hint",
+				icon = f.getUIBanner(),
+				text = "Relations: " + f.getPlayerRelationAsText()
+			});
+		}
+
+		return ret;
 	}
 });

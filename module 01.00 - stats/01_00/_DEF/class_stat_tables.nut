@@ -5,14 +5,14 @@
 ::DEF.C.Stats.Class.Ranger <- {};
 
 // Vanguards focuses on health and endurance and ignore agility
-//                              Levels     1   2   3   4   5   6   7   8
-::DEF.C.Stats.Class.Vanguard.Hitpoints <- [10, 10, 10, 10, 10, 10, 10, 20];
-::DEF.C.Stats.Class.Vanguard.Endurance <- [10, 10, 10, 10, 10, 10, 10, 20];
+//                              Levels     0   1   2   3   4   5   6   7
+::DEF.C.Stats.Class.Vanguard.Hitpoints <- [0,  0,  15, 10, 5,  10, 0,  20];
+::DEF.C.Stats.Class.Vanguard.Endurance <- [0,  0,  15, 10, 5,  10, 0,  20];
 ::DEF.C.Stats.Class.Vanguard.Agility   <- [0,  0,  0,  0,  0,  0,  0,  10];
-::DEF.C.Stats.Class.Vanguard.Mettle    <- [5,  5,  5,  5,  5,  5,  5,  10];
-::DEF.C.Stats.Class.Vanguard.Skill     <- [5,  5,  5,  5,  5,  5,  5,  10];
-::DEF.C.Stats.Class.Vanguard.Defense   <- [0,  0,  5,  5,  0,  5,  5,  10];
-::DEF.C.Stats.Class.Vanguard.Recovery  <- [1,  1,  1,  1,  1,  1,  1,  5];
+::DEF.C.Stats.Class.Vanguard.Mettle    <- [0,  0,  5,  5,  0,  5,  5,  10];
+::DEF.C.Stats.Class.Vanguard.Recovery  <- [0,  0,  2,  3,  4,  5,  0,  10];
+::DEF.C.Stats.Class.Vanguard.Skill     <- [0,  0,  10, 5,  5,  5,  5,  10];
+::DEF.C.Stats.Class.Vanguard.Defense   <- [0,  0,  0,  5,  0,  5,  0,  10];
 
 // Rogues focuses on skill and agility and ignore mettle
 //                              Levels     1   2   3   4   5   6   7   8

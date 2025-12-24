@@ -276,23 +276,23 @@ SquadScreenLeftPanelHeaderModule.prototype.createDIV = function (_parentDiv)
 			return false;
 		}
 
-		self.mDataSource.notifyBackendPopupDialogIsVisible(true);
-		self.mCurrentPopupDialog = $('.squad-screen').createPopupDialog('Level Up', null, null, 'levelup-popup');
-		self.mCurrentPopupDialog.addPopupDialogSubHeader(self.createLevelUpDialogSubHeader());
-		self.mCurrentPopupDialog.addPopupDialogOkButton(function (_dialog)
-		{
-			self.commitLevelUpStats();
-			self.mCurrentPopupDialog = null;
-			_dialog.destroyPopupDialog();
-			self.mDataSource.notifyBackendPopupDialogIsVisible(false);
-		}, true);
-		self.mCurrentPopupDialog.addPopupDialogCancelButton(function (_dialog)
-		{
-			self.mCurrentPopupDialog = null;
-			_dialog.destroyPopupDialog();
-			self.mDataSource.notifyBackendPopupDialogIsVisible(false);
-		});
-		self.mCurrentPopupDialog.addPopupDialogContent(self.createLevelUpDialogContent());
+		// self.mDataSource.notifyBackendPopupDialogIsVisible(true);
+		// self.mCurrentPopupDialog = $('.squad-screen').createPopupDialog('Level Up', null, null, 'levelup-popup');
+		// self.mCurrentPopupDialog.addPopupDialogSubHeader(self.createLevelUpDialogSubHeader());
+		// self.mCurrentPopupDialog.addPopupDialogOkButton(function (_dialog)
+		// {
+		// 	self.commitLevelUpStats();
+		// 	self.mCurrentPopupDialog = null;
+		// 	_dialog.destroyPopupDialog();
+		// 	self.mDataSource.notifyBackendPopupDialogIsVisible(false);
+		// }, true);
+		// self.mCurrentPopupDialog.addPopupDialogCancelButton(function (_dialog)
+		// {
+		// 	self.mCurrentPopupDialog = null;
+		// 	_dialog.destroyPopupDialog();
+		// 	self.mDataSource.notifyBackendPopupDialogIsVisible(false);
+		// });
+		// self.mCurrentPopupDialog.addPopupDialogContent(self.createLevelUpDialogContent());
 	});
 
 	var levelupLabel = $('<div class="label text-font-normal font-bold font-bottom-shadow font-color-value"/>');
@@ -315,23 +315,33 @@ SquadScreenLeftPanelHeaderModule.prototype.createDIV = function (_parentDiv)
 			return false;
 		}
 
-		self.mDataSource.notifyBackendPopupDialogIsVisible(true);
-		self.mCurrentPopupDialog = $('.squad-screen').createPopupDialog('Level Up', null, null, 'levelup-popup');
-		self.mCurrentPopupDialog.addPopupDialogSubHeader(self.createLevelUpDialogSubHeader());
-		self.mCurrentPopupDialog.addPopupDialogOkButton(function (_dialog)
-		{
-			self.commitLevelUpStats();
-			self.mCurrentPopupDialog = null;
-			_dialog.destroyPopupDialog();
-			self.mDataSource.notifyBackendPopupDialogIsVisible(false);
-		}, true);
-		self.mCurrentPopupDialog.addPopupDialogCancelButton(function (_dialog)
-		{
-			self.mCurrentPopupDialog = null;
-			_dialog.destroyPopupDialog();
-			self.mDataSource.notifyBackendPopupDialogIsVisible(false);
-		});
-		self.mCurrentPopupDialog.addPopupDialogContent(self.createLevelUpDialogContent());
+		self.mDataSource.class_button_activate();
+
+		var right_module = self.mParent.mParent.mRightPanelModule.mHeaderModule;
+		var b = right_module.mSwitchToPerksButton;
+		b.click();
+		// if (right_module.mOnSwitchToPerksCallback !== null && jQuery.isFunction(right_module.mOnSwitchToPerksCallback))
+		// {
+		// 	right_module.mOnSwitchToPerksCallback();
+		// }
+
+		// self.mDataSource.notifyBackendPopupDialogIsVisible(true);
+		// self.mCurrentPopupDialog = $('.squad-screen').createPopupDialog('Level Up', null, null, 'levelup-popup');
+		// self.mCurrentPopupDialog.addPopupDialogSubHeader(self.createLevelUpDialogSubHeader());
+		// self.mCurrentPopupDialog.addPopupDialogOkButton(function (_dialog)
+		// {
+		// 	self.commitLevelUpStats();
+		// 	self.mCurrentPopupDialog = null;
+		// 	_dialog.destroyPopupDialog();
+		// 	self.mDataSource.notifyBackendPopupDialogIsVisible(false);
+		// }, true);
+		// self.mCurrentPopupDialog.addPopupDialogCancelButton(function (_dialog)
+		// {
+		// 	self.mCurrentPopupDialog = null;
+		// 	_dialog.destroyPopupDialog();
+		// 	self.mDataSource.notifyBackendPopupDialogIsVisible(false);
+		// });
+		// self.mCurrentPopupDialog.addPopupDialogContent(self.createLevelUpDialogContent());
 	});
 };
 
@@ -853,7 +863,7 @@ SquadScreenLeftPanelHeaderModule.prototype.setNameAndTitle = function(_name, _ti
    // }
 };
 
-SquadScreenLeftPanelHeaderModule.prototype.setLevel = function(_levelValue, _hasLevelUp)
+SquadScreenLeftPanelHeaderModule.prototype.setLevel = function(_levelValue, class_button_is_showing)
 {
 	var label = this.mLevelContainer.find('.label:first');
 	if (label.length > 0)
@@ -864,7 +874,7 @@ SquadScreenLeftPanelHeaderModule.prototype.setLevel = function(_levelValue, _has
 	var image = this.mLevelContainer.find('img:first');
 	if (image.length > 0)
 	{
-		if (this.mDataSource.isTacticalMode() !== true && _hasLevelUp === true)
+		if (this.mDataSource.isTacticalMode() !== true && class_button_is_showing === true)
 		{
 			this.mLevelContainer.addClass('is-clickable');
 			this.mXPProgressbar.addClass('is-clickable');
@@ -886,7 +896,7 @@ SquadScreenLeftPanelHeaderModule.prototype.setLevel = function(_levelValue, _has
 	}*/
 };
 
-SquadScreenLeftPanelHeaderModule.prototype.setXP = function(_xpValue, _xpValueMax, _level, _hasLevelUp)
+SquadScreenLeftPanelHeaderModule.prototype.setXP = function(_xpValue, _xpValueMax, _level, class_button_is_showing)
 {
 	if(_level >= 11)
 	{
@@ -897,10 +907,10 @@ SquadScreenLeftPanelHeaderModule.prototype.setXP = function(_xpValue, _xpValueMa
 		this.mXPProgressbar.removeClass('xp-paragon');
 	}
 
-	if (_hasLevelUp)
+	if (class_button_is_showing)
 	{
 		this.mXPProgressbar.changeProgressbarNormalWidth(100, 100);
-		this.mXPProgressbar.changeProgressbarLabel('Click here to level up!');
+		this.mXPProgressbar.changeProgressbarLabel('Click here to assign a class!');
 	}
 	else
 	{
@@ -940,13 +950,13 @@ SquadScreenLeftPanelHeaderModule.prototype.updateControls = function(_id, _data)
 	// update level
 	if (CharacterScreenIdentifier.Entity.Character.Level in _data)
 	{
-		this.setLevel(_data[CharacterScreenIdentifier.Entity.Character.Level], _data[CharacterScreenIdentifier.Entity.Character.LevelUp.Key] !== null);
+		this.setLevel(_data[CharacterScreenIdentifier.Entity.Character.Level], _data['class_button_is_showing']);
 	}
 
 	// update xp
 	if (CharacterScreenIdentifier.Entity.Character.XPValue in _data && CharacterScreenIdentifier.Entity.Character.XPValueMax in _data)
 	{
-		this.setXP(_data[CharacterScreenIdentifier.Entity.Character.XPValue], _data[CharacterScreenIdentifier.Entity.Character.XPValueMax], _data[CharacterScreenIdentifier.Entity.Character.Level], _data[CharacterScreenIdentifier.Entity.Character.LevelUp.Key] !== null);
+		this.setXP(_data[CharacterScreenIdentifier.Entity.Character.XPValue], _data[CharacterScreenIdentifier.Entity.Character.XPValueMax], _data[CharacterScreenIdentifier.Entity.Character.Level], _data['class_button_is_showing'] === true);
 	}
 
 	// update dismiss button

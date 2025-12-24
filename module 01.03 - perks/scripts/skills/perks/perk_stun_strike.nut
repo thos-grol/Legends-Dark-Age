@@ -1,8 +1,6 @@
 
 this.perk_stun_strike <- this.inherit("scripts/skills/skill", {
-	m = {
-		BUFF = 1
-	},
+	m = {},
 	function create()
 	{
 		this.m.ID = "perk.stun_strike";
@@ -16,10 +14,15 @@ this.perk_stun_strike <- this.inherit("scripts/skills/skill", {
 		this.m.IsHidden = false;
 	}
 
-	function onAnySkillUsed( _skill, _targetEntity, _properties )
+	function onAdded()
 	{
-		
-		_properties.DamageRegularMin += BUFF;
-		_properties.DamageRegularMax += BUFF;
+		if (!this.m.Container.hasActive(::Legends.Active.StunStrike))
+		{
+			::Legends.Actives.grant(this, ::Legends.Active.StunStrike);
+		}
+	}
+	function onRemoved()
+	{
+		::Legends.Actives.remove(this, ::Legends.Active.StunStrike);
 	}
 });

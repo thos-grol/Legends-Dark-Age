@@ -63,8 +63,14 @@ o.attackEntity = function( _user, _targetEntity, _allowDiversion = true )
 	if (this.m.IsRanged) skill *= ::Z.S.get_ranged_mult(_user);
 	// hk end
 
-	toHit = toHit + skill;
-	toHit = toHit - defense;
+	toHit += skill - defense; //used algebra to write a better statement
+	// hk - executioner logic
+    // if (_user.getSkills().getSkillByID("perk.executioner2") != null && _targetEntity.getHitpointsPct() <= 0.5)
+	// {
+	// 	toHit += 20
+	// }
+	// hk end
+	
 
 	if (this.m.IsRanged)
 	{
@@ -149,8 +155,12 @@ o.attackEntity = function( _user, _targetEntity, _allowDiversion = true )
 	local is_rolling = true;
 	local is_using_hitchance = this.isUsingHitchance();
 
-	local r = ::Math.rand(1, 100);
+	local r = 0;
 	local graze_band;
+	local roll_info = null;
+
+	// local attacker_advantage = false;
+	// local defender_advanage = false;
 
 
 	if (!_targetEntity.isAbleToDie() && _targetEntity.getHitpoints() == 1) // is_death_immune
@@ -165,16 +175,28 @@ o.attackEntity = function( _user, _targetEntity, _allowDiversion = true )
 		hit_result = HIT_RESULT.HIT;
 		toHit = 100;
 	}
+
+	local advantage = 0;
+	local r1 = 0;
+	local r2 = 0;
 	
 	if (is_rolling)
 	{
 		graze_band = ::Z.S.calc_graze_band(toHit);
-		hit_result = ::Z.S.get_hit_result(graze_band, r);
+		roll_info = ::Z.S.get_hit_result(graze_band, properties, defenderProperties);
+		hit_result = roll_info.HitResult;
+		
+		//record details
+		r = roll_info.R;
+		advantage = roll_info.Advantage;
+		r1 = roll_info.R1;
+		r2 = roll_info.R2;
 	}
 
-    if (defenderProperties.IsEvadingAllAttacks) 
+    if (defenderProperties.IsEvadingAllAttacks)
+	{
 		hit_result = HIT_RESULT.MISS;
-    
+	}
 
 	if (!_user.isHiddenToPlayer() && !_targetEntity.isHiddenToPlayer())
     {
@@ -186,19 +208,22 @@ o.attackEntity = function( _user, _targetEntity, _allowDiversion = true )
         }
         else
         {
-            ::Z.S.log_skill({
+			::Z.S.log_skill({
 				User = _user,
 				Target = _targetEntity,
 				Name = getName(),
 
 				Roll = r,
+				R1 = r1,
+        		R2 = r2,
 				Chance = 0,
 				GrazeBand = graze_band,
 				HitResult = hit_result,
 				ResultType = RESULT_TYPE.GRAZE_BAND,
 
 				IsUsingHitchance = is_using_hitchance,
-				Astray = astray
+				Astray = astray,
+				Advantage = advantage
 			});
 		}
 	}
@@ -213,7 +238,7 @@ o.attackEntity = function( _user, _targetEntity, _allowDiversion = true )
 		else
 		{
 			r = ::Math.rand(1, 100);
-			local temp_result = ::Z.S.get_hit_result(graze_band, r);
+			local temp_result = ::Z.S.get_hit_result(graze_band, properties, defenderProperties);
 
 			if (temp_result < hit_result) # if the luck roll downgraded the hit
 			{
@@ -230,6 +255,7 @@ o.attackEntity = function( _user, _targetEntity, _allowDiversion = true )
 					ResultType = RESULT_TYPE.GRAZE_BAND,
 	
 					IsUsingHitchance = true,
+					Advantage = 0
 				});
 			}
 		}
@@ -247,8 +273,9 @@ o.attackEntity = function( _user, _targetEntity, _allowDiversion = true )
 			User = _user,
 			TargetEntity = _targetEntity,
 			Properties = properties,
+			TargetProperties = defenderProperties,
 			DistanceToTarget = distanceToTarget,
-			HitResult = hit_result
+			HitResult = hit_result,
 		};
 
 		// hk end

@@ -237,6 +237,20 @@ o.general_queryUIElementTooltipData = function (_entityId, _elementId, _elementO
 					text = "Will; self-discipline; that part of us which makes the right choice. [One of the nine parts of the human soul.]\n\nMettle provides:\n- resistance to mental attacks, \n-the effects of negative events on morale, \n-while increasing the chance characters gain morale from positive events."
 				}
 			];
+			
+		case "character-screen.left-panel-header-module.Experience":
+			return [
+				{
+					id = 1,
+					type = "title",
+					text = "Experience"
+				},
+				{
+					id = 2,
+					type = "description",
+					text = "Lv 2: Randomly assigns a class. If a character is given past this level, clicking the prompt will randomly assign a class. One can buy training from cities to choose a class instead.\n\nClass will assign attributes automatically, see the background icon for more.\n\nLv 6 is the max level. Reaching Lv 7 means breaking the limits of mortals."
+				}
+			];
 	}
 
 	return general_queryUIElementTooltipData(_entityId, _elementId, _elementOwner);

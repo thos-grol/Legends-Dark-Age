@@ -47,8 +47,8 @@ pt.push({
     Script = "scripts/skills/perks/perk_safeguard",
     Name = ::Const.Strings.PerkName.Safeguard,
     Tooltip = ::Const.Strings.PerkDescription.Safeguard,
-    Icon = "ui/perks/perk_22.png",
-	IconDisabled = "ui/perks/perk_22_sw.png",
+    Icon = "ui/perks/safeguard.png",
+	IconDisabled = "ui/perks/safeguard_bw.png",
     Const = "Safeguard"
 });
         
@@ -173,6 +173,9 @@ pt.push({
     IconDisabled = "ui/perks/hold_the_line_sw.png",
     Const = "HoldtheLine"
 });
+
+::Const.Perks.PerkDefObjects[::Const.Perks.PerkDefs.Berserk].Icon = "ui/perks/berserk.png";
+::Const.Perks.PerkDefObjects[::Const.Perks.PerkDefs.Berserk].IconDisabled = "ui/perks/berserk_bw.png";
         
 // =================================================================================================
 // 6
@@ -199,6 +202,8 @@ pt.push({
     IconDisabled = "ui/perks/unhindered_sw.png",
     Const = "Unhindered"
 });
+
+// Nine Lives
         
 // =================================================================================================
 // 7

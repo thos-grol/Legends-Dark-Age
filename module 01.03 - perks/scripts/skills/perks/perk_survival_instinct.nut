@@ -1,8 +1,6 @@
 
 this.perk_survival_instinct <- this.inherit("scripts/skills/skill", {
-	m = {
-		BUFF = 1
-	},
+	m = {},
 	function create()
 	{
 		this.m.ID = "perk.survival_instinct";
@@ -16,10 +14,11 @@ this.perk_survival_instinct <- this.inherit("scripts/skills/skill", {
 		this.m.IsHidden = false;
 	}
 
-	function onAnySkillUsed( _skill, _targetEntity, _properties )
+	function onUpdate( _properties )
 	{
-		
-		_properties.DamageRegularMin += BUFF;
-		_properties.DamageRegularMax += BUFF;
+		_properties.MeleeDefense += 5;
+		local pct = this.getContainer().getActor().getHitpointsPct();
+		if (pct <= 0.33) _properties.MeleeDefense += 20;
+		else if (pct <= 0.66) _properties.MeleeDefense += 10;
 	}
 });

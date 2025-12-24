@@ -1,39 +1,104 @@
 ::mods_hookExactClass("entity/tactical/player", function (o){
 
 	// changes level up logic
+	// removes manual stat allocations
     // max level is 7
 	o.updateLevel = function()
 	{
 		while (this.m.Level < 7 && this.m.XP >= ::Const.LevelXP[this.m.Level])
 		{
 			++this.m.Level;
-			// ++this.m.LevelUps;
 			++this.m.PerkPoints;
-			this.getFlags().add("Level " + this.m.Level);
 			
 			if ("State" in ::World && ::World.State != null && ::World.Assets.getOrigin() != null)
 			{
 				::World.Assets.getOrigin().onUpdateLevel(this);
 			}
-
-			if (this.m.Level == 2)
-			{
-				local _newTree = ::Const.Perks.ClassTrees.getRandom(null);
-				getBackground().addPerkGroup(_newTree.Tree)
-			}
 		}
+
+		local f = this.getFlags();
+		if (!f.has("Level Updated To")) f.set("Level Updated To", 1);
+
+		// if we don't have a class yet, then defer stat updates
+		// pressing class button will call this fn anyways
+		local c = null;
+		if (f.has("Class")) c = f.get("Class");
+		if (c == null) return;
+
+		// get class stat table
+		local class_stats = ::DEF.C.Stats.Class[c];
+
+		// apply levelups
+		local lvl_update = f.getAsInt("Level Updated To");
+		local lvl_changed = false;
+		while (lvl_update < this.m.Level)
+		{
+			lvl_update++;
+			local increaseValues = {
+				//used stats
+				hitpointsIncrease = class_stats["Hitpoints"][lvl_update],
+				maxFatigueIncrease = class_stats["Endurance"][lvl_update],
+				initiativeIncrease = class_stats["Agility"][lvl_update],
+				braveryIncrease = class_stats["Mettle"][lvl_update],
+				meleeSkillIncrease = class_stats["Skill"][lvl_update],
+				meleeDefenseIncrease = class_stats["Defense"][lvl_update],
+				rangeSkillIncrease = 0,
+				rangeDefenseIncrease = 0
+			};
+			setAttributeLevelUpValues(increaseValues);
+
+			//FEATURE_1: add trait/weapon points
+
+			lvl_changed = true;
+		}
+		if (lvl_changed) f.set("Level Updated To", lvl_update);
+
 	}
 
 	// limit_break
 	o.limit_break <- function()
 	{
-		if (this.m.Level != 7) return;
+		if (this.m.Level != 6) return;
 		++this.m.Level;
 		++this.m.LevelUps;
 
 		if ("State" in ::World && ::World.State != null && ::World.Assets.getOrigin() != null)
 		{
 			::World.Assets.getOrigin().onUpdateLevel(this);
+		}
+		updateLevel();
+	}
+
+	o.setAttributeLevelUpValues = function( _v )
+	{
+		local b = this.getBaseProperties();
+		b.Hitpoints += _v.hitpointsIncrease;
+		this.m.Hitpoints += _v.hitpointsIncrease;
+		b.Stamina += _v.maxFatigueIncrease;
+		b.Bravery += _v.braveryIncrease;
+		b.MeleeSkill += _v.meleeSkillIncrease;
+		b.RangedSkill += _v.rangeSkillIncrease;
+		b.MeleeDefense += _v.meleeDefenseIncrease;
+		b.RangedDefense += _v.rangeDefenseIncrease;
+		b.Initiative += _v.initiativeIncrease;
+		// this.m.LevelUps = this.Math.max(0, this.m.LevelUps - 1);
+
+		// for( local i = 0; i != this.Const.Attributes.COUNT; i = ++i )
+		// {
+		// 	this.m.Attributes[i].remove(0);
+		// }
+
+		this.getSkills().update();
+		this.setDirty(true);
+
+		if (b.MeleeSkill >= 90)
+		{
+			this.updateAchievement("Swordmaster", 1, 1);
+		}
+
+		if (b.RangedSkill >= 90)
+		{
+			this.updateAchievement("Deadeye", 1, 1);
 		}
 	}
 

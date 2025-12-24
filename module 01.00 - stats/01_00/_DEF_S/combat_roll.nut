@@ -23,11 +23,59 @@
     return [miss_d, miss_d + graze, miss_d + graze + hit];
 }
 
-::Z.S.get_hit_result <- function(band, roll)
+::Z.S.get_hit_result <- function(band, attacker_properties, defenderProperties)
 {
-    if (roll <= band[0]) return HIT_RESULT.MISS; //roll <= miss
-    if (roll <= band[1]) return HIT_RESULT.GRAZE; //roll <= miss + graze
-    return HIT_RESULT.HIT;
+    local attacker_advantage = ::Z.S.get_advantage(attacker_properties);
+    local defender_advantage = ::Z.S.get_advantage(defenderProperties, false);
+    local result = attacker_advantage - defender_advantage;
+    local r1 = ::Math.rand(1, 100);
+    local r2 = ::Math.rand(1, 100);
+
+    local r;
+    if (result == 0) r = r1;
+    else if (result > 0) r = ::Math.max(r1, r2);
+    else if (result < 0) r = ::Math.min(r1, r2);
+
+    local hit_result = HIT_RESULT.HIT;
+    if (r <= band[0]) hit_result = HIT_RESULT.MISS; //r <= miss
+    else if (r <= band[1]) hit_result = HIT_RESULT.GRAZE; //r <= miss + graze
+
+    return {
+        R = r,
+        R1 = r1,
+        R2 = r2,
+        Advantage = result,
+        HitResult = hit_result,
+    };
+}
+
+::Z.S.get_advantage <- function(p, attack=true)
+{
+    local advantage = 0;
+    if (attack)
+    {
+        if (p.Disadvantage_Attack) advantage--;
+        if (p.Advantage_Attack) advantage++;
+    }
+    else
+    {
+        if (p.Disadvantage_Defense) advantage--;
+        if (p.Advantage_Defense) advantage++;
+    }
+    return advantage;
+}
+
+// =================================================================================================
+// Helper
+// =================================================================================================
+
+::Z.S.is_injury_applied <- function(_actor, _properties, _id)
+{
+    local injury = _actor.getSkills().getSkillByID(_id);
+    if (injury == null) return false;
+
+    if (!_properties.IsAffectedByFreshInjuries && injury.m.IsFresh) return false;
+    return true;
 }
 
 ::Z.S.get_ranged_mult <- function(_actor)
@@ -62,17 +110,4 @@
         mult *= 0.5;
 
     return mult;
-}
-
-// =================================================================================================
-// Helper
-// =================================================================================================
-
-::Z.S.is_injury_applied <- function(_actor, _properties, _id)
-{
-    local injury = _actor.getSkills().getSkillByID(_id);
-    if (injury == null) return false;
-
-    if (!_properties.IsAffectedByFreshInjuries && injury.m.IsFresh) return false;
-    return true;
 }

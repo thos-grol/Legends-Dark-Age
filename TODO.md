@@ -1,15 +1,35 @@
+//TODO: implement class stat growth display to replace stat projection in background tt
+//FIXME: contract destruction on world map doesn't seem to work correctly anymore, go fix it.
+
+IDEA: 
+	character buttons
+	assign class button
+	get weapon tree button
+		if don't already have weapon tree, and weapon trees < 2
+	level up weapon buttons
+		if has level up weapon point
+	level up trait buttons
+		if has level up trait point
+
+
+Enemy Designs
+
+Bandits, ruffians. They should be a threat even with the lowest tier. Poorly equipped, but has classes that can capitulize on that.
+Blunt weapons, farm implements, axes.
+
+	Bandit tiers
+		Rabble & Thugs
+		Veterans
+		Elites
+
+What sort of contracts involve bandits?
+	Stolen goods
+	Town Defense
+	Camp
+	Caravans
+
 Short term
-
-// TODO: shield rework, shields are dropped onto the floor if their durability is used up, don't actually break them
-// heal shield to full, make shields unable to be picked up
-
-// How to make shieldwall better? Add some block value that mitigates damage hit duh
-// add shield poise, when hit multiple times, a character becomes unsteady and loses block ability
-// that way people can't turtle behind shields as we remove durability
-
-
-// TODO: village tooltip: add owner, see captial relations banner?
-// contracts spawned if village is above z level use barbarians instead
+  // contracts spawned if village is above z level use barbarians instead
     
 // story missions where the world heads towards a future associated with a certain god ()
 // faction has enemies stored as details?

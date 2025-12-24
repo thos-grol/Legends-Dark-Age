@@ -2,12 +2,12 @@
 {
     o.spawn = function ( _properties )
 	{
-		//TODO: use seed from contract
+		//FEATURE_1: use seed from contract
         if (::World.State.getCombatSeed() != 0)
 		{
 			::Math.seedRandom(::World.State.getCombatSeed());
 		}
-		this.Time.setRound(0); //TODO: hook log here to set round?
+		this.Time.setRound(0);
 
 		foreach( e in _properties.TemporaryEnemies )
 		{

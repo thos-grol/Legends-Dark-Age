@@ -1,13 +1,58 @@
-::mods_hookExactClass("entity/tactical/player", function (o){
-
+::mods_hookExactClass("entity/tactical/actor", function(o)
+{
 	local onInit = o.onInit;
-	o.onInit = function ()
+	o.onInit = function()
 	{
 		onInit();
 		local c = this.getSkills();
+		// hk - add character system
+		c.add(this.new("scripts/skills/special/log_system"));
+		c.add(this.new("scripts/skills/special/character_system"));
+	}
+});
 
-		local skill = c.getSkillByID("special.character_system");
-		if (skill == null) c.add(this.new("scripts/skills/special/character_system"));
+::mods_hookExactClass("entity/tactical/human", function(o)
+{
+	local onInit = o.onInit;
+	o.onInit = function()
+	{
+		onInit();
+		local c = this.getSkills();
+		c.removeByID("actives.hand_to_hand");
+		::Legends.Actives.grant(this, ::Legends.Active.H2H);
+	}
+});
+
+::mods_hookExactClass("entity/tactical/player", function (o){
+
+	//hk - we add system/monitoring skills to character here
+	o.onInit = function ()
+	{
+		this.human.onInit();
+
+		local c = this.getSkills();
+		c.add(this.new("scripts/skills/special/stats_collector"));
+		c.add(this.new("scripts/skills/special/mood_check"));
+		c.add(this.new("scripts/skills/special/weapon_breaking_warning"));
+		c.add(this.new("scripts/skills/special/no_ammo_warning"));
+		c.add(this.new("scripts/skills/effects/battle_standard_effect"));
+		c.add(this.new("scripts/skills/actives/break_ally_free_skill"));
+		c.add(this.new("scripts/skills/special/c_system"));
+
+		if (this.Const.DLC.Unhold)
+		{
+			c.add(this.new("scripts/skills/actives/wake_ally_skill"));
+		}
+
+		this.setFaction(this.Const.Faction.Player);
+		this.m.Items.setUnlockedBagSlots(2);
+		c.add(this.new("scripts/skills/special/bag_fatigue"));
+
+		// hk - add legends stuff we want to keep
+		::Legends.Effects.grant(this, ::Legends.Effect.LegendRealmOfNightmares);
+		// ::Legends.Actives.grant(this, ::Legends.Active.LegendGrapple);
+		// ::Legends.Actives.grant(this, ::Legends.Active.LegendKick);
+		this.setDiscovered(true);
 	}
 
 	// sets up character's stats, traits, and perks
@@ -60,7 +105,8 @@
 	{
 		local background = ::new("scripts/skills/backgrounds/" + ::MSU.Array.rand(_backgrounds));
 		background.setGender(_gender);
-		this.m.Skills.add(background);
+		local c = this.getSkills();
+		c.add(background);
 
 		background.buildDescription();
 		this.setGender((background.isBackgroundType(::Const.BackgroundType.Female) ? 1 : 0));

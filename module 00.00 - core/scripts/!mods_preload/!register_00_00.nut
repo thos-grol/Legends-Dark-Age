@@ -71,6 +71,8 @@ if (!("DEF" in this.getroottable())) ::DEF <- {};
 	// load other js stuff
 	::Hooks.registerJS(::Z.DIR_JS + "menu_bg.js");
 	
+	::Hooks.registerJS(::Z.DIR_JS + "datasource_modifications.js");
+	
 	::Hooks.registerJS(::Z.DIR_JS + "menu_sounds.js");
 	::Hooks.registerJS(::Z.DIR_JS + "menu_campaign_defaults.js");
 

@@ -1,8 +1,6 @@
 
 this.perk_unhindered <- this.inherit("scripts/skills/skill", {
-	m = {
-		BUFF = 1
-	},
+	m = {},
 	function create()
 	{
 		this.m.ID = "perk.unhindered";
@@ -16,10 +14,8 @@ this.perk_unhindered <- this.inherit("scripts/skills/skill", {
 		this.m.IsHidden = false;
 	}
 
-	function onAnySkillUsed( _skill, _targetEntity, _properties )
+	function onUpdate( _properties )
 	{
-		
-		_properties.DamageRegularMin += BUFF;
-		_properties.DamageRegularMax += BUFF;
+		_properties.PhysicalResistance = 2;
 	}
 });

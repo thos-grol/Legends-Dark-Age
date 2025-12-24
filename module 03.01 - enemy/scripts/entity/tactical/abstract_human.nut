@@ -1,4 +1,4 @@
-this.abstract_unit <- this.inherit("scripts/entity/tactical/human", {
+this.abstract_human <- this.inherit("scripts/entity/tactical/human", {
 	function onInit()
 	{
 		this.human.onInit();
@@ -27,8 +27,8 @@ this.abstract_unit <- this.inherit("scripts/entity/tactical/human", {
 
 		// equips weapon loadout
 		// applies build perks, traits
-		if (is_using_build()) init_build();
-		else init_random();
+		// if (is_using_build()) init_build();
+		// else init_random();
 
 		post_init();
 	}

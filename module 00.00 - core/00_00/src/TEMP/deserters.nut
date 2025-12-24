@@ -14,13 +14,44 @@
 	{
 		::World.Assets.addBusinessReputation(this.m.StartingBusinessReputation);
 		::World.Assets.m.Money = ::World.Assets.m.Money / 2;
-		::World.Assets.getStash().add(this.new("scripts/items/misc/potion_of_oblivion2_item"));
-		::World.Assets.getStash().add(this.new("scripts/items/misc/potion_of_oblivion2_item"));
-		::World.Assets.getStash().add(this.new("scripts/items/misc/potion_of_oblivion2_item"));
-		::World.Assets.getStash().add(this.new("scripts/items/misc/potion_of_oblivion2_item"));
-		::World.Assets.getStash().add(this.new("scripts/items/misc/potion_of_oblivion2_item"));
-		::World.Assets.getStash().add(this.new("scripts/items/misc/potion_of_oblivion2_item"));
-		::World.Assets.getStash().add(this.new("scripts/items/misc/potion_of_oblivion2_item"));
+
+		::World.Assets.getStash().add(this.new("scripts/items/weapons/militia_spear"));
+		::World.Assets.getStash().add(this.new("scripts/items/weapons/militia_spear"));
+		::World.Assets.getStash().add(this.new("scripts/items/weapons/militia_spear"));
+		::World.Assets.getStash().add(this.new("scripts/items/weapons/militia_spear"));
+		::World.Assets.getStash().add(this.new("scripts/items/weapons/militia_spear"));
+		
+		::World.Assets.getStash().add(this.new("scripts/items/weapons/arming_sword"));
+		::World.Assets.getStash().add(this.new("scripts/items/shields/wooden_shield"));
+
+
+		for (local i = 0; i < 5; i++)
+		{
+			::World.Assets.getStash().add(
+				::Const.World.Common.pickArmor([
+					[1, ::Legends.Armor.Standard.patched_mail_shirt],
+					[1, ::Legends.Armor.Standard.padded_leather],
+					[1, ::Legends.Armor.Standard.basic_mail_shirt],
+					[1, ::Legends.Armor.Standard.worn_mail_shirt]
+				])
+			);
+			::World.Assets.getStash().add(
+				::Const.World.Common.pickHelmet([
+					[1, ::Legends.Helmet.Standard.nasal_helmet],
+					[1, ::Legends.Helmet.Standard.padded_nasal_helmet],
+					[1, ::Legends.Helmet.Standard.mail_coif],
+					[1, ::Legends.Helmet.Standard.rusty_mail_coif],
+					[1, ::Legends.Helmet.Standard.aketon_cap],
+					[1, ::Legends.Helmet.Standard.full_aketon_cap]
+				])
+			);
+		}
+
+		for (local i = 0; i < 5; i++)
+		{
+			::World.Assets.getStash().add(this.new("scripts/items/misc/potion_of_oblivion2_item"));
+		}
+
 	}
 
 	o.onSpawnPlayer = function ()
@@ -70,10 +101,10 @@
 		bro.m.XP = 0;
 		// bro.fillAttributeLevelUpValues(::Const.XP.MaxLevelWithPerkpoints - 1);
 
-		items = bro.getItems();
-		items.unequip(items.getItemAtSlot(::Const.ItemSlot.Mainhand));
-		items.unequip(items.getItemAtSlot(::Const.ItemSlot.Ammo));
-		items.equip(this.new("scripts/items/weapons/arming_sword"));
+		// items = bro.getItems();
+		// items.unequip(items.getItemAtSlot(::Const.ItemSlot.Mainhand));
+		// items.unequip(items.getItemAtSlot(::Const.ItemSlot.Ammo));
+		
 
 		// =========================================================================================
 		// B - Lumberjack
@@ -89,14 +120,14 @@
 
 		bro.m.Level = 5;
 		bro.m.PerkPoints = bro.m.Level - 1;
-		bro.m.LevelUps = bro.m.Level - 1;
+		
 		bro.m.XP = ::Const.LevelXP[bro.m.Level - 1];
 		// bro.fillAttributeLevelUpValues(::Const.XP.MaxLevelWithPerkpoints - 1);
 
-		items = bro.getItems();
-		items.unequip(items.getItemAtSlot(::Const.ItemSlot.Mainhand));
-		items.unequip(items.getItemAtSlot(::Const.ItemSlot.Ammo));
-		items.equip(this.new("scripts/items/weapons/woodcutters_axe"));
+		// items = bro.getItems();
+		// items.unequip(items.getItemAtSlot(::Const.ItemSlot.Mainhand));
+		// items.unequip(items.getItemAtSlot(::Const.ItemSlot.Ammo));
+
 
 		// =========================================================================================
 		// C - Brawler
@@ -112,7 +143,7 @@
 
 		bro.m.Level = 5;
 		bro.m.PerkPoints = bro.m.Level - 1;
-		bro.m.LevelUps = bro.m.Level - 1;
+		
 		bro.m.XP = ::Const.LevelXP[bro.m.Level - 1];
 		// bro.fillAttributeLevelUpValues(::Const.XP.MaxLevelWithPerkpoints - 1);
 
@@ -130,7 +161,7 @@
 
 		bro.m.Level = 5;
 		bro.m.PerkPoints = bro.m.Level - 1;
-		bro.m.LevelUps = bro.m.Level - 1;
+		
 		bro.m.XP = ::Const.LevelXP[bro.m.Level - 1];
 		// bro.fillAttributeLevelUpValues(::Const.XP.MaxLevelWithPerkpoints - 1);
 
@@ -149,14 +180,14 @@
 
 		bro.m.Level = 2;
 		bro.m.PerkPoints = bro.m.Level - 1;
-		bro.m.LevelUps = bro.m.Level - 1;
+		
 		bro.m.XP = ::Const.LevelXP[bro.m.Level - 1];
 		// bro.fillAttributeLevelUpValues(::Const.XP.MaxLevelWithPerkpoints - 1);
 
-		items = bro.getItems();
-		items.unequip(items.getItemAtSlot(::Const.ItemSlot.Mainhand));
-		items.unequip(items.getItemAtSlot(::Const.ItemSlot.Ammo));
-		items.equip(this.new("scripts/items/weapons/militia_spear"));
+		// items = bro.getItems();
+		// items.unequip(items.getItemAtSlot(::Const.ItemSlot.Mainhand));
+		// items.unequip(items.getItemAtSlot(::Const.ItemSlot.Ammo));
+		
 
 		// =========================================================================================
 		// D - Hunter
@@ -172,7 +203,7 @@
 
 		bro.m.Level = 5;
 		bro.m.PerkPoints = bro.m.Level - 1;
-		bro.m.LevelUps = bro.m.Level - 1;
+		
 		bro.m.XP = ::Const.LevelXP[bro.m.Level - 1];
 		// bro.fillAttributeLevelUpValues(::Const.XP.MaxLevelWithPerkpoints - 1);
 
@@ -190,7 +221,7 @@
 
 		bro.m.Level = 5;
 		bro.m.PerkPoints = bro.m.Level - 1;
-		bro.m.LevelUps = bro.m.Level - 1;
+		
 		bro.m.XP = ::Const.LevelXP[bro.m.Level - 1];
 		// bro.fillAttributeLevelUpValues(::Const.XP.MaxLevelWithPerkpoints - 1);
 		

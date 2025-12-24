@@ -71,6 +71,7 @@ this.potion_of_oblivion2_item <- this.inherit("scripts/items/item", {
 		this.Sound.play("sounds/combat/drink_03.wav", this.Const.Sound.Volume.Inventory);
 		_actor.m.XP = ::Const.LevelXP[_actor.m.Level];
 		_actor.updateLevel();
+		_actor.m.PerkPoints += 9;
 		return true;
 	}
 

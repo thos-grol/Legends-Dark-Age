@@ -1,5 +1,8 @@
 //This file has logic for the improved combat log
 
+// FEATURE_1: announce new round start
+// o.turnsequencebar_onNextRound = function ( _round )
+
 // hk - hook log screen to add new sq fns
 ::mods_hookExactClass("ui/screens/tactical/modules/topbar/tactical_screen_topbar_event_log", function (o)
 {
@@ -24,8 +27,6 @@
     ::Z.T.Log.Turn_Has_Acted <- false;
 };
 
-::Z.T.last_name <- "";
-
 ::Z.T.Log.cd_obdr_msg <- false;
 ::Z.T.Log.cd_obdr_str <- "";
 
@@ -33,30 +34,54 @@
 // Main
 // =========================================================================================
 
+::Z.S.log_resisted <- function(target, effect_def)
+{
+    ::Tactical.EventLog.logIn(::color_name(target) + " fully resisted [" + ::Legends.Effects.EffectDefObjects[effect_def].Name + "]");
+}
+
+::Z.S.log_effect <- function(target, effect, reduced=false)
+{
+    local effect_name = effect.m.Name;
+    local duration = effect.m.TurnsLeft;
+    local ret = ::color_name(target) + " [" + effect_name + "]";
+    if (duration > 0) ret += " " + duration + " turn";
+    if (duration > 1) ret += "s";
+    if (reduced) ret += " (REDUCED)";
+    ::Tactical.EventLog.logIn(ret);
+}
+
 ::Z.S.log_skill <- function(info)
 {
-    // local _info = {
+    // info = {
     //     User = _user,
     //     Target = _targetEntity,
     //     Name = getName(),
 
     //     Roll = r,
+    //     R1 = r1,
+    //     R2 = r2,
     //     Chance = 0,
     //     GrazeBand = graze_band,
     //     HitResult = hit_result,
-    //     ResultType = ...,
+    //     ResultType = RESULT_TYPE.GRAZE_BAND,
 
     //     IsUsingHitchance = is_using_hitchance,
     //     Astray = astray,
+    //     Advantage = advantage
     // };
 
     // if there is a new entity acting, we want to add line breaks
-    local ret = "";
-    if (::Z.T.last_name != info.User.getName())
+    local log_system = info.User.getSkills().getSkillByID("special.log_system");
+    if (log_system != null)
     {
-        ::Z.T.last_name = info.User.getName();
-        ret = "\n";
+        if (log_system.m.notify_log_new_line) 
+        {
+            ::Tactical.EventLog.logEx("\n");
+            log_system.m.notify_log_new_line = false;
+        }
     }
+
+    local ret = "";
     ret += ::Z.S.log_target_info(info.User, info.Target, info.Name, info.HitResult); // user [skill] target
     if ("Astray" in info && info.Astray)
     {
@@ -65,7 +90,19 @@
     ret += info.IsUsingHitchance ? ::Z.S.log_result(info) : ""; // shows hit miss roll or graze band roll
 
     ::Tactical.EventLog.logEx(ret);
+
+    if (info.Advantage != 0)
+    {
+        local adv_str = info.Advantage > 0 ? "ADVANTAGE" : "DISADVANTAGE";
+        adv_str += " (" + info.R1 + ", " + info.R2 + ") » " + info.Roll;
+        ::Tactical.EventLog.logIn(adv_str);
+    }
 }
+
+::Z.S.log_block <- function(info)
+{
+    ::Tactical.EventLog.logIn("Block: " + info.prev_block + " » " + info.block + " (" + info.blocked + ")");
+};
 
 ::Z.S.log_damage_armor <- function(_targetEntity, _target, _cur, _prev, _damage, _is_innate=false)
 {

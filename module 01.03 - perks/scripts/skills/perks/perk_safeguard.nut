@@ -13,4 +13,16 @@ this.perk_safeguard <- this.inherit("scripts/skills/skill", {
 		this.m.IsStacking = false;
 		this.m.IsHidden = false;
 	}
+
+	function onAdded()
+	{
+		if (!this.m.Container.hasActive(::Legends.Active.Safeguard))
+		{
+			::Legends.Actives.grant(this, ::Legends.Active.Safeguard);
+		}
+	}
+	function onRemoved()
+	{
+		::Legends.Actives.remove(this, ::Legends.Active.Safeguard);
+	}
 });

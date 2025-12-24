@@ -30,6 +30,5 @@ this.perk_conservation <- this.inherit("scripts/skills/skill", {
 			}
 			
 		}
-		
 	}
 });

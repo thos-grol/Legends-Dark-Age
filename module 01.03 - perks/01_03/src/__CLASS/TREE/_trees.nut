@@ -18,7 +18,7 @@
 
 ::Const.Perks.VanguardClassTree <- {
 	ID = "VanguardClassTree",
-	Name = "Vanguard Class",
+	Name = "Vanguard",
 	Descriptions = [
 		"Vanguards are meant to stand tall amidst a sea of foes"
 	],

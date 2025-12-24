@@ -336,6 +336,19 @@ this.squad_screen <- ::inherit("scripts/mods/msu/ui_screen", {
 		}
 	}
 
+	function on_class_added( _data )
+	{
+		local bro = this.Tactical.getEntityByID(_data[0]);
+		if (bro != null) 
+		{
+			bro.class_button_logic();
+			// this.loadData();
+			//function general_onCommitStatsIncreaseValues( _data )
+			return this.UIDataHelper.convertEntityToUIData(bro, null);
+		}
+		return null;
+	}
+
 	function onDismissCharacter( _data )
 	{
 		local bro = this.Tactical.getEntityByID(_data[0]);
@@ -535,9 +548,45 @@ this.squad_screen <- ::inherit("scripts/mods/msu/ui_screen", {
 		return this.general_onUnlockPerk(_data);
 	}
 
+	// function onSwapInventoryItem( _data )
+	// {
+	// 	return this.general_onSwapInventoryItem(_data);
+	// }
 	function onSwapInventoryItem( _data )
 	{
+		if(_data[2]) return this.general_onUpgradeInventoryItem(_data);
 		return this.general_onSwapInventoryItem(_data);
+	}
+
+	function general_onUpgradeInventoryItem ( _data )
+	{
+		local data = this.helper_queryStashItemDataByIndex(_data[0], _data[1]);
+
+		if ("error" in data)
+		{
+			return data;
+		}
+		local upgrade = data.stash.upgrade(data.sourceIndex, data.targetIndex);
+		if (upgrade)
+		{
+			//only remove item if it wasn't switched out for another upgrade
+			if (typeof upgrade == "table"){
+				data.stash.removeByIndex(upgrade.index);
+				if (upgrade.item != null){
+					this.World.Assets.getStash().insert(upgrade.item, upgrade.index);
+				}
+			}
+			else{
+				data.stash.removeByIndex(data.sourceIndex);
+			}
+			return this.UIDataHelper.convertStashAndEntityToUIData(null, null, false, this.m.InventoryFilter);
+		}
+		else
+		{
+			return this.helper_convertErrorToUIData(this.Const.CharacterScreen.ErrorCode.FailedToAcquireStash);
+		}
+
+		return this.UIDataHelper.convertStashAndEntityToUIData(null, null, false, this.m.InventoryFilter);
 	}
 
 	function onDestroyInventoryItem( _data )
@@ -1069,6 +1118,8 @@ this.squad_screen <- ::inherit("scripts/mods/msu/ui_screen", {
 		}
 	}
 
+
+
 	function general_onEquipStashItem( _data )
 	{
 		local data = this.helper_queryStashItemData(_data);
@@ -1092,9 +1143,18 @@ this.squad_screen <- ::inherit("scripts/mods/msu/ui_screen", {
 
 		if (!this.Tactical.isActive() && data.sourceItem.isUsable())
 		{
-			if (data.sourceItem.onUse(data.inventory.getActor()))
+			local result = data.sourceItem.onUse(data.inventory.getActor());
+			if (result)
 			{
-				data.stash.removeByIndex(data.sourceIndex);
+				if (typeof result == "table"){
+					data.stash.removeByIndex(result.index);
+					if (result.item != null){
+						this.World.Assets.getStash().insert(result.item, result.index);
+					}
+				}
+				else{
+					data.stash.removeByIndex(data.sourceIndex);
+				}
 				data.inventory.getActor().getSkills().update();
 				return this.UIDataHelper.convertStashAndEntityToUIData(data.entity, null, false, this.m.InventoryFilter);
 			}
@@ -1137,7 +1197,6 @@ this.squad_screen <- ::inherit("scripts/mods/msu/ui_screen", {
 					data.inventory.equip(targetItems.secondItem);
 				}
 			}
-
 			return this.helper_convertErrorToUIData(this.Const.CharacterScreen.ErrorCode.FailedToRemoveItemFromSourceSlot);
 		}
 
@@ -1154,7 +1213,6 @@ this.squad_screen <- ::inherit("scripts/mods/msu/ui_screen", {
 					data.inventory.equip(targetItems.secondItem);
 				}
 			}
-
 			return this.helper_convertErrorToUIData(this.Const.CharacterScreen.ErrorCode.FailedToEquipBagItem);
 		}
 
@@ -1180,7 +1238,6 @@ this.squad_screen <- ::inherit("scripts/mods/msu/ui_screen", {
 					{
 						data.inventory.equip(targetItems.secondItem);
 					}
-
 					return this.helper_convertErrorToUIData(this.Const.CharacterScreen.ErrorCode.FailedToPutItemIntoBag);
 				}
 			}
@@ -1198,7 +1255,6 @@ this.squad_screen <- ::inherit("scripts/mods/msu/ui_screen", {
 				{
 					data.inventory.equip(targetItems.secondItem);
 				}
-
 				return this.helper_convertErrorToUIData(this.Const.CharacterScreen.ErrorCode.FailedToPutItemIntoBag);
 			}
 		}
@@ -2106,6 +2162,7 @@ this.squad_screen <- ::inherit("scripts/mods/msu/ui_screen", {
 
 	function helper_dropItemIntoStash( _data )
 	{
+
 		if (_data.targetItemIdx == null && _data.stash.hasEmptySlot() == false && !_data.stash.isResizable())
 		{
 			return this.helper_convertErrorToUIData(this.Const.CharacterScreen.ErrorCode.NotEnoughStashSpace);
@@ -2163,6 +2220,10 @@ this.squad_screen <- ::inherit("scripts/mods/msu/ui_screen", {
 				{
 					return this.helper_convertErrorToUIData(this.Const.CharacterScreen.ErrorCode.FailedToRemoveItemFromSourceSlot);
 				}
+				else if (::mods_isClass(_data.targetItem, "legend_armor_upgrade") != null || ::mods_isClass(_data.targetItem, "legend_helmet_upgrade") != null)
+				{
+					return this.helper_convertErrorToUIData(this.Const.CharacterScreen.ErrorCode.FailedToRemoveItemFromSourceSlot);
+				}
 
 				if (_data.inventory.unequip(_data.sourceItem) == false)
 				{
@@ -2209,6 +2270,7 @@ this.squad_screen <- ::inherit("scripts/mods/msu/ui_screen", {
 		]);
 		return null;
 	}
+
 
 	function helper_dropItemToGround( _data )
 	{
@@ -2421,6 +2483,94 @@ this.squad_screen <- ::inherit("scripts/mods/msu/ui_screen", {
 			error = errorString,
 			code = _errorCode
 		};
+	}
+
+	function removeInventoryItemUpgrades(_data)
+	{
+		local armor  = this.Stash.getItemAtIndex(_data[0]).item;
+		return this.removeAllUpgradesFromItem(armor)
+	}
+
+	function removePaperdollItemUpgrades(_data)
+	{
+		local bro = this.Tactical.getEntityByID(_data[0]);
+		local item  = bro.m.Items.getItemByInstanceID(_data[1]);
+		return this.removeAllUpgradesFromItem(item, bro)
+	}
+
+	function removeAllUpgradesFromItem(_item, _entity = null){
+		if (_item != null)
+		{
+			local toRemove = [];
+			foreach (idx, value in _item.getUpgrades())
+			{
+				if (value != 1) continue;
+				toRemove.push(idx);
+			}
+			if (this.Stash.getNumberOfEmptySlots() < toRemove.len()){
+				return {
+					error = this.Const.UI.Error.NotEnoughStashSpace,
+					code = this.Const.UI.Error.NotEnoughStashSpace
+				};
+			}
+			foreach(idx in toRemove)
+			{
+				local upgrade = _item.getUpgrade(idx);
+				if (upgrade.isDestroyedOnRemove()) continue;
+				this.Stash.add(_item.removeUpgrade(idx));
+			}
+		}
+		return this.UIDataHelper.convertStashAndEntityToUIData(_entity, null, false, this.m.InventoryFilter);
+	}
+
+	function onRemoveUpgrade(_data)
+	{
+		if (this.Stash.getNumberOfEmptySlots() <= 0){
+			return {
+				error = this.Const.UI.Error.NotEnoughStashSpace,
+				code = this.Const.UI.Error.NotEnoughStashSpace
+			};
+		}
+		local bro = this.Tactical.getEntityByID(_data[1]);
+		local upgrade = bro.removeArmorUpgrade(_data[2] == "body" ? this.Const.ItemSlot.Body : this.Const.ItemSlot.Head, _data[0]);
+		if (upgrade != null && !upgrade.isDestroyedOnRemove())
+		{
+			this.World.Assets.getStash().add(upgrade);
+			bro.getSkills().update();
+			return this.UIDataHelper.convertStashAndEntityToUIData(bro, null, false, this.m.InventoryFilter);
+		}
+	}
+
+	function onToggleUpgradeVisibility( _data )
+	{
+		local bro = this.Tactical.getEntityByID(_data[1]);
+		local slot;
+		switch(_data[2]) {
+			case "head":
+				slot = this.Const.ItemSlot.Head;
+				break;
+			case "body":
+				slot = this.Const.ItemSlot.Body;
+				break;
+			case "accessory":
+				slot = this.Const.ItemSlot.Accessory;
+				break;
+			default:
+				::logError("Unknown slot type: " + _data[2]);
+				return;
+		}
+
+		local item = bro.getItems().getItemAtSlot(slot);
+		if (slot == this.Const.ItemSlot.Accessory) {
+			// Some items are not visible, like dogs.
+			if (item.m.ShowOnCharacter) {
+				item.toggleAccessoryVisible();
+			}
+		} else {
+			local upgrade = item.getUpgrade(_data[0]);
+			local result = upgrade.toggleVisible();
+		}
+		return this.UIDataHelper.convertStashAndEntityToUIData(bro, null, false, this.m.InventoryFilter);
 	}
 
 });

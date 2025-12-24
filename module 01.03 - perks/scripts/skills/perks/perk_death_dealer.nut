@@ -1,8 +1,6 @@
 
 this.perk_death_dealer <- this.inherit("scripts/skills/skill", {
-	m = {
-		BUFF = 1
-	},
+	m = {},
 	function create()
 	{
 		this.m.ID = "perk.death_dealer";
@@ -16,10 +14,24 @@ this.perk_death_dealer <- this.inherit("scripts/skills/skill", {
 		this.m.IsHidden = false;
 	}
 
-	function onAnySkillUsed( _skill, _targetEntity, _properties )
+	function onAfterUpdate(_properties)
 	{
-		
-		_properties.DamageRegularMin += BUFF;
-		_properties.DamageRegularMax += BUFF;
+		local actor = this.getContainer().getActor();
+		if (!actor.isPlacedOnMap()) return;
+
+		local skills = this.getContainer().getSkillsByFunction((@(_skill) _skill.m.IsWeaponSkill && _skill.m.ActionPointCost >= 6).bindenv(this));
+		if (skills.len() == 0) return;
+		foreach (s in skills)
+		{
+			if (s != null)
+			{
+				s.m.ActionPointCost -= 2;
+			}
+		}
+	}
+
+	function onUpdate( _properties )
+	{
+		_properties.FatigueRecoveryRate += 10;
 	}
 });

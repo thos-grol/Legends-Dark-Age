@@ -1,8 +1,6 @@
 
 this.perk_lions_roar <- this.inherit("scripts/skills/skill", {
-	m = {
-		BUFF = 1
-	},
+	m = {},
 	function create()
 	{
 		this.m.ID = "perk.lions_roar";
@@ -16,10 +14,15 @@ this.perk_lions_roar <- this.inherit("scripts/skills/skill", {
 		this.m.IsHidden = false;
 	}
 
-	function onAnySkillUsed( _skill, _targetEntity, _properties )
+	function onAdded()
 	{
-		
-		_properties.DamageRegularMin += BUFF;
-		_properties.DamageRegularMax += BUFF;
+		if (!this.m.Container.hasActive(::Legends.Active.LionsRoar))
+		{
+			::Legends.Actives.grant(this, ::Legends.Active.LionsRoar);
+		}
+	}
+	function onRemoved()
+	{
+		::Legends.Actives.remove(this, ::Legends.Active.LionsRoar);
 	}
 });

@@ -1,8 +1,6 @@
 
 this.perk_vanguard <- this.inherit("scripts/skills/skill", {
-	m = {
-		BUFF = 1
-	},
+	m = {},
 	function create()
 	{
 		this.m.ID = "perk.vanguard";
@@ -16,10 +14,20 @@ this.perk_vanguard <- this.inherit("scripts/skills/skill", {
 		this.m.IsHidden = false;
 	}
 
-	function onAnySkillUsed( _skill, _targetEntity, _properties )
+	function onUpdate( _properties )
 	{
-		
-		_properties.DamageRegularMin += BUFF;
-		_properties.DamageRegularMax += BUFF;
+		_properties.IsImmuneToSurrounding = true;
+	}
+
+	function onAdded()
+	{
+		if (!this.m.Container.hasActive(::Legends.Active.LineBreaker))
+		{
+			::Legends.Actives.grant(this, ::Legends.Active.LineBreaker);
+		}
+	}
+	function onRemoved()
+	{
+		::Legends.Actives.remove(this, ::Legends.Active.LineBreaker);
 	}
 });

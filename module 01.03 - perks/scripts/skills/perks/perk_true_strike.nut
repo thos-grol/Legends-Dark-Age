@@ -1,8 +1,6 @@
 
 this.perk_true_strike <- this.inherit("scripts/skills/skill", {
-	m = {
-		BUFF = 1
-	},
+	m = {},
 	function create()
 	{
 		this.m.ID = "perk.true_strike";
@@ -16,10 +14,9 @@ this.perk_true_strike <- this.inherit("scripts/skills/skill", {
 		this.m.IsHidden = false;
 	}
 
-	function onAnySkillUsed( _skill, _targetEntity, _properties )
+	function onUpdate( _properties )
 	{
-		
-		_properties.DamageRegularMin += BUFF;
-		_properties.DamageRegularMax += BUFF;
+		_properties.Strike_Attack = true;
+		_properties.MeleeSkill += 10;
 	}
 });

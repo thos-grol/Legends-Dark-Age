@@ -1,0 +1,36 @@
+// This file defines logic for character progression ui - storage, getters, and setters
+::mods_hookExactClass("entity/tactical/player", function (o){
+
+    // class button to assign class
+    o.class_button_is_showing <- function()
+    {
+        // ::logInfo(
+        //     "Name: " + this.m.Name + "\n" +
+        //     "Class Added: " + this.getFlags().has("Class Added") + "\n"
+        // );
+        return !this.getFlags().has("Class Added") && this.m.Level > 1;
+    }
+
+    o.class_button_logic <- function()
+    {
+        local _newTree = ::Const.Perks.ClassTrees.getRandom(null);
+		getBackground().addPerkGroup(_newTree.Tree);
+        this.getFlags().add("Class Added");
+        this.getFlags().set("Class", _newTree.Name);
+
+        this.updateLevel();
+    }
+
+});
+
+// where we send data to the ui
+::mods_hookNewObjectOnce("ui/global/data_helper", function(o) {
+
+    local addCharacterToUIData = o.addCharacterToUIData;
+	o.addCharacterToUIData = function ( _entity, _target )
+	{
+		addCharacterToUIData(_entity, _target);
+		_target.class_button_is_showing <- _entity.class_button_is_showing();
+	}
+
+});

@@ -13,18 +13,20 @@
 		if (this.getContainer() == null) return;
 		if (this.getContainer().getActor() == null) return;
 
+		local staminaMult = 1.0;
+
 		// hk
 		// - implement vanguard passive armor reduction
 		// - implement hardness stat
-		
-		local stamina_modifier = ::Math.ceil(this.getStaminaModifier());
-		//FEATURE_1: create new vanguard trait passive. make it flat reduction
-		//FEATURE_1: vanguard passive, copy over underdog logic
-		// if (this.getContainer().getActor().getSkills().hasPerk(::Legends.Perk.Brawny))
-		// {
-		//  stamina_modifier = ::Math.min(0, stamina_modifier + 1); 
-		// }
-		_properties.Stamina += stamina_modifier;
+		local actor = this.getContainer().getActor();
+		local f = actor.getFlags();
+		local c = null;
+		if (f.has("Class")) c = f.get("Class");
+		if (c != null && c == "Vanguard")
+		{
+			staminaMult *= 0.70;
+		}
+		_properties.Stamina += this.Math.ceil(this.getStaminaModifier() * staminaMult);
 
 		_properties.Armor[::Const.BodyPart.Body] += this.getArmor();
 		_properties.ArmorMax[::Const.BodyPart.Body] += this.getArmorMax();

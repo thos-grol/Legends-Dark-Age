@@ -13,8 +13,9 @@
 				this.m.IsEventVisible = false;
 				::World.State.getMenuStack().pop(true);
 
-				//hk - fire day end event at the end of the contract
-				// TODO: instead we roll for an event and fire it
+				//hk - roll for an event for party and fire it
+				// FEATURE_1: instead we roll for an event and fire it
+				// write event selection logic function, also check q of garunteed events
 				::Z.S.end_day_contract();
 			}
 		}

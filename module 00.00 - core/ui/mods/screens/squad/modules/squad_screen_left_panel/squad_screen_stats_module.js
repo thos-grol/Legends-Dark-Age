@@ -24,6 +24,40 @@ var SquadScreenStatsModule = function(_parent, _dataSource)
 
 	// left stats row defines
 	this.mLeftStatsRows = {
+		Hitpoints: {
+			IconPath: Path.GFX + Asset.ICON_HEALTH,
+			StyleName: ProgressbarStyleIdentifier.Hitpoints,
+			TooltipId: TooltipIdentifier.CharacterStats.Hitpoints,
+			Row: null,
+			Progressbar: null,
+			Talent: null
+		},
+		Fatigue: {
+            IconPath: Path.GFX + Asset.ICON_FATIGUE,
+            StyleName: ProgressbarStyleIdentifier.Fatigue,
+            TooltipId: TooltipIdentifier.CharacterStats.Fatigue,
+            Row: null,
+            Progressbar: null,
+            Talent: null
+        },
+		Bravery: {
+            IconPath: Path.GFX + Asset.ICON_BRAVERY,
+            StyleName: ProgressbarStyleIdentifier.Bravery,
+            TooltipId: TooltipIdentifier.CharacterStats.Bravery,
+            Row: null,
+            Progressbar: null,
+            Talent: null
+        },
+        Initiative: {
+            IconPath: Path.GFX + Asset.ICON_INITIATIVE,
+            StyleName: ProgressbarStyleIdentifier.Initiative,
+            TooltipId: TooltipIdentifier.CharacterStats.Initiative,
+            Row: null,
+            Progressbar: null,
+            Talent: null
+        },
+
+
 		ArmorHead: {
 			IconPath: Path.GFX + Asset.ICON_ARMOR_HEAD,
 			StyleName: ProgressbarStyleIdentifier.ArmorHead,
@@ -40,14 +74,6 @@ var SquadScreenStatsModule = function(_parent, _dataSource)
 			Progressbar: null,
 			Talent: null
 		},
-		Hitpoints: {
-			IconPath: Path.GFX + Asset.ICON_HEALTH,
-			StyleName: ProgressbarStyleIdentifier.Hitpoints,
-			TooltipId: TooltipIdentifier.CharacterStats.Hitpoints,
-			Row: null,
-			Progressbar: null,
-			Talent: null
-		},
 		ActionPoints: {
 			IconPath: Path.GFX + Asset.ICON_ACTION_POINTS,
 			StyleName: ProgressbarStyleIdentifier.ActionPoints,
@@ -56,14 +82,6 @@ var SquadScreenStatsModule = function(_parent, _dataSource)
 			Progressbar: null,
 			Talent: null
 		},
-        Fatigue: {
-            IconPath: Path.GFX + Asset.ICON_FATIGUE,
-            StyleName: ProgressbarStyleIdentifier.Fatigue,
-            TooltipId: TooltipIdentifier.CharacterStats.Fatigue,
-            Row: null,
-            Progressbar: null,
-            Talent: null
-        },
 		Morale: {
 			IconPath: Path.GFX + Asset.ICON_MORALE,
 			StyleName: ProgressbarStyleIdentifier.Morale,
@@ -72,22 +90,7 @@ var SquadScreenStatsModule = function(_parent, _dataSource)
 			Progressbar: null,
 			Talent: null
 		},
-        Bravery: {
-            IconPath: Path.GFX + Asset.ICON_BRAVERY,
-            StyleName: ProgressbarStyleIdentifier.Bravery,
-            TooltipId: TooltipIdentifier.CharacterStats.Bravery,
-            Row: null,
-            Progressbar: null,
-            Talent: null
-        },
-        Initiative: {
-            IconPath: Path.GFX + Asset.ICON_INITIATIVE,
-            StyleName: ProgressbarStyleIdentifier.Initiative,
-            TooltipId: TooltipIdentifier.CharacterStats.Initiative,
-            Row: null,
-            Progressbar: null,
-            Talent: null
-        }
+        
 	};
 
 	// middle stats row defines
@@ -100,14 +103,6 @@ var SquadScreenStatsModule = function(_parent, _dataSource)
             Progressbar: null,
             Talent: null
         },
-        RangeSkill: {
-            IconPath: Path.GFX + Asset.ICON_RANGE_SKILL,
-            StyleName: ProgressbarStyleIdentifier.RangeSkill,
-            TooltipId: TooltipIdentifier.CharacterStats.RangeSkill,
-            Row: null,
-            Progressbar: null,
-            Talent: null
-        },
 		MeleeDefense: {
 			IconPath: Path.GFX + Asset.ICON_MELEE_DEFENCE,
 			StyleName: ProgressbarStyleIdentifier.MeleeDefense,
@@ -116,14 +111,7 @@ var SquadScreenStatsModule = function(_parent, _dataSource)
 			Progressbar: null,
 			Talent: null
 		},
-		RangeDefense: {
-			IconPath: Path.GFX + Asset.ICON_RANGE_DEFENCE,
-			StyleName: ProgressbarStyleIdentifier.RangeDefense,
-			TooltipId: TooltipIdentifier.CharacterStats.RangeDefense,
-			Row: null,
-			Progressbar: null,
-			Talent: null
-		},
+
 		RegularDamage: {
 			IconPath: Path.GFX + Asset.ICON_REGULAR_DAMAGE,
 			StyleName: ProgressbarStyleIdentifier.RegularDamage,
@@ -155,7 +143,24 @@ var SquadScreenStatsModule = function(_parent, _dataSource)
 			Row: null,
 			Progressbar: null,
 			Talent: null
-		}
+		},
+		RangeSkill: {
+            IconPath: Path.GFX + Asset.ICON_RANGE_SKILL,
+            StyleName: ProgressbarStyleIdentifier.RangeSkill,
+            TooltipId: TooltipIdentifier.CharacterStats.RangeSkill,
+            Row: null,
+            Progressbar: null,
+            Talent: null
+        },
+		RangeDefense: {
+			IconPath: Path.GFX + Asset.ICON_RANGE_DEFENCE,
+			StyleName: ProgressbarStyleIdentifier.RangeDefense,
+			TooltipId: TooltipIdentifier.CharacterStats.RangeDefense,
+			Row: null,
+			Progressbar: null,
+			Talent: null
+		},
+		
 	};
 
     this.registerDatasourceListener();
