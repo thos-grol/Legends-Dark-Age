@@ -1,4 +1,3 @@
-//TODO: implement class stat growth display to replace stat projection in background tt
 //FIXME: contract destruction on world map doesn't seem to work correctly anymore, go fix it.
 
 IDEA: 
