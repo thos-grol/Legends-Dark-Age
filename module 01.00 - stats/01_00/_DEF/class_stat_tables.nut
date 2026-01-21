@@ -14,15 +14,16 @@
 ::DEF.C.Stats.Class.Vanguard.Skill     <- [0,  0,  10, 5,  5,  5,  5,  10];
 ::DEF.C.Stats.Class.Vanguard.Defense   <- [0,  0,  0,  5,  0,  5,  0,  10];
 
-// Rogues focuses on skill and agility and ignore mettle
-//                              Levels     1   2   3   4   5   6   7   8
-::DEF.C.Stats.Class.Rogue.Hitpoints    <- [5,  5,  5,  5,  5,  5,  5,  10];
-::DEF.C.Stats.Class.Rogue.Endurance    <- [5,  5,  5,  5,  5,  5,  5,  10];
-::DEF.C.Stats.Class.Rogue.Agility      <- [10, 10, 10, 10, 10, 10, 10, 20];
-::DEF.C.Stats.Class.Rogue.Mettle       <- [0,  0,  0,  0,  0,  0,  0,  10];
-::DEF.C.Stats.Class.Rogue.Skill        <- [5,  5,  10, 5,  10, 5,  10, 20];
-::DEF.C.Stats.Class.Rogue.Defense      <- [0,  0,  5,  5,  0,  5,  5,  10];
-::DEF.C.Stats.Class.Rogue.Recovery     <- [1,  1,  1,  1,  1,  1,  1,  5];
+// Rogues focuses on skill/def and agility and ignore health
+// They also have signifigant output ability
+//                              Levels     0   1   2   3   4   5   6   7
+::DEF.C.Stats.Class.Rogue.Hitpoints    <- [0,  0,-20,  0,  0,  0,  0,  0 ];
+::DEF.C.Stats.Class.Rogue.Endurance    <- [0,  0,  5,  5,  0,  5,  5,  10];
+::DEF.C.Stats.Class.Rogue.Agility      <- [0,  0,  15, 10, 5,  10, 0,  20];
+::DEF.C.Stats.Class.Rogue.Mettle       <- [0,  0,  5,  5,  0,  5,  5,  10];
+::DEF.C.Stats.Class.Rogue.Recovery     <- [0,  0,  2,  3,  4,  5,  0,  10];
+::DEF.C.Stats.Class.Rogue.Skill        <- [0,  0,  10, 5,  10, 5,  10, 10];
+::DEF.C.Stats.Class.Rogue.Defense      <- [0,  0,  5,  10, 0,  5,  0,  10];
 
 // Scrapper focuses on mettle and agility and ignore endurance
 //                              Levels     1   2   3   4   5   6   7   8

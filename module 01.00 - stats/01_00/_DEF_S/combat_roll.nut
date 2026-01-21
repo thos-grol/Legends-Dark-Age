@@ -27,6 +27,9 @@
 {
     local attacker_advantage = ::Z.S.get_advantage(attacker_properties);
     local defender_advantage = ::Z.S.get_advantage(defenderProperties, false);
+
+    if (defenderProperties.Alert_Defense && attacker_advantage >= 1) attacker_advantage = 0;
+
     local result = attacker_advantage - defender_advantage;
     local r1 = ::Math.rand(1, 100);
     local r2 = ::Math.rand(1, 100);

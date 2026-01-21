@@ -41,6 +41,8 @@
             local ef = ::Legends.Effects.grant(target, effect_def, function(_effect) {
                 _effect.set_turns(duration);
                 _effect.set_reduced();
+                if ("setActor" in _effect && actor.getFaction() == ::Const.Faction.Player)
+                    _effect.setActor(actor);
             }.bindenv(this));
             ::Z.S.do_log_logic(target, ef);
             break;
@@ -49,6 +51,8 @@
             local duration = tier_data["duration"];
             local ef = ::Legends.Effects.grant(target, effect_def, function(_effect) {
                 _effect.set_turns(duration);
+                if ("setActor" in _effect && actor.getFaction() == ::Const.Faction.Player)
+                    _effect.setActor(actor);
             }.bindenv(this));
             ::Z.S.do_log_logic(target, ef);
             break;
@@ -79,9 +83,9 @@
             return p.TechniqueResistance;
 
         case "Bleed":
-            return p.PhysicalResistance;
+            return p.BleedResistance;
         case "Poison":
-            return p.PhysicalResistance;
+            return p.PoisonResistance;
 
         case "Fire":
             return p.FireResistance;

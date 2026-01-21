@@ -110,5 +110,15 @@ this.lions_roar <- this.inherit("scripts/skills/skill", {
 		local pct = actor.getHitpointsPct();
 		if (pct <= 0.33) this.useForFree(actor.getTile());
 	}
+
+	function onCombatStarted()
+	{
+		this.m.charges = 0;
+	}
+
+	function onCombatFinished()
+	{
+		this.m.charges = 0;
+	}
 });
 

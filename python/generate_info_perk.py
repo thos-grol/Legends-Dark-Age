@@ -1,9 +1,11 @@
+import os
+
 # automates generation of boilerplate code
 PATH_STR = 'module 01.03 - perks/01_03/src/__CLASS/!STR/'
 PATH_ADD = 'module 01.03 - perks/01_03/src/__CLASS/ADD/'
 PATH_PERKS = 'module 01.03 - perks/scripts/skills/perks/'
 
-TREE_NAME = 'vanguard'
+TREE_NAME = 'rogue'
 
 tree_def = []
 
@@ -92,8 +94,26 @@ this.perk_{x_id} <- this.inherit("scripts/skills/skill", {{
 	function onAnySkillUsed( _skill, _targetEntity, _properties )
 	{{
 		
-		_properties.DamageRegularMin += BUFF;
-		_properties.DamageRegularMax += BUFF;
+		_properties.DamageRegularMin += this.m.BUFF;
+		_properties.DamageRegularMax += this.m.BUFF;
+	}}
+ 
+	function onUpdate( _properties )
+	{{
+		_properties.DamageTotalMult *= 2.0;
+	}}
+ 
+	function onAdded()
+	{{
+		if (!this.m.Container.hasActive(::Legends.Active.StunStrike))
+		{{
+			::Legends.Actives.grant(this, ::Legends.Active.StunStrike);
+		}}
+	}}
+ 
+	function onRemoved()
+	{{
+		::Legends.Actives.remove(this, ::Legends.Active.StunStrike);
 	}}
 }});"""
 
@@ -110,6 +130,7 @@ with open(PATH_ADD + f'{TREE_NAME}.nut', "w", encoding='utf-8') as f_out2:
     f_out2.write(OUTPUT['ADD'])
     
 for fname, output_file in OUTPUT['FILES'].items():
+    if os.path.exists(PATH_PERKS + f'{fname}.nut'): continue
     with open(PATH_PERKS + f'{fname}.nut', "w", encoding='utf-8') as f_out3:
         f_out3.write(output_file)
 

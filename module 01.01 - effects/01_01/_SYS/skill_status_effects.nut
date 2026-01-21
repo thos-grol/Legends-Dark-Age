@@ -16,6 +16,6 @@
     o.m.reduced <- false;
     o.set_reduced <- function()
     {
-        this.m.redued = true;
+        this.m.reduced = true;
     }
 });

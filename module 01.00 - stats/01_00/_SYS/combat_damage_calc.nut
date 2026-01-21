@@ -121,6 +121,16 @@
         hitInfo.Injuries = injuries;
         hitInfo.InjuryThresholdMult = _info.Properties.ThresholdToInflictInjuryMult;
         hitInfo.Tile = _info.TargetEntity.getTile();
+
+        // hk - fast adaptation logic with graze band
+        local fast_adaptation = _info.User.getSkills().getSkillByID("perk.fast_adaptation2");
+        if (fast_adaptation != null)
+        {
+            if (_info.HitResult == HIT_RESULT.HIT) fast_adaptation.m.Stacks = 0;
+            else fast_adaptation.m.Stacks++;
+        }
+        // hk - end
+
         _info.Container.onBeforeTargetHit(_info.Skill, _info.TargetEntity, hitInfo);
         local pos = _info.TargetEntity.getPos();
         local hasArmorHitSound = _info.TargetEntity.getItems().getAppearance().ImpactSound[bodyPart].len() != 0;

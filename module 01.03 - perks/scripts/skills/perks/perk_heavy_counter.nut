@@ -14,6 +14,13 @@ this.perk_heavy_counter <- this.inherit("scripts/skills/skill", {
 		this.m.IsHidden = false;
 	}
 
+	function consume_flaw_child(_actor, _targetEntity)
+	{
+		local roll = ::Math.rand(1, 100);
+		if (roll <= 25) ::Z.S.add_effect( _actor, _targetEntity, ::Legends.Effect.Stunned, 2);
+		else ::Z.S.add_effect( _actor, _targetEntity, ::Legends.Effect.Dazed, 2);
+	}
+
 	function onTargetHit( _skill, _targetEntity, _bodyPart, _damageInflictedHitpoints, _damageInflictedArmor )
 	{
 		if (_targetEntity == null) return;
@@ -25,14 +32,13 @@ this.perk_heavy_counter <- this.inherit("scripts/skills/skill", {
 		local flaw = _targetEntity.getSkills().getSkillByID("effects.flaw");
 		if (flaw != null)
 		{
-			local roll = ::Math.rand(1, 100);
-			if (roll <= 25) ::Z.S.add_effect( actor, _targetEntity, ::Legends.Effect.Stunned, 2);
-			else ::Z.S.add_effect( actor, _targetEntity, ::Legends.Effect.Dazed, 2);
-			_targetEntity.getSkills().removeByID("effects.flaw");
+			flaw.consume_flaw(actor, _targetEntity);
 		}
-
-		if (::Tactical.TurnSequenceBar.getActiveEntity() != null 
+		else
+		{
+			if (::Tactical.TurnSequenceBar.getActiveEntity() != null 
 			&& ::Tactical.TurnSequenceBar.getActiveEntity().getID() == actor.getID()) return;
-		::Z.S.add_effect_lite(actor, _targetEntity, ::Legends.Effect.Flaw);
+			::Z.S.add_effect_lite(actor, _targetEntity, ::Legends.Effect.Flaw);
+		}
 	}
 });

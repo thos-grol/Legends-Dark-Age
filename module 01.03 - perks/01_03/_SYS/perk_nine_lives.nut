@@ -14,7 +14,7 @@
 		this.m.Order = this.Const.SkillOrder.VeryLast + 10000;
 	}
 
-	o.setSpent = function ( _f )
+	o.setSpent <- function ( _f )
 	{
 		if (_f && !this.m.IsSpent)
 		{
@@ -37,14 +37,14 @@
 		if (this.m.timer_on) this.m.IsSpent = true;
 	}
 
-	o.onCombatStarted = function()
+	o.onCombatStarted <- function()
 	{
 		this.m.IsSpent = false;
 		this.m.timer_on = false;
 		this.m.LastFrameUsed = 0;
 	}
 
-	o.onCombatFinished = function()
+	o.onCombatFinished <- function()
 	{
 		this.m.IsSpent = false;
 		this.m.timer_on = false;

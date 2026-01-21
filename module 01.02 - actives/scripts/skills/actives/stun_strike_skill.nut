@@ -146,5 +146,15 @@ this.stun_strike_skill <- this.inherit("scripts/skills/skill", {
 		}
 	}
 
+	function onCombatStarted()
+	{
+		this.m.charges = 0;
+	}
+
+	function onCombatFinished()
+	{
+		this.m.charges = 0;
+	}
+
 });
 

@@ -53,8 +53,6 @@ this.character_system <- this.inherit("scripts/skills/skill", {
 		{
 			_properties.SurroundedDefense += 5;
 		}
-
-		
 	}
 });
 

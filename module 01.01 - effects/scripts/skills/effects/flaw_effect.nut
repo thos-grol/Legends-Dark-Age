@@ -95,5 +95,20 @@ this.flaw_effect <- this.inherit("scripts/skills/skill", {
 		}
 	}
 
+	function consume_flaw(_actor, _targetEntity)
+	{
+		local skill_container = this.getContainer();
+		foreach( skill in skill_container.m.Skills)
+		{
+			if (skill.isGarbage()) continue;
+			if ("consume_flaw_child" in skill)
+			{
+				skill.consume_flaw_child(_actor, _targetEntity);
+			}
+		}
+		
+		this.removeSelf();
+	}
+
 });
 

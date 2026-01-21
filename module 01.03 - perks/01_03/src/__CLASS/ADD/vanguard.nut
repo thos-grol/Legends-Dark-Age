@@ -21,8 +21,8 @@ pt.push({
     Script = "scripts/skills/perks/perk_conservation",
     Name = ::Const.Strings.PerkName.Conservation,
     Tooltip = ::Const.Strings.PerkDescription.Conservation,
-    Icon = "ui/perks/recuperation_circle.png",
-	IconDisabled = "ui/perks/recuperation_circle_bw.png",
+    Icon = "ui/perks/conservation.png",
+	IconDisabled = "ui/perks/conservation_bw.png",
     Const = "Conservation"
 });
         

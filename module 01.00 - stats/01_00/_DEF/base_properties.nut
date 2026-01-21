@@ -10,6 +10,10 @@
 ::Const.CharacterProperties.Disadvantage_Defense <- false;
 ::Const.CharacterProperties.Advantage_Defense <- false;
 
+::Const.CharacterProperties.Alert_Defense <- false;
+::Const.CharacterProperties.IsProficientWithRogue <- false;
+
+
 // properties that determine whether an attack will roll min or max damage between 2 rolls
 // neutral is normal BB behavior
 ::Const.CharacterProperties.Disstrike_Attack <- false;

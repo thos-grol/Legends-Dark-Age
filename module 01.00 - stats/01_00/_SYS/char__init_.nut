@@ -8,6 +8,7 @@
 		// hk - add character system
 		c.add(this.new("scripts/skills/special/log_system"));
 		c.add(this.new("scripts/skills/special/character_system"));
+		c.add(this.new("scripts/skills/special/bag_system"));
 	}
 });
 

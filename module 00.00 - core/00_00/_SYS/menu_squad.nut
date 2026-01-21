@@ -1,6 +1,7 @@
 ::mods_hookExactClass("states/world_state", function(o)
 {
 	// squad logic
+	o.m.SQUAD_STATE_LEN <- 10;
 	o.m.squad_state <- [ // 
 		SQUAD_STATE.FREE, // 1
 		SQUAD_STATE.FREE, // 2
@@ -27,7 +28,7 @@
 	o.onSerialize = function ( _out )
 	{
 		onSerialize(_out);
-		for(local i = 0; i < this.m.squad_state.len(); i++ )
+		for(local i = 0; i < this.m.SQUAD_STATE_LEN; i++ )
 		{
 			_out.writeU8(this.m.squad_state[i]);
 		}
@@ -37,7 +38,7 @@
 	o.onDeserialize = function ( _in )
 	{
 		onDeserialize(_in);
-		for(local i = 0; i < this.m.squad_state.len(); i++ )
+		for(local i = 0; i < this.m.SQUAD_STATE_LEN; i++ )
 		{
 			this.m.squad_state[i] = _in.readU8();
 		}

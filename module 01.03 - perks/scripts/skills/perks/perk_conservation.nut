@@ -27,6 +27,10 @@ this.perk_conservation <- this.inherit("scripts/skills/skill", {
 					_properties.IsProficientWithShieldWall = true;
 					break;
 
+				case "Rogue":
+					_properties.IsProficientWithRogue = true;
+					break;
+
 			}
 			
 		}

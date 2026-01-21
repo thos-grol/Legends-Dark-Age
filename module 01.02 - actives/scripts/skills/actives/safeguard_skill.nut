@@ -201,5 +201,15 @@ this.safeguard_skill <- this.inherit("scripts/skills/skill", {
 		}
 	}
 
+	function onCombatStarted()
+	{
+		this.m.cooldown = 0;
+	}
+
+	function onCombatFinished()
+	{
+		this.m.cooldown = 0;
+	}
+
 });
 
