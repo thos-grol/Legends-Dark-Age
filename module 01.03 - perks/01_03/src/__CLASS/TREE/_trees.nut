@@ -46,12 +46,12 @@
 		[
 			::Const.Perks.PerkDefs.PoisonMaster,
 			::Const.Perks.PerkDefs.Untouchable,
-			::Const.Perks.PerkDefs.SerpentsStrike,
+			::Const.Perks.PerkDefs.BladeDancer,
 		],
 		[
 			::Const.Perks.PerkDefs.LotusPoison,
 			::Const.Perks.PerkDefs.Sap,
-			::Const.Perks.PerkDefs.BattleDance,
+			::Const.Perks.PerkDefs.Duelist2,
 		],
 		[
 			::Const.Perks.PerkDefs.UncannyDodge,

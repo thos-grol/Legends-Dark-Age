@@ -70,10 +70,10 @@ this.flaw_effect <- this.inherit("scripts/skills/skill", {
 	function onRefresh()
 	{
 		this.m.TurnsLeft = 2;
-		local actor = this.getContainer().getActor();
-		if (actor == null) return;
-		if (!actor.isAlive() || actor.isDying()) return;
-		this.spawnIcon(this.m.Overlay, actor.getTile());
+		// local actor = this.getContainer().getActor();
+		// if (actor == null) return;
+		// if (!actor.isAlive() || actor.isDying()) return;
+		// this.spawnIcon(this.m.Overlay, actor.getTile());
 	}
 
 	function onRemoved()
@@ -84,7 +84,6 @@ this.flaw_effect <- this.inherit("scripts/skills/skill", {
 
 	function onUpdate( _properties )
 	{
-		_properties.MeleeDefense += -10;
 	}
 
 	function onTurnEnd()

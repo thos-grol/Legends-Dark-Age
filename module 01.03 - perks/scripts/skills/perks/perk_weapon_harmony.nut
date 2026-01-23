@@ -45,13 +45,16 @@ this.perk_weapon_harmony <- this.inherit("scripts/skills/skill", {
 	{
 		if (_skill == null) return;
 		if (this.m.is_spent) return;
-		if (_skill.getActionPointCost() <= 4) 
+		if (_skill.getActionPointCost() <= 4)
 		{
 			this.m._4AP_charges++;
 			if (this.m._4AP_charges <= 1) return;
 		}
-		
+
 		local actor = this.getContainer().getActor();
+
+		::Legends.Effects.grant(actor, ::Legends.Effect.Adrenaline);
+
 		if (!actor.isHiddenToPlayer())
 		{
 			if (this.m.SoundOnUse.len() != 0)

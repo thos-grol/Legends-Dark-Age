@@ -1,7 +1,7 @@
 
 this.perk_reflex <- this.inherit("scripts/skills/skill", {
 	m = {
-		BUFF = 1
+		enabled = false
 	},
 	function create()
 	{
@@ -14,30 +14,56 @@ this.perk_reflex <- this.inherit("scripts/skills/skill", {
 		this.m.IsActive = false;
 		this.m.IsStacking = false;
 		this.m.IsHidden = false;
+		this.m.SoundOnUse = [
+			"sounds/combat/perfect_focus_01.wav"
+		];
+		this.m.Overlay = "reflex";
 	}
 
-	function onAnySkillUsed( _skill, _targetEntity, _properties )
+	function trigger()
 	{
-		
-		_properties.DamageRegularMin += this.m.BUFF;
-		_properties.DamageRegularMax += this.m.BUFF;
-	}
- 
-	function onUpdate( _properties )
-	{
-		_properties.DamageTotalMult *= 2.0;
-	}
- 
-	function onAdded()
-	{
-		if (!this.m.Container.hasActive(::Legends.Active.StunStrike))
+		if (this.m.enabled) return;
+		this.m.enabled = true;
+
+		local actor = this.getContainer().getActor();
+		actor.setFatigue(this.Math.max(0, actor.getFatigue() - 15));
+		actor.setDirty(true);
+
+		if (!actor.isHiddenToPlayer())
 		{
-			::Legends.Actives.grant(this, ::Legends.Active.StunStrike);
+			if (this.m.SoundOnUse.len() != 0)
+			{
+				this.Sound.play(this.m.SoundOnUse[this.Math.rand(0, this.m.SoundOnUse.len() - 1)], this.Const.Sound.Volume.RacialEffect * 1.5, actor.getPos());
+			}
+
+			this.spawnIcon(this.m.Overlay, actor.getTile());
+			::Tactical.EventLog.logIn(::color_name(actor) + " [Reflex]");
 		}
 	}
- 
-	function onRemoved()
+
+	function onDamageReceived( _attacker, _damageHitpoints, _damageArmor )
 	{
-		::Legends.Actives.remove(this, ::Legends.Active.StunStrike);
+		if (::Math.rand(1, 100) > 20) return;
+		trigger();
+	}
+
+	function onMissed( _attacker, _skill )
+	{
+		if (::Math.rand(1, 100) > 20) return;
+		trigger();
+	}
+
+	function onUpdate( _properties )
+	{
+		_properties.MeleeDefense += 5;
+		if (this.m.enabled)
+		{
+			_properties.ActionPoints += 4;
+		}
+	}
+
+	function onTurnEnd()
+	{
+		this.m.enabled = false;
 	}
 });

@@ -51,3 +51,12 @@
 
 ::DEF.C.Effect_Explanations["Resistance"] <- "\n\n" + ::gray("« Flaw »")
 + "\n" + ::gray("Decrease the tier of a status effect/elemental type");
+
+::DEF.C.Effect_Explanations["Poison"] <- "\n\n" + ::gray("« Poison (Poison) »")
++ "\n" + ::gray("5 Damage on [Wait] or [Turn End]")
++ "\n" + ::gray("• T0: Resisted")
++ "\n" + ::gray("• T1: Reduced to 3 Damage, 2 turn")
++ "\n" + ::gray("• T2: 2 turn")
++ "\n" + ::gray("• T3: 3 turn")
++ "\n" + ::gray("• T4: 3 turn")
++ "\n" + ::gray("• T5: 4 turn");

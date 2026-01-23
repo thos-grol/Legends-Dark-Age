@@ -121,23 +121,23 @@
     },
     { // 1
         "result" : "REDUCED",
-        "duration" : 1,
+        "duration" : 2,
     },
     { // 2
         "result" : "ADD",
-        "duration" : 1,
+        "duration" : 2,
     },
     { // 3
         "result" : "ADD",
-        "duration" : 2,
+        "duration" : 3,
     },
     { // 4
         "result" : "ADD",
-        "duration" : 2,
+        "duration" : 3,
     },
     { // 5
         "result" : "ADD",
-        "duration" : 3,
+        "duration" : 4,
     },
 ];
 

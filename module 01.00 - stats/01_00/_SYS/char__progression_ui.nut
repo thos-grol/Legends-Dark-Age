@@ -13,12 +13,7 @@
 
     o.class_button_logic <- function()
     {
-        local _newTree = ::Const.Perks.ClassTrees.getRandom(null);
-		getBackground().addPerkGroup(_newTree.Tree);
-        this.getFlags().add("Class Added");
-        this.getFlags().set("Class", _newTree.Name);
-
-        this.updateLevel();
+        ::Z.S.set_class_random(this);
     }
 
 });

@@ -43,6 +43,7 @@ this.fleche_skill <- this.inherit("scripts/skills/skill", {
 
 	function getTooltip()
 	{
+		// recalc_costs();
 		local ret = this.getDefaultTooltip();
 		ret.pop();
 		ret.pop();
@@ -175,6 +176,12 @@ this.fleche_skill <- this.inherit("scripts/skills/skill", {
 		::Tactical.getNavigator().teleport(_tag.User, _tag.TargetTile, null, null, false);
 	}
 
+	function onAfterUpdate( _properties )
+	{
+		recalc_costs();
+		this.m.FatigueCostMult *= _properties.IsProficientWithRogue ? 0.75 : 1.0;
+	}
+
 
 
 	// management logic
@@ -183,33 +190,11 @@ this.fleche_skill <- this.inherit("scripts/skills/skill", {
 	{
 		local actor = this.getContainer().getActor();
 		local skill = actor.getSkills().getAttackOfOpportunity();
+		
+		if (skill == null) return;
+
 		this.m.ActionPointCost = skill.getActionPointCost();
 		this.m.FatigueCost = skill.getFatigueCost() + 15;
-	}
-
-	function onAdded()
-	{
-		recalc_costs();
-	}
-
-	function onEquip( _item )
-	{
-		recalc_costs();
-	}
-
-	function onUnequip( _item )
-	{
-		recalc_costs();
-	}
-
-	function onCombatStarted()
-	{
-		recalc_costs();
-	}
-
-	function onCombatFinished()
-	{
-		recalc_costs();
 	}
 
 	function isUsable()

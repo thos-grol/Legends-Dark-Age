@@ -183,9 +183,15 @@ SquadScreen.prototype.createDIV = function (_parentDiv)
 SquadScreen.prototype.update_embark_button_state = function ()
 {
 	var num_bros = this.mBrothersModule.mNumActive;
-	var enabled = num_bros <= this.max_squad_size 
+	try
+	{
+		var enabled = num_bros <= this.max_squad_size 
 		&& num_bros > 0
 		&& this.data_squad_state[this.mBrothersModule.CHUNK_INDEX] !== 1;
+	}
+	catch (error) {
+		var enabled = false;
+	}
 	
 	this.mInfo_Embark_Button.enableButton(enabled);
 }

@@ -27,6 +27,10 @@ this.perk_alert2 <- this.inherit("scripts/skills/skill", {
 		if (level >= 5) mult++;
 		
 		_properties.Initiative += 10 * mult;
+
+		if (::has_skill(actor, "effects.dazed")) return;
+		if (::has_skill(actor, "effects.stunned")) return;
+		
 		_properties.Alert_Defense = true;
 	}
 });

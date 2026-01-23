@@ -1,7 +1,7 @@
 
 this.perk_quick_hands2 <- this.inherit("scripts/skills/skill", {
 	m = {
-		BUFF = 1
+		is_spent = false
 	},
 	function create()
 	{
@@ -14,30 +14,44 @@ this.perk_quick_hands2 <- this.inherit("scripts/skills/skill", {
 		this.m.IsActive = false;
 		this.m.IsStacking = false;
 		this.m.IsHidden = false;
+		this.m.ItemActionOrder = ::Const.ItemActionOrder.Any;
 	}
 
-	function onAnySkillUsed( _skill, _targetEntity, _properties )
+	function onPayForItemAction( _skill, _items )
 	{
-		
-		_properties.DamageRegularMin += this.m.BUFF;
-		_properties.DamageRegularMax += this.m.BUFF;
-	}
- 
-	function onUpdate( _properties )
-	{
-		_properties.DamageTotalMult *= 2.0;
-	}
- 
-	function onAdded()
-	{
-		if (!this.m.Container.hasActive(::Legends.Active.StunStrike))
+		if (_skill == this)
 		{
-			::Legends.Actives.grant(this, ::Legends.Active.StunStrike);
+			this.m.is_spent = true;
 		}
 	}
- 
-	function onRemoved()
+
+	// helper
+	function getItemActionCost( _items )
 	{
-		::Legends.Actives.remove(this, ::Legends.Active.StunStrike);
+		// foreach (item in _items)
+		// {
+		// 	if (item != null && item.isItemType(::Const.Items.ItemType.Shield))
+		// 	{
+		// 		return null;
+		// 	}
+		// }
+		return this.m.is_spent ? null : 0;
+	}
+
+	// management
+
+	function onTurnStart()
+	{
+		this.m.is_spent = false;
+	}
+
+	function onCombatStarted()
+	{
+		this.m.is_spent = false;
+	}
+
+	function onCombatFinished()
+	{
+		this.m.is_spent = false;
 	}
 });

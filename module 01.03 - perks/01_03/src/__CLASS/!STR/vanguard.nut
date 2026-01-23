@@ -15,8 +15,12 @@
 + "\n" + ::green("– 25%") + " Fatigue " + ::red("(Skill)")
 
 + "\n\n" + ::blue("« Vanguard »")
-+ "\n" + ::green("– 75%") + " Fatigue " + ::seagreen("(Shieldwall)")
-+ "\n" + ::green("– 75%") + " Fatigue " + ::seagreen("(Safeguard)");
++ "\n" + ::green("– 25%") + " Fatigue " + ::seagreen("(Shieldwall)")
++ "\n" + ::green("– 25%") + " Fatigue " + ::seagreen("(Safeguard)")
+
++ "\n\n" + ::blue("« Rogue »")
++ "\n" + ::green("– 25%") + " Fatigue " + ::seagreen("(Footwork)")
++ "\n" + ::green("– 25%") + " Fatigue " + ::seagreen("(Fleche)");
         
 ::Const.Strings.PerkName.BruteStrength <- "Brute Strength";
 ::Const.Strings.PerkDescription.BruteStrength <- "Improves lethality"
@@ -106,7 +110,10 @@
 + "\n\n" + ::blue("« Passive »")
 + "\n" + ::green("+10") + " Skill"
 + "\n\n" + ::blue("« On Hit »")
-+ "\n" + "• Do 2 damage rolls and pick the highest one";
++ "\n" + "• Do 2 damage rolls and pick the highest one"
++ "\n\n" + ::blue("« For Rogues »")
++ "\n" + "• Boost passive [Keen Insight]: 15% -> 25%";
+
 
 // =================================================================================================
 // 5

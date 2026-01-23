@@ -1,6 +1,6 @@
 ::mods_hookExactClass("skills/effects/spider_poison_effect", function(o)
 {
-    o.m.Damage <- 10;
+    o.m.Damage <- 5;
 
     o.getDescription = function()
 	{
@@ -22,7 +22,7 @@
 
 			local hitInfo = clone this.Const.Tactical.HitInfo;
 			hitInfo.DamageRegular = this.m.Damage;
-			if (this.m.reduced) hitInfo.DamageRegular /= 2;
+			if (this.m.reduced) hitInfo.DamageRegular = 3;
 			hitInfo.DamageDirect = 1.0;
 			hitInfo.BodyPart = this.Const.BodyPart.Body;
 			hitInfo.BodyDamageMult = 1.0;

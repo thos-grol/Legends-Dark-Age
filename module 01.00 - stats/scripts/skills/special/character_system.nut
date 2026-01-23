@@ -39,6 +39,8 @@ this.character_system <- this.inherit("scripts/skills/skill", {
 		return ret;
 	}
 
+
+
 	// logic fns, implement passives given by level and class
 	function onUpdate( _properties )
 	{
@@ -51,7 +53,100 @@ this.character_system <- this.inherit("scripts/skills/skill", {
 		if (f.has("Class")) _class = f.get("Class");
 		if (_class == "Vanguard")
 		{
-			_properties.SurroundedDefense += 5;
+			_properties.SurroundedDefense += 5; // Underdog
+		}
+	}
+
+
+
+	// on attacked
+	function roll_flaw(actor, _targetEntity)
+	{
+		if (!actor.isAlive() || actor.isDying()) return;
+		if (!_targetEntity.isAlive() || _targetEntity.isDying()) return;
+
+		if (actor.isAlliedWith(_targetEntity)) return;
+		if (actor.getID() == _targetEntity.getID()) return;
+
+		local true_strike = actor.getSkills().getSkillByID("perk.true_strike") != null;
+		local chance = 15;
+		if (true_strike) chance += 10;
+		if (::Math.rand(1, 100) > chance) return;
+
+		local limit = 2;
+		if (actor.getTile().getDistanceTo(_targetEntity.getTile()) > limit) return;
+
+		::Z.S.add_effect_lite(actor, _targetEntity, ::Legends.Effect.Flaw);
+	}
+
+	function onTargetHit( _skill, _targetEntity, _bodyPart, _damageInflictedHitpoints, _damageInflictedArmor )
+	{
+		local c = this.getContainer();
+		local actor = c.getActor();
+		local f = actor.getFlags();
+
+		// implement class passives
+		local _class = null;
+		if (f.has("Class")) _class = f.get("Class");
+
+		// rogue - keen instinct
+		if (_class == "Rogue")
+		{
+			roll_flaw(actor, _targetEntity);
+		}
+	}
+
+	function onTargetMissed( _skill, _targetEntity )
+	{
+		local c = this.getContainer();
+		local actor = c.getActor();
+		local f = actor.getFlags();
+
+		// implement class passives
+		local _class = null;
+		if (f.has("Class")) _class = f.get("Class");
+
+		// rogue - keen instinct
+		if (_class == "Rogue")
+		{
+			roll_flaw(actor, _targetEntity);
+		}
+	}
+
+	
+
+	// on being attacked
+	function onMissed( _attacker, _skill )
+	{
+		local c = this.getContainer();
+		local actor = c.getActor();
+		local f = actor.getFlags();
+
+		// implement class passives
+		local _class = null;
+		if (f.has("Class")) _class = f.get("Class");
+
+		// rogue - keen instinct
+		if (_class == "Rogue")
+		{
+			roll_flaw(actor, _attacker);
+		}
+	}
+
+	function onBeforeDamageReceived( _attacker, _skill, _hitInfo, _properties )
+	{
+		local c = this.getContainer();
+		local actor = c.getActor();
+		local f = actor.getFlags();
+
+		// implement class passives
+		local _class = null;
+		if (f.has("Class")) _class = f.get("Class");
+
+		// rogue - keen instinct
+		if (_class == "Rogue")
+		{
+			roll_flaw(actor, _attacker);
 		}
 	}
 });

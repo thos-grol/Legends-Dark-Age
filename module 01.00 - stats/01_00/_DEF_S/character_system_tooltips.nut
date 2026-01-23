@@ -28,6 +28,34 @@
             });
             break;
 
+        case "Rogue":
+            local ki_text = ::seagreen("Keen Insight") 
+                + "\n "+ "Apply [Flaw] (Range 2):"
+                + "\n "+ "• On attacked by an AOE melee"
+                + "\n "+ "• 15% - Attacked"
+                + "\n "+ "• 15% - Attacking";
+            ret.push({
+                id = 10,
+                type = "text",
+                icon = "ui/icons/special_named.png",
+                text = ki_text
+            });
+
+            ret.push({
+                id = 10,
+                type = "text",
+                icon = "ui/icons/special_named.png",
+                text = ::seagreen("Footwork") + " - Adds the [Footwork] active"
+            });
+
+            ret.push({
+                id = 10,
+                type = "text",
+                icon = "ui/icons/special_named.png",
+                text = ::seagreen("Throwing Proficiency") + ::red(" (at Lvl 3)") + " - Gain the ability to use Throwing weapons"
+            });
+            break;
+
         case "Vanguard":
             ret.push({
                 id = 10,
@@ -39,7 +67,7 @@
                 id = 10,
                 type = "text",
                 icon = "ui/icons/special_named.png",
-                text = ::seagreen("Underdog") + " - The defense malus due to being surrounded by opponents is reduced by 5."
+                text = ::seagreen("Underdog") + " - The defense malus due to being surrounded by opponents is reduced by 5"
             });
             break;
     }

@@ -18,10 +18,14 @@ var hk_btn_sounds =
 	},
 	setCallbacks : function(_obj){
 		_obj.on("click", function(){
-			SQ.call(hk_btn_sounds.mSQHandle, 'onButtonClicked');
+			try {
+				SQ.call(hk_btn_sounds.mSQHandle, 'onButtonClicked');
+			} catch (error) {}
 		})
 		_obj.on("mouseenter", function(){
-			SQ.call(hk_btn_sounds.mSQHandle, 'onHover')
+			try {
+				SQ.call(hk_btn_sounds.mSQHandle, 'onHover')
+			} catch (error) {}
 		})
 	},
 	wrapper : function(_func)

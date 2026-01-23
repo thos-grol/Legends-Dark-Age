@@ -12,6 +12,10 @@ this.perk_twin_fangs <- this.inherit("scripts/skills/skill", {
 		this.m.IsActive = false;
 		this.m.IsStacking = false;
 		this.m.IsHidden = false;
+		this.m.SoundOnUse = [
+			"sounds/general/twin_fangs.wav",
+		];
+		this.m.Overlay = "twin_fangs";
 	}
 
 	// main logic
@@ -46,9 +50,11 @@ this.perk_twin_fangs <- this.inherit("scripts/skills/skill", {
 	function check_flaw(_skill, _targetEntity)
 	{
 		if (_targetEntity == null) return;
+		if (!_targetEntity.isAlive() || _targetEntity.isDying()) return;
 
 		local actor = this.getContainer().getActor();
 		if (_targetEntity == actor) return;
+		if (!actor.isAlive() || actor.isDying()) return;
 
 		local flaw = _targetEntity.getSkills().getSkillByID("effects.flaw");
 		if (flaw != null)
@@ -58,16 +64,24 @@ this.perk_twin_fangs <- this.inherit("scripts/skills/skill", {
 			{
 				flaw.consume_flaw(actor, _targetEntity);
 
-				//TODO: play sfx sound 
-				//TODO: trigger skill icon triggering
+				if (!actor.isHiddenToPlayer())
+				{
+					if (this.m.SoundOnUse.len() != 0)
+					{
+						this.Sound.play(this.m.SoundOnUse[this.Math.rand(0, this.m.SoundOnUse.len() - 1)], this.Const.Sound.Volume.RacialEffect * 1.5, actor.getPos());
+					}
 
-				local skill = _tag.User.getSkills().getAttackOfOpportunity();
+					this.spawnIcon(this.m.Overlay, actor.getTile());
+					::Tactical.EventLog.logIn(::color_name(actor) + " [Twin Fangs]");
+				}
+
+				local skill = actor.getSkills().getAttackOfOpportunity();
 				if (skill != null)
 				{
 					local info = {
-						User = _tag.User,
+						User = actor,
 						Skill = skill,
-						TargetTile = _tag.TargetTile
+						TargetTile = _targetEntity.getTile()
 					};
 					this.Time.scheduleEvent(this.TimeUnit.Virtual, this.Const.Combat.RiposteDelay, this.on_aoo.bindenv(this), info);
 				}
@@ -77,7 +91,12 @@ this.perk_twin_fangs <- this.inherit("scripts/skills/skill", {
 
 	function on_aoo( _info )
 	{
-		if (!_info.User.isAlive()) return;
+		local actor = _info.User;
+		local _targetEntity = _info.TargetTile.getEntity();
+
+		if (!actor.isAlive() || actor.isDying()) return;
+		if (_targetEntity == null || !_targetEntity.isAlive() || actor.isDying()) return;
+
 		_info.Skill.useForFree(_info.TargetTile);
 	}
 });

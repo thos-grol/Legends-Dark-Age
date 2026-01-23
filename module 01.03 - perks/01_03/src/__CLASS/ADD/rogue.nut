@@ -117,17 +117,6 @@ pt.push({
     Const = "Escape"
 });
         
-::Legends.Perk.NineLives <- null;
-pt.push({
-    ID = "perk.nine_lives",
-    Script = "scripts/skills/perks/perk_nine_lives",
-    Name = ::Const.Strings.PerkName.NineLives,
-    Tooltip = ::Const.Strings.PerkDescription.NineLives,
-    Icon = "ui/perks/nine_lives.png",
-    IconDisabled = "ui/perks/nine_lives_sw.png",
-    Const = "NineLives"
-});
-        
 ::Legends.Perk.TrueStrike <- null;
 pt.push({
     ID = "perk.true_strike",
@@ -165,15 +154,15 @@ pt.push({
     Const = "Untouchable"
 });
         
-::Legends.Perk.SerpentsStrike <- null;
+::Legends.Perk.BladeDancer <- null;
 pt.push({
-    ID = "perk.serpents_strike",
-    Script = "scripts/skills/perks/perk_serpents_strike",
-    Name = ::Const.Strings.PerkName.SerpentsStrike,
-    Tooltip = ::Const.Strings.PerkDescription.SerpentsStrike,
-    Icon = "ui/perks/serpents_strike.png",
-    IconDisabled = "ui/perks/serpents_strike_sw.png",
-    Const = "SerpentsStrike"
+    ID = "perk.blade_dancer",
+    Script = "scripts/skills/perks/perk_blade_dancer",
+    Name = ::Const.Strings.PerkName.BladeDancer,
+    Tooltip = ::Const.Strings.PerkDescription.BladeDancer,
+    Icon = "ui/perks/blade_dancer.png",
+    IconDisabled = "ui/perks/blade_dancer_sw.png",
+    Const = "BladeDancer"
 });
         
 // =================================================================================================
@@ -202,15 +191,15 @@ pt.push({
     Const = "Sap"
 });
         
-::Legends.Perk.BattleDance <- null;
+::Legends.Perk.Duelist2 <- null;
 pt.push({
-    ID = "perk.battle_dance",
-    Script = "scripts/skills/perks/perk_battle_dance",
-    Name = ::Const.Strings.PerkName.BattleDance,
-    Tooltip = ::Const.Strings.PerkDescription.BattleDance,
-    Icon = "ui/perks/battle_dance.png",
-    IconDisabled = "ui/perks/battle_dance_sw.png",
-    Const = "BattleDance"
+    ID = "perk.duelist2",
+    Script = "scripts/skills/perks/perk_duelist2",
+    Name = ::Const.Strings.PerkName.Duelist2,
+    Tooltip = ::Const.Strings.PerkDescription.Duelist2,
+    Icon = "ui/perks/duelist2.png",
+    IconDisabled = "ui/perks/duelist2_sw.png",
+    Const = "Duelist2"
 });
         
 // =================================================================================================

@@ -1,8 +1,6 @@
 
 this.perk_poison_master <- this.inherit("scripts/skills/skill", {
-	m = {
-		BUFF = 1
-	},
+	m = {},
 	function create()
 	{
 		this.m.ID = "perk.poison_master";
@@ -16,28 +14,8 @@ this.perk_poison_master <- this.inherit("scripts/skills/skill", {
 		this.m.IsHidden = false;
 	}
 
-	function onAnySkillUsed( _skill, _targetEntity, _properties )
-	{
-		
-		_properties.DamageRegularMin += this.m.BUFF;
-		_properties.DamageRegularMax += this.m.BUFF;
-	}
- 
 	function onUpdate( _properties )
 	{
-		_properties.DamageTotalMult *= 2.0;
-	}
- 
-	function onAdded()
-	{
-		if (!this.m.Container.hasActive(::Legends.Active.StunStrike))
-		{
-			::Legends.Actives.grant(this, ::Legends.Active.StunStrike);
-		}
-	}
- 
-	function onRemoved()
-	{
-		::Legends.Actives.remove(this, ::Legends.Active.StunStrike);
+		_properties.PoisonResistance += 2;
 	}
 });
