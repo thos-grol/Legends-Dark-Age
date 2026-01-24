@@ -28,6 +28,7 @@
 
 ::Color.hit_result[HIT_RESULT.MISS] <- ::Color.NiceRed;
 ::Color.hit_result[HIT_RESULT.GRAZE] <- ::Color.NiceYellow;
+::Color.hit_result[HIT_RESULT.MEGA_GRAZE] <- ::Color.NiceYellow;
 ::Color.hit_result[HIT_RESULT.HIT] <- ::Color.NiceGreen;
 
 

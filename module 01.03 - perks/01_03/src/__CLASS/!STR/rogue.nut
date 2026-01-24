@@ -58,9 +58,10 @@
 ::Const.Strings.PerkName.Poisoner <- "Poisoner";
 ::Const.Strings.PerkDescription.Poisoner <- "Improves lethality"
 + "\n\n" + ::blue("« Passive »")
-+ "\n" + ::green("+25%") + " Poison Chance"
++ "\n" + ::green("+33%") + " Poison Chance"
 + "\n" + ::green("+1") + " Poison Tier"
 + "\n" + ::red("• Once per unit, adds a poison item to this unit\'s bag")
++ "\n" + ::red("• Perk can\'t be taken if bag is full")
 + ::DEF.C.Effect_Explanations["Poison"];
 
 ::Const.Strings.PerkName.Reflex <- "Reflex";
@@ -106,9 +107,9 @@
 ::Const.Strings.PerkName.Untouchable <- "Untouchable";
 ::Const.Strings.PerkDescription.Untouchable <- "Improves survival"
 + "\n\n" + ::blue("« On Enemy Kill »")
-+ "\n" + ::green("+4") + " [Untouchable] stacks"
++ "\n" + ::green("+2") + " [Untouchable] stacks"
 
-+ "\n\n" + ::gray("« Untouchable » Max 4")
++ "\n\n" + ::gray("« Untouchable » Max 2")
 + "\n" + ::gray("While this character has stacks, they take 0 damage from most attacks. Things like explosions or undodgeable attacks are exceptions")
 + "\n" + ::gray("• Lose 1 stack on 1H attack")
 + "\n" + ::gray("• Lose 2 stacks on 2H attack");
@@ -127,39 +128,49 @@
 // =================================================================================================
     
 ::Const.Strings.PerkName.LotusPoison <- "Lotus Poison";
-::Const.Strings.PerkDescription.LotusPoison <- "TODO"
-+ "\n\n" + ::blue("« Passive »")
-+ "\n" + ::green("+1") + " Fat Recovery";
-//TODO:implement
+::Const.Strings.PerkDescription.LotusPoison <- "Improves control ability"
++ "\n\n" + ::blue("« On Poison Apply »")
++ "\n" + ::green("25%") + " chance to apply [T5 Weakness]"
++ ::DEF.C.Effect_Explanations["Weakness"];
         
 ::Const.Strings.PerkName.Sap <- "Sap";
-::Const.Strings.PerkDescription.Sap <- "TODO"
+::Const.Strings.PerkDescription.Sap <- "Improves control ability"
 + "\n\n" + ::blue("« Passive »")
-+ "\n" + ::green("+1") + " Fat Recovery";
-//TODO:implement
++ "\n" + ::green("+25%") + " Headshot chance"
++ "\n" + "• Headshots will consume [Flaw] and stun";
         
 ::Const.Strings.PerkName.Duelist2 <- "Duelist";
-::Const.Strings.PerkDescription.Duelist2 <- "TODO"
+::Const.Strings.PerkDescription.Duelist2 <- "Improves lethality"
 + "\n\n" + ::blue("« Passive »")
-+ "\n" + ::green("+1") + " Fat Recovery";
-//TODO:implement
++ "\n" + ::green("+25%") + " Armor Ignore"
++ "\n" + ::red("• Invalid with 2H weapons")
++ "\n" + ::red("• Offhand must be free")
++ "\n" + ::red("• Exceptions:")
++ "\n\n" + ::blue("« On Enemy Killed (Max 2 turns)»")
++ "\n" + ::green("+25%") + " Damage (+2 turns)";
+//FIXME: Rogue - list Dulist exceptions
         
 // =================================================================================================
 // 7
 // =================================================================================================
     
 ::Const.Strings.PerkName.UncannyDodge <- "Uncanny Dodge";
-::Const.Strings.PerkDescription.UncannyDodge <- "TODO"
+::Const.Strings.PerkDescription.UncannyDodge <- "Improves survival"
 + "\n\n" + ::blue("« Passive »")
-+ "\n" + ::green("+1") + " Fat Recovery";
-//TODO:implement
++ "\n" + ::green("50%") + " chance to degrade hits by one level"
++ "\n" + ::gray("• Hit -> Graze")
++ "\n" + ::gray("• Graze -> 10%")
++ "\n" + ::gray("• 10% -> Miss");
         
 ::Const.Strings.PerkName.ViciousInsight <- "Vicious Insight";
-::Const.Strings.PerkDescription.ViciousInsight <- "TODO"
+::Const.Strings.PerkDescription.ViciousInsight <- "Improves lethality"
 + "\n\n" + ::blue("« Passive »")
-+ "\n" + ::green("+1") + " Fat Recovery";
-//TODO:implement
-        
++ "\n" + "• Boost passive [Keen Insight]: +10%"
++ "\n" + ::green("50%") + " chance to upgrade hits by one level"
++ "\n" + ::gray("• Miss -> 10%")
++ "\n" + ::gray("• 10% -> Graze")
++ "\n" + ::gray("• Graze -> Hit");
+
 ::Const.Strings.PerkName.WeaponMaster <- "Weapon Master";
 ::Const.Strings.PerkDescription.WeaponMaster <- "TODO"
 + "\n\n" + ::blue("« Passive »")

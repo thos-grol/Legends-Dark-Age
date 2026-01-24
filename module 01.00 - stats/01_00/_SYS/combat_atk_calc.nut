@@ -198,6 +198,32 @@ o.attackEntity = function( _user, _targetEntity, _allowDiversion = true )
 		hit_result = HIT_RESULT.MISS;
 	}
 
+	// hk - uncanny dodge logic with graze band
+	local is_uncanny_dodge = false;
+	local uncanny_dodge = _targetEntity.getSkills().getSkillByID("perk.uncanny_dodge");
+	if (uncanny_dodge != null)
+	{
+		if (::Math.rand(1, 100) <= 50 && hit_result != HIT_RESULT.MISS) 
+		{
+			hit_result = ::Z.S.degrade_result(hit_result);
+			is_uncanny_dodge = true;
+		}
+	}
+	// hk - end
+
+	// hk - vicious_insight logic with graze band
+	local is_vicious_insight = false;
+	local vicious_insight = _user.getSkills().getSkillByID("perk.vicious_insight");
+	if (vicious_insight != null)
+	{
+		if (::Math.rand(1, 100) <= 50 && hit_result != HIT_RESULT.HIT) 
+		{
+			hit_result = ::Z.S.upgrade_result(hit_result);
+			is_vicious_insight = true;
+		}
+	}
+	// hk - end
+
 	if (!_user.isHiddenToPlayer() && !_targetEntity.isHiddenToPlayer())
     {
         this.Tactical.EventLog.log_newline();
@@ -225,6 +251,16 @@ o.attackEntity = function( _user, _targetEntity, _allowDiversion = true )
 				Astray = astray,
 				Advantage = advantage
 			});
+		}
+
+		if (is_uncanny_dodge)
+		{
+			::Tactical.EventLog.logIn(::color_name(_targetEntity) + " [Uncanny Dodge]");
+		}
+		
+		if (is_vicious_insight)
+		{
+			::Tactical.EventLog.logIn(::color_name(_user) + " [Vicious Insight]");
 		}
 	}
 
@@ -266,6 +302,7 @@ o.attackEntity = function( _user, _targetEntity, _allowDiversion = true )
 		this.getContainer().setBusy(true);
 
 		if (hit_result == HIT_RESULT.GRAZE) properties.DamageTotalMult *= 0.33;
+		else if(hit_result == HIT_RESULT.MEGA_GRAZE) properties.DamageTotalMult *= 0.1;
 
 		local info = {
 			Skill = this,

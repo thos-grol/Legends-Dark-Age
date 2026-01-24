@@ -5,6 +5,7 @@ enum SQUAD_STATE {
 
 enum HIT_RESULT {
     MISS,
+    MEGA_GRAZE,
     GRAZE,
     HIT
 };

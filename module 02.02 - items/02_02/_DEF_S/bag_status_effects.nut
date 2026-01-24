@@ -30,7 +30,7 @@
     local poisoner = tag._actor.getSkills().getSkillByID("perk.poisoner") != null;
 
     local chance = tag._effect_chance;
-    if (poisoner) chance += 25;
+    if (poisoner) chance += 33;
     if (::Math.rand(1, 100) > chance) return;
 
     // 2. check resistances & apply the effect
@@ -45,9 +45,9 @@
     }
 
     // 4. apply any other modifiers on successful apply
-    if (tag._actor.getSkills().getSkillByID("perk.lotus_poison") != null)
+    if (tag._actor.getSkills().getSkillByID("perk.lotus_poison") != null && ::Math.rand(1, 100) <= 25)
     {
-        //TODO: lotus poison apply weakness
+        ::Z.S.add_effect( tag._actor, tag._target, ::Legends.Effect.Weakness, 5);
     }
 }
 

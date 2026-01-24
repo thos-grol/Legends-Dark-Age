@@ -20,7 +20,7 @@ this.bag_poison <- this.inherit("scripts/items/accessory/accessory", {
 	{
 		local effect_str = "Inflict " + ::seagreen("T2 Poison")
 		+ "\n" + "Requirements:"
-		+ "\n" + "• " + ::green("50%") + " chance"
+		+ "\n" + "• " + ::green("33%") + " chance"
 		+ "\n" + "• At least " + ::red("6") + " Health damage"
 		+ "\n" + "• " + ::red("Cut") + " or " + ::red("Pierce") + " damage";
 

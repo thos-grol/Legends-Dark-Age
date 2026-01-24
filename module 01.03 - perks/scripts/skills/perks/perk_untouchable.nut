@@ -2,7 +2,7 @@
 this.perk_untouchable <- this.inherit("scripts/skills/skill", {
 	m = {
 		stacks = 0,
-		stacks_max = 4
+		stacks_max = 2
 	},
 	function create()
 	{

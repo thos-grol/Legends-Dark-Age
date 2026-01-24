@@ -72,6 +72,34 @@
 // Helper
 // =================================================================================================
 
+::Z.S.degrade_result <- function(_result)
+{
+    switch (_result) {
+        case HIT_RESULT.HIT:
+            return HIT_RESULT.GRAZE;
+        case HIT_RESULT.GRAZE:
+            return HIT_RESULT.MEGA_GRAZE;
+        case HIT_RESULT.MEGA_GRAZE:
+            return HIT_RESULT.MISS;
+        case HIT_RESULT.MISS:
+            return HIT_RESULT.MISS;
+    }
+}
+
+::Z.S.upgrade_result <- function(_result)
+{
+    switch (_result) {
+        case HIT_RESULT.MISS:
+            return HIT_RESULT.MEGA_GRAZE;
+        case HIT_RESULT.MEGA_GRAZE:
+                return HIT_RESULT.GRAZE;
+        case HIT_RESULT.GRAZE:
+            return HIT_RESULT.HIT;
+        case HIT_RESULT.HIT:
+            return HIT_RESULT.HIT;
+    }
+}
+
 ::Z.S.is_injury_applied <- function(_actor, _properties, _id)
 {
     local injury = _actor.getSkills().getSkillByID(_id);

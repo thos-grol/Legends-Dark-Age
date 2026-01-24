@@ -1,8 +1,6 @@
 
 this.perk_sap <- this.inherit("scripts/skills/skill", {
-	m = {
-		BUFF = 1
-	},
+	m = {},
 	function create()
 	{
 		this.m.ID = "perk.sap";
@@ -16,28 +14,29 @@ this.perk_sap <- this.inherit("scripts/skills/skill", {
 		this.m.IsHidden = false;
 	}
 
-	function onAnySkillUsed( _skill, _targetEntity, _properties )
+	function consume_flaw_child(_actor, _targetEntity)
 	{
-		
-		_properties.DamageRegularMin += this.m.BUFF;
-		_properties.DamageRegularMax += this.m.BUFF;
+		local roll = ::Math.rand(1, 100);
+		if (roll <= 25) ::Z.S.add_effect( _actor, _targetEntity, ::Legends.Effect.Stunned, 3);
 	}
- 
-	function onUpdate( _properties )
+
+	function onTargetHit( _skill, _targetEntity, _bodyPart, _damageInflictedHitpoints, _damageInflictedArmor )
 	{
-		_properties.DamageTotalMult *= 2.0;
-	}
- 
-	function onAdded()
-	{
-		if (!this.m.Container.hasActive(::Legends.Active.StunStrike))
+		if (_targetEntity == null) return;
+
+		local actor = this.getContainer().getActor();
+		if (_targetEntity == actor) return;
+
+		// striking targets with flaw will detonate into a debuff
+		local flaw = _targetEntity.getSkills().getSkillByID("effects.flaw");
+		if (flaw != null)
 		{
-			::Legends.Actives.grant(this, ::Legends.Active.StunStrike);
+			flaw.consume_flaw(actor, _targetEntity);
 		}
 	}
- 
-	function onRemoved()
+
+	function onUpdate( _properties )
 	{
-		::Legends.Actives.remove(this, ::Legends.Active.StunStrike);
+		_properties.HitChance[this.Const.BodyPart.Head] += 25;
 	}
 });

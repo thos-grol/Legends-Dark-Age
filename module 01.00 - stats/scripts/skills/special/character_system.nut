@@ -69,8 +69,10 @@ this.character_system <- this.inherit("scripts/skills/skill", {
 		if (actor.getID() == _targetEntity.getID()) return;
 
 		local true_strike = actor.getSkills().getSkillByID("perk.true_strike") != null;
+		local vicious_insight = actor.getSkills().getSkillByID("perk.vicious_insight") != null;
 		local chance = 15;
 		if (true_strike) chance += 10;
+		if (vicious_insight) chance += 10;
 		if (::Math.rand(1, 100) > chance) return;
 
 		local limit = 2;

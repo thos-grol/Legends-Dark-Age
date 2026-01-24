@@ -36,7 +36,7 @@ this.bag_system <- this.inherit("scripts/skills/skill", {
 					::Z.S.apply_poison({
 						_effect_def = ::Legends.Effect.SpiderPoison,
 						_effect_level = 2,
-						_effect_chance = 50,
+						_effect_chance = 33,
 
 						_SKILL = _skill,
 
