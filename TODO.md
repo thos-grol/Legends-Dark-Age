@@ -1,14 +1,34 @@
 //FIXME: contract destruction on world map doesn't seem to work correctly anymore, go fix it.
 //TODO: idea, shieldwall should have a chance to taunt enemies
-//TODO: retexture dismiss button to be red
-
-
-//TODO: change reserve button to learn weapon button
 //TODO: modify double grip to remove armor pen
 
-//TODO: add bro cosmetic screen to squadscreen
+//TODO: retexture dismiss button to be red
+//TODO: change reserve button/add weapon tree tooltip explanation
+
+//TODO: implement all trait trees and test (4 x 2 = 8) <- copy from old project to save time
+	health
+	endurance
+	mettle
+	agility
+//TODO: implement all weapon trees and test (15 x 3 = 45) <- copy from old project to save time
+	crossbows -> advanced weapons
+		- crossbow -> uses bolts (military grade weapons, deadly, hard to obtain)
+		- handgonne -> handcannon (takes ? AP to reload, needs powder) (military grade weapons, deadly, hard to obtain)
+		- future flintlock (high damage burst shot, 1 shot - takes 9 AP to reload, needs powder) (military grade weapons, deadly, hard to obtain)
+		- magic ranged items? (epic grade weapons, deadly, hard to obtain)
+
+//TODO: finish up rogue tree
+
+//TODO: finish up all other classes
+//TODO: implement perk unlock restrictions
+	- one per row
+		- add description to say how silver perks - class perks can only be picked once per row
+	- traits and weapons can't be picked
+		- add description to lock saying how to obtain them - bronze perks
 
 //FEATURE_1: idea, add flintlock pistol
+//FEATURE_9: add bro cosmetic screen to squadscreen (popup dialog?)
+
 
 • 
 + ::DEF.C.Effect_Explanations["Daze"];
