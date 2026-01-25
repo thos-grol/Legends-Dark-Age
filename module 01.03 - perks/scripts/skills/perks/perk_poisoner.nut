@@ -19,6 +19,9 @@ this.perk_poisoner <- this.inherit("scripts/skills/skill", {
 		local actor = this.getContainer().getActor();
 		if (!actor.isPlayerControlled()) return;
 
+		local f = actor.getFlags();
+		if (f.has("perk.poisoner item added")) return;
+
 		//0. check if bag slots are available
 		local items = actor.getItems();
 
@@ -36,7 +39,7 @@ this.perk_poisoner <- this.inherit("scripts/skills/skill", {
 		
 		if (free_bag_slot)
 		{
-			local f = actor.getFlags();
+			
 			if (!f.has("perk.poisoner item added"))
 			{
 				items.addToBag(::new("scripts/items/bag/bag_poison"));

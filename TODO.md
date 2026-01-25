@@ -1,14 +1,18 @@
 //FIXME: contract destruction on world map doesn't seem to work correctly anymore, go fix it.
+//TODO: idea, shieldwall should have a chance to taunt enemies
+//TODO: retexture dismiss button to be red
 
-IDEA: 
-	character buttons
-	assign class button
-	get weapon tree button
-		if don't already have weapon tree, and weapon trees < 2
-	level up weapon buttons
-		if has level up weapon point
-	level up trait buttons
-		if has level up trait point
+
+//TODO: change reserve button to learn weapon button
+//TODO: modify double grip to remove armor pen
+
+//TODO: add bro cosmetic screen to squadscreen
+
+//FEATURE_1: idea, add flintlock pistol
+
+• 
++ ::DEF.C.Effect_Explanations["Daze"];
+
 
 
 Enemy Designs

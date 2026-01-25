@@ -35,3 +35,12 @@ CharacterScreenDatasource.prototype.notifyBackend_class_activate = function (_br
 {
 	SQ.call(this.mSQHandle, 'on_class_added', [_brotherId], _callback);
 };
+
+CharacterScreenDatasource.prototype.notifyBackend_add_weapon_tree = function (_brotherId, _callback)
+{
+	var self = this;
+	var activeCharacterID = this.mBrothersList[this.mSelectedBrotherIndex]['id'];
+	SQ.call(this.mSQHandle, 'on_add_weapon_tree', activeCharacterID, function (_data) {
+		self.updateBrother(_data);
+	});
+};

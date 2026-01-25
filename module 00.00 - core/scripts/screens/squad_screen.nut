@@ -124,6 +124,33 @@ this.squad_screen <- ::inherit("scripts/mods/msu/ui_screen", {
 		}
 	}
 
+	function on_add_weapon_tree( _id )
+	{
+		local bro = this.Tactical.getEntityByID(_id);
+
+		local key = "Weapon Trees";
+		if (bro.getFlags().has(key))
+		{
+			local tree_str =  bro.getFlags().get(key);
+			local trees = split(tree_str, "|");
+			if (trees.len() == 1)
+			{
+				local tree_name = trees[0];
+				local tree = ::Z.S.get_weapon_tree_to_add( bro, tree_name );
+				if (tree != null) ::Z.S.set_weapon_tree( bro, tree);
+			}
+		}
+		else
+		{
+			::Z.S.set_weapon_tree( bro, ::Z.S.get_weapon_tree_to_add(bro));
+		}
+
+
+		
+		
+		return this.UIDataHelper.convertEntityToUIData(bro, null);
+	}
+
 	function toggle()
 	{
 		if (!this.isAnimating())

@@ -110,7 +110,7 @@
 + "\n" + ::green("+2") + " [Untouchable] stacks"
 
 + "\n\n" + ::gray("« Untouchable » Max 2")
-+ "\n" + ::gray("While this character has stacks, they take 0 damage from most attacks. Things like explosions or undodgeable attacks are exceptions")
++ "\n" + ::gray("While this character has stacks, they dodge most attacks. Things like explosions or undodgeable attacks are exceptions")
 + "\n" + ::gray("• Lose 1 stack on 1H attack")
 + "\n" + ::gray("• Lose 2 stacks on 2H attack");
         

@@ -73,6 +73,46 @@
     }
 }
 
+// gets the weapon tree that would be added if button is pressed
+::Z.S.tt_weapon_tree <- function(ret, _player)
+{
+    local key = "Weapon Trees";
+    if (_player.getFlags().has(key))
+    {
+        local tree_str =  _player.getFlags().get(key);
+        local trees = split(tree_str, "|");
+        if (trees.len() == 1)
+        {
+            local tree_name = trees[0];
+            local tree_def = ::Z.S.get_weapon_tree_to_add( _player, tree_name);
+            if (tree_def != null)
+            {
+                ret.push({
+                    id = 10,
+                    type = "text",
+                    icon = "ui/icons/warning.png",
+                    text = ::seagreen(tree_def.Name) + " tree can be added"
+                });
+            }
+        }
+    }
+    else
+    {
+        local tree_def = ::Z.S.get_weapon_tree_to_add( _player);
+        if (tree_def != null)
+        {
+            ret.push({
+                id = 10,
+                type = "text",
+                icon = "ui/icons/warning.png",
+                text = ::seagreen(tree_def.Name) + " tree can be added"
+            });
+        }
+    }
+
+    
+}
+
 // =================================================================================================
 // Helper
 // =================================================================================================

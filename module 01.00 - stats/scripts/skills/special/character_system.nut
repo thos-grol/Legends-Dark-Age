@@ -27,9 +27,16 @@ this.character_system <- this.inherit("scripts/skills/skill", {
 
 		local ret = this.skill.getTooltip();
 
+
 		local _class = null;
 		if (f.has("Class")) _class = f.get("Class");
-		::Z.S.get_class_passives(ret, _class)
+
+		if (_class != null)
+		{
+			::Z.S.tt_weapon_tree(ret, actor);
+		}
+
+		::Z.S.get_class_passives(ret, _class);
 		// ret.push({
 		// 	id = 10,
 		// 	type = "text",

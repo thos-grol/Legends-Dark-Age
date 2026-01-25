@@ -219,9 +219,13 @@ SquadScreenLeftPanelHeaderModule.prototype.createDIV = function (_parentDiv)
 
 	var layout = $('<div class="l-button is-reserve"/>');
 	portraitContainer.append(layout);
-	this.mReserveButton = layout.createImageButton(Path.GFX + "ui/icons/stat_screen_dmg_dealt.png", function (_event)
+	this.mReserveButton = layout.createImageButton(Path.GFX + "ui/icons/plus.png", function (_event)
 	{
-		self.mDataSource.notifyBackendToggleReservesCharacter();
+		self.mDataSource.notifyBackend_add_weapon_tree();
+
+		var right_module = self.mParent.mParent.mRightPanelModule.mHeaderModule;
+		var b = right_module.mSwitchToPerksButton;
+		b.click();
 	}, 'display-none', 6);
 
 	
@@ -970,23 +974,23 @@ SquadScreenLeftPanelHeaderModule.prototype.updateControls = function(_id, _data)
 	}
 	
 	// update reserve button
-	if (!this.mDataSource.isTacticalMode())
-	{
-		this.mReserveButton.removeClass('display-none').addClass('display-block');
-	}
-	else
+	if (this.mDataSource.isTacticalMode() || !_data['is_add_weapon_tree_button_enabled'])
 	{
 		this.mReserveButton.addClass('display-none').removeClass('display-block');
 	}
-	
-	if (_data['inReserves'])
-	{
-		this.mReserveButton.changeButtonImage(Path.GFX + "ui/buttons/mood_heal.png")
-	}
 	else
 	{
-		this.mReserveButton.changeButtonImage(Path.GFX + "ui/icons/stat_screen_dmg_dealt.png")
+		this.mReserveButton.removeClass('display-none').addClass('display-block');
 	}
+	
+	// if (_data['inReserves'])
+	// {
+	// 	this.mReserveButton.changeButtonImage(Path.GFX + "ui/buttons/mood_heal.png")
+	// }
+	// else
+	// {
+	// 	this.mReserveButton.changeButtonImage(Path.GFX + "ui/icons/stat_screen_dmg_dealt.png")
+	// }
 	this.mReserveButton.unbindTooltip();
 	this.mReserveButton.bindTooltip({ contentType: 'ui-element', entityId: _id, elementId: TooltipIdentifier.CharacterScreen.LeftPanelHeaderModule.Reserves });
 };

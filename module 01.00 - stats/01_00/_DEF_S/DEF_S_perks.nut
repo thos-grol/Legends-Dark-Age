@@ -45,23 +45,7 @@
     if (_actor.getBackground().hasPerk(_perk)) _actor.getBackground().removePerk(_perk)
 }
 
-::Z.S.Perks_tree <- function (_item)
-{
-    if (_item.isItemType(::Const.Items.ItemType.Shield)) return ::Const.Perks.ShieldTree.Tree;
-    else if (_item.m.ID == "tool.throwing_net") return ::Const.Perks.BeastClassTree.Tree;
-    else if (_item.isWeaponType(::Const.Items.WeaponType.Flail)) return ::Const.Perks.FlailTree.Tree;
-    else if (_item.isWeaponType(::Const.Items.WeaponType.Hammer)) return ::Const.Perks.HammerTree.Tree;
-    else if (_item.isWeaponType(::Const.Items.WeaponType.Axe)) return ::Const.Perks.AxeTree.Tree;
-    else if (_item.isWeaponType(::Const.Items.WeaponType.Cleaver)) return ::Const.Perks.CleaverTree.Tree;
-    else if (_item.isWeaponType(::Const.Items.WeaponType.Sword)) return ::Const.Perks.SwordTree.Tree;
-    else if (_item.isWeaponType(::Const.Items.WeaponType.Polearm)) return ::Const.Perks.PolearmTree.Tree;
-    else if (_item.isWeaponType(::Const.Items.WeaponType.Spear)) return ::Const.Perks.SpearTree.Tree;
-    else if (_item.isWeaponType(::Const.Items.WeaponType.Crossbow)) return ::Const.Perks.BowTree.Tree;
-    else if (_item.isWeaponType(::Const.Items.WeaponType.Bow)) return ::Const.Perks.BowTree.Tree;
-    else if (_item.isWeaponType(::Const.Items.WeaponType.Sling)) return ::Const.Perks.BowTree.Tree;
-    else if (_item.isWeaponType(::Const.Items.WeaponType.Firearm)) return ::Const.Perks.BowTree.Tree;
-    else return ::Const.Perks.HammerTree.Tree;
-}
+
 
 ::Z.S.Perks_isProficiency <- function (_id)
 {

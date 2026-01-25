@@ -40,20 +40,4 @@ this.perk_untouchable <- this.inherit("scripts/skills/skill", {
 
 		}
 	}
-
-	function onBeforeDamageReceived( _attacker, _skill, _hitInfo, _properties )
-	{
-		if (this.m.stacks == 0) return;
-		_properties.DamageReceivedRegularMult = 0;
-		_properties.DamageReceivedArmorMult = 0;
-
-		local weapon = _attacker.getMainhandItem();
-		if (weapon == null) this.m.stacks--;
-		//FIXME: Rogue - add immunity to explosive damage whenever it's added in
-		else if (weapon.isItemType(::Const.Items.ItemType.RangedWeapon)) this.m.stacks--;
-		else if (weapon.isItemType(::Const.Items.ItemType.OneHanded)) this.m.stacks--;
-		else if (weapon.isItemType(::Const.Items.ItemType.TwoHanded)) this.m.stacks -= 2;
-
-		this.m.stacks = ::Math.max(0, this.m.stacks);
-	}
 });

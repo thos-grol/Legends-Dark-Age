@@ -224,6 +224,24 @@ o.attackEntity = function( _user, _targetEntity, _allowDiversion = true )
 	}
 	// hk - end
 
+	// hk - untouchable logic with graze band
+	local is_untoucable = false;
+	local untouchable = _targetEntity.getSkills().getSkillByID("perk.untouchable");
+	if (is_using_hitchance && untouchable != null && untouchable.m.stacks > 0)
+	{
+		hit_result = HIT_RESULT.MISS;
+
+		local weapon = _user.getMainhandItem();
+		if (weapon == null) untouchable.m.stacks--;
+		else if (weapon.isItemType(::Const.Items.ItemType.RangedWeapon)) untouchable.m.stacks--;
+		else if (weapon.isItemType(::Const.Items.ItemType.OneHanded)) untouchable.m.stacks--;
+		else if (weapon.isItemType(::Const.Items.ItemType.TwoHanded)) untouchable.m.stacks -= 2;
+		untouchable.m.stacks = ::Math.max(0, untouchable.m.stacks);
+
+		is_untoucable = true;
+	}
+	// hk - end
+
 	if (!_user.isHiddenToPlayer() && !_targetEntity.isHiddenToPlayer())
     {
         this.Tactical.EventLog.log_newline();
@@ -261,6 +279,11 @@ o.attackEntity = function( _user, _targetEntity, _allowDiversion = true )
 		if (is_vicious_insight)
 		{
 			::Tactical.EventLog.logIn(::color_name(_user) + " [Vicious Insight]");
+		}
+
+		if (is_untoucable)
+		{
+			::Tactical.EventLog.logIn(::color_name(_targetEntity) + " [Untouchable]");
 		}
 	}
 

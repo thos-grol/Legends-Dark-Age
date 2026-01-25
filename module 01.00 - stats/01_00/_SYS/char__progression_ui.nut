@@ -26,6 +26,20 @@
 	{
 		addCharacterToUIData(_entity, _target);
 		_target.class_button_is_showing <- _entity.class_button_is_showing();
+        _target.is_add_weapon_tree_button_enabled <- ::Z.S.is_add_weapon_tree_button_enabled( _entity );
 	}
 
 });
+
+// ::mods_hookNewObjectOnce("ui/global/data_helper", function(o) {
+
+//     local convertEntityToUIData = o.convertEntityToUIData;
+// 	o.convertEntityToUIData = function ( _entity, _activeEntity )
+// 	{
+// 		local result = convertEntityToUIData(_entity, _activeEntity);
+
+//         result.is_add_weapon_tree_button_enabled <- ::Z.S.is_add_weapon_tree_button_enabled( _entity );
+// 		return result;
+// 	}
+
+// });

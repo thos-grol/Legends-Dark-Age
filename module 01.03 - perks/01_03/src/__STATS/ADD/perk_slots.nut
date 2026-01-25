@@ -3,6 +3,10 @@ local ids = [
     "EMPTY_FIT",
     "EMPTY_STURDY",
     "EMPTY_TENACIOUS",
+
+    "EMPTY_SWORD",
+
+
 ];
 local pt = [];
 
